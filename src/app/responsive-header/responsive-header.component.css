@@ -1,0 +1,106 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+
+
+
+@media only screen and (min-width:1080px) {
+
+
+  .mat-drawer{
+    display: none;
+  }
+
+
+}
+
+@media only screen and (max-width:1080px) {
+  .nav-element {
+    display: none !important;
+  }
+
+
+}
+
+
+
+
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.nav-element{
+  padding: 20px;
+  display: flex;
+  cursor: pointer;
+
+}
+
+.element-text{
+  padding-top:5px;
+  font-size: 16px;
+}
+.random-user{
+  width:40px;
+  height:40px;
+  margin-top: 20px;
+  margin-right: 7.5px;
+
+
+}
+
+.random-user-side{
+  width:35px;
+  height:35px;
+
+
+}
+
+.random-user-side-text{
+  margin-top: 10px;
+  margin-left: 10px;
+  color:grey;
+  font-size: 10px;
+}
+
+.title{
+  cursor:pointer
+}
+
+img{
+  border-radius: 50%;
+}
+
+.rollen-verteilung{
+  font-size: 16px;
+  margin-top: 10px;
+
+}
+
+.rolle-bild{
+  margin-bottom: 7px;
+}
+
+.sidenav-text{
+  margin-left: 5px;
+}
+
+
+
+
