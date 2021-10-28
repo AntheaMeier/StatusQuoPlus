@@ -3,11 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './header/header.component';
-// import { MainheaderComponent } from './mainheader/mainheader.component';
 
-import {RouterModule} from "@angular/router";
-// import { MainheaderComponent } from './mainheader/mainheader.component';
+//import {RouterModule} from "@angular/router";
 // import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
@@ -34,9 +31,7 @@ import { MatListModule } from '@angular/material/list';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     ResponsiveHeaderComponent,
-    // MainheaderComponent
   ],
   imports: [
     BrowserModule,
