@@ -6,7 +6,7 @@ export const GoalSchema = new mongoose.Schema({
   price: {type: Number, required: true},
 });
 
-export interface Goal {
+export interface Goal extends mongoose.Document {
   id: string;
   title: string;
   description: string;

@@ -17,22 +17,26 @@ export class GoalsService {
       price: price
     });
     const result = await newGoal.save();
-    console.log(result);
-    return 'goalId';
+    return result.id as string;
   }
 
-  getGoals() {
-    return [...this.goals];
+  async getGoals() {
+    const goals = await this.goalModel.find().exec();
+    return goals.map((goal) => ({id: goal.id, title: goal.title, description: goal.description, price: goal.price}));
   }
 
-  getSingleGoal(goalId: string) {
-    const goal = this.findGoal(goalId)[0];
-    return {...goal};
+  async getSingleGoal(goalId: string) {
+    const goal = await this.findGoal(goalId);
+    return {id: goal.id, title: goal.title, description: goal.description, price: goal.price};
   }
 
-  updateGoal(goalId: string, title: string, desc: string, price: number) {
-    const [goal, index] = this.findGoal(goalId);
-    const updatedGoal = {...goal};
+  async updateGoal(
+    goalId: string,
+    title: string,
+    desc: string,
+    price: number
+  ) {
+    const updatedGoal = await this.findGoal(goalId);
     if (title) {
       updatedGoal.title = title;
     }
@@ -42,20 +46,24 @@ export class GoalsService {
     if (price) {
       updatedGoal.price = price;
     }
-    this.goals[index] = updatedGoal;
+    updatedGoal.save();
   }
 
-  deleteGoal(goalId: string) {
-    const index = this.findGoal(goalId)[1];
-    this.goals.splice(index, 1);
+  async deleteGoal(goalId: string) {
+    const result = await this.goalModel.deleteOne({_id: goalId}).exec();
+    console.log(result);
   }
 
-  private findGoal(id: string): [Goal, number] {
-    const goalIndex = this.goals.findIndex((goal) => goal.id == id)
-    const goal = this.goals[goalIndex];
-    if (!goal) {
-      throw new NotFoundException('Could not find product.');
+  private async findGoal(id: string): Promise<Goal> {
+    let goal;
+    try {
+      goal = await this.goalModel.findById(id).exec();
+    } catch (error) {
+      throw new NotFoundException('Could not find goal.');
     }
-    return [goal, goalIndex];
+    if (!goal) {
+      throw new NotFoundException('Could not find goal.');
+    }
+    return goal;
   }
 }

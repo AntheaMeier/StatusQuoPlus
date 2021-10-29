@@ -1,26 +1,28 @@
-import {Body, Controller, Get, Post, Param, Patch, Delete} from "@nestjs/common";
 import {GoalsService} from "./goals.service";
+import {Body, Controller, Delete, Get, Param, Patch, Post} from "@nestjs/common";
 
 @Controller('goals')
 export class GoalsController {
   constructor(private readonly goalsService: GoalsService) {}
 
   @Post()
-  addGoals(
+  async addGoals(
     @Body('title') goalTitle: string,
     @Body('description') goalDesc: string,
     @Body('price') goalPrice: number,
-  ): any {
-    const generatedId = this.goalsService.insertGoals(
+  ) {
+    const generatedId = await this.goalsService.insertGoals(
       goalTitle,
       goalDesc,
-      goalPrice);
+      goalPrice
+    );
     return {id: generatedId};
   }
 
   @Get()
-  getAllGoals() {
-    return this.goalsService.getGoals();
+  async getAllGoals() {
+    const goals = await this.goalsService.getGoals();
+    return goals;
   }
 
   @Get(':id')
@@ -29,19 +31,19 @@ export class GoalsController {
   }
 
   @Patch(':id')
-  updateGoal(
+  async updateGoal(
     @Param('id') goalId: string,
     @Body('title') goalTitle: string,
     @Body('description') goalDesc: string,
     @Body('price') goalPrice: number
   ) {
-    this.goalsService.updateGoal(goalId, goalTitle, goalDesc, goalPrice);
+    await this.goalsService.updateGoal(goalId, goalTitle, goalDesc, goalPrice);
     return null;
   }
 
   @Delete(':id')
-  removeGoal(@Param('id') goalId: string) {
-    this.goalsService.deleteGoal(goalId);
+  async removeGoal(@Param('id') goalId: string) {
+    await this.goalsService.deleteGoal(goalId);
     return null;
   }
 }
