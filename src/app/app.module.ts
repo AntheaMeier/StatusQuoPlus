@@ -3,11 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './header/header.component';
-// import { MainheaderComponent } from './mainheader/mainheader.component';
 
 import {RouterModule} from "@angular/router";
-// import { MainheaderComponent } from './mainheader/mainheader.component';
 // import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
@@ -24,7 +21,13 @@ import { ResponsiveHeaderComponent } from './responsive-header/responsive-header
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatCardModule} from "@angular/material/card";
+import { LoginZweiComponent } from './login-zwei/login-zwei.component';
+// @ts-ignore
 
 
 
@@ -34,9 +37,11 @@ import { MatListModule } from '@angular/material/list';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     ResponsiveHeaderComponent,
-    // MainheaderComponent
+    LoginComponent,
+    RegisterComponent,
+    LoginZweiComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,11 @@ import { MatListModule } from '@angular/material/list';
     MatSelectModule,
     LayoutModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatCardModule,
     // MatListModule
   ],
   providers: [],
