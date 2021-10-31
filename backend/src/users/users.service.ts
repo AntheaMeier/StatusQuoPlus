@@ -1,33 +1,35 @@
 import {Injectable, NotFoundException} from '@nestjs/common';
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from 'mongoose';
-
-export type User = any;
+import {Users} from "./users.model";
 
 @Injectable()
 export class UsersService {
-  // private users: Users[] = [];
+   private users: Users[] = [];
 
-  private readonly users = [
-    {
-      userId: 1,
-      username: 'john',
-      password: 'changeme',
-    },
-    {
-      userId: 2,
-      username: 'maria',
-      password: 'guess',
-    },
-  ];
+  constructor(@InjectModel('Users') private readonly usersModel: Model<Users>) {}
 
-  async findOne(username: string): Promise<User | undefined> {
-    return this.users.find(user => user.username === username);
+  async findOne(username: string): Promise<Users | undefined> {
+    return (await this.getUsers()).find(user => user.username === username);
   }
-}
 
-/*  constructor(@InjectModel('Users') private readonly usersModel: Model<Users>) {}
+  private async findUser(id: string): Promise<Users> {
+    let user;
+    try {
+      user = await this.usersModel.findById(id).exec();
+    } catch (error) {
+      throw new NotFoundException('Could not find user.');
+    }
+    if (!user) {
+      throw new NotFoundException('Could not find user.');
+    }
+    return user;
+  }
 
+  async getSingleUser(usersId: string) {
+    const users = await this.findUser(usersId);
+    return {id: users.id, name: users.name, username: users.username, password: users.password};
+  }
 
   async insertUsers(name: string, username: string, password: string) {
     const newUser = new this.usersModel({
@@ -37,15 +39,11 @@ export class UsersService {
     });
     const result = await newUser.save();
     return result.id;
+  }
 
   async getUsers() {
     const users = await this.usersModel.find().exec();
     return users as Users[];
-  }
-
-  async getSingleUser(usersId: string) {
-    const users = await this.findUser(usersId);
-    return {id: users.id, name: users.name, username: users.username, password: users.password};
   }
 
   async updateUsers(
@@ -71,17 +69,4 @@ export class UsersService {
     const result = await this.usersModel.deleteOne({_id: usersId}).exec();
     console.log(result);
   }
-
-  private async findUser(id: string): Promise<Users> {
-    let user;
-    try {
-      user = await this.usersModel.findById(id).exec();
-    } catch (error) {
-      throw new NotFoundException('Could not find user.');
-    }
-    if (!user) {
-      throw new NotFoundException('Could not find user.');
-    }
-    return user;
-  }*/
-
+}

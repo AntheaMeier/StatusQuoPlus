@@ -1,4 +1,3 @@
-/*
 import * as mongoose from 'mongoose';
 
 export const UsersSchema = new mongoose.Schema({
@@ -13,4 +12,3 @@ export interface Users extends mongoose.Document{
   username: string;
   password: string;
 }
-*/

@@ -1,13 +1,11 @@
-/*
 import {UsersService} from "./users.service";
-import {Body, Controller, Delete, Get, Param, Patch, Post} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Param, Patch, Post,} from "@nestjs/common";
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-*/
 
-/*  @Post()
+  @Post()
   async addUsers(
     @Body('name') usersName: string,
     @Body('username') usersUsername: string,
@@ -48,4 +46,4 @@ export class UsersController {
     await this.usersService.deleteUsers(usersId);
     return null;
   }
-}*/
+}
