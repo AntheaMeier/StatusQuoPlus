@@ -10,6 +10,8 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class ResponsiveHeaderComponent {
 
+  public loggedOut = false;
+
   public loggedIn = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -27,7 +29,7 @@ export class ResponsiveHeaderComponent {
 
   logout(){
     this.loggedIn=false;
-    console.log(this.loggedIn);
+    this.loggedOut = true;
   }
 
 }

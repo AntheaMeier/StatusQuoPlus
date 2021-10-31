@@ -91,4 +91,7 @@
 
 </mat-sidenav-container>
 
+<div *ngIf="loggedOut">
+  <div class="alert alert-primary">You have been successfully logged out!</div>
+</div>
 <app-login-zwei *ngIf="!loggedIn" (setLoggedIn)="setLoggedIn($event)"></app-login-zwei>
