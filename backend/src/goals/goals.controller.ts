@@ -7,15 +7,9 @@ export class GoalsController {
 
   @Post()
   async addGoals(
-    @Body('title') goalTitle: string,
-    @Body('description') goalDesc: string,
-    @Body('price') goalPrice: number,
+    @Body('description') goalDesc: string
   ) {
-    const generatedId = await this.goalsService.insertGoals(
-      goalTitle,
-      goalDesc,
-      goalPrice
-    );
+    const generatedId = await this.goalsService.insertGoals(goalDesc);
     return {id: generatedId};
   }
 
@@ -33,11 +27,9 @@ export class GoalsController {
   @Patch(':id')
   async updateGoal(
     @Param('id') goalId: string,
-    @Body('title') goalTitle: string,
-    @Body('description') goalDesc: string,
-    @Body('price') goalPrice: number
+    @Body('description') goalDesc: string
   ) {
-    await this.goalsService.updateGoal(goalId, goalTitle, goalDesc, goalPrice);
+    await this.goalsService.updateGoal(goalId, goalDesc);
     return null;
   }
 

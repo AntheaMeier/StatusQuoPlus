@@ -10,11 +10,9 @@ export class GoalsService {
   constructor(@InjectModel('Goal') private readonly goalModel: Model<Goal>
   ) {}
 
-  async insertGoals(title: string, desc: string, price: number) {
+  async insertGoals(desc: string) {
     const newGoal = new this.goalModel({
-      title: title,
-      description: desc,
-      price: price
+      description: desc
     });
     const result = await newGoal.save();
     return result.id as string;
@@ -22,29 +20,21 @@ export class GoalsService {
 
   async getGoals() {
     const goals = await this.goalModel.find().exec();
-    return goals.map((goal) => ({id: goal.id, title: goal.title, description: goal.description, price: goal.price}));
+    return goals.map((goal) => ({id: goal.id, description: goal.description}));
   }
 
   async getSingleGoal(goalId: string) {
     const goal = await this.findGoal(goalId);
-    return {id: goal.id, title: goal.title, description: goal.description, price: goal.price};
+    return {id: goal.id, description: goal.description};
   }
 
   async updateGoal(
     goalId: string,
-    title: string,
-    desc: string,
-    price: number
+    desc: string
   ) {
     const updatedGoal = await this.findGoal(goalId);
-    if (title) {
-      updatedGoal.title = title;
-    }
     if (desc) {
       updatedGoal.description = desc;
-    }
-    if (price) {
-      updatedGoal.price = price;
     }
     updatedGoal.save();
   }
