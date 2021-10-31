@@ -1,3 +1,15 @@
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+
 mat-card {
   max-width: 400px;
   margin: 2em auto;
@@ -7,3 +19,5 @@ mat-card {
 mat-form-field {
   display: block;
 }
+
+
