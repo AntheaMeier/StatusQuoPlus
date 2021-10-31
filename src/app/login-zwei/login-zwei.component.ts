@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -9,10 +9,13 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login-zwei.component.css']
 })
 export class LoginZweiComponent implements OnInit {
+
+  @Output() setLoggedIn: EventEmitter<any> = new EventEmitter()
   form: FormGroup;
   public loginInvalid = false;
   private formSubmitAttempt = false;
   private returnUrl: string;
+  public loggedIn = false;
 
   constructor(
     private fb: FormBuilder,
@@ -35,6 +38,7 @@ export class LoginZweiComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
+
     this.loginInvalid = false;
     this.formSubmitAttempt = false;
     if (this.form.valid) {
@@ -48,6 +52,12 @@ export class LoginZweiComponent implements OnInit {
     } else {
       this.formSubmitAttempt = true;
     }
+  }
+
+
+  onClick(){
+    this.loggedIn=true;
+    this.setLoggedIn.emit(this.loggedIn);
   }
 }
 

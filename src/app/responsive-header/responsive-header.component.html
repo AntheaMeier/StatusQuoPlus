@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container *ngIf="loggedIn" class="sidenav-container">
 
 
     <mat-sidenav #drawer class="sidenav"
@@ -8,7 +8,7 @@
       [opened]="(isHandset$ | async) === false">
 
 
-  <mat-toolbar>Menü</mat-toolbar>
+  <mat-toolbar >Menü</mat-toolbar>
       <mat-nav-list>
         <a mat-list-item href="#"><img class="random-user-side" src="https://randomuser.me/api/portraits/men/11.jpg" alt="random user"> <p class="random-user-side-text">Dein Profil ansehen</p></a>
 
@@ -22,7 +22,7 @@
       </mat-form-field></a>
       <a mat-list-item><mat-icon>language</mat-icon> <div class="sidenav-text">Sprache</div></a>
       <a mat-list-item href="#"> <mat-icon>info</mat-icon> <div class="sidenav-text">Info</div></a>
-      <a mat-list-item ><mat-icon>exit_to_app</mat-icon> <div class="sidenav-text">Logout</div></a>
+      <a (click)="logout()" mat-list-item ><mat-icon>exit_to_app</mat-icon> <div class="sidenav-text">Logout</div></a>
 
     </mat-nav-list>
 
@@ -79,7 +79,7 @@
       </div>
 
       <div class="nav-element">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with input icon">
+        <button (click)="logout()" mat-icon-button class="example-icon" aria-label="Example icon-button with input icon">
           <mat-icon>exit_to_app</mat-icon>
         </button>
         <div class="element-text">
@@ -87,8 +87,8 @@
         </div>
       </div>
     </mat-toolbar>
-    <app-login-zwei></app-login-zwei>
   </mat-sidenav-content>
 
 </mat-sidenav-container>
 
+<app-login-zwei *ngIf="!loggedIn" (setLoggedIn)="setLoggedIn($event)"></app-login-zwei>
