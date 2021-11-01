@@ -1,0 +1,18 @@
+<mat-card class="style">ZIELE
+  <mat-card class="style2">
+    <mat-card class="style3">{{ newPost }}
+        <button class="style4"mat-button  *ngIf="true" matSuffix mat-icon-button aria-label="Delete" (click)="onDeleteGoal()">
+          <mat-icon class="style5">delete</mat-icon>
+        </button>
+    </mat-card>
+  </mat-card>
+  <mat-form-field class="example-form-field" appearance="fill">
+    <mat-label>I want to achieve</mat-label>
+    <input matInput type="text" [(ngModel)]="enteredValue">
+    <button  *ngIf="true" matSuffix mat-icon-button aria-label="Send" (click)="onAddPost()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </mat-form-field>
+</mat-card>
+
+
