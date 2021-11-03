@@ -95,10 +95,13 @@ img{
 }
 
 .sidenav-text{
-  margin-left: 5px;
+  margin-left: 5px ;
+}
+
+.rollen-verteilung-side{
+  margin-top: 7.5px;
 }
 
 .mat-toolbar {
   background-color: #E8E4E1 !important;
 }
-

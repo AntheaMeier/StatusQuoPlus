@@ -10,6 +10,10 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class ResponsiveHeaderComponent {
 
+  public loggedOut = false;
+
+  public loggedIn = false;
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -17,5 +21,15 @@ export class ResponsiveHeaderComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver) {}
+
+
+  setLoggedIn(data:boolean){
+    this.loggedIn= data;
+  }
+
+  logout(){
+    this.loggedIn=false;
+    this.loggedOut = true;
+  }
 
 }
