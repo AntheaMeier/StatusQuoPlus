@@ -38,7 +38,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {OverlayModule} from '@angular/cdk/overlay';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {LoginZweiComponent} from "./login-zwei/login-zwei.component";
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
@@ -48,6 +50,11 @@ import { FormsModule } from '@angular/forms';
     GoalsCreateComponent
   ],
   imports: [
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatInputModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
