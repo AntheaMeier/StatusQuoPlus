@@ -7,14 +7,20 @@ export class UsersController {
 
   @Post()
   async addUsers(
-    @Body('name') usersName: string,
     @Body('username') usersUsername: string,
     @Body('password') usersPassword: string,
+    @Body('firstname') usersFirstname: string,
+    @Body('surname') usersSurname: string,
+    @Body('email') usersEmail: string,
+    @Body('role') usersRole: string,
   ) {
     const generatedId = await this.usersService.insertUsers(
-      usersName,
       usersUsername,
       usersPassword,
+      usersFirstname,
+      usersSurname,
+      usersEmail,
+      usersRole
     );
     return {id: generatedId};
   }
@@ -33,11 +39,14 @@ export class UsersController {
   @Patch(':id')
   async updateUsers(
     @Param('id') usersId: string,
-    @Body('name') usersName: string,
     @Body('username') usersUsername: string,
-    @Body('password') usersPassword: string
+    @Body('password') usersPassword: string,
+    @Body('firstname') usersFirstname: string,
+    @Body('surname') usersSurname: string,
+    @Body('email') usersEmail: string,
+    @Body('role') usersRole: string
   ) {
-    await this.usersService.updateUsers(usersId, usersName, usersUsername, usersPassword);
+    await this.usersService.updateUsers(usersId, usersUsername, usersPassword, usersFirstname, usersSurname, usersEmail, usersRole);
     return null;
   }
 

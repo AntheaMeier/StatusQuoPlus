@@ -28,14 +28,17 @@ export class UsersService {
 
   async getSingleUser(usersId: string) {
     const users = await this.findUser(usersId);
-    return {id: users.id, name: users.name, username: users.username, password: users.password};
+    return {id: users.id, username: users.username, password: users.password, firstname: users.firstname, surname: users.surname, email: users.email, role: users.role};
   }
 
-  async insertUsers(name: string, username: string, password: string) {
+  async insertUsers(username: string, password: string, firstname: string, surname: string, email: string, role: string) {
     const newUser = new this.usersModel({
-      name: name,
       username: username,
-      password: password
+      password: password,
+      firstname: firstname,
+      surname: surname,
+      email: email,
+      role: role
     });
     const result = await newUser.save();
     return result.id;
@@ -48,21 +51,33 @@ export class UsersService {
 
   async updateUsers(
     userId: string,
-    name: string,
     username: string,
-    password: string
+    password: string,
+    firstname: string,
+    surname: string,
+    role: string,
+    email: string
   ) {
     const updatedUsers = await this.findUser(userId);
-    if (name) {
-      updatedUsers.name = name;
-    }
     if (username) {
       updatedUsers.username = username;
     }
     if (password) {
       updatedUsers.password = password;
     }
-    updatedUsers.save();
+    if (firstname) {
+      updatedUsers.firstname = firstname;
+    }
+    if (surname) {
+      updatedUsers.surname = surname;
+    }
+    if (email) {
+      updatedUsers.email = email;
+    }
+    if (role) {
+      updatedUsers.role = role;
+    }
+    await updatedUsers.save();
   }
 
   async deleteUsers(usersId: string) {
