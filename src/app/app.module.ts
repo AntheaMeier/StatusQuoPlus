@@ -41,6 +41,8 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LoginZweiComponent} from "./login-zwei/login-zwei.component";
 import {AppRoutingModule} from "./app-routing.module";
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -60,6 +62,7 @@ import {AppRoutingModule} from "./app-routing.module";
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    HttpClientModule,
     MatFormFieldModule,
     MatSelectModule,
     LayoutModule,

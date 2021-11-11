@@ -7,6 +7,7 @@ import {Injectable, NotFoundException} from "@nestjs/common";
 export class GoalsService {
   private goals: Goal[] = [];
 
+
   constructor(@InjectModel('Goal') private readonly goalModel: Model<Goal>
   ) {}
 
