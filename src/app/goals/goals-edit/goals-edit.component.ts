@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {GoalsCreateComponent} from "../goals-create/goals-create.component";
 import { Router, ActivatedRoute } from '@angular/router';
@@ -7,12 +7,7 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 import { ErrorStateMatcher } from '@angular/material/core';
 
 /** Error when invalid control is dirty, touched, or submitted. */
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
+
 
 @Component({
   selector: 'app-goals-edit',
@@ -21,16 +16,19 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class GoalsEditComponent {
 
+ @Input() idDialog: any;
+
+ enteredValue = "";
+
   articleForm: FormGroup =  this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required)
   });
   id = '';
-  description = '';
   isLoadingResults = false;
-  matcher = new MyErrorStateMatcher();
 
 
-  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<GoalsCreateComponent>, private router: Router, private route: ActivatedRoute, private api: ApiService, private formBuilder: FormBuilder) {}
+  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<GoalsCreateComponent>, private router: Router, private route: ActivatedRoute, private api: ApiService, private formBuilder: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(GoalsEditComponent, {
@@ -47,14 +45,18 @@ export class GoalsEditComponent {
   }
 
   onClick(): void {
+    console.log(this.data);
+
+
 
   }
 
   ngOnInit() {
     this.getArticle(this.route.snapshot.params.id);
     this.articleForm = this.formBuilder.group({
-      'description' : [null, Validators.required]
+      'description' : ['', Validators.required]
     });
+
   }
 
   getArticle(id: any) {
@@ -68,15 +70,16 @@ export class GoalsEditComponent {
 
   onFormSubmit() {
     this.isLoadingResults = true;
-    this.api.updateArticle(this.id, this.articleForm.value)
+    console.log(this.data);
+    this.data.description = this.enteredValue;
+    this.api.updateArticle(this.data.id, this.data)
       .subscribe((res: any) => {
-          const id = res._id;
           this.isLoadingResults = false;
-          this.router.navigate(['/show-article', id]);
         }, (err: any) => {
           console.log(err);
           this.isLoadingResults = false;
         }
       );
+    this.dialogRef.close();
   }
 }

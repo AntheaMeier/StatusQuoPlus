@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { ApiService } from '../../shared/api.service';
 import { Goals} from "../../shared/goals";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -36,6 +36,7 @@ export class GoalsCreateComponent {
 
   enteredValue = '';
   newPost = '';
+  idDialog: any = '';
 
   displayedColumns: string[] = ['description'];
   data: Goals[] = [];
@@ -72,9 +73,10 @@ export class GoalsCreateComponent {
       }, (err: any) => {
         console.log(err);
         this.isLoadingResults = false;
+
       });
 
-    this.data.push(simpleObject);
+    this.ngOnInit();
 
   }
 
@@ -109,26 +111,35 @@ export class GoalsCreateComponent {
   }
 
   deleteArticle(id: any) {
-    this.isLoadingResults = true;
-    this.api.deleteArticle(id)
-      .subscribe(res => {
-          this.isLoadingResults = false;
-          this.router.navigate(['/articles']);
-        }, (err) => {
-          console.log(err);
-          this.isLoadingResults = false;
-        }
-      );
+    if(confirm("Are you sure you want to delete this goal?")) {
+      this.isLoadingResults = true;
+      this.api.deleteGoal(id)
+        .subscribe(res => {
+            this.isLoadingResults = false;
+            this.router.navigate(['/articles']);
+          }, (err) => {
+            console.log(err);
+            this.isLoadingResults = false;
+          }
+        );
+      this.ngOnInit();
+    }
   }
 
-  openDialog(): void {
+  openDialog(id: any): void {
+
+    this.idDialog= id;
+
     const dialogRef = this.dialog.open(GoalsEditComponent, {
       width: '250px',
+      data :{'id': this.idDialog, 'description': this.description}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.ngOnInit();
     });
+
+
   }
 
   sendMessage() {

@@ -3,9 +3,9 @@
   <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
   <mat-form-field appearance="fill">
     <mat-label>your updated goal</mat-label>
-    <input matInput placeholder="Description" formControlName="description" [errorStateMatcher]="matcher">
+    <input [(ngModel)]="enteredValue" matInput placeholder="Description" formControlName="description">
     <mat-error>
-      <span *ngIf="!articleForm.get('description').valid && articleForm.get('description').touched">Please enter Description</span>
+      <span>Please enter Description</span>
     </mat-error>
   </mat-form-field>
   </form>
@@ -13,7 +13,7 @@
 <div mat-dialog-actions>
   <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button type="submit" [disabled]="!articleForm.valid" mat-flat-button color="primary">
+  <button (click)="onFormSubmit()" type="submit" [disabled]="!articleForm.valid" mat-flat-button color="primary">
     <mat-icon>save</mat-icon>
   </button>
   </form>

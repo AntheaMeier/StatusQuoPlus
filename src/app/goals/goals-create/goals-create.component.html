@@ -15,7 +15,7 @@
         <button class="style4"mat-button  *ngIf="true" matSuffix mat-icon-button aria-label="Delete" (click)="onDeleteGoal()">
           <mat-icon class="style5"  (click)="deleteArticle(goal.id)">delete</mat-icon>
         </button>
-        <button class="style4"  *ngIf="true" matSuffix mat-icon-button aria-label="Edit" (click) = "openDialog()">
+        <button class="style4"  *ngIf="true" matSuffix mat-icon-button aria-label="Edit" (click) = "openDialog(goal.id)">
           <mat-icon class="style5">edit</mat-icon>
         </button>
       </mat-card>
