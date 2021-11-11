@@ -42,6 +42,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LoginZweiComponent} from "./login-zwei/login-zwei.component";
 import {AppRoutingModule} from "./app-routing.module";
 import { HttpClientModule } from '@angular/common/http';
+import { GoalsEditComponent } from './goals/goals-edit/goals-edit.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     ResponsiveHeaderComponent,
     LoginZweiComponent,
-    GoalsCreateComponent
+    GoalsCreateComponent,
+    GoalsEditComponent,
   ],
   imports: [
     AppRoutingModule,
