@@ -23,11 +23,12 @@ export class LoginZweiComponent implements OnInit {
     private router: Router,
     private authService: AuthService
   ) {
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/game';
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/login';
 
     this.form = this.fb.group({
-      username: ['', Validators.email],
-      password: ['', Validators.required]
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+
     });
   }
 

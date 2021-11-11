@@ -11,7 +11,7 @@ export const UsersSchema = new mongoose.Schema({
   role: {type: String, required: true},
 });
 
-export interface Users extends mongoose.Document{
+export interface Users extends mongoose.Document {
   id: number;
 
   username: string;
