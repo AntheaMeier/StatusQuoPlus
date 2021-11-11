@@ -6,6 +6,8 @@ import { Goals} from "./goals";
 
 
 
+
+
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
@@ -43,6 +45,47 @@ export class ApiService {
       catchError(this.handleError<Goals>('addGoal'))
     );
   }
+
+
+  deleteArticle(id: any): Observable<Goals> {
+    const url = `${apiUrl}/${id}`;
+    return this.http.delete<Goals>(url, httpOptions).pipe(
+      tap(_ => console.log(`deleted article id=${id}`)),
+      catchError(this.handleError<Goals>('deleteArticle'))
+    );
+  }
+
+  updateArticle(id: any, article: Goals): Observable<any> {
+    const url = `${apiUrl}/${id}`;
+    return this.http.patch(url, article, httpOptions).pipe(
+      tap(_ => console.log(`updated article id=${id}`)),
+      catchError(this.handleError<any>('updateArticle'))
+    );
+  }
+
+
+  deleteGoal(id: any): Observable<Goals> {
+    const url = `${apiUrl}/${id}`;
+    return this.http.delete<Goals>(url, httpOptions).pipe(
+      tap(_ => console.log(`deleted article id=${id}`)),
+      catchError(this.handleError<Goals>('deleteArticle'))
+    );
+  }
+
+
+  getArticle(id: number): Observable<Goals> {
+    const url = `${apiUrl}/${id}`;
+    return this.http.get<Goals>(url).pipe(
+      tap(_ => console.log(`fetched article id=${id}`)),
+      catchError(this.handleError<Goals>(`getArticle id=${id}`))
+    );
+  }
+
+
+
+
+
+
 }
 
 
