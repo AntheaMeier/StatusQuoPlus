@@ -13,7 +13,10 @@
       <mat-card class="style3 example-box" *ngFor="let goal of data" cdkDrag>
         {{ goal.description }}
         <button class="style4"mat-button  *ngIf="true" matSuffix mat-icon-button aria-label="Delete" (click)="onDeleteGoal()">
-          <mat-icon class="style5">delete</mat-icon>
+          <mat-icon class="style5"  (click)="deleteArticle(goal.id)">delete</mat-icon>
+        </button>
+        <button class="style4"  *ngIf="true" matSuffix mat-icon-button aria-label="Edit" (click) = "openDialog()">
+          <mat-icon class="style5">edit</mat-icon>
         </button>
       </mat-card>
     </div>
@@ -24,7 +27,7 @@
   <mat-form-field class="example-form-field" appearance="fill">
     <mat-label>I want to achieve</mat-label>
     <input matInput type="text" [(ngModel)]="enteredValue" (keyup.enter)="onAddPost()">
-    <button  *ngIf="true" matSuffix mat-icon-button aria-label="Send" (click)="onAddPost()">
+    <button  *ngIf="true" matSuffix mat-icon-button aria-label="Send" (click)="onAddPost()" (click)="sendMessage()">
       <mat-icon>send</mat-icon>
     </button>
   </mat-form-field>
