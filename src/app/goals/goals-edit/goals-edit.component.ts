@@ -13,10 +13,11 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
   templateUrl: './goals-edit.component.html',
   styleUrls: ['./goals-edit.component.css'],
 })
-export class GoalsEditComponent {
+export class GoalsEditComponent implements OnInit {
 
  @Input() idDialog: any;
  enteredValue = "";
+ oldDescription: any;
 
   articleForm: FormGroup =  this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required)
@@ -25,12 +26,15 @@ export class GoalsEditComponent {
   isLoadingResults = false;
 
 
-  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<GoalsCreateComponent>, private router: Router, private route: ActivatedRoute, private api: ApiService, private formBuilder: FormBuilder,
+  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<GoalsCreateComponent>,
+              private router: Router, private route: ActivatedRoute,
+              private api: ApiService, private formBuilder: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(GoalsEditComponent, {
       width: '40%',
+
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('dialog closed');
@@ -46,7 +50,7 @@ export class GoalsEditComponent {
   }
 
   ngOnInit() {
-    this.getArticle(this.route.snapshot.params.id);
+    this.getArticle(this.data.id);
     this.articleForm = this.formBuilder.group({
       'description' : ['', Validators.required]
     });
@@ -56,8 +60,9 @@ export class GoalsEditComponent {
   getArticle(id: any) {
     this.api.getArticle(id).subscribe((data: any) => {
       this.id = data.id;
+      this.oldDescription = data.description;
       this.articleForm.setValue({
-        description: data.description
+        description: data.description,
       });
     });
   }
