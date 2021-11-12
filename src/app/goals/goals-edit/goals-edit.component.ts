@@ -4,7 +4,6 @@ import {GoalsCreateComponent} from "../goals-create/goals-create.component";
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../shared/api.service';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 
@@ -12,12 +11,11 @@ import { ErrorStateMatcher } from '@angular/material/core';
 @Component({
   selector: 'app-goals-edit',
   templateUrl: './goals-edit.component.html',
-  styleUrls: ['./goals-edit.component.css']
+  styleUrls: ['./goals-edit.component.css'],
 })
 export class GoalsEditComponent {
 
  @Input() idDialog: any;
-
  enteredValue = "";
 
   articleForm: FormGroup =  this.formBuilder.group({
@@ -32,9 +30,8 @@ export class GoalsEditComponent {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(GoalsEditComponent, {
-      width: '250px',
+      width: '40%',
     });
-
     dialogRef.afterClosed().subscribe(result => {
       console.log('dialog closed');
     });
@@ -46,9 +43,6 @@ export class GoalsEditComponent {
 
   onClick(): void {
     console.log(this.data);
-
-
-
   }
 
   ngOnInit() {

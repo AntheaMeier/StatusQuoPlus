@@ -65,7 +65,7 @@ export class GoalsCreateComponent {
 
     this.isLoadingResults = true;
     const simpleObject = {} as Goals;
-    simpleObject.description= this.enteredValue;
+    simpleObject.description = this.enteredValue;
 
     this.api.addArticle(simpleObject)
       .subscribe((res: any) => {
@@ -127,11 +127,9 @@ export class GoalsCreateComponent {
   }
 
   openDialog(id: any): void {
-
     this.idDialog= id;
-
     const dialogRef = this.dialog.open(GoalsEditComponent, {
-      width: '250px',
+      width: '40%',
       data :{'id': this.idDialog, 'description': this.description}
     });
 

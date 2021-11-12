@@ -1,11 +1,12 @@
-<h1 mat-dialog-title>Edit</h1>
+<h1>
+</h1>
 <div mat-dialog-content>
   <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
   <mat-form-field appearance="fill">
     <mat-label>your updated goal</mat-label>
-    <input [(ngModel)]="enteredValue" matInput placeholder="Description" formControlName="description">
+    <input [(ngModel)]="enteredValue" matInput placeholder="I want to achieve.." formControlName="description">
     <mat-error>
-      <span>Please enter Description</span>
+      <span>Please enter description</span>
     </mat-error>
   </mat-form-field>
   </form>
