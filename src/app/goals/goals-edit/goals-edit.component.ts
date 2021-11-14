@@ -4,7 +4,6 @@ import {GoalsCreateComponent} from "../goals-create/goals-create.component";
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../shared/api.service';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 
@@ -12,13 +11,13 @@ import { ErrorStateMatcher } from '@angular/material/core';
 @Component({
   selector: 'app-goals-edit',
   templateUrl: './goals-edit.component.html',
-  styleUrls: ['./goals-edit.component.css']
+  styleUrls: ['./goals-edit.component.css'],
 })
-export class GoalsEditComponent {
+export class GoalsEditComponent implements OnInit {
 
  @Input() idDialog: any;
-
  enteredValue = "";
+ oldDescription: any;
 
   articleForm: FormGroup =  this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required)
@@ -27,14 +26,16 @@ export class GoalsEditComponent {
   isLoadingResults = false;
 
 
-  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<GoalsCreateComponent>, private router: Router, private route: ActivatedRoute, private api: ApiService, private formBuilder: FormBuilder,
+  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<GoalsCreateComponent>,
+              private router: Router, private route: ActivatedRoute,
+              private api: ApiService, private formBuilder: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(GoalsEditComponent, {
-      width: '250px',
-    });
+      width: '40%',
 
+    });
     dialogRef.afterClosed().subscribe(result => {
       console.log('dialog closed');
     });
@@ -46,13 +47,10 @@ export class GoalsEditComponent {
 
   onClick(): void {
     console.log(this.data);
-
-
-
   }
 
   ngOnInit() {
-    this.getArticle(this.route.snapshot.params.id);
+    this.getArticle(this.data.id);
     this.articleForm = this.formBuilder.group({
       'description' : ['', Validators.required]
     });
@@ -62,8 +60,9 @@ export class GoalsEditComponent {
   getArticle(id: any) {
     this.api.getArticle(id).subscribe((data: any) => {
       this.id = data.id;
+      this.oldDescription = data.description;
       this.articleForm.setValue({
-        description: data.description
+        description: data.description,
       });
     });
   }

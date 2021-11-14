@@ -1,5 +1,5 @@
 .style {
-  max-width: 20%;
+  max-width: 40%;
   height: 80%;
   margin-left: 40%;
   margin-top: 1%;
@@ -12,14 +12,25 @@
   height: 80%;
   background-color: #E8E4E1;
   margin: 0 auto;
+  position: relative;
+  overflow: hidden;
 }
+
+
+.mat-card-content {
+  height: 100%;
+  position: center;
+  overflow: auto;
+}
+
+
 
 .style3 {
   height: 15%;
-  background-color: black;
-  color: whitesmoke;
+  background-color: white;
+  color: #857971;
   margin: 0 auto;
-  padding-right: 0;
+  margin-right: 10%;
   margin-bottom: 5px;
 
 }
@@ -31,6 +42,7 @@
 .style5 {
   margin-bottom: 150%;
 }
+
 
 .example-form-field {
   width: 100%;
@@ -65,4 +77,22 @@ input {
 
 ::ng-deep.mat-form-field-flex {
   border-radius: 4px !important;
+}
+
+.button:hover {
+  background-color: #4CAF50 !important; /* Green */
+  color: white;
+}
+
+
+::ng-deep .mat-progress-bar-fill::after {
+  background-color: #0071B9;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+  background: #E8E4E1;
+}
+
+::ng-deep .mat-progress-bar {
+  border-radius: 2px;
 }

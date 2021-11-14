@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { ApiService } from '../../shared/api.service';
 import { Goals} from "../../shared/goals";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -16,7 +16,7 @@ import {GoalsEditComponent} from "../goals-edit/goals-edit.component";
   templateUrl: './goals-create.component.html',
   styleUrls: ['./goals-create.component.css']
 })
-export class GoalsCreateComponent {
+export class GoalsCreateComponent implements OnInit{
 
   drop(event: CdkDragDrop<Goals[]>) {
     if (event.previousContainer === event.container) {
@@ -65,7 +65,7 @@ export class GoalsCreateComponent {
 
     this.isLoadingResults = true;
     const simpleObject = {} as Goals;
-    simpleObject.description= this.enteredValue;
+    simpleObject.description = this.enteredValue;
 
     this.api.addArticle(simpleObject)
       .subscribe((res: any) => {
@@ -127,11 +127,9 @@ export class GoalsCreateComponent {
   }
 
   openDialog(id: any): void {
-
     this.idDialog= id;
-
     const dialogRef = this.dialog.open(GoalsEditComponent, {
-      width: '250px',
+      width: '40%',
       data :{'id': this.idDialog, 'description': this.description}
     });
 
