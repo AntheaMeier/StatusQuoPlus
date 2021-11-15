@@ -1,7 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from '../auth.service';
+import {Login} from "../shared/login";
+import {ApiService} from "../shared/api.service";
 
 @Component({
   selector: 'app-login-zwei',
@@ -16,12 +18,15 @@ export class LoginZweiComponent implements OnInit {
   private formSubmitAttempt = false;
   private returnUrl: string;
   public loggedIn = false;
+  data: Login[] = [];
+  isLoadingResults = true;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private api: ApiService,
   ) {
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/login';
 
@@ -32,11 +37,24 @@ export class LoginZweiComponent implements OnInit {
     });
   }
 
-  async ngOnInit(): Promise<void> {
+  /*async ngOnInit(): Promise<void> {
     if (await this.authService.checkAuthenticated()) {
       await this.router.navigate([this.returnUrl]);
     }
+  }*/
+
+  ngOnInit() {
+    this.api.getUsers()
+      .subscribe((res: any) => {
+        this.data = res;
+        //console.log(this.data);
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
   }
+
 
   async onSubmit(): Promise<void> {
 
@@ -56,9 +74,23 @@ export class LoginZweiComponent implements OnInit {
   }
 
 
-  onClick(){
-    this.loggedIn=true;
-    this.setLoggedIn.emit(this.loggedIn);
+  onClick() {
+    //console.log(this.data[4].username);
+    for (const i of this.data) {
+      //console.log(this.data);
+      if (i.username === this.form.get('username')?.value && i.password === this.form.get('password')?.value) {
+        console.log(this.form.get('username')?.value, this.form.get('password')?.value);
+        this.loggedIn = true;
+        this.setLoggedIn.emit(this.loggedIn);
+        console.log("erfolg");
+      } else {
+        this.loggedIn = false;
+        this.setLoggedIn.emit(this.loggedIn);
+        this.loginInvalid = true;
+        console.log("error");
+      }
+    }
+    //this.loggedIn=true;
+    //this.setLoggedIn.emit(this.loggedIn);
   }
 }
-
