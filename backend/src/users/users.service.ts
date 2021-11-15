@@ -1,13 +1,14 @@
 import {Injectable, NotFoundException} from '@nestjs/common';
-import { InjectModel } from "@nestjs/mongoose";
-import { Model } from 'mongoose';
+import {InjectModel} from "@nestjs/mongoose";
+import {Model} from 'mongoose';
 import {Users} from "./users.model";
 
 @Injectable()
 export class UsersService {
-   private users: Users[] = [];
+  private users: Users[] = [];
 
-  constructor(@InjectModel('Users') private readonly usersModel: Model<Users>) {}
+  constructor(@InjectModel('Users') private readonly usersModel: Model<Users>) {
+  }
 
   async findOne(username: string): Promise<Users | undefined> {
     return (await this.getUsers()).find(user => user.username === username);
@@ -28,7 +29,15 @@ export class UsersService {
 
   async getSingleUser(usersId: string) {
     const users = await this.findUser(usersId);
-    return {id: users.id, username: users.username, password: users.password, firstname: users.firstname, surname: users.surname, email: users.email, role: users.role};
+    return {
+      id: users.id,
+      username: users.username,
+      password: users.password,
+      firstname: users.firstname,
+      surname: users.surname,
+      email: users.email,
+      role: users.role
+    };
   }
 
   async insertUsers(username: string, password: string, firstname: string, surname: string, email: string, role: string) {
@@ -55,8 +64,8 @@ export class UsersService {
     password: string,
     firstname: string,
     surname: string,
-    role: string,
-    email: string
+    email: string,
+    role: string
   ) {
     const updatedUsers = await this.findUser(userId);
     if (username) {
