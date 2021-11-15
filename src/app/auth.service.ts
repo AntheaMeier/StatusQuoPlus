@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {Router} from '@angular/router';
 import {OktaAuth} from '@okta/okta-auth-js';
 
 @Injectable({
@@ -26,6 +26,7 @@ export class AuthService {
   async login(username: string, password: string): Promise<void> {
     const transaction = await this.authClient.signIn({username, password});
 
+    console.log(localStorage);
     if (transaction.status !== 'SUCCESS') {
       throw Error('We cannot handle the ' + transaction.status + ' status');
     }
