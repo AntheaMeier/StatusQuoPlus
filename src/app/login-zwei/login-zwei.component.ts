@@ -47,7 +47,6 @@ export class LoginZweiComponent implements OnInit {
     this.api.getUsers()
       .subscribe((res: any) => {
         this.data = res;
-        //console.log(this.data);
         this.isLoadingResults = false;
       }, err => {
         console.log(err);
@@ -75,22 +74,12 @@ export class LoginZweiComponent implements OnInit {
 
 
   onClick() {
-    //console.log(this.data[4].username);
-    for (const i of this.data) {
-      //console.log(this.data);
+    for (let i of this.data) {
       if (i.username === this.form.get('username')?.value && i.password === this.form.get('password')?.value) {
-        console.log(this.form.get('username')?.value, this.form.get('password')?.value);
         this.loggedIn = true;
         this.setLoggedIn.emit(this.loggedIn);
-        console.log("erfolg");
-      } else {
-        this.loggedIn = false;
-        this.setLoggedIn.emit(this.loggedIn);
+      } else
         this.loginInvalid = true;
-        console.log("error");
-      }
     }
-    //this.loggedIn=true;
-    //this.setLoggedIn.emit(this.loggedIn);
   }
 }
