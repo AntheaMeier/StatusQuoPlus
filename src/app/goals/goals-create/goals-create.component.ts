@@ -48,26 +48,13 @@ export class GoalsCreateComponent implements OnInit{
   constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute) { }
 
   onAddPost(){
-    /*console.log('enteredValue = ' + this.enteredValue);
-    this.newPost = this.enteredValue;
-    this.isLoadingResults = true;
-    let addedGoal = "{ \"description:\" : "+ "\"" + this.newPost + "\""  + "}";
-    console.log('addedGoal = ' + addedGoal);
-
-    this.api.addArticle(addedGoal)
-      .subscribe((res: any) => {
-        this.isLoadingResults = false;
-      }, (err: any) => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });*/
 
 
     this.isLoadingResults = true;
     const simpleObject = {} as Goals;
     simpleObject.description = this.enteredValue;
 
-    this.api.addArticle(simpleObject)
+    this.api.addGoal(simpleObject)
       .subscribe((res: any) => {
         this.isLoadingResults = false;
       }, (err: any) => {
@@ -87,7 +74,7 @@ export class GoalsCreateComponent implements OnInit{
 
 
   ngOnInit() {
-    this.api.getArticles()
+    this.api.getGoals()
       .subscribe((res: any) => {
         this.data = res;
         console.log(this.data)
@@ -98,12 +85,12 @@ export class GoalsCreateComponent implements OnInit{
         this.isLoadingResults = false;
       });
 
-    this.getArticleDetails(this.route.snapshot.params.id);
+    this.getGoalDetails(this.route.snapshot.params.id);
 
   }
 
-  getArticleDetails(id: any) {
-    this.api.getArticle(id)
+  getGoalDetails(id: any) {
+    this.api.getGoal(id)
       .subscribe((data: any) => {
         this.goal = data;
         console.log(this.goal);
@@ -112,7 +99,7 @@ export class GoalsCreateComponent implements OnInit{
 
   }
 
-  deleteArticle(id: any) {
+  deleteGoal(id: any) {
     if(confirm("Are you sure you want to delete this goal?")) {
       this.isLoadingResults = true;
       this.api.deleteGoal(id)
@@ -147,6 +134,7 @@ export class GoalsCreateComponent implements OnInit{
     // After Sending Message
     this.enteredValue = '';
   }
+
 }
 
 
