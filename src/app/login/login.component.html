@@ -5,13 +5,13 @@
       <div class = 'form-group'>
         <input class = 'form-control' type = "text" formControlName="username" name = "username" placeholder = "Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
         <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-          <div *ngIf="f.username.errors.required">Username is required</div>
+          <div *ngIf="f.username.errors">Username is required</div>
         </div>
       </div>
       <div class = 'form-group'>
         <input class = 'form-control' type = "password" formControlName="password" name = "password" placeholder = "Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-          <div *ngIf="f.password.errors.required">Password is required</div>
+          <div *ngIf="f.password.errors">Password is required</div>
         </div>
       </div>
       <input class= 'btn btn-outline-info' type = "submit" value = "Login">

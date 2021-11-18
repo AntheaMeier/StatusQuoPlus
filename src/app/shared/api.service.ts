@@ -13,7 +13,6 @@ const httpOptions = {
 
 const apiUrl = 'http://localhost:3000/goals';
 const apiUrlLogin = 'http://localhost:3000/users';
-const apiUrlToken = 'http://localhost:3000/login';
 
 @Injectable({
   providedIn: 'root'
@@ -33,19 +32,19 @@ export class ApiService {
     };
   }
 
-  getArticles(): Observable<Goals[]> {
-    return this.http.get<Goals[]>(apiUrl)
-      .pipe(
-        tap(goal => console.log('fetched articles')),
-        catchError(this.handleError('getGoals', []))
-      );
-  }
+
+
+  //Login
 
   postTypeRequest(url:string, payload: any): any {
     return this.http.post(`${this.apiUrlToken}${url}`, payload).pipe(map(res => {
       return res;
     }));
   }
+
+
+
+  // Users
 
   getUsers(): Observable<Login[]> {
     return this.http.get<Login[]>(apiUrlLogin)
@@ -55,29 +54,26 @@ export class ApiService {
       );
   }
 
-  addArticle(goal: Goals): Observable<Goals> {
+
+
+
+  // Goals
+
+  getGoals(): Observable<Goals[]> {
+    return this.http.get<Goals[]>(apiUrl)
+      .pipe(
+        tap(goal => console.log('fetched articles')),
+        catchError(this.handleError('getGoals', []))
+      );
+  }
+
+  addGoal(goal: Goals): Observable<Goals> {
     return this.http.post<Goals>(apiUrl, goal, httpOptions).pipe(
       tap((goal: Goals) => console.log(`added goal w/ id=${goal.id}`)),
       catchError(this.handleError<Goals>('addGoal'))
     );
   }
 
-
-  deleteArticle(id: any): Observable<Goals> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.delete<Goals>(url, httpOptions).pipe(
-      tap(_ => console.log(`deleted article id=${id}`)),
-      catchError(this.handleError<Goals>('deleteArticle'))
-    );
-  }
-
-  updateArticle(id: any, article: Goals): Observable<any> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.patch(url, article, httpOptions).pipe(
-      tap(_ => console.log(`updated article id=${id}`)),
-      catchError(this.handleError<any>('updateArticle'))
-    );
-  }
 
 
   deleteGoal(id: any): Observable<Goals> {
@@ -86,10 +82,22 @@ export class ApiService {
       tap(_ => console.log(`deleted article id=${id}`)),
       catchError(this.handleError<Goals>('deleteArticle'))
     );
+
+  }
+
+  updateGoal(id: any, article: Goals): Observable<any> {
+    const url = `${apiUrl}/${id}`;
+    return this.http.patch(url, article, httpOptions).pipe(
+      tap(_ => console.log(`updated article id=${id}`)),
+      catchError(this.handleError<any>('updateArticle'))
+    );
   }
 
 
-  getArticle(id: number): Observable<Goals> {
+
+
+
+  getGoal(id: number): Observable<Goals> {
     const url = `${apiUrl}/${id}`;
     return this.http.get<Goals>(url).pipe(
       tap(_ => console.log(`fetched article id=${id}`)),

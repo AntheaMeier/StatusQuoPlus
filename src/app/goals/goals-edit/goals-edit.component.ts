@@ -46,15 +46,15 @@ export class GoalsEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getArticle(this.data.id);
+    this.getGoal(this.data.id);
     this.articleForm = this.formBuilder.group({
       'description' : ['', Validators.required]
     });
 
   }
 
-  getArticle(id: any) {
-    this.api.getArticle(id).subscribe((data: any) => {
+  getGoal(id: any) {
+    this.api.getGoal(id).subscribe((data: any) => {
       this.id = data.id;
       this.oldDescription = data.description;
       this.articleForm.setValue({
@@ -67,7 +67,7 @@ export class GoalsEditComponent implements OnInit {
     this.isLoadingResults = true;
     console.log(this.data);
     this.data.description = this.enteredValue;
-    this.api.updateArticle(this.data.id, this.data)
+    this.api.updateGoal(this.data.id, this.data)
       .subscribe((res: any) => {
           this.isLoadingResults = false;
         }, (err: any) => {
