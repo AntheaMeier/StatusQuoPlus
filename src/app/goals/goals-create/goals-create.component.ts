@@ -8,6 +8,7 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 import { ErrorStateMatcher } from '@angular/material/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {GoalsEditComponent} from "../goals-edit/goals-edit.component";
+import { DeleteConfirmationDialogComponent } from '../delete-confirmation-dialog/delete-confirmation-dialog';
 /** Error when invalid control is dirty, touched, or submitted. */
 
 
@@ -77,8 +78,6 @@ export class GoalsCreateComponent implements OnInit{
       });
 
     window.location.reload()
-
-
   }
 
   onDeleteGoal(){
@@ -112,28 +111,26 @@ export class GoalsCreateComponent implements OnInit{
 
   }
 
-  deleteArticle(id: any) {
-    if(confirm("Are you sure you want to delete this goal?")) {
-      this.isLoadingResults = true;
-      this.api.deleteGoal(id)
-        .subscribe(res => {
-            this.isLoadingResults = false;
-            this.router.navigate(['/articles']);
-          }, (err) => {
-            console.log(err);
-            this.isLoadingResults = false;
-          }
-        );
-      window.location.reload()
-
-    }
-  }
-
   openDialog(id: any): void {
     this.idDialog= id;
     const dialogRef = this.dialog.open(GoalsEditComponent, {
       width: '40%',
       data :{'id': this.idDialog, 'description': this.description}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+
+
+  }
+
+  deleteDialog(id: any): void {
+
+    this.idDialog= id;
+    const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
+      width: '40%',
+      data :{'id': this.idDialog }
     });
 
     dialogRef.afterClosed().subscribe(result => {
