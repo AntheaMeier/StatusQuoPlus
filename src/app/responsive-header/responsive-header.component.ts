@@ -2,13 +2,11 @@ import {Component} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map, shareReplay} from 'rxjs/operators';
-import { AuthService } from './../services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Login} from "../shared/login";
 import {ApiService} from "../shared/api.service";
-
-import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-responsive-header',
@@ -16,12 +14,9 @@ import { OnInit } from '@angular/core';
   styleUrls: ['./responsive-header.component.css']
 })
 export class ResponsiveHeaderComponent {
-  public loggedOut = false;
   public loggedIn = false;
 
-
   isLogin = false;
-  errorMessage: any;
   loginForm: FormGroup
   submitted = false;
   data: Login[] = [];
@@ -66,17 +61,13 @@ export class ResponsiveHeaderComponent {
 
   }
 
-  // convenience getter for easy access to form fields
   get f(): any { return this.loginForm.controls; }
 
   onSubmit(): void {
     this.submitted = true;
-    console.log('Your form data : ', this.loginForm.value);
     for (let i of this.data) {
       if (i.username === this.loginForm.get('username')?.value && i.password === this.loginForm.get('password')?.value) {
         this.api.postTypeRequest('', this.loginForm.value).subscribe((res: any) => {
-          console.log('der access token' + res.access_token);
-
           this.auth.setDataInLocalStorage('userData', JSON.stringify(res));
           this.auth.setDataInLocalStorage('token', res.access_token);
           window.location.reload()
@@ -87,7 +78,6 @@ export class ResponsiveHeaderComponent {
   }
 
   isUserLogin(): void{
-    console.log('userDetails=' + this.auth.getUserDetails());
     if (this.auth.getUserDetails() != null){
       this.isLogin = true;
     }
