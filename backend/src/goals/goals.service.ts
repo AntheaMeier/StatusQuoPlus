@@ -1,15 +1,15 @@
-import { Goal} from "./goals.model";
-import { InjectModel } from "@nestjs/mongoose";
-import { Model} from "mongoose";
+import {Goal} from "./goals.model";
+import {InjectModel} from "@nestjs/mongoose";
+import {Model} from "mongoose";
 import {Injectable, NotFoundException} from "@nestjs/common";
 
 @Injectable()
 export class GoalsService {
   private goals: Goal[] = [];
 
-
   constructor(@InjectModel('Goal') private readonly goalModel: Model<Goal>
-  ) {}
+  ) {
+  }
 
   async insertGoals(desc: string) {
     const newGoal = new this.goalModel({
