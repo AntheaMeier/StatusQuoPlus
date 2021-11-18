@@ -1,26 +1,32 @@
 <mat-card class="style">ZIELE
   <mat-card class="style2">
-    <mat-card-content>
-      <div cdkDropList
-           #todoList="cdkDropList"
-           [cdkDropListData]="data"
-           class="example-list"
-           (cdkDropListDropped)="drop($event)">
-        <mat-card class="style3 example-box" *ngFor="let goal of data" cdkDrag>
-          {{ goal.description }}
-          <button [disableRipple]="true" class="style4" *ngIf="true" matSuffix mat-icon-button aria-label="Delete"
-                  (click)="onDeleteGoal()">
-            <mat-icon class="style5" (click)="deleteGoal(goal.id)">delete</mat-icon>
-          </button>
-          <button [disableRipple]="true" class="style4" *ngIf="true" matSuffix mat-icon-button aria-label="Edit"
-                  (click)="openDialog(goal.id)">
-            <mat-icon class="style5">edit</mat-icon>
-          </button>
-          <!--   Progress bar: value = anz abgehakte todos jedes Ziels -->
-          <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-        </mat-card>
-      </div>
-    </mat-card-content>
+  <mat-card-content>
+
+
+
+    <div     cdkDropList
+             #todoList="cdkDropList"
+             [cdkDropListData]="data"
+             class="example-list"
+             (cdkDropListDropped)="drop($event)">
+      <mat-card class="style3 example-box" *ngFor="let goal of data" cdkDrag>
+        {{ goal.description }}
+        <button [disableRipple]="true" class="style4" *ngIf="true" matSuffix mat-icon-button aria-label="Delete" (click)="deleteDialog(goal.id)">
+          <mat-icon class="style5"  (click)="deleteDialog(goal.id)">delete</mat-icon>
+        </button>
+        <button [disableRipple]="true" class="style4" *ngIf="true" matSuffix mat-icon-button aria-label="Edit" (click) = "openDialog(goal.id)">
+          <mat-icon class="style5">edit</mat-icon>
+        </button>
+
+
+<!--   Progress bar: value = anz abgehakte todos jedes Ziels -->
+        <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+
+
+      </mat-card>
+    </div>
+
+  </mat-card-content>
   </mat-card>
   <div class="div-styling">
     <mat-form-field class="example-form-field" appearance="fill">
