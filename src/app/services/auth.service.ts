@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -7,7 +8,6 @@ export class AuthService {
 
   getUserDetails(): JSON {
     return localStorage.getItem('userData') ? JSON.parse(<string>localStorage.getItem('userData')) : null;
-
   }
 
   setDataInLocalStorage(variableName: string, data: any): any {

@@ -2,12 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import { ApiService } from '../../shared/api.service';
 import { Goals} from "../../shared/goals";
 import {MatDialog} from '@angular/material/dialog';
-
 import {ActivatedRoute, Router} from '@angular/router';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {GoalsEditComponent} from "../goals-edit/goals-edit.component";
-/** Error when invalid control is dirty, touched, or submitted. */
-
 
 @Component({
   selector: 'app-goals',
@@ -35,14 +32,11 @@ export class GoalsCreateComponent implements OnInit{
   data: Goals[] = [];
   isLoadingResults = true;
   goal: Goals = { id: '', description: ''};
-
-
   description = '';
+
   constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute) { }
 
   onAddPost(){
-
-
     this.isLoadingResults = true;
     const simpleObject = {} as Goals;
     simpleObject.description = this.enteredValue;
@@ -55,23 +49,17 @@ export class GoalsCreateComponent implements OnInit{
         this.isLoadingResults = false;
 
       });
-
     window.location.reload()
-
-
   }
 
   onDeleteGoal(){
     this.newPost = this.enteredValue;
   }
 
-
   ngOnInit() {
     this.api.getGoals()
       .subscribe((res: any) => {
         this.data = res;
-        console.log(this.data)
-        console.log(this.data);
         this.isLoadingResults = false;
       }, err => {
         console.log(err);
@@ -84,7 +72,6 @@ export class GoalsCreateComponent implements OnInit{
     this.api.getGoal(id)
       .subscribe((data: any) => {
         this.goal = data;
-        console.log(this.goal);
         this.isLoadingResults = false;
       });
   }
@@ -118,10 +105,8 @@ export class GoalsCreateComponent implements OnInit{
   }
 
   sendMessage() {
-    // After Sending Message
     this.enteredValue = '';
   }
-
 }
 
 

@@ -10,7 +10,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './goals-edit.component.html',
   styleUrls: ['./goals-edit.component.css'],
 })
-
 export class GoalsEditComponent implements OnInit {
 
   @Input() idDialog: any;
@@ -19,9 +18,9 @@ export class GoalsEditComponent implements OnInit {
   articleForm: FormGroup =  this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required)
   });
+
   id = '';
   isLoadingResults = false;
-
 
   constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<GoalsCreateComponent>,
               private router: Router, private route: ActivatedRoute,
@@ -32,17 +31,11 @@ export class GoalsEditComponent implements OnInit {
     const dialogRef = this.dialog.open(GoalsEditComponent, {
       width: '40%',
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('dialog closed');
-    });
+    dialogRef.afterClosed().subscribe(result => {});
   }
 
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  onClick(): void {
-    console.log(this.data);
   }
 
   ngOnInit() {
@@ -65,7 +58,6 @@ export class GoalsEditComponent implements OnInit {
 
   onFormSubmit() {
     this.isLoadingResults = true;
-    console.log(this.data);
     this.data.description = this.enteredValue;
     this.api.updateGoal(this.data.id, this.data)
       .subscribe((res: any) => {
