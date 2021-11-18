@@ -1,9 +1,16 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {LoginZweiComponent} from "./login-zwei/login-zwei.component";
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {LoginComponent} from "./login/login.component";
+import {ResponsiveHeaderComponent} from "./responsive-header/responsive-header.component";
+import {AuthGuardService} from "./auth-guard.service";
 
 const routes: Routes = [
-  {path: '', component: LoginZweiComponent},
+  {path: '',
+    component: ResponsiveHeaderComponent,
+    canActivate: [AuthGuardService]
+  },
+  {path: 'login', component: LoginComponent},
+
 
 ];
 
@@ -11,4 +18,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

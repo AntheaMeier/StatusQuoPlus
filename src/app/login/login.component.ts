@@ -1,25 +1,15 @@
-import {Component} from '@angular/core';
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {Observable} from 'rxjs';
-import {map, shareReplay} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { ApiService } from './../shared/api.service';
 import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Login} from "../shared/login";
-import {ApiService} from "../shared/api.service";
-
-import { OnInit } from '@angular/core';
-
 @Component({
-  selector: 'app-responsive-header',
-  templateUrl: './responsive-header.component.html',
-  styleUrls: ['./responsive-header.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class ResponsiveHeaderComponent {
-  public loggedOut = false;
-  public loggedIn = false;
-
-
+export class LoginComponent implements OnInit {
   isLogin = false;
   errorMessage: any;
   loginForm: FormGroup
@@ -27,25 +17,15 @@ export class ResponsiveHeaderComponent {
   data: Login[] = [];
   isLoadingResults = true;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
-
-  constructor(private breakpointObserver: BreakpointObserver,
-              private auth: AuthService,
-              private router: Router,
-              private formBuilder: FormBuilder,
-              private api: ApiService,
+  constructor(
+    private formBuilder: FormBuilder,
+    private api: ApiService,
+    private auth: AuthService,
+    private router: Router
   ) {
     this.loginForm = formBuilder.group({
       title: formBuilder.control('initial value', Validators.required)
     });
-  }
-
-  setLoggedIn(data: boolean) {
-    this.loggedIn = data;
   }
 
   ngOnInit(): void {
@@ -63,7 +43,6 @@ export class ResponsiveHeaderComponent {
         console.log(err);
         this.isLoadingResults = false;
       });
-
   }
 
   // convenience getter for easy access to form fields
@@ -77,17 +56,17 @@ export class ResponsiveHeaderComponent {
         this.api.postTypeRequest('', this.loginForm.value).subscribe((res: any) => {
           console.log('der access token' + res.access_token);
 
+          console.log('das ist res ' + res);
           this.auth.setDataInLocalStorage('userData', JSON.stringify(res));
           this.auth.setDataInLocalStorage('token', res.access_token);
-          window.location.reload()
+          this.router.navigate([''])
         });
       }
     }
-
   }
 
   isUserLogin(): void{
-    console.log('userDetails=' + this.auth.getUserDetails());
+    console.log(this.auth.getUserDetails());
     if (this.auth.getUserDetails() != null){
       this.isLogin = true;
     }
@@ -95,16 +74,6 @@ export class ResponsiveHeaderComponent {
 
   logout(): void{
     this.auth.clearStorage();
-    window.location.reload()
+    this.router.navigate(['/login']);
   }
-
-
-
-
-
-
-  /// login ab hier
-
-
-
 }

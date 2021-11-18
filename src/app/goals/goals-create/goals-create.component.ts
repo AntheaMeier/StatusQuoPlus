@@ -1,11 +1,13 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { ApiService } from '../../shared/api.service';
 import { Goals} from "../../shared/goals";
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {GoalsEditComponent} from "../goals-edit/goals-edit.component";
 /** Error when invalid control is dirty, touched, or submitted. */
 
 
@@ -14,7 +16,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
   templateUrl: './goals-create.component.html',
   styleUrls: ['./goals-create.component.css']
 })
-export class GoalsCreateComponent {
+export class GoalsCreateComponent implements OnInit{
 
   drop(event: CdkDragDrop<Goals[]>) {
     if (event.previousContainer === event.container) {
@@ -34,14 +36,16 @@ export class GoalsCreateComponent {
 
   enteredValue = '';
   newPost = '';
+  idDialog: any = '';
 
-  displayedColumns: string[] = ['descritption'];
+  displayedColumns: string[] = ['description'];
   data: Goals[] = [];
   isLoadingResults = true;
+  goal: Goals = { id: '', description: ''};
 
 
   description = '';
-  constructor(private router: Router, private api: ApiService) { }
+  constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute) { }
 
   onAddPost(){
     /*console.log('enteredValue = ' + this.enteredValue);
@@ -61,7 +65,7 @@ export class GoalsCreateComponent {
 
     this.isLoadingResults = true;
     const simpleObject = {} as Goals;
-    simpleObject.description= this.enteredValue;
+    simpleObject.description = this.enteredValue;
 
     this.api.addArticle(simpleObject)
       .subscribe((res: any) => {
@@ -69,9 +73,11 @@ export class GoalsCreateComponent {
       }, (err: any) => {
         console.log(err);
         this.isLoadingResults = false;
+
       });
 
-    this.data.push(simpleObject);
+    window.location.reload()
+
 
   }
 
@@ -91,14 +97,56 @@ export class GoalsCreateComponent {
         console.log(err);
         this.isLoadingResults = false;
       });
+
+    this.getArticleDetails(this.route.snapshot.params.id);
+
   }
 
+  getArticleDetails(id: any) {
+    this.api.getArticle(id)
+      .subscribe((data: any) => {
+        this.goal = data;
+        console.log(this.goal);
+        this.isLoadingResults = false;
+      });
+
+  }
+
+  deleteArticle(id: any) {
+    if(confirm("Are you sure you want to delete this goal?")) {
+      this.isLoadingResults = true;
+      this.api.deleteGoal(id)
+        .subscribe(res => {
+            this.isLoadingResults = false;
+            this.router.navigate(['/articles']);
+          }, (err) => {
+            console.log(err);
+            this.isLoadingResults = false;
+          }
+        );
+      window.location.reload()
+
+    }
+  }
+
+  openDialog(id: any): void {
+    this.idDialog= id;
+    const dialogRef = this.dialog.open(GoalsEditComponent, {
+      width: '40%',
+      data :{'id': this.idDialog, 'description': this.description}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
 
 
+  }
 
-
-
-
+  sendMessage() {
+    // After Sending Message
+    this.enteredValue = '';
+  }
 }
 
 
