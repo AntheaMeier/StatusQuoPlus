@@ -1,11 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { ApiService } from '../../shared/api.service';
 import { Goals} from "../../shared/goals";
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 
 import {ActivatedRoute, Router} from '@angular/router';
-import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {GoalsEditComponent} from "../goals-edit/goals-edit.component";
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -31,14 +29,9 @@ export class GoalsCreateComponent implements OnInit{
     }
   }
 
-
-
-
   enteredValue = '';
   newPost = '';
   idDialog: any = '';
-
-  displayedColumns: string[] = ['description'];
   data: Goals[] = [];
   isLoadingResults = true;
   goal: Goals = { id: '', description: ''};
@@ -84,9 +77,7 @@ export class GoalsCreateComponent implements OnInit{
         console.log(err);
         this.isLoadingResults = false;
       });
-
     this.getGoalDetails(this.route.snapshot.params.id);
-
   }
 
   getGoalDetails(id: any) {
@@ -96,7 +87,6 @@ export class GoalsCreateComponent implements OnInit{
         console.log(this.goal);
         this.isLoadingResults = false;
       });
-
   }
 
   deleteGoal(id: any) {
@@ -112,7 +102,6 @@ export class GoalsCreateComponent implements OnInit{
           }
         );
       window.location.reload()
-
     }
   }
 
@@ -126,8 +115,6 @@ export class GoalsCreateComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       this.ngOnInit();
     });
-
-
   }
 
   sendMessage() {
