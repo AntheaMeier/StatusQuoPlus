@@ -1,4 +1,4 @@
-<mat-sidenav-container  class="sidenav-container">
+<mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav"
                fixedInViewport
                [attr.role]="(isHandset$) ? 'dialog' : 'navigation'"
@@ -6,10 +6,11 @@
                [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menü</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#"  *ngIf="this.isLogin"><img class="random-user-side" src="https://randomuser.me/api/portraits/men/11.jpg"
-                                     alt="random user">
+      <a mat-list-item href="#" *ngIf="this.isLogin"><img class="random-user-side"
+                                                          src="https://randomuser.me/api/portraits/men/11.jpg"
+                                                          alt="random user">
         <p class="random-user-side-text">Dein Profil ansehen</p></a>
-      <a class="rollen-verteilung-side" mat-list-item href="#"  *ngIf="this.isLogin">
+      <a class="rollen-verteilung-side" mat-list-item href="#" *ngIf="this.isLogin">
         <mat-form-field>
           <mat-label>Rolle</mat-label>
           <mat-select>
@@ -26,8 +27,7 @@
         <mat-icon>info</mat-icon>
         <div class="sidenav-text">Info</div>
       </a>
-
-      <a (click) = 'logout()' mat-list-item *ngIf="this.isLogin">
+      <a (click)='logout()' mat-list-item *ngIf="this.isLogin">
         <mat-icon>exit_to_app</mat-icon>
         <div class="sidenav-text">Logout</div>
       </a>
@@ -45,8 +45,7 @@
       </button>
       <span class="title">adesso</span>
       <span class="example-spacer"></span>
-
-      <div class="nav-element rolle-bild"  *ngIf="this.isLogin">
+      <div class="nav-element rolle-bild" *ngIf="this.isLogin">
         <img class="random-user" src="https://randomuser.me/api/portraits/men/11.jpg" alt="random user">
         <div class="rollen-verteilung">
           <mat-form-field>
@@ -74,7 +73,7 @@
           Info
         </div>
       </div>
-      <div (click) = 'logout()' class="nav-element" *ngIf="this.isLogin">
+      <div (click)='logout()' class="nav-element" *ngIf="this.isLogin">
         <button mat-icon-button class="example-icon"
                 aria-label="Example icon-button with input icon">
           <mat-icon>exit_to_app</mat-icon>
@@ -84,27 +83,28 @@
         </div>
       </div>
     </mat-toolbar>
-    <div class = 'row m-0 w-100'>
-      <div class = 'col-md-4 offset-4 mt-5' *ngIf = '!this.isLogin'>
+    <div class='row m-0 w-100'>
+      <div class='col-md-4 offset-4 mt-5' *ngIf='!this.isLogin'>
         <h4>Login</h4>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
-          <div class = 'form-group'>
-            <input class = 'form-control' type = "text" formControlName="username" name = "username" placeholder = "Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class='form-group'>
+            <input class='form-control' type="text" formControlName="username" name="username" placeholder="Username"
+                   [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-              <div *ngIf="f.username.errors.required">Username is required</div>
+              <div *ngIf="f.username.errors">Username is required</div>
             </div>
           </div>
-          <div class = 'form-group'>
-            <input class = 'form-control' type = "password" formControlName="password" name = "password" placeholder = "Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <div class='form-group'>
+            <input class='form-control' type="password" formControlName="password" name="password"
+                   placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-              <div *ngIf="f.password.errors.required">Password is required</div>
+              <div *ngIf="f.password.errors">Password is required</div>
             </div>
           </div>
-          <input class= 'btn btn-outline-info' type = "submit" value = "Login">
+          <input class='btn btn-outline-info' type="submit" value="Login">
         </form>
       </div>
     </div>
-
     <app-goals *ngIf="this.isLogin"></app-goals>
   </mat-sidenav-content>
 </mat-sidenav-container>

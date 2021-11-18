@@ -1,5 +1,4 @@
 <mat-card class="style">ZIELE
-
   <mat-card class="style2">
   <mat-card-content>
 
@@ -28,15 +27,14 @@
     </div>
 
   </mat-card-content>
-
   </mat-card>
-  <mat-form-field class="example-form-field" appearance="fill">
-    <mat-label>I want to achieve</mat-label>
-    <input matInput type="text" [(ngModel)]="enteredValue" (keyup.enter)="onAddPost()" (keyup.enter)="sendMessage()">
-    <button  *ngIf="true" matSuffix mat-icon-button aria-label="Send" (click)="onAddPost()" (click)="sendMessage()">
-      <mat-icon>send</mat-icon>
-    </button>
-  </mat-form-field>
+  <div class="div-styling">
+    <mat-form-field class="example-form-field" appearance="fill">
+      <mat-label>I want to achieve</mat-label>
+      <input matInput type="text" [(ngModel)]="enteredValue" (keyup.enter)="onAddPost()" (keyup.enter)="sendMessage()">
+      <button *ngIf="true" matSuffix mat-icon-button aria-label="Send" (click)="onAddPost()" (click)="sendMessage()">
+        <mat-icon>send</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
 </mat-card>
-
-

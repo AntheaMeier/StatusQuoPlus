@@ -16,14 +16,11 @@
   overflow: hidden;
 }
 
-
 .mat-card-content {
   height: 100%;
   position: center;
   overflow: auto;
 }
-
-
 
 .style3 {
   height: 15%;
@@ -32,7 +29,6 @@
   margin: 0 auto;
   margin-right: 10%;
   margin-bottom: 5px;
-
 }
 
 .style4 {
@@ -43,12 +39,11 @@
   margin-bottom: 150%;
 }
 
-
 .example-form-field {
   width: 100%;
-  margin-top: 5%;
+  margin-top: 3%;
+  height: 15%;
   background-color: #E8E4E1;
-  padding-bottom: -20px;
   border-radius: 4px;
 }
 
@@ -58,12 +53,10 @@
 }
 
 ::ng-deep.mat-form-field-underline {
-  /*change color of underline*/
   background-color: #0071B9 !important;
 }
 
 ::ng-deep.mat-form-field-ripple {
-  /*change color of underline when focused*/
   background-color: #0071B9 !important;
 }
 
@@ -73,17 +66,8 @@ input {
 
 ::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
   background-color: #E8E4E1 !important;
+  height: 10% !important;
 }
-
-::ng-deep.mat-form-field-flex {
-  border-radius: 4px !important;
-}
-
-.button:hover {
-  background-color: #4CAF50 !important; /* Green */
-  color: white;
-}
-
 
 ::ng-deep .mat-progress-bar-fill::after {
   background-color: #0071B9;
@@ -94,5 +78,6 @@ input {
 }
 
 ::ng-deep .mat-progress-bar {
-  border-radius: 2px;
+  border-radius: 4px;
 }
+

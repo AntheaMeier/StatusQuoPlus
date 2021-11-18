@@ -3,10 +3,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {GoalsCreateComponent} from "../goals-create/goals-create.component";
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../shared/api.service';
-import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-
-/** Error when invalid control is dirty, touched, or submitted. */
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-goals-edit',
@@ -15,16 +12,15 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 })
 export class GoalsEditComponent implements OnInit {
 
- @Input() idDialog: any;
- enteredValue = "";
- oldDescription: any;
-
+  @Input() idDialog: any;
+  enteredValue = "";
+  oldDescription: any;
   articleForm: FormGroup =  this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required)
   });
+
   id = '';
   isLoadingResults = false;
-
 
   constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<GoalsCreateComponent>,
               private router: Router, private route: ActivatedRoute,
@@ -34,31 +30,24 @@ export class GoalsEditComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(GoalsEditComponent, {
       width: '40%',
-
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('dialog closed');
-    });
+    dialogRef.afterClosed().subscribe(result => {});
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  onClick(): void {
-    console.log(this.data);
-  }
-
   ngOnInit() {
-    this.getArticle(this.data.id);
+    this.getGoal(this.data.id);
     this.articleForm = this.formBuilder.group({
       'description' : ['', Validators.required]
     });
 
   }
 
-  getArticle(id: any) {
-    this.api.getArticle(id).subscribe((data: any) => {
+  getGoal(id: any) {
+    this.api.getGoal(id).subscribe((data: any) => {
       this.id = data.id;
       this.oldDescription = data.description;
       this.articleForm.setValue({
@@ -69,9 +58,8 @@ export class GoalsEditComponent implements OnInit {
 
   onFormSubmit() {
     this.isLoadingResults = true;
-    console.log(this.data);
     this.data.description = this.enteredValue;
-    this.api.updateArticle(this.data.id, this.data)
+    this.api.updateGoal(this.data.id, this.data)
       .subscribe((res: any) => {
           this.isLoadingResults = false;
         }, (err: any) => {
