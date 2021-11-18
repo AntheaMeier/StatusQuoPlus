@@ -3,22 +3,19 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {GoalsCreateComponent} from "../goals-create/goals-create.component";
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../shared/api.service';
-import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-
-/** Error when invalid control is dirty, touched, or submitted. */
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-goals-edit',
   templateUrl: './goals-edit.component.html',
   styleUrls: ['./goals-edit.component.css'],
 })
+
 export class GoalsEditComponent implements OnInit {
 
- @Input() idDialog: any;
- enteredValue = "";
- oldDescription: any;
-
+  @Input() idDialog: any;
+  enteredValue = "";
+  oldDescription: any;
   articleForm: FormGroup =  this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required)
   });
@@ -34,7 +31,6 @@ export class GoalsEditComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(GoalsEditComponent, {
       width: '40%',
-
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('dialog closed');
