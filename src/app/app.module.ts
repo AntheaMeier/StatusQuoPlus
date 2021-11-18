@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { ResponsiveHeaderComponent } from './responsive-header/responsive-header.component';
-import { LayoutModule } from '@angular/cdk/layout';
-import { GoalsCreateComponent } from './goals/goals-create/goals-create.component';
+import {ResponsiveHeaderComponent} from './responsive-header/responsive-header.component';
+import {LayoutModule} from '@angular/cdk/layout';
+import {GoalsCreateComponent} from './goals/goals-create/goals-create.component';
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -39,20 +39,21 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {LoginZweiComponent} from "./login-zwei/login-zwei.component";
 import {AppRoutingModule} from "./app-routing.module";
 import { HttpClientModule } from '@angular/common/http';
 import { GoalsEditComponent } from './goals/goals-edit/goals-edit.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { LoginComponent } from './login/login.component';
+import {AuthGuardService} from "./auth-guard.service";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ResponsiveHeaderComponent,
-    LoginZweiComponent,
     GoalsCreateComponent,
     GoalsEditComponent,
+    LoginComponent,
   ],
     imports: [
         AppRoutingModule,
@@ -108,7 +109,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
         FormsModule,
         MatProgressBarModule,
     ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

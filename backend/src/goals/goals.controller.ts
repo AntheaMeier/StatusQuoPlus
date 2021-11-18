@@ -3,7 +3,8 @@ import {Body, Controller, Delete, Get, Param, Patch, Post} from "@nestjs/common"
 
 @Controller('goals')
 export class GoalsController {
-  constructor(private readonly goalsService: GoalsService) {}
+  constructor(private readonly goalsService: GoalsService) {
+  }
 
   @Post()
   async addGoals(

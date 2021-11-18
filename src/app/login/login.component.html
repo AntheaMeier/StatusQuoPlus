@@ -1,0 +1,24 @@
+<div class = 'row m-0 w-100'>
+  <div class = 'col-md-4 offset-4 mt-5' *ngIf = '!this.isLogin'>
+    <h4>Login</h4>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
+      <div class = 'form-group'>
+        <input class = 'form-control' type = "text" formControlName="username" name = "username" placeholder = "Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+          <div *ngIf="f.username.errors.required">Username is required</div>
+        </div>
+      </div>
+      <div class = 'form-group'>
+        <input class = 'form-control' type = "password" formControlName="password" name = "password" placeholder = "Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+        </div>
+      </div>
+      <input class= 'btn btn-outline-info' type = "submit" value = "Login">
+    </form>
+  </div>
+  <div class = 'col-md-4 offset-4 mt-5' *ngIf = 'this.isLogin'>
+    <h1>You are logged in</h1>
+    <button class = 'btn btn-outline-info' (click) = 'logout()'>Log-out</button>
+  </div>
+</div>

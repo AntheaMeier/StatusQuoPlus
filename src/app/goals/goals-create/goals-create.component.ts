@@ -76,7 +76,8 @@ export class GoalsCreateComponent implements OnInit{
 
       });
 
-    this.ngOnInit();
+    window.location.reload()
+
 
   }
 
@@ -108,6 +109,7 @@ export class GoalsCreateComponent implements OnInit{
         console.log(this.goal);
         this.isLoadingResults = false;
       });
+
   }
 
   deleteArticle(id: any) {
@@ -122,7 +124,8 @@ export class GoalsCreateComponent implements OnInit{
             this.isLoadingResults = false;
           }
         );
-      this.ngOnInit();
+      window.location.reload()
+
     }
   }
 

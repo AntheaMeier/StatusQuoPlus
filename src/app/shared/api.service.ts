@@ -1,27 +1,30 @@
-import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { catchError, tap, map } from 'rxjs/operators';
-import { Goals} from "./goals";
-
-
+import {Injectable} from '@angular/core';
+import {Observable, of, throwError} from 'rxjs';
+import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
+import {catchError, tap, map} from 'rxjs/operators';
+import {Goals} from "./goals";
+import {Login} from "./login";
 
 
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
+
 const apiUrl = 'http://localhost:3000/goals';
+const apiUrlLogin = 'http://localhost:3000/users';
+const apiUrlToken = 'http://localhost:3000/login';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
+   apiUrlToken = 'http://localhost:3000/login';
+
   constructor(private http: HttpClient) {
 
   }
-
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -30,12 +33,25 @@ export class ApiService {
     };
   }
 
-
   getArticles(): Observable<Goals[]> {
     return this.http.get<Goals[]>(apiUrl)
       .pipe(
         tap(goal => console.log('fetched articles')),
         catchError(this.handleError('getGoals', []))
+      );
+  }
+
+  postTypeRequest(url:string, payload: any): any {
+    return this.http.post(`${this.apiUrlToken}${url}`, payload).pipe(map(res => {
+      return res;
+    }));
+  }
+
+  getUsers(): Observable<Login[]> {
+    return this.http.get<Login[]>(apiUrlLogin)
+      .pipe(
+        tap(goal => console.log('fetched Users')),
+        catchError(this.handleError('getUsers', []))
       );
   }
 
@@ -87,5 +103,3 @@ export class ApiService {
 
 
 }
-
-
