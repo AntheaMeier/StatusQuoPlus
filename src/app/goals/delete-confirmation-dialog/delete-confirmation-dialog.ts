@@ -21,7 +21,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   articleForm: FormGroup =  this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required)
   });
-  
+
   id = '';
   isLoadingResults = false;
 
@@ -40,7 +40,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   }
 
   getArticle(id: any) {
-    this.api.getArticle(id).subscribe((data: any) => {
+    this.api.getGoal(id).subscribe((data: any) => {
       this.id = data.id;
       this.oldDescription = data.description;
       this.articleForm.setValue({
