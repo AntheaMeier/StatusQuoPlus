@@ -26,6 +26,9 @@ export class ResponsiveHeaderComponent {
   submitted = false;
   data: Login[] = [];
   isLoadingResults = true;
+  firstNameloggedInUser: String = "";
+  lastNameloggedInUser: String = "";
+
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -63,6 +66,10 @@ export class ResponsiveHeaderComponent {
         console.log(err);
         this.isLoadingResults = false;
       });
+
+   this.firstNameloggedInUser = this.auth.getUserDetails().user_info.firstname;
+    this.lastNameloggedInUser = this.auth.getUserDetails().user_info.surname;
+
 
   }
 
