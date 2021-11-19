@@ -28,6 +28,7 @@ export class ResponsiveHeaderComponent {
   isLoadingResults = true;
   firstNameloggedInUser: String = "";
   lastNameloggedInUser: String = "";
+  roleLoggedInUser: String= "";
 
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -69,6 +70,9 @@ export class ResponsiveHeaderComponent {
 
    this.firstNameloggedInUser = this.auth.getUserDetails().user_info.firstname;
     this.lastNameloggedInUser = this.auth.getUserDetails().user_info.surname;
+
+    this.roleLoggedInUser = this.auth.getUserDetails().user_info.role;
+
 
 
   }

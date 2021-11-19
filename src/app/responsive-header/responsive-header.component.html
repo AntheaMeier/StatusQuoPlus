@@ -12,9 +12,9 @@
       <a class="rollen-verteilung-side" mat-list-item href="#"  *ngIf="this.isLogin">
         <mat-form-field>
           <mat-label>Rolle</mat-label>
-          <mat-select>
-            <mat-option value="one">Mitarbeiter*in</mat-option>
-            <mat-option value="two">Vorgesetzte*r</mat-option>
+          <mat-select [(value)]= "roleLoggedInUser">
+            <mat-option value="Mitarbeiter_in">Mitarbeiter_in</mat-option>
+            <mat-option value="Vorgesetzte_r">Vorgesetzte_r</mat-option>
           </mat-select>
         </mat-form-field>
       </a>
@@ -51,9 +51,9 @@
         <div class="rollen-verteilung">
           <mat-form-field>
             <mat-label>Rolle</mat-label>
-            <mat-select>
-              <mat-option value="one">Mitarbeiter*in</mat-option>
-              <mat-option value="two">Vorgesetzte*r</mat-option>
+            <mat-select [(value)]= "roleLoggedInUser">
+              <mat-option value="Mitarbeiter_in">Mitarbeiter_in</mat-option>
+              <mat-option value="Vorgesetzte_r">Vorgesetzte_r</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
