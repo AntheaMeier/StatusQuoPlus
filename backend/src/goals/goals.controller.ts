@@ -11,8 +11,7 @@ import {
 
 @Controller('goals')
 export class GoalsController {
-  constructor(private readonly goalsService: GoalsService) {
-  }
+  constructor(private readonly goalsService: GoalsService) {}
 
   @Post()
   async addGoals(
@@ -46,7 +45,6 @@ export class GoalsController {
     return null;
   }
 
-
   @Patch(':order/:id')
   async updateGoalOrder(
     @Param('id') goalId: string,
@@ -55,7 +53,6 @@ export class GoalsController {
     await this.goalsService.updateGoalOrder(goalId, goalOrder);
     return null;
   }
-
 
   @Delete(':id')
   async removeGoal(@Param('id') goalId: string) {

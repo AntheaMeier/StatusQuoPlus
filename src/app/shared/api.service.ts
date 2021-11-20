@@ -57,7 +57,6 @@ export class ApiService {
 
 
 
-
   // Goals
 
   getGoals(): Observable<Goals[]> {
@@ -74,7 +73,6 @@ export class ApiService {
       catchError(this.handleError<Goals>('addGoal'))
     );
   }
-
 
 
   deleteGoal(id: any): Observable<Goals> {
@@ -97,12 +95,10 @@ export class ApiService {
   updateGoalOrder(id: any, goal: Goals): Observable<any> {
     const url = `${apiUrlOrder}/${id}`;
     return this.http.patch(url, goal, httpOptions).pipe(
-      tap(_ => console.log(`updated goal id=${id}`)),
+      tap(_ => console.log(`updated goal order id=${id} und order=` + goal.order)),
       catchError(this.handleError<any>('updateArticle'))
     );
   }
-
-
 
   getGoal(id: number): Observable<Goals> {
     const url = `${apiUrl}/${id}`;
@@ -111,10 +107,4 @@ export class ApiService {
       catchError(this.handleError<Goals>(`getArticle id=${id}`))
     );
   }
-
-
-
-
-
-
 }
