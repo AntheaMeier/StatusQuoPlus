@@ -27,7 +27,7 @@ export class GoalsService {
 
   async getSingleGoal(goalId: string) {
     const goal = await this.findGoal(goalId);
-    return {id: goal.id, description: goal.description};
+    return {id: goal.id, description: goal.description, order: goal.order};
   }
 
   async updateGoal(
@@ -39,6 +39,14 @@ export class GoalsService {
       updatedGoal.description = desc;
     }
     updatedGoal.save();
+  }
+
+  async updateGoalOrder(goalId: string, order: string) {
+    const updatedGoalOrder = await this.findGoal(goalId);
+    if (order) {
+      updatedGoalOrder.order = order;
+    }
+    updatedGoalOrder.save();
   }
 
   async deleteGoal(goalId: string) {

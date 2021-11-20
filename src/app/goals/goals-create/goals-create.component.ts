@@ -17,6 +17,18 @@ import {GoalsEditComponent} from "../goals-edit/goals-edit.component";
   styleUrls: ['./goals-create.component.css']
 })
 export class GoalsCreateComponent implements OnInit{
+  enteredValue = '';
+  newPost = '';
+  idDialog: any = '';
+
+  displayedColumns: string[] = ['description'];
+  data: Goals[] = [];
+  isLoadingResults = true;
+  goal: Goals = { id: '', description: '', order: ''};
+
+
+  description = '';
+  constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute) { }
 
   drop(event: CdkDragDrop<Goals[]>) {
     if (event.previousContainer === event.container) {
@@ -32,24 +44,7 @@ export class GoalsCreateComponent implements OnInit{
   }
 
 
-
-
-  enteredValue = '';
-  newPost = '';
-  idDialog: any = '';
-
-  displayedColumns: string[] = ['description'];
-  data: Goals[] = [];
-  isLoadingResults = true;
-  goal: Goals = { id: '', description: ''};
-
-
-  description = '';
-  constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute) { }
-
   onAddPost(){
-
-
     this.isLoadingResults = true;
     const simpleObject = {} as Goals;
     simpleObject.description = this.enteredValue;
@@ -64,9 +59,8 @@ export class GoalsCreateComponent implements OnInit{
       });
 
     window.location.reload()
-
-
   }
+
 
   onDeleteGoal(){
     this.newPost = this.enteredValue;
