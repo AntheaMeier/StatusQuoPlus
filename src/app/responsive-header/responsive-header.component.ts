@@ -30,6 +30,9 @@ export class ResponsiveHeaderComponent {
   lastNameloggedInUser: String = "";
   roleLoggedInUser: String= "";
 
+  loginInvalid = false;
+  userFound = false;
+
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -53,6 +56,8 @@ export class ResponsiveHeaderComponent {
   }
 
   ngOnInit(): void {
+
+
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -75,6 +80,7 @@ export class ResponsiveHeaderComponent {
 
 
 
+
   }
 
   // convenience getter for easy access to form fields
@@ -85,15 +91,32 @@ export class ResponsiveHeaderComponent {
     console.log('Your form data : ', this.loginForm.value);
     for (let i of this.data) {
       if (i.username === this.loginForm.get('username')?.value && i.password === this.loginForm.get('password')?.value) {
+        this.userFound= true;
+
         this.api.postTypeRequest('', this.loginForm.value).subscribe((res: any) => {
           console.log('der access token' + res.access_token);
 
           this.auth.setDataInLocalStorage('userData', JSON.stringify(res));
           this.auth.setDataInLocalStorage('token', res.access_token);
-          window.location.reload()
+
+          window.location.reload();
+
+
         });
+
+
+
       }
+
+
+
     }
+
+    if(!this.userFound){
+      this.loginInvalid= true;
+    }
+
+
 
   }
 
@@ -107,6 +130,14 @@ export class ResponsiveHeaderComponent {
   logout(): void{
     this.auth.clearStorage();
     window.location.reload()
+  }
+
+
+
+
+
+  removeErrorMessage(): void{
+    this.loginInvalid=false;
   }
 
 

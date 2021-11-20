@@ -11,9 +11,10 @@ export class GoalsService {
   ) {
   }
 
-  async insertGoals(desc: string) {
+  async insertGoals(desc: string, order: string) {
     const newGoal = new this.goalModel({
-      description: desc
+      description: desc,
+      order: order
     });
     const result = await newGoal.save();
     return result.id as string;
@@ -21,7 +22,7 @@ export class GoalsService {
 
   async getGoals() {
     const goals = await this.goalModel.find().exec();
-    return goals.map((goal) => ({id: goal.id, description: goal.description}));
+    return goals.map((goal) => ({id: goal.id, description: goal.description, order: goal.order}));
   }
 
   async getSingleGoal(goalId: string) {

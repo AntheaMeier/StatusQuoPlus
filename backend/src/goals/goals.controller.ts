@@ -8,9 +8,12 @@ export class GoalsController {
 
   @Post()
   async addGoals(
-    @Body('description') goalDesc: string
-  ) {
-    const generatedId = await this.goalsService.insertGoals(goalDesc);
+    @Body('description') goalDesc: string,
+  @Body('order') goalOrder: string,
+
+
+) {
+    const generatedId = await this.goalsService.insertGoals(goalDesc, goalOrder);
     return {id: generatedId};
   }
 

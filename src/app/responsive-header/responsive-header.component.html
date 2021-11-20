@@ -6,7 +6,7 @@
                [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menü</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#"  *ngIf="this.isLogin"><img class="random-user-side" src="https://randomuser.me/api/portraits/men/11.jpg"
+      <a  mat-list-item   *ngIf="this.isLogin"><img class="random-user-side" src="https://randomuser.me/api/portraits/men/11.jpg"
                                      alt="random user">
         <p class="random-user-side-text">Dein Profil ansehen</p></a>
       <a class="rollen-verteilung-side" mat-list-item href="#"  *ngIf="this.isLogin">
@@ -92,15 +92,18 @@
     <div class = 'row m-0 w-100'>
       <div class = 'col-md-4 offset-4 mt-5' *ngIf = '!this.isLogin'>
         <h4>Login</h4>
+        <mat-error *ngIf="loginInvalid">
+          The username and password were not recognized
+        </mat-error>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
           <div class = 'form-group'>
-            <input class = 'form-control' type = "text" formControlName="username" name = "username" placeholder = "Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            <input (keypress)="removeErrorMessage()" (keydown.backspace)="removeErrorMessage()" class = 'form-control' type = "text" formControlName="username" name = "username" placeholder = "Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
               <div *ngIf="f.username.errors">Username is required</div>
             </div>
           </div>
           <div class = 'form-group'>
-            <input class = 'form-control' type = "password" formControlName="password" name = "password" placeholder = "Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <input (keypress)="removeErrorMessage()"  (keydown.backspace)="removeErrorMessage()"class = 'form-control' type = "password" formControlName="password" name = "password" placeholder = "Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
               <div *ngIf="f.password.errors">Password is required</div>
             </div>
