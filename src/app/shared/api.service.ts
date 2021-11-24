@@ -5,12 +5,9 @@ import {catchError, tap, map} from 'rxjs/operators';
 import {Goals} from "./goals";
 import {Login} from "./login";
 
-
-
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-
 const apiUrl = 'http://localhost:3000/goals';
 const apiUrlLogin = 'http://localhost:3000/users';
 const apiUrlOrder = 'http://localhost:3000/goals/order';
@@ -20,33 +17,25 @@ const apiUrlOrder = 'http://localhost:3000/goals/order';
 })
 export class ApiService {
 
-   apiUrlToken = 'http://localhost:3000/login';
+  apiUrlToken = 'http://localhost:3000/login';
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error); // log to console instead
+      console.error(error);
       return of(result as T);
     };
   }
 
-
-
   //Login
-
   postTypeRequest(url:string, payload: any): any {
     return this.http.post(`${this.apiUrlToken}${url}`, payload).pipe(map(res => {
       return res;
     }));
   }
 
-
-
   // Users
-
   getUsers(): Observable<Login[]> {
     return this.http.get<Login[]>(apiUrlLogin)
       .pipe(
@@ -55,10 +44,7 @@ export class ApiService {
       );
   }
 
-
-
   // Goals
-
   getGoals(): Observable<Goals[]> {
     return this.http.get<Goals[]>(apiUrl)
       .pipe(
@@ -73,7 +59,6 @@ export class ApiService {
       catchError(this.handleError<Goals>('addGoal'))
     );
   }
-
 
   deleteGoal(id: any): Observable<Goals> {
     const url = `${apiUrl}/${id}`;
