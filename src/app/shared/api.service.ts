@@ -10,6 +10,7 @@ const httpOptions = {
 };
 const apiUrl = 'http://localhost:3000/goals';
 const apiUrlLogin = 'http://localhost:3000/users';
+const apiUrlOrder = 'http://localhost:3000/goals/order';
 
 @Injectable({
   providedIn: 'root'
@@ -71,14 +72,18 @@ export class ApiService {
   updateGoal(id: any, article: Goals): Observable<any> {
     const url = `${apiUrl}/${id}`;
     return this.http.patch(url, article, httpOptions).pipe(
-      tap(_ => console.log(`updated article id=${id}`)),
+      tap(_ => console.log(`updated goal id=${id}`)),
       catchError(this.handleError<any>('updateArticle'))
     );
   }
 
-
-
-
+  updateGoalOrder(id: any, goal: Goals): Observable<any> {
+    const url = `${apiUrlOrder}/${id}`;
+    return this.http.patch(url, goal, httpOptions).pipe(
+      tap(_ => console.log(`updated goal order id=${id} und order=` + goal.order)),
+      catchError(this.handleError<any>('updateArticle'))
+    );
+  }
 
   getGoal(id: number): Observable<Goals> {
     const url = `${apiUrl}/${id}`;
@@ -87,10 +92,4 @@ export class ApiService {
       catchError(this.handleError<Goals>(`getArticle id=${id}`))
     );
   }
-
-
-
-
-
-
 }

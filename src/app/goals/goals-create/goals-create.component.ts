@@ -14,10 +14,39 @@ import { DeleteConfirmationDialogComponent } from '../delete-confirmation-dialog
   styleUrls: ['./goals-create.component.css']
 })
 export class GoalsCreateComponent implements OnInit{
+  enteredValue = '';
+  newPost = '';
+  idDialog: any = '';
+
+  displayedColumns: string[] = ['description'];
+  data: Goals[] = [];
+  isLoadingResults = true;
+  goal: Goals = { id: '', description: '', order: ''};
+  description = '';
+  id = '';
+
+
+  constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute) { }
+
+  public position(): void {
+    console.log('position aufgerufen');
+    let position = 0;
+    this.data.forEach((goal: Goals) => {
+      position +=1;
+      goal.order = String(position);
+      this.api.updateGoalOrder(goal.id, goal).subscribe((data: Goals) => {
+        console.log('neu positioniert');
+        }, error => {
+        console.log('hat nicht funktioniert');
+      });
+    });
+  }
 
   drop(event: CdkDragDrop<Goals[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      console.log('bewegt oder?');
+      this.position();
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -27,7 +56,6 @@ export class GoalsCreateComponent implements OnInit{
       );
     }
   }
-
   enteredValue = '';
   newPost = '';
   idDialog: any = '';
@@ -54,6 +82,7 @@ export class GoalsCreateComponent implements OnInit{
     window.location.reload()
   }
 
+
   onDeleteGoal(){
     this.newPost = this.enteredValue;
   }
@@ -63,6 +92,10 @@ export class GoalsCreateComponent implements OnInit{
       .subscribe((res: any) => {
         this.data = res;
         this.isLoadingResults = false;
+
+        this.data.sort((goal1, goal2) => {
+          return Number(goal1.order)- Number(goal2.order);
+        });
       }, err => {
         console.log(err);
         this.isLoadingResults = false;
