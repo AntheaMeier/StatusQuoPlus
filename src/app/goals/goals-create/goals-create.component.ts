@@ -25,7 +25,6 @@ export class GoalsCreateComponent implements OnInit{
   description = '';
   id = '';
 
-
   constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute) { }
 
   public position(): void {
@@ -56,15 +55,6 @@ export class GoalsCreateComponent implements OnInit{
       );
     }
   }
-  enteredValue = '';
-  newPost = '';
-  idDialog: any = '';
-  data: Goals[] = [];
-  isLoadingResults = true;
-  goal: Goals = { id: '', description: ''};
-  description = '';
-
-  constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute) { }
 
   onAddPost(){
     this.isLoadingResults = true;
