@@ -5,12 +5,14 @@ import {GoalsModule} from "./goals/goals.module";
 import {MongooseModule} from "@nestjs/mongoose";
 import {UsersModule} from './users/users.module';
 import {AuthModule} from './auth/auth.module';
+import {TasksModule} from "./tasks/tasks.module";
 
 @Module({
   imports: [
     GoalsModule,
     UsersModule,
     AuthModule,
+    TasksModule,
     MongooseModule.forRoot(
       'mongodb+srv://Adso2:hallo@cluster0.kuzro.mongodb.net/statusquo-db?retryWrites=true&w=majority',
     ),
