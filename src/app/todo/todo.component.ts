@@ -20,4 +20,8 @@ export class TodoComponent implements OnInit {
 
   }
 
+  show(){
+    this.ngOnInit()
+  }
+
 }
