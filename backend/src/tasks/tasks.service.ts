@@ -9,8 +9,7 @@ export class TasksService{
   constructor(@InjectModel('Task') private readonly taskModel: Model<Task>) {
   }
 
-  async insertTask(desc: string, status:string){
-    const goalid = new Date().toString();
+  async insertTask(desc: string, status:string, goalid:string){
     const newTask = new this.taskModel({
       description: desc,
       status,
@@ -57,6 +56,30 @@ export class TasksService{
 
   async deleteTask(taskId: string){
     const result = await this.taskModel.deleteOne({_id:taskId}).exec();
+  }
+
+  async getTasksToGoal(goalid: string){
+    let tasks;
+
+    try{
+      tasks = await this.taskModel.find( { goalid: goalid } )
+
+    }
+
+    catch(error){
+      throw new NotFoundException('Could not find task')
+    }
+
+    if(!tasks){
+      throw new NotFoundException('Could not find task task')
+
+    }
+
+    return tasks;
+
+
+
+
   }
 
   private async findTask(id: string): Promise<Task> {

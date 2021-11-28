@@ -9,9 +9,6 @@ export const TaskSchema = new mongoose.Schema({
 });
 
 
-
-
-
 export interface Task extends mongoose.Document{
   id: string;
   description: string;
@@ -20,3 +17,4 @@ export interface Task extends mongoose.Document{
 
 
 }
+

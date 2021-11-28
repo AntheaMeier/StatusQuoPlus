@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Inject, InjectionToken, Input, OnInit} from '@angular/core';
 import { ApiService } from '../../shared/api.service';
 import { Goals} from "../../shared/goals";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Output, EventEmitter } from '@angular/core';
 
 import {ActivatedRoute, Router} from '@angular/router';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
@@ -9,6 +10,9 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {GoalsEditComponent} from "../goals-edit/goals-edit.component";
 import { DeleteConfirmationDialogComponent } from '../delete-confirmation-dialog/delete-confirmation-dialog';
+import {Tasks} from "../../shared/tasks";
+import {TaskdataService} from "../../taskdata.service";
+
 
 /** Error when invalid control is dirty, touched, or submitted. */
 
@@ -29,9 +33,15 @@ export class GoalsCreateComponent implements OnInit{
   goal: Goals = { id: '', description: '', order: ''};
   description = '';
   id = '';
+  dataTasks: Tasks[] = [];
+ tasksToOneGoal: Tasks[] = [];
+
+  showTasksToOneGoal = false;
 
 
-  constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute) { }
+
+  constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute,
+              private lol: TaskdataService) { }
 
   public position(): void {
     console.log('position aufgerufen');
@@ -101,6 +111,18 @@ export class GoalsCreateComponent implements OnInit{
         console.log(err);
         this.isLoadingResults = false;
       });
+
+
+      this.api.getTasks()
+      .subscribe((res: any) => {
+        this.dataTasks = res;
+        console.log(this.dataTasks)
+        this.isLoadingResults = false;
+
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
   }
 
   deleteDialog(id: any): void {
@@ -118,13 +140,15 @@ export class GoalsCreateComponent implements OnInit{
 
   }
 
-  getGoalDetails(id: any) {
+  getGoalDetails(id: any) : Goals{
     this.api.getGoal(id)
       .subscribe((data: any) => {
         this.goal = data;
         console.log(this.goal);
         this.isLoadingResults = false;
       });
+
+    return this.goal;
 
   }
 
@@ -162,6 +186,48 @@ export class GoalsCreateComponent implements OnInit{
   sendMessage() {
     // After Sending Message
     this.enteredValue = '';
+  }
+
+
+  addTask(id: any){
+
+    this.isLoadingResults = true;
+    const simpleObject = {} as Tasks;
+    simpleObject.description = "New Task For" +  id ;
+    simpleObject.status= "todo";
+    simpleObject.goalid=id;
+
+    this.api.addTask(simpleObject)
+      .subscribe((res: any) => {
+        this.isLoadingResults = false;
+      }, (err: any) => {
+        console.log(err);
+        this.isLoadingResults = false;
+
+      });
+
+    window.location.reload()
+
+  }
+
+
+  showTasks(id: any){
+
+
+    this.api.getTasksToGoal(id)
+      .subscribe((res: any) => {
+      this.tasksToOneGoal = res;
+      this.lol.setData(this.tasksToOneGoal);
+
+        this.isLoadingResults = false;
+
+    }, err => {
+      console.log(err);
+      this.isLoadingResults = false;
+    });
+
+    this.showTasksToOneGoal = true;
+    this.lol.setShowData(this.showTasksToOneGoal);
   }
 
 }

@@ -46,6 +46,9 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import { LoginComponent } from './login/login.component';
 import {AuthGuardService} from "./auth-guard.service";
 import { DeleteConfirmationDialogComponent } from './goals/delete-confirmation-dialog/delete-confirmation-dialog';
+import { TodoComponent } from './todo/todo.component';
+import {TaskdataService} from "./taskdata.service";
+
 
 
 @NgModule({
@@ -56,6 +59,7 @@ import { DeleteConfirmationDialogComponent } from './goals/delete-confirmation-d
     GoalsEditComponent,
     LoginComponent,
     DeleteConfirmationDialogComponent,
+    TodoComponent,
   ],
     imports: [
         AppRoutingModule,
@@ -111,7 +115,7 @@ import { DeleteConfirmationDialogComponent } from './goals/delete-confirmation-d
         FormsModule,
         MatProgressBarModule,
     ],
-  providers: [AuthGuardService],
+  providers: [AuthGuardService, TaskdataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

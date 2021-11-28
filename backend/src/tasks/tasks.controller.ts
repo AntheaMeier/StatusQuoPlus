@@ -11,8 +11,10 @@ export class TasksController{
   async addProduct(
     @Body('description') taskDesc: string,
     @Body('status') taskStatus: string,
+    @Body('goalid') taskGoalid: string,
+
   ) {
-   const generatedId = await this.tasksService.insertTask(taskDesc, taskStatus);
+   const generatedId = await this.tasksService.insertTask(taskDesc, taskStatus, taskGoalid);
    return{id: generatedId};
 
 
@@ -45,6 +47,23 @@ export class TasksController{
     await this.tasksService.deleteTask(taskId);
     return null;
     }
+
+
+    @Get('goal/:goalid')
+  async getAllTasksToGoal(
+      @Param('goalid') goalid: string,
+
+    ){
+    const tasks = await this.tasksService.getTasksToGoal(goalid);
+    return tasks;
+  }
+
+
+
+
+
+
+
 
 
 

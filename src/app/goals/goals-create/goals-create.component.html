@@ -18,6 +18,14 @@
           <mat-icon class="style5">edit</mat-icon>
         </button>
 
+        <button class="style4" (click)="addTask(goal.id)">
+          <p>Add a new Task</p>
+        </button>
+
+        <button class="style4" (click)="showTasks(goal.id)">
+          <p>Show Tasks</p>
+        </button>
+
 
 <!--   Progress bar: value = anz abgehakte todos jedes Ziels -->
         <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
