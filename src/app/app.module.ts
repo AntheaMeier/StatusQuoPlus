@@ -47,7 +47,6 @@ import { LoginComponent } from './login/login.component';
 import {AuthGuardService} from "./auth-guard.service";
 import { DeleteConfirmationDialogComponent } from './goals/delete-confirmation-dialog/delete-confirmation-dialog';
 import { TodoComponent } from './todo/todo.component';
-import {TaskdataService} from "./taskdata.service";
 
 
 
@@ -115,7 +114,7 @@ import {TaskdataService} from "./taskdata.service";
         FormsModule,
         MatProgressBarModule,
     ],
-  providers: [AuthGuardService, TaskdataService],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -11,7 +11,6 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import {GoalsEditComponent} from "../goals-edit/goals-edit.component";
 import { DeleteConfirmationDialogComponent } from '../delete-confirmation-dialog/delete-confirmation-dialog';
 import {Tasks} from "../../shared/tasks";
-import {TaskdataService} from "../../taskdata.service";
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -43,7 +42,7 @@ export class GoalsCreateComponent implements OnInit{
 
 
   constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute,
-              private lol: TaskdataService) { }
+             ) { }
 
   public position(): void {
     console.log('position aufgerufen');
@@ -220,7 +219,6 @@ export class GoalsCreateComponent implements OnInit{
       .subscribe((res: any) => {
       this.tasksToOneGoal = res;
       this.showTasksClicked.emit(this.tasksToOneGoal);
-      this.lol.setData(this.tasksToOneGoal);
 
         this.isLoadingResults = false;
 
@@ -230,7 +228,6 @@ export class GoalsCreateComponent implements OnInit{
     });
 
     this.showTasksToOneGoal = true;
-    this.lol.setShowData(this.showTasksToOneGoal);
   }
 
 }
