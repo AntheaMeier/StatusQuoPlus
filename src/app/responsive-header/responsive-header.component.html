@@ -113,8 +113,8 @@
       </div>
     </div>
     <div class="content-components">
-    <app-goals *ngIf="this.isLogin"></app-goals>
-    <app-todo *ngIf="this.isLogin"></app-todo>
+    <app-goals *ngIf="this.isLogin" (showTasksClicked)="tasksToOneGoal = $event"></app-goals>
+    <app-todo *ngIf="this.isLogin" [tasksToOneGoal]="tasksToOneGoal"></app-todo>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

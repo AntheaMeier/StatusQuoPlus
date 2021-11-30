@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Login} from "../shared/login";
 import {ApiService} from "../shared/api.service";
+import {Tasks} from "../shared/tasks";
 
 @Component({
   selector: 'app-responsive-header',
@@ -29,7 +30,7 @@ export class ResponsiveHeaderComponent {
   userFound = false;
 
 
-
+   tasksToOneGoal : Tasks[] = [];
 
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

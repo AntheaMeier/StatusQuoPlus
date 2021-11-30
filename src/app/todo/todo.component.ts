@@ -10,18 +10,14 @@ import {TaskdataService} from "../taskdata.service";
 export class TodoComponent implements OnInit {
 
   @Input()
-  tasksToOneGoal: Tasks[] =this.lol.getData()
+  @Input() tasksToOneGoal: Tasks[] = [];
   showData: boolean = false;
 
   constructor(private lol: TaskdataService) { }
 
   ngOnInit(): void {
-    this.tasksToOneGoal = this.lol.getData();
 
   }
 
-  show(){
-    this.ngOnInit()
-  }
 
 }

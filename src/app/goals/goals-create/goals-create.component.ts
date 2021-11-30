@@ -36,6 +36,8 @@ export class GoalsCreateComponent implements OnInit{
   dataTasks: Tasks[] = [];
  tasksToOneGoal: Tasks[] = [];
 
+ @Output() showTasksClicked = new EventEmitter<Tasks[]>();
+
   showTasksToOneGoal = false;
 
 
@@ -217,6 +219,7 @@ export class GoalsCreateComponent implements OnInit{
     this.api.getTasksToGoal(id)
       .subscribe((res: any) => {
       this.tasksToOneGoal = res;
+      this.showTasksClicked.emit(this.tasksToOneGoal);
       this.lol.setData(this.tasksToOneGoal);
 
         this.isLoadingResults = false;
