@@ -135,7 +135,7 @@ export class GoalsCreateComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.ngOnInit();
+      this.ngOnInit()
     });
 
 
