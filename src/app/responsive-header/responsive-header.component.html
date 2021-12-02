@@ -13,9 +13,9 @@
       <a class="rollen-verteilung-side" mat-list-item href="#" *ngIf="this.isLogin">
         <mat-form-field>
           <mat-label>Rolle</mat-label>
-          <mat-select [(value)]= "roleLoggedInUser">
-            <mat-option value="Mitarbeiter_in">Mitarbeiter_in</mat-option>
-            <mat-option value="Vorgesetzte_r">Vorgesetzte_r</mat-option>
+          <mat-select value= "Mitarbeiter_in">
+            <mat-option value="Mitarbeiter_in" (click)="onSelectMitarbeiter_in()">Mitarbeiter_in</mat-option>
+            <mat-option value="Vorgesetzte_r" *ngIf="roleLoggedInUser == 'Vorgesetzte_r'" (click)="onSelectVorgesetzte_r()">Vorgesetzte_r</mat-option>
           </mat-select>
         </mat-form-field>
       </a>
@@ -50,9 +50,9 @@
         <div class="rollen-verteilung">
           <mat-form-field>
             <mat-label>Rolle</mat-label>
-            <mat-select [(value)]= "roleLoggedInUser">
-              <mat-option value="Mitarbeiter_in">Mitarbeiter_in</mat-option>
-              <mat-option value="Vorgesetzte_r">Vorgesetzte_r</mat-option>
+            <mat-select value="Mitarbeiter_in">
+              <mat-option value="Mitarbeiter_in"  (click)="onSelectMitarbeiter_in()">Mitarbeiter_in</mat-option>
+              <mat-option value="Vorgesetzte_r" *ngIf="roleLoggedInUser == 'Vorgesetzte_r'" (click)="onSelectVorgesetzte_r()">Vorgesetzte_r</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -112,7 +112,7 @@
         </form>
       </div>
     </div>
-    <div class="content-components">
+    <div class="content-components" *ngIf="selectedRole == 'Mitarbeiter_in'">
     <app-goals *ngIf="this.isLogin" (showTasksClicked)="tasksToOneGoal = $event"></app-goals>
     <app-todo *ngIf="this.isLogin" [tasksToOneGoal]="tasksToOneGoal"></app-todo>
     </div>

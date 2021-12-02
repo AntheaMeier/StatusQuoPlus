@@ -25,6 +25,7 @@ export class ResponsiveHeaderComponent {
   firstNameloggedInUser: String = "";
   lastNameloggedInUser: String = "";
   roleLoggedInUser: String= "";
+  selectedRole: String = "Mitarbeiter_in";
 
   loginInvalid = false;
   userFound = false;
@@ -133,6 +134,16 @@ export class ResponsiveHeaderComponent {
   removeErrorMessage(): void{
     this.loginInvalid=false;
   }
+
+
+  onSelectVorgesetzte_r(){
+    this.selectedRole = "Vorgesetzte_r"
+  }
+
+
+onSelectMitarbeiter_in(){
+    this.selectedRole= "Mitarbeiter_in"
+}
 
 
 
