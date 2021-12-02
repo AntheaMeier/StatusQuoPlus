@@ -46,6 +46,7 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import { LoginComponent } from './login/login.component';
 import {AuthGuardService} from "./auth-guard.service";
 import { DeleteConfirmationDialogComponent } from './goals/delete-confirmation-dialog/delete-confirmation-dialog';
+import { AnnualReviewComponent } from './annual-review/annual-review.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { DeleteConfirmationDialogComponent } from './goals/delete-confirmation-d
     GoalsEditComponent,
     LoginComponent,
     DeleteConfirmationDialogComponent,
+    AnnualReviewComponent,
   ],
     imports: [
         AppRoutingModule,

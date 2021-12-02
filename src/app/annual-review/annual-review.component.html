@@ -1,0 +1,36 @@
+<mat-card class="row style">
+    <h3>UNTERJAEHRIGER AUSTAUSCH</h3>
+    <mat-card class="style2 col-md-6">
+        <form (submit)="onAddPost(reviewForm)" #reviewForm="ngForm">
+            <mat-form-field class="col-md-12">
+                <input 
+                id = "dateEntry"
+                matInput type="text" 
+                name="date"
+                ngModel
+                required
+                placeholder="Datum"
+                #date="ngModel">
+                <mat-error *ngIf="date.invalid">Please enter a date</mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-md-12">
+            <textarea 
+                id = "content"
+                matInput rows="6" 
+                name="content"
+                ngModel
+                required
+                placeholder="Notizen zum unterjaehrigen Austausch"
+                #content="ngModel">
+            </textarea>
+            <mat-error *ngIf="content.invalid">Please enter content</mat-error>
+            </mat-form-field>
+            <button 
+            mat-raised-button 
+            type="submit">Save</button>
+        </form>
+    </mat-card>
+    <mat-card class="style2 col-md-6">
+    
+    </mat-card>
+</mat-card>
