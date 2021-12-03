@@ -5,16 +5,16 @@ import {Injectable, NotFoundException} from "@nestjs/common";
 
 @Injectable()
 export class GoalsService {
-  private goals: Goal[] = [];
 
   constructor(@InjectModel('Goal') private readonly goalModel: Model<Goal>
   ) {
   }
 
-  async insertGoals(desc: string, order: string) {
+  async insertGoals(desc: string, order: string, userid:string) {
     const newGoal = new this.goalModel({
       description: desc,
-      order: order
+      order: order,
+      userid
     });
     const result = await newGoal.save();
     return result.id as string;
@@ -22,23 +22,28 @@ export class GoalsService {
 
   async getGoals() {
     const goals = await this.goalModel.find().exec();
-    return goals.map((goal) => ({id: goal.id, description: goal.description, order: goal.order}));
+    return goals.map((goal) => (
+      {id: goal.id, description: goal.description, order: goal.order, userid: goal.userid}));
   }
 
   async getSingleGoal(goalId: string) {
     const goal = await this.findGoal(goalId);
-    return {id: goal.id, description: goal.description, order: goal.order};
+    return {id: goal.id, description: goal.description, order: goal.order, userid: goal.userid};
   }
 
   async updateGoal(
     goalId: string,
-    desc: string
+    desc: string,
+    userid: string
   ) {
     const updatedGoal = await this.findGoal(goalId);
     if (desc) {
       updatedGoal.description = desc;
     }
-    updatedGoal.save();
+    if(userid){
+      updatedGoal.userid = userid
+    }
+    await updatedGoal.save();
   }
 
   async updateGoalOrder(goalId: string, order: string) {
@@ -46,12 +51,27 @@ export class GoalsService {
     if (order) {
       updatedGoalOrder.order = order;
     }
-    updatedGoalOrder.save();
+    await updatedGoalOrder.save();
   }
 
   async deleteGoal(goalId: string) {
     const result = await this.goalModel.deleteOne({_id: goalId}).exec();
     console.log(result);
+  }
+
+  async getGoalsToUser (userid: string){
+    let goals;
+
+    try{
+      goals = await this.goalModel.find( { userid: userid } )
+    }
+    catch(error){
+      throw new NotFoundException('Could not find task')
+    }
+    if(!goals){
+      throw new NotFoundException('Could not find task task')
+    }
+    return goals;
   }
 
   private async findGoal(id: string): Promise<Goal> {

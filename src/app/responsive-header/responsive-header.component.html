@@ -6,14 +6,14 @@
                [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menü</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#" *ngIf="this.isLogin"><img class="random-user-side"
-                                                          src="https://randomuser.me/api/portraits/men/11.jpg"
-                                                          alt="random user">
-        <p class="random-user-side-text">Dein Profil ansehen</p></a>
+      <a mat-list-item href="#" *ngIf="this.isLogin">
+        <img class="random-user-side" src="https://randomuser.me/api/portraits/men/11.jpg" alt="random user">
+        <p class="random-user-side-text">Dein Profil ansehen</p>
+      </a>
       <a class="rollen-verteilung-side" mat-list-item href="#" *ngIf="this.isLogin">
         <mat-form-field>
           <mat-label>Rolle</mat-label>
-          <mat-select [(value)]= "roleLoggedInUser">
+          <mat-select [(value)]="roleLoggedInUser">
             <mat-option value="Mitarbeiter_in">Mitarbeiter_in</mat-option>
             <mat-option value="Vorgesetzte_r">Vorgesetzte_r</mat-option>
           </mat-select>
@@ -50,7 +50,7 @@
         <div class="rollen-verteilung">
           <mat-form-field>
             <mat-label>Rolle</mat-label>
-            <mat-select [(value)]= "roleLoggedInUser">
+            <mat-select [(value)]="roleLoggedInUser">
               <mat-option value="Mitarbeiter_in">Mitarbeiter_in</mat-option>
               <mat-option value="Vorgesetzte_r">Vorgesetzte_r</mat-option>
             </mat-select>
@@ -94,16 +94,19 @@
         <mat-error *ngIf="loginInvalid">
           The username and password were not recognized
         </mat-error>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
-          <div class = 'form-group'>
-            <input (keypress)="removeErrorMessage()" (keydown.backspace)="removeErrorMessage()" class = 'form-control' type = "text" formControlName="username" name = "username" placeholder = "Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class='form-group'>
+            <input (keypress)="removeErrorMessage()" (keydown.backspace)="removeErrorMessage()" class='form-control'
+                   type="text" formControlName="username" name="username" placeholder="Username"
+                   [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
               <div *ngIf="f.username.errors">Username is required</div>
             </div>
           </div>
-          <div class = 'form-group'>
-            <input (keypress)="removeErrorMessage()"  (keydown.backspace)="removeErrorMessage()"class = 'form-control' type = "password" formControlName="password" name = "password" placeholder = "Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-
+          <div class='form-group'>
+            <input (keypress)="removeErrorMessage()" (keydown.backspace)="removeErrorMessage()" class='form-control'
+                   type="password" formControlName="password" name="password" placeholder="Password"
+                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
               <div *ngIf="f.password.errors">Password is required</div>
             </div>
@@ -113,8 +116,8 @@
       </div>
     </div>
     <div class="content-components">
-    <app-goals *ngIf="this.isLogin" (showTasksClicked)="tasksToOneGoal = $event"></app-goals>
-    <app-todo *ngIf="this.isLogin" [tasksToOneGoal]="tasksToOneGoal"></app-todo>
+      <app-goals-create *ngIf="this.isLogin" (showTasksClicked)="tasksToOneGoal = $event"></app-goals-create>
+      <app-todo *ngIf="this.isLogin" [tasksToOneGoal]="tasksToOneGoal"></app-todo>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
