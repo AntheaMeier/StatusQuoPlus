@@ -60,7 +60,7 @@ export class ApiService {
 
   addGoal(goal: Goals): Observable<Goals> {
     return this.http.post<Goals>(apiUrl, goal, httpOptions).pipe(
-      tap((goal: Goals) => console.log(`added goal w/ id=${goal.id}`)),
+      tap((goal: Goals) => console.log(`added goal w/ id=${goal._id}`)),
       catchError(this.handleError<Goals>('addGoal'))
     );
   }
