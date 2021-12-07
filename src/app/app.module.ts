@@ -47,6 +47,7 @@ import { LoginComponent } from './login/login.component';
 import {AuthGuardService} from "./auth-guard.service";
 import { DeleteConfirmationDialogComponent } from './goals/delete-confirmation-dialog/delete-confirmation-dialog';
 import { TodoComponent } from './todo/todo.component';
+import { GridComponent } from './grid/grid.component';
 
 
 
@@ -59,6 +60,7 @@ import { TodoComponent } from './todo/todo.component';
     LoginComponent,
     DeleteConfirmationDialogComponent,
     TodoComponent,
+    GridComponent,
   ],
     imports: [
         AppRoutingModule,
