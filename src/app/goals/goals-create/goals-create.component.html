@@ -9,7 +9,7 @@
                [cdkDropListData]="data"
                class="example-list"
                (cdkDropListDropped)="drop($event)">
-        <mat-card [ngStyle]="{'background-color':goal === selectedGoal ? 'lightblue' : 'white' }" class="style3 example-box" *ngFor="let goal of data" cdkDrag (click)="setTheSelectedGoal(goal)">
+        <mat-card (click)= "setGoalsid(goal.id)" [ngStyle]="{'background-color':goal === selectedGoal ? 'lightblue' : 'white' }" class="style3 example-box" *ngFor="let goal of data" cdkDrag (click)="setTheSelectedGoal(goal)"  (click)="showTasks(goal.id)">
           <mat-icon (click)="deleteDialog(goal.id)">cancel</mat-icon>
           <div class="goal-description" *ngIf="!editable" (click)="setEditableToTrue()">
           {{ goal.description }}

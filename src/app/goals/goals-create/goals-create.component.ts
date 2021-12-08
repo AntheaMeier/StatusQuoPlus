@@ -39,6 +39,7 @@ export class GoalsCreateComponent implements OnInit{
   id = '';
   dataTasks: Tasks[] = [];
  tasksToOneGoal: Tasks[] = [];
+  @Output() showGoalid = new EventEmitter<string>();
 
  @Output() showTasksClicked = new EventEmitter<Tasks[]>();
 
@@ -261,6 +262,10 @@ export class GoalsCreateComponent implements OnInit{
   setTheSelectedGoal(goal: Goals) {
  this.selectedGoal=goal;
 
+  }
+
+  setGoalsid(value: string) {
+    this.showGoalid.emit(value);
   }
 }
 

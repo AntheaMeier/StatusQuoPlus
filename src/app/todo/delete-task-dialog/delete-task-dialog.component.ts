@@ -37,7 +37,7 @@ export class DeleteTaskDialogComponent implements OnInit {
 
 
 
-  deleteGoal(id: String) {
+  deleteGoal(id: any) {
     console.log('das ist die id ' + id);
     this.isLoadingResults = true;
     this.api.deleteTask(id)
@@ -51,7 +51,7 @@ export class DeleteTaskDialogComponent implements OnInit {
   }
 
   onFormSubmit() {
-    this.deleteGoal(this.data.id);
+    this.deleteGoal(this.data._id);
     this.dialog.closeAll();
   }
 

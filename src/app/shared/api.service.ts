@@ -13,6 +13,8 @@ const apiUrl = 'http://localhost:3000/goals';
 const apiUrlLogin = 'http://localhost:3000/users';
 const apiUrlOrder = 'http://localhost:3000/goals/order';
 const apiUrlTasks = 'http://localhost:3000/tasks';
+const apiUrlStatus = 'http://localhost:3000/tasks/status';
+
 const apiUrlTasksForGoal = 'http://localhost:3000/tasks/goal';
 
 
@@ -123,7 +125,7 @@ export class ApiService {
 
   addTask(task: Tasks): Observable<Tasks> {
     return this.http.post<Tasks>(apiUrlTasks, task, httpOptions).pipe(
-      tap((task: Tasks) => console.log(`added task w/ id=${task.id}`)),
+      tap((task: Tasks) => console.log(`added task w/ id=${task._id}`)),
       catchError(this.handleError<Tasks>('addTask'))
     );
   }
@@ -152,6 +154,15 @@ export class ApiService {
         tap(task => console.log('fetched tasks for goal')),
         catchError(this.handleError('getTasksForGoal', []))
       );
+  }
+
+  updateTaskStatus(id: any, task: Tasks): Observable<any> {
+    const url = `${apiUrlStatus}/${id}`;
+    console.log('api.service aufgerufen');
+    return this.http.patch(url, task, httpOptions).pipe(
+      tap(_ => console.log(`updated task status id=${id} und status=` + task.status)),
+      catchError(this.handleError<any>('updateArticle'))
+    );
   }
 
 

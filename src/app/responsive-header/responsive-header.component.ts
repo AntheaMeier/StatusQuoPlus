@@ -30,10 +30,12 @@ export class ResponsiveHeaderComponent {
  teamVorgesetze: Team[] = [];
   loginInvalid = false;
   userFound = false;
+  goalid : string = "";
 
 
 
-   tasksToOneGoal : Tasks[] = [];
+
+  tasksToOneGoal : Tasks[] = [];
 
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -166,6 +168,11 @@ onClickVorgesetzter(){
       this.isLoadingResults = false;
     });
 }
+
+
+  setGoalsid(id: string) {
+    this.goalid = id;
+  }
 
 
 

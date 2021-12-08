@@ -1,18 +1,67 @@
-<mat-card class="style">TODO
-  <mat-card class="style2">
-    <mat-card class="style3" *ngFor="let task of tasksToOneGoal">
-      {{ task.description }}
+<mat-card class="container">
 
-      <button class="style4"mat-button  *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
-        <mat-icon class="style5">delete</mat-icon>
-      </button>
-    </mat-card>
-  </mat-card>
-  <mat-form-field class="example-form-field" appearance="fill">
-    <mat-label>I want to achieve</mat-label>
-    <input matInput type="text" >
-    <button  *ngIf="true" matSuffix mat-icon-button aria-label="Send">
-      <mat-icon>send</mat-icon>
-    </button>
-  </mat-form-field>
+  <div cdkDropListGroup>
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="tasksToOneGoal"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+
+      <mat-card class="main-card">TODO   <mat-icon (click)="addTask()">add</mat-icon>
+        <mat-card class="inner-card">
+          <mat-card class="small-card" *ngFor="let task of tasksToOneGoal" cdkDrag>
+            {{ task.description }}
+
+            <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+              <mat-icon  (click)="deleteDialog(task._id)" class="icon-styling">cancel</mat-icon>
+            </button>
+          </mat-card>
+        </mat-card>
+      </mat-card>
+    </div>
+
+
+
+    <div
+      cdkDropList
+      #doingList="cdkDropList"
+      [cdkDropListData]="tasksToDoing"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <mat-card class="main-card">DOING
+        <mat-card class="inner-card">
+          <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag>
+
+            {{task.description}}
+
+            <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+              <mat-icon class="icon-styling">delete</mat-icon>
+            </button>
+          </mat-card>
+        </mat-card>
+      </mat-card>
+    </div>
+
+
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="tasksToDone"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <mat-card class="main-card">DONE
+        <mat-card class="inner-card">
+          <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag>
+
+            {{task.description}}
+
+            <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+              <mat-icon class="icon-styling">delete</mat-icon>
+            </button>
+          </mat-card>
+        </mat-card>
+      </mat-card>
+    </div>
+  </div>
 </mat-card>

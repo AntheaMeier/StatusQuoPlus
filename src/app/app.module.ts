@@ -47,7 +47,7 @@ import { LoginComponent } from './login/login.component';
 import {AuthGuardService} from "./auth-guard.service";
 import { DeleteConfirmationDialogComponent } from './goals/delete-confirmation-dialog/delete-confirmation-dialog';
 import { TodoComponent } from './todo/todo.component';
-
+import { DeleteTaskDialogComponent} from "./todo/delete-task-dialog/delete-task-dialog.component";
 
 
 @NgModule({
@@ -59,6 +59,7 @@ import { TodoComponent } from './todo/todo.component';
     LoginComponent,
     DeleteConfirmationDialogComponent,
     TodoComponent,
+    DeleteTaskDialogComponent,
   ],
     imports: [
         AppRoutingModule,

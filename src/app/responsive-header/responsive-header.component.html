@@ -113,8 +113,13 @@
       </div>
     </div>
     <div class="content-components" *ngIf="selectedRole == 'Mitarbeiter_in'">
-    <app-goals *ngIf="this.isLogin" (showTasksClicked)="tasksToOneGoal = $event"></app-goals>
-    <app-todo *ngIf="this.isLogin" [tasksToOneGoal]="tasksToOneGoal"></app-todo>
+      <div class="one-component">
+        <app-goals *ngIf="this.isLogin" (showTasksClicked)="tasksToOneGoal = $event"  (showGoalid)="setGoalsid($event)"></app-goals>
+      </div>
+      <div class="one-component">
+
+      <app-todo *ngIf="this.isLogin" [tasksToOneGoal]="tasksToOneGoal" [goalid]="goalid"></app-todo>
+        </div>
     </div>
     <div class="content-components" *ngIf="selectedRole == 'Vorgesetzte_r'">
      <mat-card>
