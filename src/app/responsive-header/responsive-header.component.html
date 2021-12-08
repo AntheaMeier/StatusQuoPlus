@@ -15,7 +15,7 @@
           <mat-label>Rolle</mat-label>
           <mat-select value= "Mitarbeiter_in">
             <mat-option value="Mitarbeiter_in" (click)="onSelectMitarbeiter_in()">Mitarbeiter_in</mat-option>
-            <mat-option value="Vorgesetzte_r" *ngIf="roleLoggedInUser == 'Vorgesetzte_r'" (click)="onSelectVorgesetzte_r()">Vorgesetzte_r</mat-option>
+            <mat-option (click)="onClickVorgesetzter()" value="Vorgesetzte_r" *ngIf="roleLoggedInUser == 'Vorgesetzte_r'" (click)="onSelectVorgesetzte_r()">Vorgesetzte_r</mat-option>
           </mat-select>
         </mat-form-field>
       </a>
@@ -52,7 +52,7 @@
             <mat-label>Rolle</mat-label>
             <mat-select value="Mitarbeiter_in">
               <mat-option value="Mitarbeiter_in"  (click)="onSelectMitarbeiter_in()">Mitarbeiter_in</mat-option>
-              <mat-option value="Vorgesetzte_r" *ngIf="roleLoggedInUser == 'Vorgesetzte_r'" (click)="onSelectVorgesetzte_r()">Vorgesetzte_r</mat-option>
+              <mat-option (click)="onClickVorgesetzter()" value="Vorgesetzte_r" *ngIf="roleLoggedInUser == 'Vorgesetzte_r'" (click)="onSelectVorgesetzte_r()">Vorgesetzte_r</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -115,6 +115,23 @@
     <div class="content-components" *ngIf="selectedRole == 'Mitarbeiter_in'">
     <app-goals *ngIf="this.isLogin" (showTasksClicked)="tasksToOneGoal = $event"></app-goals>
     <app-todo *ngIf="this.isLogin" [tasksToOneGoal]="tasksToOneGoal"></app-todo>
+    </div>
+    <div class="content-components" *ngIf="selectedRole == 'Vorgesetzte_r'">
+     <mat-card>
+       <mat-card-content>
+      <mat-card  *ngFor="let member of teamVorgesetze">
+
+      {{member.firstname}}
+      {{member.surname}}
+
+      <!-- <div *ngFor="let member in teamVorgesetze">
+         <p>{{member.firstname}}</p>
+         <p>{{member.surname}}</p>
+
+       </div>-->
+      </mat-card>
+       </mat-card-content>
+     </mat-card>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

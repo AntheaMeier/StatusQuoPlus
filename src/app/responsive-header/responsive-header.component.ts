@@ -5,7 +5,7 @@ import {map, shareReplay} from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Login} from "../shared/login";
+import {Login, Team} from "../shared/login";
 import {ApiService} from "../shared/api.service";
 import {Tasks} from "../shared/tasks";
 
@@ -26,9 +26,11 @@ export class ResponsiveHeaderComponent {
   lastNameloggedInUser: String = "";
   roleLoggedInUser: String= "";
   selectedRole: String = "Mitarbeiter_in";
-
+  idLoggedInUser: String = "";
+ teamVorgesetze: Team[] = [];
   loginInvalid = false;
   userFound = false;
+
 
 
    tasksToOneGoal : Tasks[] = [];
@@ -76,7 +78,9 @@ export class ResponsiveHeaderComponent {
    this.firstNameloggedInUser = this.auth.getUserDetails().user_info.firstname;
     this.lastNameloggedInUser = this.auth.getUserDetails().user_info.surname;
 
+
     this.roleLoggedInUser = this.auth.getUserDetails().user_info.role;
+    this.idLoggedInUser = this.auth.getUserDetails().user_info._id;
 
 
 
@@ -146,7 +150,22 @@ onSelectMitarbeiter_in(){
 }
 
 
+onClickVorgesetzter(){
+  this.api.getUser(this.idLoggedInUser)
+    .subscribe((res: Login) => {
+      console.log('get user '+ res.firstname);
 
+     this.teamVorgesetze =  res.team;
+
+
+
+      this.isLoadingResults = false;
+
+    }, err => {
+      console.log(err);
+      this.isLoadingResults = false;
+    });
+}
 
 
 

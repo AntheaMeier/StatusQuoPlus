@@ -49,6 +49,16 @@ export class ApiService {
       );
   }
 
+
+  getUser(id: any): Observable<Login> {
+    const url = `${apiUrlLogin}/${id}`;
+    return this.http.get<Login>(url).pipe(
+      tap(_ => console.log(`fetched user id=${id}`)),
+      catchError(this.handleError<Login>(`getUser id=${id}`))
+    );
+  }
+
+
   // Goals
   getGoals(): Observable<Goals[]> {
     return this.http.get<Goals[]>(apiUrl)
