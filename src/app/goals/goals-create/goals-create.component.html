@@ -1,4 +1,4 @@
-<mat-card class="style">ZIELE
+<mat-card class="style">ZIELE <mat-icon (click)="onAddPost()">add</mat-icon>
   <mat-card class="style2">
     <mat-card-content>
 
@@ -9,31 +9,15 @@
                [cdkDropListData]="data"
                class="example-list"
                (cdkDropListDropped)="drop($event)">
-        <mat-card class="style3 example-box" *ngFor="let goal of data" cdkDrag>
-          <div class="goal-description">
+        <mat-card [ngStyle]="{'background-color':goal === selectedGoal ? 'lightblue' : 'white' }" class="style3 example-box" *ngFor="let goal of data" cdkDrag (click)="setTheSelectedGoal(goal)">
+          <mat-icon (click)="deleteDialog(goal.id)">cancel</mat-icon>
+          <div class="goal-description" *ngIf="!editable" (click)="setEditableToTrue()">
           {{ goal.description }}
           </div>
-          <button [disableRipple]="true" class="style4" *ngIf="true" matSuffix mat-icon-button aria-label="Delete" (click)="deleteDialog(goal.id)">
-            <mat-icon class="style5"  (click)="deleteDialog(goal.id)">delete</mat-icon>
-          </button>
-          <button [disableRipple]="true" class="style4" *ngIf="true" matSuffix mat-icon-button aria-label="Edit" (click) = "openDialog(goal.id)">
-            <mat-icon class="style5">edit</mat-icon>
-          </button>
 
+            <textarea name="desc" (keyup)="getTheInput($event)"    aria-label="Edit" (keyup.enter) = "updateAGoal(goal)" [value]="goal.description" *ngIf="editable">
 
-          <button class="style4" matSuffix mat-icon-button aria-label="Edit" (click)="addTask(goal.id) ">
-            <span class="style5">
-              <mat-icon>add_circle_outline</mat-icon>
-              Add a Task</span>
-
-          </button>
-
-
-          <button class="button-at style4" style="vertical-align:middle" (click)="showTasks(goal.id)">
-            <span>show Tasks </span></button>
-
-
-
+            </textarea>
           <!--   Progress bar: value = anz abgehakte todos jedes Ziels -->
           <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
 

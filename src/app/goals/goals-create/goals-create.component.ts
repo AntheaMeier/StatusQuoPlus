@@ -25,11 +25,16 @@ export class GoalsCreateComponent implements OnInit{
   enteredValue = '';
   newPost = '';
   idDialog: any = '';
+  editable = false;
+
 
   displayedColumns: string[] = ['description'];
   data: Goals[] = [];
   isLoadingResults = true;
   goal: Goals = { id: '', description: '', order: ''};
+  selectedGoal: Goals = { id: '', description: '', order: ''};
+
+
   description = '';
   id = '';
   dataTasks: Tasks[] = [];
@@ -77,7 +82,7 @@ export class GoalsCreateComponent implements OnInit{
   onAddPost(){
     this.isLoadingResults = true;
     const simpleObject = {} as Goals;
-    simpleObject.description = this.enteredValue;
+    simpleObject.description = "Click to edit";
 
     this.api.addGoal(simpleObject)
       .subscribe((res: any) => {
@@ -184,6 +189,21 @@ export class GoalsCreateComponent implements OnInit{
 
   }
 
+
+  updateAGoal(goal: Goals){
+    this.isLoadingResults = true;
+    goal.description = this.description;
+    this.api.updateGoal(goal.id, goal)
+      .subscribe((res: any) => {
+          this.isLoadingResults = false;
+        }, (err: any) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        }
+      );
+    this.editable= false;
+  }
+
   sendMessage() {
     // After Sending Message
     this.enteredValue = '';
@@ -230,5 +250,17 @@ export class GoalsCreateComponent implements OnInit{
     this.showTasksToOneGoal = true;
   }
 
+  setEditableToTrue() {
+    this.editable=true;
+  }
+
+  getTheInput(e: any) {
+    this.description = e.target.value;
+  }
+
+  setTheSelectedGoal(goal: Goals) {
+ this.selectedGoal=goal;
+
+  }
 }
 
