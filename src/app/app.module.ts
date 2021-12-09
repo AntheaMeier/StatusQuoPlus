@@ -47,6 +47,7 @@ import { LoginComponent } from './login/login.component';
 import {AuthGuardService} from "./auth-guard.service";
 import { DeleteConfirmationDialogComponent } from './goals/delete-confirmation-dialog/delete-confirmation-dialog';
 import { AnnualReviewComponent } from './annual-review/annual-review.component';
+import { ListReviewsComponent } from './annual-review/list-reviews/list-reviews.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { AnnualReviewComponent } from './annual-review/annual-review.component';
     LoginComponent,
     DeleteConfirmationDialogComponent,
     AnnualReviewComponent,
+    ListReviewsComponent,
   ],
     imports: [
         AppRoutingModule,

@@ -1,0 +1,13 @@
+<mat-accordion multi="true" *ngIf="data.length > 0">
+    <mat-expansion-panel *ngFor="let review of data">
+        <mat-expansion-panel-header>
+            {{ review.date }}
+        </mat-expansion-panel-header>
+        <p>{{ review.description }}</p>
+        <mat-action-row>
+            <button mat-button color="primary">EDIT</button>
+            <button mat-button color="warn"  (click)="deleteReview(review.id)">DELETE</button>
+          </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>
+<p class="info-text mat-body1" *ngIf="data.length === 0">No reviews added yet.</p>

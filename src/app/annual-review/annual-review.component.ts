@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../shared/api.service';
-import { NgForm } from '@angular/forms';
 import { Review } from '../shared/review';
 
 @Component({
@@ -10,6 +9,9 @@ import { Review } from '../shared/review';
 })
 
 export class AnnualReviewComponent {
+  review!: Review;
+  idDialog: any = '';
+  
   enteredContent = "";
   enteredDate = "";
 
@@ -17,14 +19,20 @@ export class AnnualReviewComponent {
   
   constructor(private api: ApiService) {}
 
-  onAddPost(form: NgForm) {
-    if (form.invalid)
-    {
-        return;
-    }
-    
-   // this.api.addReview(form.value.title);
-    form.resetForm();
-}
+  onAddPost(){
+    this.isLoadingResults = true;
+    const simpleObject = {} as Review;
+    simpleObject.date = this.enteredDate;
+    simpleObject.description = this.enteredContent;
 
+    this.api.addReview(simpleObject)
+      .subscribe((res: any) => {
+        this.isLoadingResults = false;
+      }, (err: any) => {
+        console.log(err);
+        this.isLoadingResults = false;
+
+      });
+    window.location.reload()
+  }
 }
