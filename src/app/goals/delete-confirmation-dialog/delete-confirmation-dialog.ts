@@ -76,7 +76,7 @@ import {Tasks} from "../../shared/tasks";
         console.log('das ist res ' + res[0]._id)
         let taskId =  ''
         for(let i = 0 ; i < res.length; i++){
-
+         
           taskId = res[i]._id;
           this.api.deleteTask(taskId)
             .subscribe(res => {
