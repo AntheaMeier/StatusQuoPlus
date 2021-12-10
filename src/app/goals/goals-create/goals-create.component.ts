@@ -37,6 +37,8 @@ export class GoalsCreateComponent implements OnInit {
  tasksToOneGoal: Tasks[] = [];
   @Output() showGoalid = new EventEmitter<string>();
 
+
+
   goal: Goals = { _id: '', description: '', order: '', userid: ''};
   user: Login = { id: '', username: '', password: '', firstname: '', surname: '', email: '', role: '', team:[]};
   dataUsers: Login[] = [];
@@ -44,7 +46,10 @@ export class GoalsCreateComponent implements OnInit {
   userID = JSON.stringify(this.user.id);
   showTasksToOneGoal = false;
   showGoalsToOneUser = false;
-  goalsToOneUser: Goals[] = [];
+  @Input() goalsToOneUser: Goals[] = [];
+
+
+  @Input() idTeam="";
 
 
 
@@ -87,7 +92,17 @@ export class GoalsCreateComponent implements OnInit {
       });
 
     this.idloggedInUser = this.auth.getUserDetails().user_info._id;
-    this.showGoals(this.idloggedInUser);
+    if(this.idTeam =="")
+    {
+      this.showGoals(this.idloggedInUser);
+
+
+
+    }
+
+    else{
+      this.showGoals(this.idTeam)
+    }
   }
 
   public position(): void {

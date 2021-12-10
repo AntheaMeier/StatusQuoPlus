@@ -145,8 +145,8 @@
 
       <div *ngIf="clickedOnMitarbeiter">
 
-        <app-goals></app-goals>
-        <app-todo></app-todo>
+        <app-goals   (showGoalid)="setGoalsid($event)" [idTeam]="idTeamMember"  [goalsToOneUser]="goalsToOneUser" ></app-goals>
+        <app-todo [goalid]="goalid"></app-todo>
 
       </div>
 

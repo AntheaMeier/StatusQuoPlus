@@ -8,6 +8,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Login, Team} from "../shared/login";
 import {ApiService} from "../shared/api.service";
 import {Tasks} from "../shared/tasks";
+import {Goals} from "../shared/goals";
 
 @Component({
   selector: 'app-responsive-header',
@@ -31,6 +32,7 @@ export class ResponsiveHeaderComponent {
   userFound = false;
   goalid : string = "";
   clickedOnMitarbeiter = false;
+  idTeamMember = "";
 
 
   tasksToOneGoal : Tasks[] = [];
@@ -41,6 +43,7 @@ export class ResponsiveHeaderComponent {
       map(result => result.matches),
       shareReplay()
     );
+   goalsToOneUser: Goals[] = [];
 
   constructor(private breakpointObserver: BreakpointObserver,
               private auth: AuthService,
@@ -154,13 +157,24 @@ onClickVorgesetzter(){
   }
 
 
-
   /// login ab hier
 
 
   loadGoals(userid:any) {
 
     this.clickedOnMitarbeiter = true;
+
+    this.api.getGoalsToUser(userid)
+      .subscribe((res: any) => {
+        this.goalsToOneUser = res;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+
+    this.idTeamMember= userid;
+
 
   }
 
