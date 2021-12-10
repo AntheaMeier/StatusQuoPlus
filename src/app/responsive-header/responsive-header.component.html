@@ -145,9 +145,15 @@
 
       <div *ngIf="clickedOnMitarbeiter">
 
-        <app-goals   (showGoalid)="setGoalsid($event)" [idTeam]="idTeamMember"  [goalsToOneUser]="goalsToOneUser" ></app-goals>
-        <app-todo [goalid]="goalid"></app-todo>
+        <div class="one-component">
 
+
+        <app-goals [selectedRole]="selectedRole" (showTasksClicked)="tasksToOneGoal = $event"  (showGoalid)="setGoalsid($event)" [idTeam]="idTeamMember"  [goalsToOneUser]="goalsToOneUser" ></app-goals>
+        </div>
+
+        <div class="one-component">
+        <app-todo  [selectedRole]="selectedRole" [tasksToOneGoal]="tasksToOneGoal" [goalid]="goalid"></app-todo>
+        </div>
       </div>
 
     </div>

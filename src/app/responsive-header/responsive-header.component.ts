@@ -126,11 +126,14 @@ export class ResponsiveHeaderComponent {
 
   onSelectVorgesetzte_r(){
     this.selectedRole = "Vorgesetzte_r"
+    this.tasksToOneGoal= [];
   }
 
 
 onSelectMitarbeiter_in(){
     this.selectedRole= "Mitarbeiter_in"
+  this.tasksToOneGoal= [];
+
 }
 
 
@@ -161,6 +164,8 @@ onClickVorgesetzter(){
 
 
   loadGoals(userid:any) {
+    this.tasksToOneGoal= [];
+
 
     this.clickedOnMitarbeiter = true;
 

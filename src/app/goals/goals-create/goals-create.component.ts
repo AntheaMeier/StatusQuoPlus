@@ -51,6 +51,8 @@ export class GoalsCreateComponent implements OnInit {
 
   @Input() idTeam="";
 
+  @Input() selectedRole: String = "Mitarbeiter_in";
+
 
 
   constructor(public dialog: MatDialog,
@@ -270,7 +272,11 @@ export class GoalsCreateComponent implements OnInit {
 
 
   setEditableToTrue() {
-    this.editable=true;
+    if(this.selectedRole=='Mitarbeiter_in') {
+
+
+      this.editable = true;
+    }
   }
 
   getTheInput(e: any) {

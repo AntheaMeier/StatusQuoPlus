@@ -28,6 +28,9 @@ export class TodoComponent implements OnInit {
 
   showData: boolean = false;
 
+  @Input() selectedRole: String = "Mitarbeiter_in";
+
+
   constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
