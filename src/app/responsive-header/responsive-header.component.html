@@ -124,7 +124,7 @@
     <div class="content-components" *ngIf="selectedRole == 'Vorgesetzte_r'">
      <mat-card>
        <mat-card-content>
-      <mat-card  *ngFor="let member of teamVorgesetze">
+      <mat-card  *ngFor="let member of teamVorgesetze" (click)="loadGoals(member.userid)">
 
       {{member.firstname}}
       {{member.surname}}
@@ -137,6 +137,14 @@
       </mat-card>
        </mat-card-content>
      </mat-card>
+
+      <div *ngIf="clickedOnMitarbeiter">
+
+        <app-goals ></app-goals>
+        <app-todo></app-todo>
+
+      </div>
+
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

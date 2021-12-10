@@ -31,6 +31,7 @@ export class ResponsiveHeaderComponent {
   loginInvalid = false;
   userFound = false;
   goalid : string = "";
+  clickedOnMitarbeiter = false;
 
 
 
@@ -179,5 +180,9 @@ onClickVorgesetzter(){
   /// login ab hier
 
 
+  loadGoals(userid:any) {
 
+    this.clickedOnMitarbeiter = true;
+
+  }
 }
