@@ -1,7 +1,6 @@
-<mat-card class="style">ZIELE <mat-icon (click)="onAddPost()">add</mat-icon>
+<mat-card class="style">ZIELE <mat-icon (click)="onAddPost(idloggedInUser)">add</mat-icon>
   <mat-card class="style2">
     <mat-card-content>
-
 
 
       <div     cdkDropList
@@ -9,8 +8,8 @@
                [cdkDropListData]="data"
                class="example-list"
                (cdkDropListDropped)="drop($event)">
-        <mat-card (click)= "setGoalsid(goal.id)" [ngStyle]="{'background-color':goal === selectedGoal ? 'lightblue' : 'white' }" class="style3 example-box" *ngFor="let goal of data" cdkDrag (click)="setTheSelectedGoal(goal)"  (click)="showTasks(goal.id)">
-          <mat-icon (click)="deleteDialog(goal.id)">cancel</mat-icon>
+        <mat-card (click)= "setGoalsid(goal._id)" [ngStyle]="{'background-color':goal === selectedGoal ? 'lightblue' : 'white' }" class="style3 example-box" *ngFor="let goal of goalsToOneUser" cdkDrag (click)="setTheSelectedGoal(goal)"  (click)="showTasks(goal._id)">
+          <mat-icon (click)="deleteDialog(goal._id)">cancel</mat-icon>
           <div class="goal-description" *ngIf="!editable" (click)="setEditableToTrue()">
           {{ goal.description }}
           </div>
@@ -25,13 +24,14 @@
         </mat-card>
       </div>
 
+
     </mat-card-content>
   </mat-card>
   <div class="div-styling">
     <mat-form-field class="example-form-field" appearance="fill">
       <mat-label>I want to achieve</mat-label>
-      <input matInput type="text" [(ngModel)]="enteredValue" (keyup.enter)="onAddPost()" (keyup.enter)="sendMessage()">
-      <button *ngIf="true" matSuffix mat-icon-button aria-label="Send" (click)="onAddPost()" (click)="sendMessage()">
+      <input matInput type="text" [(ngModel)]="enteredValue" (keyup.enter)="onAddPost(idloggedInUser)">
+      <button *ngIf="true" matSuffix mat-icon-button aria-label="Send" (click)="onAddPost(idloggedInUser)">
         <mat-icon>send</mat-icon>
       </button>
     </mat-form-field>

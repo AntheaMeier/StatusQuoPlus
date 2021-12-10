@@ -1,5 +1,6 @@
 export interface Goals {
-  id: string;
+  _id: string;
   description: string;
   order: string;
+  userid: string;
 }

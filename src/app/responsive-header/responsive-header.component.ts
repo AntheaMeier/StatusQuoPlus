@@ -16,7 +16,6 @@ import {Tasks} from "../shared/tasks";
 })
 export class ResponsiveHeaderComponent {
   public loggedIn = false;
-
   isLogin = false;
   loginForm: FormGroup
   submitted = false;
@@ -32,8 +31,6 @@ export class ResponsiveHeaderComponent {
   userFound = false;
   goalid : string = "";
   clickedOnMitarbeiter = false;
-
-
 
 
   tasksToOneGoal : Tasks[] = [];
@@ -61,14 +58,11 @@ export class ResponsiveHeaderComponent {
   }
 
   ngOnInit(): void {
-
-
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
     this.isUserLogin();
-
     this.api.getUsers()
       .subscribe((res: any) => {
         this.data = res;
@@ -77,9 +71,9 @@ export class ResponsiveHeaderComponent {
         console.log(err);
         this.isLoadingResults = false;
       });
-
-   this.firstNameloggedInUser = this.auth.getUserDetails().user_info.firstname;
+    this.firstNameloggedInUser = this.auth.getUserDetails().user_info.firstname;
     this.lastNameloggedInUser = this.auth.getUserDetails().user_info.surname;
+
 
 
     this.roleLoggedInUser = this.auth.getUserDetails().user_info.role;
@@ -87,6 +81,8 @@ export class ResponsiveHeaderComponent {
 
 
 
+
+    this.roleLoggedInUser = this.auth.getUserDetails().user_info.role;
 
   }
 
@@ -97,30 +93,16 @@ export class ResponsiveHeaderComponent {
     for (let i of this.data) {
       if (i.username === this.loginForm.get('username')?.value && i.password === this.loginForm.get('password')?.value) {
         this.userFound= true;
-
         this.api.postTypeRequest('', this.loginForm.value).subscribe((res: any) => {
           this.auth.setDataInLocalStorage('userData', JSON.stringify(res));
           this.auth.setDataInLocalStorage('token', res.access_token);
-
           window.location.reload();
-
-
         });
-
-
-
       }
-
-
-
     }
-
     if(!this.userFound){
       this.loginInvalid= true;
     }
-
-
-
   }
 
   isUserLogin(): void{
@@ -133,10 +115,6 @@ export class ResponsiveHeaderComponent {
     this.auth.clearStorage();
     window.location.reload()
   }
-
-
-
-
 
   removeErrorMessage(): void{
     this.loginInvalid=false;
@@ -185,4 +163,5 @@ onClickVorgesetzter(){
     this.clickedOnMitarbeiter = true;
 
   }
+
 }

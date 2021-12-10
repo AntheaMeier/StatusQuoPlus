@@ -1,27 +1,23 @@
-import {Component, Inject, InjectionToken, Input, OnInit} from '@angular/core';
-import { ApiService } from '../../shared/api.service';
-import { Goals} from "../../shared/goals";
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Output, EventEmitter } from '@angular/core';
-
+import {Component, Input, OnInit} from '@angular/core';
+import {ApiService} from '../../shared/api.service';
+import {Goals} from "../../shared/goals";
+import {MatDialog} from '@angular/material/dialog';
+import {Output, EventEmitter} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {GoalsEditComponent} from "../goals-edit/goals-edit.component";
-import { DeleteConfirmationDialogComponent } from '../delete-confirmation-dialog/delete-confirmation-dialog';
+import {DeleteConfirmationDialogComponent} from '../delete-confirmation-dialog/delete-confirmation-dialog';
 import {Tasks} from "../../shared/tasks";
-
-
-/** Error when invalid control is dirty, touched, or submitted. */
-
+import {Login} from "../../shared/login";
+import {Team} from "../../shared/login";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-goals',
   templateUrl: './goals-create.component.html',
   styleUrls: ['./goals-create.component.css']
 })
-export class GoalsCreateComponent implements OnInit{
+export class GoalsCreateComponent implements OnInit {
   enteredValue = '';
   newPost = '';
   idDialog: any = '';
@@ -31,9 +27,9 @@ export class GoalsCreateComponent implements OnInit{
   displayedColumns: string[] = ['description'];
   data: Goals[] = [];
   isLoadingResults = true;
-  goal: Goals = { id: '', description: '', order: ''};
-  selectedGoal: Goals = { id: '', description: '', order: ''};
-
+  selectedGoal: Goals = { _id: '', description: '', order: '', userid: ''};
+  @Output() showTasksClicked = new EventEmitter<Tasks[]>();
+  @Output() showGoalsClicked = new EventEmitter<Goals[]>();
 
   description = '';
   id = '';
@@ -41,25 +37,66 @@ export class GoalsCreateComponent implements OnInit{
  tasksToOneGoal: Tasks[] = [];
   @Output() showGoalid = new EventEmitter<string>();
 
- @Output() showTasksClicked = new EventEmitter<Tasks[]>();
-
+  goal: Goals = { _id: '', description: '', order: '', userid: ''};
+  user: Login = { id: '', username: '', password: '', firstname: '', surname: '', email: '', role: '', team:[]};
+  dataUsers: Login[] = [];
+  idloggedInUser: String = "";
+  userID = JSON.stringify(this.user.id);
   showTasksToOneGoal = false;
+  showGoalsToOneUser = false;
+  goalsToOneUser: Goals[] = [];
 
 
 
-  constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute,
-             ) { }
+  constructor(public dialog: MatDialog,
+              private router: Router,
+              private api: ApiService,
+              private route: ActivatedRoute,
+              private auth: AuthService,
+  ) {}
+
+  ngOnInit() {
+    this.api.getGoals()
+      .subscribe((res: any) => {
+        this.data = res;
+        this.isLoadingResults = false;
+        this.data.sort((goal1, goal2) => {
+          return Number(goal1.order) - Number(goal2.order);
+        });
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+
+    this.api.getTasks()
+      .subscribe((res: any) => {
+        this.dataTasks = res;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+
+    this.api.getUsers()
+      .subscribe((res: any) => {
+        this.dataUsers = res;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+
+    this.idloggedInUser = this.auth.getUserDetails().user_info._id;
+    this.showGoals(this.idloggedInUser);
+  }
 
   public position(): void {
-    console.log('position aufgerufen');
     let position = 0;
     this.data.forEach((goal: Goals) => {
-      position +=1;
+      position += 1;
       goal.order = String(position);
-      this.api.updateGoalOrder(goal.id, goal).subscribe((data: Goals) => {
-        console.log('neu positioniert');
+      this.api.updateGoalOrder(goal._id, goal).subscribe((data: Goals) => {
       }, error => {
-        console.log('hat nicht funktioniert');
       });
     });
   }
@@ -67,7 +104,6 @@ export class GoalsCreateComponent implements OnInit{
   drop(event: CdkDragDrop<Goals[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log('bewegt oder?');
       this.position();
     } else {
       transferArrayItem(
@@ -79,11 +115,14 @@ export class GoalsCreateComponent implements OnInit{
     }
   }
 
-
-  onAddPost(){
+  onAddPost(id: any) {
     this.isLoadingResults = true;
     const simpleObject = {} as Goals;
+
     simpleObject.description = "Click to edit";
+
+    simpleObject.userid = id;
+
 
     this.api.addGoal(simpleObject)
       .subscribe((res: any) => {
@@ -91,76 +130,78 @@ export class GoalsCreateComponent implements OnInit{
       }, (err: any) => {
         console.log(err);
         this.isLoadingResults = false;
-
       });
-
     window.location.reload()
   }
 
+  showGoals(id: any) {
+    this.api.getGoalsToUser(id)
+      .subscribe((res: any) => {
+        this.goalsToOneUser = res;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+    this.showGoalsToOneUser = true;
+  }
 
-  onDeleteGoal(){
+  addTask(id: any) {
+    this.isLoadingResults = true;
+    const simpleObject = {} as Tasks;
+    simpleObject.description = "New Task For" + id;
+    simpleObject.status = "todo";
+    simpleObject.goalid = id;
+
+    this.api.addTask(simpleObject)
+      .subscribe((res: any) => {
+        this.isLoadingResults = false;
+      }, (err: any) => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+    window.location.reload()
+  }
+
+  showTasks(id: any) {
+    this.api.getTasksToGoal(id)
+      .subscribe((res: any) => {
+        this.tasksToOneGoal = res;
+        this.showTasksClicked.emit(this.tasksToOneGoal);
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+    this.showTasksToOneGoal = true;
+  }
+
+  onDeleteGoal() {
     this.newPost = this.enteredValue;
   }
 
-
-  ngOnInit() {
-    this.api.getGoals()
-      .subscribe((res: any) => {
-        this.data = res;
-        console.log(this.data)
-        console.log(this.data);
-        this.isLoadingResults = false;
-
-        this.data.sort((goal1, goal2) => {
-          return Number(goal1.order)- Number(goal2.order);
-        });
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-
-
-      this.api.getTasks()
-      .subscribe((res: any) => {
-        this.dataTasks = res;
-        console.log(this.dataTasks)
-        this.isLoadingResults = false;
-
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-  }
-
   deleteDialog(id: any): void {
-
-    this.idDialog= id;
+    this.idDialog = id;
     const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
       width: '40%',
-      data :{'id': this.idDialog }
+      data: {'id': this.idDialog}
     });
-
     dialogRef.afterClosed().subscribe(result => {
       this.ngOnInit()
     });
-
-
   }
 
-  getGoalDetails(id: any) : Goals{
+  getGoalDetails(id: any): Goals {
     this.api.getGoal(id)
       .subscribe((data: any) => {
         this.goal = data;
-        console.log(this.goal);
         this.isLoadingResults = false;
       });
-
     return this.goal;
-
   }
 
   deleteGoal(id: any) {
-    if(confirm("Are you sure you want to delete this goal?")) {
+    if (confirm("Are you sure you want to delete this goal?")) {
       this.isLoadingResults = true;
       this.api.deleteGoal(id)
         .subscribe(res => {
@@ -172,7 +213,6 @@ export class GoalsCreateComponent implements OnInit{
           }
         );
       window.location.reload()
-
     }
   }
 
@@ -182,7 +222,6 @@ export class GoalsCreateComponent implements OnInit{
       width: '40%',
       data :{'id': this.idDialog, 'description': this.description}
     });
-
     dialogRef.afterClosed().subscribe(result => {
       this.ngOnInit();
     });
@@ -194,7 +233,7 @@ export class GoalsCreateComponent implements OnInit{
   updateAGoal(goal: Goals){
     this.isLoadingResults = true;
     goal.description = this.description;
-    this.api.updateGoal(goal.id, goal)
+    this.api.updateGoal(goal._id, goal)
       .subscribe((res: any) => {
           this.isLoadingResults = false;
         }, (err: any) => {
@@ -211,45 +250,9 @@ export class GoalsCreateComponent implements OnInit{
   }
 
 
-  addTask(id: any){
-
-    this.isLoadingResults = true;
-    const simpleObject = {} as Tasks;
-    simpleObject.description = "New Task For" +  id ;
-    simpleObject.status= "todo";
-    simpleObject.goalid=id;
-
-    this.api.addTask(simpleObject)
-      .subscribe((res: any) => {
-        this.isLoadingResults = false;
-      }, (err: any) => {
-        console.log(err);
-        this.isLoadingResults = false;
-
-      });
-
-    window.location.reload()
-
-  }
 
 
-  showTasks(id: any){
 
-
-    this.api.getTasksToGoal(id)
-      .subscribe((res: any) => {
-      this.tasksToOneGoal = res;
-      this.showTasksClicked.emit(this.tasksToOneGoal);
-
-        this.isLoadingResults = false;
-
-    }, err => {
-      console.log(err);
-      this.isLoadingResults = false;
-    });
-
-    this.showTasksToOneGoal = true;
-  }
 
   setEditableToTrue() {
     this.editable=true;
@@ -267,5 +270,5 @@ export class GoalsCreateComponent implements OnInit{
   setGoalsid(value: string) {
     this.showGoalid.emit(value);
   }
-}
 
+}

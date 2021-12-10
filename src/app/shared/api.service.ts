@@ -16,8 +16,7 @@ const apiUrlTasks = 'http://localhost:3000/tasks';
 const apiUrlStatus = 'http://localhost:3000/tasks/status';
 
 const apiUrlTasksForGoal = 'http://localhost:3000/tasks/goal';
-
-
+const apiUrlUsersForGoal = 'http://localhost:3000/goals/user';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +25,8 @@ export class ApiService {
 
   apiUrlToken = 'http://localhost:3000/login';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -36,7 +36,7 @@ export class ApiService {
   }
 
   //Login
-  postTypeRequest(url:string, payload: any): any {
+  postTypeRequest(url: string, payload: any): any {
     return this.http.post(`${this.apiUrlToken}${url}`, payload).pipe(map(res => {
       return res;
     }));
@@ -72,7 +72,7 @@ export class ApiService {
 
   addGoal(goal: Goals): Observable<Goals> {
     return this.http.post<Goals>(apiUrl, goal, httpOptions).pipe(
-      tap((goal: Goals) => console.log(`added goal w/ id=${goal.id}`)),
+      tap((goal: Goals) => console.log(`added goal w/ id=${goal._id}`)),
       catchError(this.handleError<Goals>('addGoal'))
     );
   }
@@ -80,17 +80,17 @@ export class ApiService {
   deleteGoal(id: any): Observable<Goals> {
     const url = `${apiUrl}/${id}`;
     return this.http.delete<Goals>(url, httpOptions).pipe(
-      tap(_ => console.log(`deleted article id=${id}`)),
-      catchError(this.handleError<Goals>('deleteArticle'))
+      tap(_ => console.log(`deleted goal id=${id}`)),
+      catchError(this.handleError<Goals>('deleteGoal'))
     );
 
   }
 
-  updateGoal(id: any, article: Goals): Observable<any> {
+  updateGoal(id: any, goal: Goals): Observable<any> {
     const url = `${apiUrl}/${id}`;
-    return this.http.patch(url, article, httpOptions).pipe(
+    return this.http.patch(url, goal, httpOptions).pipe(
       tap(_ => console.log(`updated goal id=${id}`)),
-      catchError(this.handleError<any>('updateArticle'))
+      catchError(this.handleError<any>('updateGoal'))
     );
   }
 
@@ -98,7 +98,7 @@ export class ApiService {
     const url = `${apiUrlOrder}/${id}`;
     return this.http.patch(url, goal, httpOptions).pipe(
       tap(_ => console.log(`updated goal order id=${id} und order=` + goal.order)),
-      catchError(this.handleError<any>('updateArticle'))
+      catchError(this.handleError<any>('updateGoal'))
     );
   }
 
@@ -110,11 +110,15 @@ export class ApiService {
     );
   }
 
-
+  getGoalsToUser(id: any): Observable<Goals[]> {
+    return this.http.get<Goals[]>(`${apiUrlUsersForGoal}/${id}`)
+      .pipe(
+        tap(goal => console.log('fetched users for goal')),
+        catchError(this.handleError('getUsersForGoal', []))
+      );
+  }
 
   // Tasks
-
-
   getTasks(): Observable<Tasks[]> {
     return this.http.get<Tasks[]>(apiUrlTasks)
       .pipe(
@@ -136,7 +140,6 @@ export class ApiService {
       tap(_ => console.log(`deleted task id=${id}`)),
       catchError(this.handleError<Tasks>('deleteTask'))
     );
-
   }
 
   updateTask(id: any, task: Tasks): Observable<any> {
@@ -147,8 +150,7 @@ export class ApiService {
     );
   }
 
-
-  getTasksToGoal(id:any): Observable<Tasks[]> {
+  getTasksToGoal(id: any): Observable<Tasks[]> {
     return this.http.get<Tasks[]>(`${apiUrlTasksForGoal}/${id}`)
       .pipe(
         tap(task => console.log('fetched tasks for goal')),
