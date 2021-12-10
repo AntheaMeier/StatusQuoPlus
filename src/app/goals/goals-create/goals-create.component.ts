@@ -63,7 +63,7 @@ export class GoalsCreateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.api.getGoals()
+    this.api.getGoalsToUser(this.idloggedInUser)
       .subscribe((res: any) => {
         this.data = res;
         this.isLoadingResults = false;
