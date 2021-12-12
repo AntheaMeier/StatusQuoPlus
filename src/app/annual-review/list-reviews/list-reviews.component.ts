@@ -12,10 +12,6 @@ import { DeleteConfirmationDialogComponent } from 'src/app/goals/delete-confirma
 })
 export class ListReviewsComponent implements OnInit {
 
-  // reviews = [
-  //   {date: '21.12.2020', description: 'ldskjfsdk'},
-  //   {date: '22.12.2021', description: 'ldskjfsdk'},
-  // ];
   idDialog: any = '';
   data: Review[] = [];
   isLoadingResults = true;

@@ -1,13 +1,19 @@
 <mat-accordion multi="true" *ngIf="data.length > 0">
+    <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
     <mat-expansion-panel *ngFor="let review of data">
         <mat-expansion-panel-header>
             {{ review.date }}
         </mat-expansion-panel-header>
         <p>{{ review.description }}</p>
         <mat-action-row>
-            <button mat-button color="primary">EDIT</button>
-            <button mat-button color="warn"  (click)="deleteReview(review.id)">DELETE</button>
+            <button mat-button color="primary" class="style4">
+                <mat-icon class="style5">edit</mat-icon>
+            </button>
+            <button mat-button color="warn"  (click)="deleteReview(review.id)" class="style4">
+                <mat-icon class="style5">delete</mat-icon>    
+            </button>
           </mat-action-row>
     </mat-expansion-panel>
+</cdk-virtual-scroll-viewport>
 </mat-accordion>
 <p class="info-text mat-body1" *ngIf="data.length === 0">No reviews added yet.</p>
