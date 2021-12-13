@@ -12,6 +12,9 @@ import { DeleteConfirmationDialogComponent } from 'src/app/goals/delete-confirma
 })
 export class ListReviewsComponent implements OnInit {
 
+  edit = false;
+  enteredContent = '';
+
   idDialog: any = '';
   data: Review[] = [];
   isLoadingResults = true;
@@ -71,5 +74,14 @@ export class ListReviewsComponent implements OnInit {
     }
   }
 
-
+  editOnOff() {
+    if (this.edit)
+    {
+      this.edit = false;
+    }
+    else
+    {
+      this.edit = true;
+    }
+  }
 }

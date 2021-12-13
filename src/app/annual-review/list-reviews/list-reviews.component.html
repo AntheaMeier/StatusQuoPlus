@@ -4,9 +4,10 @@
         <mat-expansion-panel-header>
             {{ review.date }}
         </mat-expansion-panel-header>
-        <p>{{ review.description }}</p>
+        <p *ngIf="!edit">{{ review.description }}</p>
+        <textarea rows="5" *ngIf="edit" (keyup.enter)="editOnOff()" [(ngModel)]="enteredContent" placeholder="{{ review.description }}">{{ review.description }}</textarea>
         <mat-action-row>
-            <button mat-button color="primary" class="style4">
+            <button mat-button color="primary" class="style4" (click)="editOnOff()">
                 <mat-icon class="style5">edit</mat-icon>
             </button>
             <button mat-button color="warn"  (click)="deleteReview(review.id)" class="style4">

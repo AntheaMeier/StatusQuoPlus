@@ -1,3 +1,7 @@
 .viewport{
     height: 250px;
   }
+
+textarea {
+  width: 100%;
+}
