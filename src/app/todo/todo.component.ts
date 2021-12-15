@@ -107,7 +107,9 @@ export class TodoComponent implements OnInit {
 
 
   changeEditable(){
-    this.editable = true;
+    if(this.selectedRole=='Mitarbeiter_in') {
+      this.editable = true;
+    }
   }
 
 
