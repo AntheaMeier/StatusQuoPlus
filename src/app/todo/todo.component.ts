@@ -105,4 +105,31 @@ export class TodoComponent implements OnInit {
   }
 
 
+
+  changeEditable(){
+    this.editable = true;
+  }
+
+
+  getTheInput(e: any) {
+    this.description = e.target.value;
+  }
+
+
+
+  updateATask(task: Tasks){
+    this.isLoadingResults = true;
+    task.description = this.description;
+    this.api.updateTask(task._id, task)
+      .subscribe((res: any) => {
+          this.isLoadingResults = false;
+        }, (err: any) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        }
+      );
+    this.editable= false;
+  }
+
+
 }

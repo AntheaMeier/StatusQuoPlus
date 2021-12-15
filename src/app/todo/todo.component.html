@@ -10,7 +10,7 @@
 
       <mat-card class="main-card">TODO   <mat-icon (click)="addTask()" *ngIf="selectedRole == 'Mitarbeiter_in'">add</mat-icon>
 
-        <mat-card class="inner-card" *ngIf="!editable">
+        <mat-card class="inner-card" *ngIf="!editable" (click)="changeEditable()">
           <mat-card class="small-card" *ngFor="let task of tasksToOneGoal" cdkDrag>
             {{ task.description }}
 
@@ -24,6 +24,17 @@
 
 
         </mat-card>
+
+        <mat-card class="inner-card" *ngIf="editable">
+          <mat-card class="small-card" *ngFor="let task of tasksToOneGoal" cdkDrag>
+
+            <input value="{{task.description}}"   (keyup)="getTheInput($event)"    aria-label="Edit" (keyup.enter) = "updateATask(task)">
+          </mat-card>
+
+
+
+        </mat-card>
+
       </mat-card>
     </div>
 
@@ -36,7 +47,7 @@
       class="example-list"
       (cdkDropListDropped)="drop($event)">
       <mat-card class="main-card">DOING
-        <mat-card class="inner-card">
+        <mat-card class="inner-card" *ngIf="!editable" (click)="changeEditable()">
 
          <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag>
 
@@ -47,6 +58,17 @@
            </button>
          </mat-card>
        </mat-card>
+
+        <mat-card class="inner-card" *ngIf="editable">
+          <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag>
+
+            <input value="{{task.description}}"   (keyup)="getTheInput($event)"    aria-label="Edit" (keyup.enter) = "updateATask(task)">
+          </mat-card>
+
+
+
+        </mat-card>
+
       </mat-card>
     </div>
 
@@ -58,7 +80,7 @@
       class="example-list"
       (cdkDropListDropped)="drop($event)">
       <mat-card class="main-card">DONE
-        <mat-card class="inner-card">
+        <mat-card class="inner-card" *ngIf="!editable" (click)="changeEditable()">
           <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag>
 
             {{task.description}}
@@ -69,6 +91,17 @@
             </button>
           </mat-card>
         </mat-card>
+
+        <mat-card class="inner-card" *ngIf="editable">
+          <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag>
+
+            <input value="{{task.description}}"   (keyup)="getTheInput($event)"    aria-label="Edit" (keyup.enter) = "updateATask(task)">
+          </mat-card>
+
+
+
+        </mat-card>
+
       </mat-card>
     </div>
   </div>
