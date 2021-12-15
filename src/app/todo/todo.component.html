@@ -9,15 +9,20 @@
       (cdkDropListDropped)="drop($event)">
 
       <mat-card class="main-card">TODO   <mat-icon (click)="addTask()" *ngIf="selectedRole == 'Mitarbeiter_in'">add</mat-icon>
-        <mat-card class="inner-card">
+
+        <mat-card class="inner-card" *ngIf="!editable">
           <mat-card class="small-card" *ngFor="let task of tasksToOneGoal" cdkDrag>
             {{ task.description }}
 
             <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
               <mat-icon  (click)="deleteDialog(task.
               _id)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
+
             </button>
           </mat-card>
+
+
+
         </mat-card>
       </mat-card>
     </div>
@@ -32,15 +37,16 @@
       (cdkDropListDropped)="drop($event)">
       <mat-card class="main-card">DOING
         <mat-card class="inner-card">
-          <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag>
 
-            {{task.description}}
+         <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag>
 
-            <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
-              <mat-icon class="icon-styling">delete</mat-icon>
-            </button>
-          </mat-card>
-        </mat-card>
+           {{task.description}}
+
+           <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+             <mat-icon class="icon-styling"  *ngIf="selectedRole == 'Mitarbeiter_in'">delete</mat-icon>
+           </button>
+         </mat-card>
+       </mat-card>
       </mat-card>
     </div>
 
@@ -56,7 +62,6 @@
           <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag>
 
             {{task.description}}
-
 
 
             <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">

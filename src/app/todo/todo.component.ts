@@ -8,6 +8,7 @@ import {ApiService} from "../shared/api.service";
 import {DeleteConfirmationDialogComponent} from "../goals/delete-confirmation-dialog/delete-confirmation-dialog";
 import {DeleteTaskDialogComponent} from "./delete-task-dialog/delete-task-dialog.component";
 
+
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
@@ -25,6 +26,8 @@ export class TodoComponent implements OnInit {
   description = '';
   isLoadingResults = true;
   status = '';
+  editable= false;
+
 
   showData: boolean = false;
 
@@ -52,7 +55,6 @@ export class TodoComponent implements OnInit {
   drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log('moveIteminArray aufgerufen');
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -101,4 +103,6 @@ export class TodoComponent implements OnInit {
 
 
   }
+
+
 }
