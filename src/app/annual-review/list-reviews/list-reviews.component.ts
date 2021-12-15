@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Review } from '../../shared/review';
 import { ApiService } from 'src/app/shared/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { DeleteConfirmationDialogComponent } from 'src/app/goals/delete-confirmation-dialog/delete-confirmation-dialog';
+import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-list-reviews',
@@ -15,15 +14,25 @@ export class ListReviewsComponent implements OnInit {
   edit = false;
   enteredContent = '';
 
-  idDialog: any = '';
-  data: Review[] = [];
+  reviewForm: FormGroup = this.formBuilder.group({
+    description: this.formBuilder.control('initial value', Validators.required)
+  });
+
+  _id = '';
+  date = '';
+  description = '';
   isLoadingResults = true;
+
   review: Review = { id: '', date: '', description: ''};
-
   reviews: Review[] = [];
+  oldDescription: any;
   
-
-  constructor(private api: ApiService, private router: Router, private route: ActivatedRoute, public dialog: MatDialog ) { }
+  constructor(
+    private api: ApiService, 
+    private router: Router, 
+    private route: ActivatedRoute, 
+    private formBuilder: FormBuilder,
+    ) { }
 
   getReviewDetails(id: any) {
     this.api.getReview(id)
@@ -36,27 +45,43 @@ export class ListReviewsComponent implements OnInit {
   ngOnInit(): void {
     this.api.getReviews()
       .subscribe((res: any) => {
-        this.data = res;
+        this.reviews = res;
         this.isLoadingResults = false;
       }, err => {
         console.log(err);
         this.isLoadingResults = false;
       });
     this.getReviewDetails(this.route.snapshot.params.id);
+  //   this.getReview(this.route.snapshot.params.id);
+  // this.reviewForm = this.formBuilder.group({
+  //   'date' : [null, Validators.required],
+  //   'description' : [null, Validators.required] 
+  //  });
   }
 
-  // deleteDialog(id: any): void {
-
-  //   this.idDialog= id;
-  //   const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
-  //     width: '40%',
-  //     data :{'id': this.idDialog }
-  //   });
-
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     this.ngOnInit();
+  // getReview(id: any) {
+  //   this.api.getGoal(id).subscribe((data: any) => {
+  //     this._id = data._id;
+  //     this.oldDescription = data.description;
+  //     this.reviewForm.setValue({
+  //       description: data.description,
+  //     });
   //   });
   // }
+
+  onFormSubmit(id: any) {
+    this.isLoadingResults = true;
+    this.api.updateReview(id, this.reviewForm.value)
+    .subscribe((res: any) => {
+        const id = res._id;
+        this.isLoadingResults = false;
+        this.router.navigate(['/show-review', id]);
+      }, (err: any) => {
+        console.log(err);
+        this.isLoadingResults = false;
+      }
+    );
+  }
 
   deleteReview(id: any) {
     if (confirm('Are you sure you want to delete this item?')) {
