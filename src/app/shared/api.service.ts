@@ -5,6 +5,7 @@ import {catchError, tap, map} from 'rxjs/operators';
 import {Goals} from "./goals";
 import {Login} from "./login";
 import {Tasks} from "./tasks";
+import { Review } from './review';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -14,9 +15,9 @@ const apiUrlLogin = 'http://localhost:3000/users';
 const apiUrlOrder = 'http://localhost:3000/goals/order';
 const apiUrlTasks = 'http://localhost:3000/tasks';
 const apiUrlStatus = 'http://localhost:3000/tasks/status';
-
 const apiUrlTasksForGoal = 'http://localhost:3000/tasks/goal';
 const apiUrlUsersForGoal = 'http://localhost:3000/goals/user';
+const apiUrlReviews = 'http://localhost:3000/reviews';
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +52,6 @@ export class ApiService {
       );
   }
 
-
   getUser(id: any): Observable<Login> {
     const url = `${apiUrlLogin}/${id}`;
     return this.http.get<Login>(url).pipe(
@@ -59,7 +59,6 @@ export class ApiService {
       catchError(this.handleError<Login>(`getUser id=${id}`))
     );
   }
-
 
   // Goals
   getGoals(): Observable<Goals[]> {
@@ -167,5 +166,43 @@ export class ApiService {
     );
   }
 
+  // Reviews
+  addReview(review: Review): Observable<Review> {
+    return this.http.post<Review>(apiUrlReviews, review, httpOptions).pipe(
+      tap((review: Review) => console.log(`added review w/ id=${review.id}`)),
+      catchError(this.handleError<Review>('addReview'))
+    );
+  }
 
+  getReviews(): Observable<Review[]> {
+    return this.http.get<Review[]>(apiUrlReviews)
+      .pipe(
+        tap(review => console.log('fetched reviews')),
+        catchError(this.handleError('getReviews', []))
+      );
+  }
+
+  getReview(id: number): Observable<Review> {
+    const url = `${apiUrlReviews}/${id}`;
+    return this.http.get<Review>(url).pipe(
+      tap(_ => console.log(`fetched review id=${id}`)),
+      catchError(this.handleError<Review>(`getReview id=${id}`))
+    );
+  }
+
+  deleteReview(id: any): Observable<Review> {
+    const url = `${apiUrlReviews}/${id}`;
+    return this.http.delete<Review>(url, httpOptions).pipe(
+      tap(_ => console.log(`deleted review id=${id}`)),
+      catchError(this.handleError<Review>('deleteReview'))
+    );
+  }
+
+  updateReview(id: any, article: Review): Observable<any> {
+    const url = `${apiUrlReviews}/${id}`;
+    return this.http.patch(url, article, httpOptions).pipe(
+      tap(_ => console.log(`updated review id=${id}`)),
+      catchError(this.handleError<any>('updateReview'))
+    );
+  }
 }

@@ -23,7 +23,6 @@ export class GoalsCreateComponent implements OnInit {
   idDialog: any = '';
   editable = false;
 
-
   displayedColumns: string[] = ['description'];
   data: Goals[] = [];
   isLoadingResults = true;
@@ -37,8 +36,6 @@ export class GoalsCreateComponent implements OnInit {
  tasksToOneGoal: Tasks[] = [];
   @Output() showGoalid = new EventEmitter<string>();
 
-
-
   goal: Goals = { _id: '', description: '', order: '', userid: ''};
   user: Login = { id: '', username: '', password: '', firstname: '', surname: '', email: '', role: '', team:[]};
   dataUsers: Login[] = [];
@@ -48,12 +45,9 @@ export class GoalsCreateComponent implements OnInit {
   showGoalsToOneUser = false;
   @Input() goalsToOneUser: Goals[] = [];
 
-
   @Input() idTeam="";
 
   @Input() selectedRole: String = "Mitarbeiter_in";
-
-
 
   constructor(public dialog: MatDialog,
               private router: Router,
@@ -97,9 +91,6 @@ export class GoalsCreateComponent implements OnInit {
     if(this.idTeam =="")
     {
       this.showGoals(this.idloggedInUser);
-
-
-
     }
 
     else{
@@ -139,7 +130,6 @@ export class GoalsCreateComponent implements OnInit {
     simpleObject.description = "Click to edit";
 
     simpleObject.userid = id;
-
 
     this.api.addGoal(simpleObject)
       .subscribe((res: any) => {
@@ -246,7 +236,6 @@ export class GoalsCreateComponent implements OnInit {
 
   }
 
-
   updateAGoal(goal: Goals){
     this.isLoadingResults = true;
     goal.description = this.description;
@@ -266,15 +255,8 @@ export class GoalsCreateComponent implements OnInit {
     this.enteredValue = '';
   }
 
-
-
-
-
-
   setEditableToTrue() {
     if(this.selectedRole=='Mitarbeiter_in') {
-
-
       this.editable = true;
     }
   }
@@ -284,8 +266,7 @@ export class GoalsCreateComponent implements OnInit {
   }
 
   setTheSelectedGoal(goal: Goals) {
- this.selectedGoal=goal;
-
+    this.selectedGoal=goal;
   }
 
   setGoalsid(value: string) {
