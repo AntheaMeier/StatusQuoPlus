@@ -53,7 +53,6 @@ import { GridComponent } from './grid/grid.component';
 
 import { AnnualReviewComponent } from './annual-review/annual-review.component';
 import { ListReviewsComponent } from './annual-review/list-reviews/list-reviews.component';
-import { HomepageComponent } from './homepage/homepage.component';
 
 
 
@@ -70,7 +69,6 @@ import { HomepageComponent } from './homepage/homepage.component';
     GridComponent,
     AnnualReviewComponent,
     ListReviewsComponent,
-    HomepageComponent,
   ],
     imports: [
         AppRoutingModule,
