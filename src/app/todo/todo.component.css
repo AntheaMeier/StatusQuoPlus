@@ -1,22 +1,15 @@
 .container {
-  height: 75%;
-  min-width: 400%;
-  margin-left: -30%;
-  margin-top: 9%;
   box-shadow: none !important;
-  background-color: transparent;
+  /*background-color: transparent;*/
+  margin: 1%;
 }
 
-
 .main-card {
-  margin-top: 10%;
-  margin-left: 5%;
-  width: 100%;
+  margin: 1%;
   box-shadow: 0px 0px 8px #E8E4E1;
   font-family: "Klavika", sans-serif;
   color: #0071B9;
 }
-
 
 .inner-card {
   height: 80%;
