@@ -3,7 +3,6 @@
 }
 
 
-
 .sidenav-container {
   height: 100%;
 }
@@ -38,6 +37,7 @@
   flex: 1 1 auto;
 }
 
+
 .nav-element{
   padding: 20px;
   display: flex;
@@ -69,7 +69,8 @@
 }
 
 .title{
-  cursor:pointer
+  cursor:pointer;
+  margin-right: 5%;
 }
 
 img{

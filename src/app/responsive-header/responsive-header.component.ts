@@ -126,38 +126,41 @@ export class ResponsiveHeaderComponent {
 
   onSelectVorgesetzte_r(){
     this.selectedRole = "Vorgesetzte_r"
-    this.tasksToOneGoal= [];
+    this.tasksToOneGoal = [];
   }
 
 
-onSelectMitarbeiter_in(){
-    this.selectedRole= "Mitarbeiter_in"
-  this.tasksToOneGoal= [];
+  onSelectMitarbeiter_in(){
+      this.selectedRole = "Mitarbeiter_in"
+    this.tasksToOneGoal = [];
 
-}
-
-
-onClickVorgesetzter(){
-  this.api.getUser(this.idLoggedInUser)
-    .subscribe((res: Login) => {
-      console.log('get user '+ res.firstname);
-
-     this.teamVorgesetze =  res.team;
-
-
-
-      this.isLoadingResults = false;
-
-    }, err => {
-      console.log(err);
-      this.isLoadingResults = false;
-    });
-}
-
-
-  setGoalsid(id: string) {
-    this.goalid = id;
   }
+
+
+  onClickVorgesetzter(){
+    this.api.getUser(this.idLoggedInUser)
+      .subscribe((res: Login) => {
+        console.log('get user '+ res.firstname);
+
+       this.teamVorgesetze =  res.team;
+
+
+
+        this.isLoadingResults = false;
+
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+  }
+
+
+    setGoalsid(id: string) {
+      this.goalid = id;
+    }
+
+
+
 
 
   /// login ab hier

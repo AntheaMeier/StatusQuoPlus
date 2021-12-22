@@ -6,34 +6,24 @@
                [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menü</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#" *ngIf="this.isLogin">
-        <img class="random-user-side" src="https://randomuser.me/api/portraits/men/11.jpg" alt="random user">
-        <p class="random-user-side-text">Dein Profil ansehen</p>
+      <a mat-list-item *ngIf="this.isLogin">
+        <div class="sidenav-text" *ngIf="this.isLogin">ZIELE</div>
       </a>
-      <a class="rollen-verteilung-side" mat-list-item href="#" *ngIf="this.isLogin">
-        <mat-form-field>
-          <mat-label>Rolle</mat-label>
-          <mat-select value= "Mitarbeiter_in">
-            <mat-option value="Mitarbeiter_in" (click)="onSelectMitarbeiter_in()">Mitarbeiter_in</mat-option>
-            <mat-option (click)="onClickVorgesetzter()" value="Vorgesetzte_r" *ngIf="roleLoggedInUser == 'Vorgesetzte_r'" (click)="onSelectVorgesetzte_r()">Vorgesetzte_r</mat-option>
+      <a mat-list-item *ngIf="this.isLogin">
+        <div class="sidenav-text" mat-button>PROTOKOLLE</div>
+      </a>
+      <a mat-list-item *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">
+        <div class="sidenav-text" (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">MEIN TEAM</div>
+      </a>
 
-          </mat-select>
-        </mat-form-field>
-      </a>
-      <a mat-list-item>
-        <mat-icon>language</mat-icon>
-        <div class="sidenav-text">Sprache</div>
-      </a>
-      <a mat-list-item href="#">
-        <mat-icon>info</mat-icon>
-        <div class="sidenav-text">Info</div>
-      </a>
       <a (click)='logout()' mat-list-item *ngIf="this.isLogin">
         <mat-icon>exit_to_app</mat-icon>
         <div class="sidenav-text">Logout</div>
       </a>
     </mat-nav-list>
   </mat-sidenav>
+
+
   <mat-sidenav-content>
     <mat-toolbar color="white">
       <button
@@ -45,39 +35,19 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span class="title">adesso</span>
-      <span class="example-spacer"></span>
-      <div class="nav-element rolle-bild" *ngIf="this.isLogin">
-        <img class="random-user" src="https://randomuser.me/api/portraits/men/11.jpg" alt="random user">
-        <div class="rollen-verteilung">
-          <mat-form-field>
-            <mat-label>Rolle</mat-label>
-            <mat-select value="Mitarbeiter_in">
-              <mat-option value="Mitarbeiter_in"  (click)="onSelectMitarbeiter_in()">Mitarbeiter_in</mat-option>
-              <mat-option (click)="onClickVorgesetzter()" value="Vorgesetzte_r" *ngIf="roleLoggedInUser == 'Vorgesetzte_r'" (click)="onSelectVorgesetzte_r()">Vorgesetzte_r</mat-option>
-
-            </mat-select>
-          </mat-form-field>
-        </div>
+      <div class="nav-element">
+        <div class="element-text" *ngIf="this.isLogin">ZIELE</div>
       </div>
+      <div class="nav-element">
+        <div class="element-text" *ngIf="this.isLogin">PROTOKOLLE</div>
+      </div>
+      <div class="nav-element">
+        <div class="element-text" *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'" (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">MEIN TEAM</div>
+      </div>
+      <span class="example-spacer"></span>
       <div class="nav-element">
         <div class="element-text">
           {{firstNameloggedInUser + ' ' + lastNameloggedInUser}}
-        </div>
-      </div>
-      <div class="nav-element">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with input icon">
-          <mat-icon>language</mat-icon>
-        </button>
-        <div class="element-text">
-          Sprache
-        </div>
-      </div>
-      <div class="nav-element">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with input icon">
-          <mat-icon>info</mat-icon>
-        </button>
-        <div class="element-text">
-          Info
         </div>
       </div>
       <div (click)='logout()' class="nav-element" *ngIf="this.isLogin">
