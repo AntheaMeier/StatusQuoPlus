@@ -41,7 +41,6 @@ export class TodoComponent implements OnInit {
   }
 
   fillArrays() {
-    console.log('aufruf');
     for(let task of this.tasksToOneGoal) {
       if (task.status == "doing") {
         let index = this.tasksToOneGoal.indexOf(task);
