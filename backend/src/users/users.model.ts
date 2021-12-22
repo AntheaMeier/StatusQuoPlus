@@ -1,5 +1,15 @@
 import * as mongoose from 'mongoose';
 
+const TeamSchema = new mongoose.Schema({
+
+  userid: {type: String, required:true},
+  firstname: {type: String},
+  surname: {type: String},
+
+
+} ,{ _id : false });
+
+
 export const UsersSchema = new mongoose.Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
@@ -9,6 +19,7 @@ export const UsersSchema = new mongoose.Schema({
 
   email: {type: String, required: true},
   role: {type: String, required: true},
+  team: {type: [TeamSchema]},
 });
 
 export interface Users extends mongoose.Document {
@@ -22,5 +33,16 @@ export interface Users extends mongoose.Document {
 
   email: string;
   role: string;
+  team: Team;
+
+}
+
+
+export interface Team extends mongoose.Document {
+  userid: string;
+
+  firstname: string;
+  surname: string;
+
 
 }

@@ -4,6 +4,7 @@ import {GoalsCreateComponent} from "../goals-create/goals-create.component";
 import { Router } from '@angular/router';
 import { ApiService } from '../../shared/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Tasks} from "../../shared/tasks";
 
 /** Error when invalid control is dirty, touched, or submitted. */
 
@@ -24,6 +25,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
   id = '';
   isLoadingResults = false;
+  isLoadingResultsTasksToGoal = false;
+  tasksToOneGoal : Tasks[] = [];
 
 
   constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<GoalsCreateComponent>,
@@ -49,17 +52,58 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     });
   }
 
+
+
+
   deleteGoal(id: any) {
+
+
+
     this.isLoadingResults = true;
     this.api.deleteGoal(id)
       .subscribe(res => {
           this.isLoadingResults = false;
-          this.router.navigate(['/articles']);
         }, (err) => {
           console.log(err);
           this.isLoadingResults = false;
         }
       );
+
+
+    this.api.getTasksToGoal(id)
+      .subscribe((res: any) => {
+        this.tasksToOneGoal = res;
+        console.log('das ist res ' + res[0]._id)
+        let taskId =  ''
+        for(let i = 0 ; i < res.length; i++){
+         
+          taskId = res[i]._id;
+          this.api.deleteTask(taskId)
+            .subscribe(res => {
+                this.isLoadingResults = false;
+              }, (err) => {
+                console.log(err);
+                this.isLoadingResults = false;
+              }
+            );
+
+
+
+        }
+
+        this.isLoadingResultsTasksToGoal = false;
+
+
+
+      }, err => {
+        console.log(err);
+        this.isLoadingResultsTasksToGoal = false;
+      });
+
+
+
+
+
   }
 
   onFormSubmit() {

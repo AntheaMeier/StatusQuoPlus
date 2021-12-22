@@ -11,16 +11,18 @@ import {
 
 @Controller('goals')
 export class GoalsController {
-  constructor(private readonly goalsService: GoalsService) {}
+  constructor(private goalsService: GoalsService) {}
 
   @Post()
   async addGoals(
     @Body('description') goalDesc: string,
     @Body('order') goalOrder: string,
+    @Body('userid') goalUserid: string,
   ) {
     const generatedId = await this.goalsService.insertGoals(
       goalDesc,
       goalOrder,
+      goalUserid,
     );
     return { id: generatedId };
   }
@@ -40,8 +42,9 @@ export class GoalsController {
   async updateGoal(
     @Param('id') goalId: string,
     @Body('description') goalDesc: string,
+    @Body('userid') goalUserid: string,
   ) {
-    await this.goalsService.updateGoal(goalId, goalDesc);
+    await this.goalsService.updateGoal(goalId, goalDesc, goalUserid);
     return null;
   }
 
@@ -58,5 +61,14 @@ export class GoalsController {
   async removeGoal(@Param('id') goalId: string) {
     await this.goalsService.deleteGoal(goalId);
     return null;
+  }
+
+  @Get('user/:userid')
+  async getAllGoalsToUser(
+    @Param('userid') userid: string,
+
+  ){
+    const goals = await this.goalsService.getGoalsToUser(userid);
+    return goals;
   }
 }

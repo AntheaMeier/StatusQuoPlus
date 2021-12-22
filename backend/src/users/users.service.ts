@@ -1,7 +1,7 @@
 import {Injectable, NotFoundException} from '@nestjs/common';
 import {InjectModel} from "@nestjs/mongoose";
 import {Model} from 'mongoose';
-import {Users} from "./users.model";
+import {Team, Users} from "./users.model";
 
 @Injectable()
 export class UsersService {
@@ -36,18 +36,21 @@ export class UsersService {
       firstname: users.firstname,
       surname: users.surname,
       email: users.email,
-      role: users.role
+      role: users.role,
+      team: users.team,
     };
   }
 
-  async insertUsers(username: string, password: string, firstname: string, surname: string, email: string, role: string) {
+  async insertUsers(username: string, password: string, firstname: string, surname: string, email: string, role: string, team: Team) {
     const newUser = new this.usersModel({
       username: username,
       password: password,
       firstname: firstname,
       surname: surname,
       email: email,
-      role: role
+      role: role,
+      team: team,
+
     });
     const result = await newUser.save();
     return result.id;
@@ -65,7 +68,8 @@ export class UsersService {
     firstname: string,
     surname: string,
     email: string,
-    role: string
+    role: string,
+    team: Team,
   ) {
     const updatedUsers = await this.findUser(userId);
     if (username) {
@@ -86,6 +90,10 @@ export class UsersService {
     if (role) {
       updatedUsers.role = role;
     }
+
+    if (team) {
+      updatedUsers.team = team;
+    }
     await updatedUsers.save();
   }
 
@@ -93,4 +101,6 @@ export class UsersService {
     const result = await this.usersModel.deleteOne({_id: usersId}).exec();
     console.log(result);
   }
+
+
 }

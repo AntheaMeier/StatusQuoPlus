@@ -1,40 +1,31 @@
-<mat-card class="style">ZIELE
+<mat-card class="style">ZIELE <mat-icon  *ngIf="selectedRole == 'Mitarbeiter_in'" (click)="onAddPost(idloggedInUser)">add</mat-icon>
   <mat-card class="style2">
-  <mat-card-content>
+    <mat-card-content>
 
 
+      <div     cdkDropList
+               #todoList="cdkDropList"
+               [cdkDropListData]="goalsToOneUser"
+               class="example-list"
+               (cdkDropListDropped)="drop($event)">
+        <mat-card (click)= "setGoalsid(goal._id)" [ngStyle]="{'background-color':goal === selectedGoal ? 'lightblue' : 'white' }" class="style3 example-box" *ngFor="let goal of goalsToOneUser" cdkDrag (click)="setTheSelectedGoal(goal)"  (click)="showTasks(goal._id)">
+          <mat-icon (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
+          <div class="goal-description" *ngIf="!editable" (click)="setEditableToTrue()">
+            {{ goal.description }}
+          </div>
 
-    <div     cdkDropList
-             #todoList="cdkDropList"
-             [cdkDropListData]="data"
-             class="example-list"
-             (cdkDropListDropped)="drop($event)">
-      <mat-card class="style3 example-box" *ngFor="let goal of data" cdkDrag>
-        {{ goal.description }}
-        <button [disableRipple]="true" class="style4" *ngIf="true" matSuffix mat-icon-button aria-label="Delete" (click)="deleteDialog(goal.id)">
-          <mat-icon class="style5"  (click)="deleteDialog(goal.id)">delete</mat-icon>
-        </button>
-        <button [disableRipple]="true" class="style4" *ngIf="true" matSuffix mat-icon-button aria-label="Edit" (click) = "openDialog(goal.id)">
-          <mat-icon class="style5">edit</mat-icon>
-        </button>
+          <textarea name="desc" (keyup)="getTheInput($event)"    aria-label="Edit" (keyup.enter) = "updateAGoal(goal)" [value]="goal.description" *ngIf="editable">
 
-
-<!--   Progress bar: value = anz abgehakte todos jedes Ziels -->
-        <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+            </textarea>
+          <!--   Progress bar: value = anz abgehakte todos jedes Ziels -->
+          <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
 
 
-      </mat-card>
-    </div>
+        </mat-card>
+      </div>
 
-  </mat-card-content>
-  </mat-card>
-  <div class="div-styling">
-    <mat-form-field class="example-form-field" appearance="fill">
-      <mat-label>I want to achieve</mat-label>
-      <input matInput type="text" [(ngModel)]="enteredValue" (keyup.enter)="onAddPost()" (keyup.enter)="sendMessage()">
-      <button *ngIf="true" matSuffix mat-icon-button aria-label="Send" (click)="onAddPost()" (click)="sendMessage()">
-        <mat-icon>send</mat-icon>
-      </button>
-    </mat-form-field>
-  </div>
+
+    </mat-card-content>
+  </mat-card >
+
 </mat-card>

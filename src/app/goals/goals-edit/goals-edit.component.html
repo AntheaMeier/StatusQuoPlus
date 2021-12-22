@@ -12,9 +12,9 @@
   </form>
 </div>
 <div mat-dialog-actions>
-  <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
+  <form [formGroup]="articleForm">
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button (click)="onFormSubmit()" type="submit" [disabled]="!articleForm.valid" mat-flat-button color="primary">
+  <button (keyup.enter)="onFormSubmit()" (click)="onFormSubmit()" type="submit" [disabled]="!articleForm.valid" mat-flat-button color="primary">
     <mat-icon>save</mat-icon>
   </button>
   </form>

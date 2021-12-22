@@ -1,3 +1,8 @@
+.body{
+  display: block;
+}
+
+
 .sidenav-container {
   height: 100%;
 }
@@ -32,6 +37,7 @@
   flex: 1 1 auto;
 }
 
+
 .nav-element{
   padding: 20px;
   display: flex;
@@ -63,7 +69,8 @@
 }
 
 .title{
-  cursor:pointer
+  cursor:pointer;
+  margin-right: 5%;
 }
 
 img{
@@ -89,5 +96,16 @@ img{
 
 .form-group{
   margin-bottom: 20px;
+}
+
+.content-components{
+  display:flex;
+  width: 100%;
+  height: 100%;
+}
+
+.one-component{
+  float: left;
+  margin-right: 20px;
 }
 

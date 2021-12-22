@@ -6,33 +6,24 @@
                [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menü</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#" *ngIf="this.isLogin"><img class="random-user-side"
-                                                          src="https://randomuser.me/api/portraits/men/11.jpg"
-                                                          alt="random user">
-        <p class="random-user-side-text">Dein Profil ansehen</p></a>
-      <a class="rollen-verteilung-side" mat-list-item href="#" *ngIf="this.isLogin">
-        <mat-form-field>
-          <mat-label>Rolle</mat-label>
-          <mat-select [(value)]= "roleLoggedInUser">
-            <mat-option value="Mitarbeiter_in">Mitarbeiter_in</mat-option>
-            <mat-option value="Vorgesetzte_r">Vorgesetzte_r</mat-option>
-          </mat-select>
-        </mat-form-field>
+      <a mat-list-item *ngIf="this.isLogin">
+        <div class="sidenav-text" *ngIf="this.isLogin">ZIELE</div>
       </a>
-      <a mat-list-item>
-        <mat-icon>language</mat-icon>
-        <div class="sidenav-text">Sprache</div>
+      <a mat-list-item *ngIf="this.isLogin">
+        <div class="sidenav-text" mat-button>PROTOKOLLE</div>
       </a>
-      <a mat-list-item href="#">
-        <mat-icon>info</mat-icon>
-        <div class="sidenav-text">Info</div>
+      <a mat-list-item *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">
+        <div class="sidenav-text" (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">MEIN TEAM</div>
       </a>
+
       <a (click)='logout()' mat-list-item *ngIf="this.isLogin">
         <mat-icon>exit_to_app</mat-icon>
         <div class="sidenav-text">Logout</div>
       </a>
     </mat-nav-list>
   </mat-sidenav>
+
+
   <mat-sidenav-content>
     <mat-toolbar color="white">
       <button
@@ -44,38 +35,19 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span class="title">adesso</span>
-      <span class="example-spacer"></span>
-      <div class="nav-element rolle-bild" *ngIf="this.isLogin">
-        <img class="random-user" src="https://randomuser.me/api/portraits/men/11.jpg" alt="random user">
-        <div class="rollen-verteilung">
-          <mat-form-field>
-            <mat-label>Rolle</mat-label>
-            <mat-select [(value)]= "roleLoggedInUser">
-              <mat-option value="Mitarbeiter_in">Mitarbeiter_in</mat-option>
-              <mat-option value="Vorgesetzte_r">Vorgesetzte_r</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
+      <div class="nav-element">
+        <div class="element-text" *ngIf="this.isLogin">ZIELE</div>
       </div>
+      <div class="nav-element">
+        <div class="element-text" *ngIf="this.isLogin">PROTOKOLLE</div>
+      </div>
+      <div class="nav-element">
+        <div class="element-text" *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'" (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">MEIN TEAM</div>
+      </div>
+      <span class="example-spacer"></span>
       <div class="nav-element">
         <div class="element-text">
           {{firstNameloggedInUser + ' ' + lastNameloggedInUser}}
-        </div>
-      </div>
-      <div class="nav-element">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with input icon">
-          <mat-icon>language</mat-icon>
-        </button>
-        <div class="element-text">
-          Sprache
-        </div>
-      </div>
-      <div class="nav-element">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with input icon">
-          <mat-icon>info</mat-icon>
-        </button>
-        <div class="element-text">
-          Info
         </div>
       </div>
       <div (click)='logout()' class="nav-element" *ngIf="this.isLogin">
@@ -94,16 +66,19 @@
         <mat-error *ngIf="loginInvalid">
           The username and password were not recognized
         </mat-error>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
-          <div class = 'form-group'>
-            <input (keypress)="removeErrorMessage()" (keydown.backspace)="removeErrorMessage()" class = 'form-control' type = "text" formControlName="username" name = "username" placeholder = "Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class='form-group'>
+            <input (keypress)="removeErrorMessage()" (keydown.backspace)="removeErrorMessage()" class='form-control'
+                   type="text" formControlName="username" name="username" placeholder="Username"
+                   [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
               <div *ngIf="f.username.errors">Username is required</div>
             </div>
           </div>
-          <div class = 'form-group'>
-            <input (keypress)="removeErrorMessage()"  (keydown.backspace)="removeErrorMessage()"class = 'form-control' type = "password" formControlName="password" name = "password" placeholder = "Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-
+          <div class='form-group'>
+            <input (keypress)="removeErrorMessage()" (keydown.backspace)="removeErrorMessage()" class='form-control'
+                   type="password" formControlName="password" name="password" placeholder="Password"
+                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
               <div *ngIf="f.password.errors">Password is required</div>
             </div>
@@ -112,6 +87,46 @@
         </form>
       </div>
     </div>
-    <app-goals *ngIf="this.isLogin"></app-goals>
+    <div class="content-components" *ngIf="selectedRole == 'Mitarbeiter_in'">
+      <div class="one-component">
+        <app-goals *ngIf="this.isLogin" (showTasksClicked)="tasksToOneGoal = $event"  (showGoalid)="setGoalsid($event)"></app-goals>
+      </div>
+      <div class="one-component">
+
+      <app-todo *ngIf="this.isLogin" [tasksToOneGoal]="tasksToOneGoal" [goalid]="goalid"></app-todo>
+        </div>
+    </div>
+    <div class="content-components" *ngIf="selectedRole == 'Vorgesetzte_r'">
+     <mat-card>
+       <mat-card-content>
+      <mat-card  *ngFor="let member of teamVorgesetze" (click)="loadGoals(member.userid)">
+
+      {{member.firstname}}
+      {{member.surname}}
+
+      <!-- <div *ngFor="let member in teamVorgesetze">
+         <p>{{member.firstname}}</p>
+         <p>{{member.surname}}</p>
+
+       </div>-->
+      </mat-card>
+       </mat-card-content>
+     </mat-card>
+
+      <div *ngIf="clickedOnMitarbeiter">
+
+        <div class="one-component">
+
+
+        <app-goals [selectedRole]="selectedRole" (showTasksClicked)="tasksToOneGoal = $event"  (showGoalid)="setGoalsid($event)" [idTeam]="idTeamMember"  [goalsToOneUser]="goalsToOneUser" ></app-goals>
+        </div>
+
+        <div class="one-component">
+        <app-todo  [selectedRole]="selectedRole" [tasksToOneGoal]="tasksToOneGoal" [goalid]="goalid"></app-todo>
+        </div>
+      </div>
+
+    </div>
+      <app-annual-review *ngIf="this.isLogin"></app-annual-review>
   </mat-sidenav-content>
 </mat-sidenav-container>

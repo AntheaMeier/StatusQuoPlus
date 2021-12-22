@@ -1,7 +1,8 @@
+
+
+
 .style {
-  max-width: 40%;
   height: 80%;
-  margin-left: 40%;
   margin-top: 1%;
   box-shadow: 0px 0px 8px #E8E4E1;
   font-family: "Klavika", sans-serif;
@@ -16,12 +17,6 @@
   overflow: hidden;
 }
 
-.mat-card-content {
-  height: 100%;
-  position: center;
-  overflow: auto;
-}
-
 .style3 {
   height: 15%;
   background-color: white;
@@ -32,10 +27,63 @@
 }
 
 .style4 {
-  float: right;
+  max-width: 150px;
+  max-height: 80px;
+  margin: 20px;
+
 }
 
 .style5 {
+  margin-bottom: 150%;
+}
+
+
+
+
+
+
+.main-card {
+  height: 80%;
+  max-width: 60%;
+  margin-left: 5%;
+  margin-top: 1%;
+  box-shadow: 0px 0px 8px #E8E4E1;
+  font-family: "Klavika", sans-serif;
+  color: #0071B9;
+}
+
+.inner-card {
+  height: 80%;
+  background-color: #E8E4E1;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.mat-card-content {
+  height: 100%;
+  position: center;
+  overflow: auto;
+}
+
+.small-card {
+  height: 15%;
+  background-color: white;
+  color: #857971;
+  margin: 0 auto;
+  margin-right: 10%;
+  margin-bottom: 5px;
+}
+
+.button-styling {
+  float: right;
+  max-width: 150px;
+  max-height: 80px;
+  margin: 20px;
+
+}
+
+.icon-styling {
   margin-bottom: 150%;
 }
 
@@ -81,3 +129,48 @@ input {
   border-radius: 4px;
 }
 
+
+.button-at {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #46a4d9;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 15px;
+  padding: 10px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button-at span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button-at span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button-at:hover span {
+  padding-right: 25px;
+}
+
+.button-at:hover span:after {
+  opacity: 1;
+  right: 0;
+
+}
+
+.goals-description{
+  display: block;
+}

@@ -40,12 +40,20 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from "./app-routing.module";
-import { HttpClientModule } from '@angular/common/http';
-import { GoalsEditComponent } from './goals/goals-edit/goals-edit.component';
+import {HttpClientModule} from '@angular/common/http';
+import {GoalsEditComponent} from './goals/goals-edit/goals-edit.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
-import { LoginComponent } from './login/login.component';
+import {LoginComponent} from './login/login.component';
 import {AuthGuardService} from "./auth-guard.service";
 import { DeleteConfirmationDialogComponent } from './goals/delete-confirmation-dialog/delete-confirmation-dialog';
+
+import { TodoComponent } from './todo/todo.component';
+import { DeleteTaskDialogComponent} from "./todo/delete-task-dialog/delete-task-dialog.component";
+import { GridComponent } from './grid/grid.component';
+
+import { AnnualReviewComponent } from './annual-review/annual-review.component';
+import { ListReviewsComponent } from './annual-review/list-reviews/list-reviews.component';
+
 
 
 @NgModule({
@@ -56,6 +64,11 @@ import { DeleteConfirmationDialogComponent } from './goals/delete-confirmation-d
     GoalsEditComponent,
     LoginComponent,
     DeleteConfirmationDialogComponent,
+    TodoComponent,
+    DeleteTaskDialogComponent,
+    GridComponent,
+    AnnualReviewComponent,
+    ListReviewsComponent,
   ],
     imports: [
         AppRoutingModule,
