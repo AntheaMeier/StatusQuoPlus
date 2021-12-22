@@ -15,6 +15,7 @@
   float: left;
   display: inline;
 }
+/*
 
 .mat-card-content {
   height: 100%;
@@ -38,6 +39,7 @@
   background-color: #E8E4E1;
   border-radius: 4px;
 }
+*/
 
 ::ng-deep .mat-focused .mat-form-field-label {
   /*change color of label*/

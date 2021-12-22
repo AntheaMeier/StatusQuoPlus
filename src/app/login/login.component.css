@@ -1,0 +1,25 @@
+.style {
+  font-family: "Klavika", sans-serif;
+  color: #0071B9;
+}
+
+.form-group {
+  margin-bottom: 1%;
+}
+
+.style2 {
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.headline {
+  text-align: center;
+  padding-top: 1%;
+}
+
+.buttonLogin {
+  margin-top: 1%;
+  background-color: #0071B9;
+  color: white;
+  border-color: #0071B9;
+}

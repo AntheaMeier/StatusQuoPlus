@@ -13,9 +13,11 @@
       <a class="rollen-verteilung-side" mat-list-item href="#" *ngIf="this.isLogin">
         <mat-form-field>
           <mat-label>Rolle</mat-label>
-          <mat-select value= "Mitarbeiter_in">
+          <mat-select value="Mitarbeiter_in">
             <mat-option value="Mitarbeiter_in" (click)="onSelectMitarbeiter_in()">Mitarbeiter_in</mat-option>
-            <mat-option (click)="onClickVorgesetzter()" value="Vorgesetzte_r" *ngIf="roleLoggedInUser == 'Vorgesetzte_r'" (click)="onSelectVorgesetzte_r()">Vorgesetzte_r</mat-option>
+            <mat-option (click)="onClickVorgesetzter()" value="Vorgesetzte_r"
+                        *ngIf="roleLoggedInUser == 'Vorgesetzte_r'" (click)="onSelectVorgesetzte_r()">Vorgesetzte_r
+            </mat-option>
 
           </mat-select>
         </mat-form-field>
@@ -34,60 +36,96 @@
       </a>
     </mat-nav-list>
   </mat-sidenav>
-    <mat-toolbar color="white">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span class="title">adesso</span>
-      <span class="example-spacer"></span>
-      <div class="nav-element rolle-bild" *ngIf="this.isLogin">
-        <img class="random-user" src="https://randomuser.me/api/portraits/men/11.jpg" alt="random user">
-        <div class="rollen-verteilung">
-          <mat-form-field>
-            <mat-label>Rolle</mat-label>
-            <mat-select value="Mitarbeiter_in">
-              <mat-option value="Mitarbeiter_in"  (click)="onSelectMitarbeiter_in()">Mitarbeiter_in</mat-option>
-              <mat-option (click)="onClickVorgesetzter()" value="Vorgesetzte_r" *ngIf="roleLoggedInUser == 'Vorgesetzte_r'" (click)="onSelectVorgesetzte_r()">Vorgesetzte_r</mat-option>
+  <mat-toolbar color="white">
+    <button
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      (click)="drawer.toggle()"
+      *ngIf="isHandset$ | async">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <span class="title">adesso</span>
+    <span class="example-spacer"></span>
+    <div class="nav-element rolle-bild" *ngIf="this.isLogin">
+      <img class="random-user" src="https://randomuser.me/api/portraits/men/11.jpg" alt="random user">
+      <div class="rollen-verteilung">
+        <mat-form-field>
+          <mat-label>Rolle</mat-label>
+          <mat-select value="Mitarbeiter_in">
+            <mat-option value="Mitarbeiter_in" (click)="onSelectMitarbeiter_in()">Mitarbeiter_in</mat-option>
+            <mat-option (click)="onClickVorgesetzter()" value="Vorgesetzte_r"
+                        *ngIf="roleLoggedInUser == 'Vorgesetzte_r'" (click)="onSelectVorgesetzte_r()">Vorgesetzte_r
+            </mat-option>
 
-            </mat-select>
-          </mat-form-field>
-        </div>
+          </mat-select>
+        </mat-form-field>
       </div>
-      <div class="nav-element">
-        <div class="element-text">
-          {{firstNameloggedInUser + ' ' + lastNameloggedInUser}}
-        </div>
+    </div>
+    <div class="nav-element">
+      <div class="element-text">
+        {{firstNameloggedInUser + ' ' + lastNameloggedInUser}}
       </div>
-      <div class="nav-element">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with input icon">
-          <mat-icon>language</mat-icon>
-        </button>
-        <div class="element-text">
-          Sprache
-        </div>
+    </div>
+    <div class="nav-element">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with input icon">
+        <mat-icon>language</mat-icon>
+      </button>
+      <div class="element-text">
+        Sprache
       </div>
-      <div class="nav-element">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with input icon">
-          <mat-icon>info</mat-icon>
-        </button>
-        <div class="element-text">
-          Info
-        </div>
+    </div>
+    <div class="nav-element">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with input icon">
+        <mat-icon>info</mat-icon>
+      </button>
+      <div class="element-text">
+        Info
       </div>
-      <div (click)='logout()' class="nav-element" *ngIf="this.isLogin">
-        <button mat-icon-button class="example-icon"
-                aria-label="Example icon-button with input icon">
-          <mat-icon>exit_to_app</mat-icon>
-        </button>
-        <div class="element-text">
-          Logout
-        </div>
+    </div>
+    <div (click)='logout()' class="nav-element" *ngIf="this.isLogin">
+      <button mat-icon-button class="example-icon"
+              aria-label="Example icon-button with input icon">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+      <div class="element-text">
+        Logout
       </div>
-    </mat-toolbar>
-  <app-homepage></app-homepage>
+    </div>
+  </mat-toolbar>
+  <div class="content-components" *ngIf="selectedRole == 'Mitarbeiter_in'">
+    <div class="one-component">
+      <app-goals *ngIf="this.isLogin" (showTasksClicked)="tasksToOneGoal = $event"
+                 (showGoalid)="setGoalsid($event)"></app-goals>
+    </div>
+    <div class="one-component">
+      <app-todo *ngIf="this.isLogin" [tasksToOneGoal]="tasksToOneGoal" [goalid]="goalid"></app-todo>
+    </div>
+    <div class="one-component">
+      <app-annual-review *ngIf="this.isLogin"></app-annual-review>
+    </div>
+  </div>
+  <div class="content-components" *ngIf="selectedRole == 'Vorgesetzte_r'">
+    <mat-card>
+      <mat-card-content>
+        <mat-card *ngFor="let member of teamVorgesetze" (click)="loadGoals(member.userid)">
+          {{member.firstname}}
+          {{member.surname}}
+        </mat-card>
+      </mat-card-content>
+    </mat-card>
+    <div *ngIf="clickedOnMitarbeiter">
+      <div class="one-component">
+        <app-goals [selectedRole]="selectedRole" (showTasksClicked)="tasksToOneGoal = $event"
+                   (showGoalid)="setGoalsid($event)" [idTeam]="idTeamMember"
+                   [goalsToOneUser]="goalsToOneUser"></app-goals>
+      </div>
+      <div class="one-component">
+        <app-todo [selectedRole]="selectedRole" [tasksToOneGoal]="tasksToOneGoal" [goalid]="goalid"></app-todo>
+      </div>
+      <div class="one-component">
+        <app-annual-review></app-annual-review>
+      </div>
+    </div>
+  </div>
 </mat-sidenav-container>

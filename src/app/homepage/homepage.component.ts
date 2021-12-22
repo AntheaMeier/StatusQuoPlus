@@ -15,32 +15,4 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  isLogin = false;
-  tasksToOneGoal : Tasks[] = [];
-  selectedRole: String = "Mitarbeiter_in";
-  teamVorgesetze: Team[] = [];
-  goalid : string = "";
-  clickedOnMitarbeiter = false;
-  idTeamMember = "";
-  goalsToOneUser: Goals[] = [];
-  isLoadingResults = true;
-
-  loadGoals(userid:any) {
-    this.tasksToOneGoal= [];
-    this.clickedOnMitarbeiter = true;
-    this.api.getGoalsToUser(userid)
-      .subscribe((res: any) => {
-        this.goalsToOneUser = res;
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-    this.idTeamMember= userid;
-  }
-
-  setGoalsid(id: string) {
-    this.goalid = id;
-  }
 }
