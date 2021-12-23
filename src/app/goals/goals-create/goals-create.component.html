@@ -17,7 +17,6 @@
           <textarea name="desc" (keyup)="getTheInput($event)"    aria-label="Edit" (keyup.enter) = "updateAGoal(goal)" [value]="goal.description" *ngIf="editable">
 
             </textarea>
-          <!--   Progress bar: value = anz abgehakte todos jedes Ziels -->
           <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
 
 

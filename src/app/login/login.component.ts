@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   data: Login[] = [];
   isLoadingResults = true;
+  loginInvalid = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -55,6 +56,7 @@ export class LoginComponent implements OnInit {
           this.auth.setDataInLocalStorage('userData', JSON.stringify(res));
           this.auth.setDataInLocalStorage('token', res.access_token);
           this.router.navigate([''])
+          window.location.reload();
         });
       }
     }
@@ -69,5 +71,9 @@ export class LoginComponent implements OnInit {
   logout(): void{
     this.auth.clearStorage();
     this.router.navigate(['/login']);
+  }
+
+  removeErrorMessage(): void{
+    this.loginInvalid=false;
   }
 }
