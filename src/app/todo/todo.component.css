@@ -1,19 +1,12 @@
-.container {
-  box-shadow: none !important;
-  /*background-color: transparent;*/
-  margin: 1%;
-}
-
 .main-card {
   margin: 1%;
-  box-shadow: 0px 0px 8px #E8E4E1;
+  box-shadow: 0 0 8px #E8E4E1;
   font-family: "Klavika", sans-serif;
   color: #0071B9;
 }
 
 .inner-card {
   height: 80%;
-  margin: 0 auto;
   position: relative;
   overflow: hidden;
   border: none !important;
@@ -27,12 +20,8 @@
 }
 
 .small-card {
-  height: 15%;
   background-color: #E8E4E1;
   color: #857971;
-  margin: 0 auto;
-  margin-right: 10%;
-  margin-bottom: 5px;
 }
 
 .button-styling {

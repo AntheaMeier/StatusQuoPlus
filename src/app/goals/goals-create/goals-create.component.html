@@ -1,26 +1,30 @@
-<mat-card class="style">ZIELE
-  <mat-icon *ngIf="selectedRole == 'Mitarbeiter_in'" (click)="onAddPost(idloggedInUser)">add</mat-icon>
+<mat-card class="style">ZIELE <mat-icon  *ngIf="selectedRole == 'Mitarbeiter_in'" (click)="onAddPost(idloggedInUser)">add</mat-icon>
   <mat-card class="style2">
     <mat-card-content>
-      <div cdkDropList
-           #todoList="cdkDropList"
-           [cdkDropListData]="data"
-           class="example-list"
-           (cdkDropListDropped)="drop($event)">
-        <mat-card (click)="setGoalsid(goal._id)"
-                  [ngStyle]="{'background-color':goal === selectedGoal ? 'lightblue' : 'white' }"
-                  class="style3 example-box" *ngFor="let goal of goalsToOneUser" cdkDrag
-                  (click)="setTheSelectedGoal(goal)" (click)="showTasks(goal._id)">
+
+
+      <div     cdkDropList
+               #todoList="cdkDropList"
+               [cdkDropListData]="goalsToOneUser"
+               class="example-list"
+               (cdkDropListDropped)="drop($event)">
+        <mat-card (click)= "setGoalsid(goal._id)" [ngStyle]="{'background-color':goal === selectedGoal ? 'lightblue' : 'white' }" class="style3 example-box" *ngFor="let goal of goalsToOneUser" cdkDrag (click)="setTheSelectedGoal(goal)"  (click)="showTasks(goal._id)">
           <mat-icon (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
           <div class="goal-description" *ngIf="!editable" (click)="setEditableToTrue()">
             {{ goal.description }}
           </div>
-          <textarea name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup.enter)="updateAGoal(goal)"
-                    [value]="goal.description" *ngIf="editable">
+
+          <textarea name="desc" (keyup)="getTheInput($event)"    aria-label="Edit" (keyup.enter) = "updateAGoal(goal)" [value]="goal.description" *ngIf="editable">
+
             </textarea>
           <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+
+
         </mat-card>
       </div>
+
+
     </mat-card-content>
-  </mat-card>
+  </mat-card >
+
 </mat-card>

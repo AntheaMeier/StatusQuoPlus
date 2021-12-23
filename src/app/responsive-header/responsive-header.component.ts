@@ -27,20 +27,23 @@ export class ResponsiveHeaderComponent {
   roleLoggedInUser: String= "";
   selectedRole: String = "Mitarbeiter_in";
   idLoggedInUser: String = "";
-  teamVorgesetze: Team[] = [];
+ teamVorgesetze: Team[] = [];
   loginInvalid = false;
   userFound = false;
   goalid : string = "";
-  idTeamMember = "";
-  tasksToOneGoal : Tasks[] = [];
   clickedOnMitarbeiter = false;
-  goalsToOneUser: Goals[] = [];
+  idTeamMember = "";
+
+
+  tasksToOneGoal : Tasks[] = [];
+
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
+   goalsToOneUser: Goals[] = [];
 
   constructor(private breakpointObserver: BreakpointObserver,
               private auth: AuthService,
@@ -73,9 +76,17 @@ export class ResponsiveHeaderComponent {
       });
     this.firstNameloggedInUser = this.auth.getUserDetails().user_info.firstname;
     this.lastNameloggedInUser = this.auth.getUserDetails().user_info.surname;
+
+
+
     this.roleLoggedInUser = this.auth.getUserDetails().user_info.role;
     this.idLoggedInUser = this.auth.getUserDetails().user_info._id;
+
+
+
+
     this.roleLoggedInUser = this.auth.getUserDetails().user_info.role;
+
   }
 
   get f(): any { return this.loginForm.controls; }
@@ -108,14 +119,21 @@ export class ResponsiveHeaderComponent {
     window.location.reload()
   }
 
-  onSelectVorgesetzte_r(){
-    this.selectedRole = "Vorgesetzte_r"
-    this.tasksToOneGoal= [];
+  removeErrorMessage(): void{
+    this.loginInvalid=false;
   }
 
+
+  onSelectVorgesetzte_r(){
+    this.selectedRole = "Vorgesetzte_r"
+    this.tasksToOneGoal = [];
+  }
+
+
   onSelectMitarbeiter_in(){
-    this.selectedRole= "Mitarbeiter_in"
-    this.tasksToOneGoal= [];
+      this.selectedRole = "Mitarbeiter_in"
+    this.tasksToOneGoal = [];
+
   }
 
 
@@ -123,17 +141,37 @@ export class ResponsiveHeaderComponent {
     this.api.getUser(this.idLoggedInUser)
       .subscribe((res: Login) => {
         console.log('get user '+ res.firstname);
-        this.teamVorgesetze =  res.team;
+
+       this.teamVorgesetze =  res.team;
+
+
+
         this.isLoadingResults = false;
-        }, err => {
+
+      }, err => {
         console.log(err);
         this.isLoadingResults = false;
       });
   }
 
-  loadGoals(userid: any) {
-    this.tasksToOneGoal = [];
+
+    setGoalsid(id: string) {
+      this.goalid = id;
+    }
+
+
+
+
+
+  /// login ab hier
+
+
+  loadGoals(userid:any) {
+    this.tasksToOneGoal= [];
+
+
     this.clickedOnMitarbeiter = true;
+
     this.api.getGoalsToUser(userid)
       .subscribe((res: any) => {
         this.goalsToOneUser = res;
@@ -142,10 +180,10 @@ export class ResponsiveHeaderComponent {
         console.log(err);
         this.isLoadingResults = false;
       });
-    this.idTeamMember = userid;
+
+    this.idTeamMember= userid;
+
+
   }
 
-  setGoalsid(id: string) {
-    this.goalid = id;
-  }
 }

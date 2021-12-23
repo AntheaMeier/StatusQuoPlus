@@ -33,7 +33,7 @@ export class GoalsCreateComponent implements OnInit {
   description = '';
   id = '';
   dataTasks: Tasks[] = [];
- tasksToOneGoal: Tasks[] = [];
+  tasksToOneGoal: Tasks[] = [];
   @Output() showGoalid = new EventEmitter<string>();
 
   goal: Goals = { _id: '', description: '', order: '', userid: ''};
@@ -57,27 +57,6 @@ export class GoalsCreateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.api.getGoalsToUser(this.idloggedInUser)
-      .subscribe((res: any) => {
-        this.data = res;
-        this.isLoadingResults = false;
-        this.data.sort((goal1, goal2) => {
-          return Number(goal1.order) - Number(goal2.order);
-        });
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-
-    this.api.getTasks()
-      .subscribe((res: any) => {
-        this.dataTasks = res;
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-
     this.api.getUsers()
       .subscribe((res: any) => {
         this.dataUsers = res;
@@ -96,21 +75,47 @@ export class GoalsCreateComponent implements OnInit {
     else{
       this.showGoals(this.idTeam)
     }
+
+    console.log('ID die wir brauchen: '+this.idloggedInUser)
+    this.api.getGoalsToUser(this.idloggedInUser)
+      .subscribe((res: any) => {
+        this.goalsToOneUser = res;
+        this.isLoadingResults = false;
+        this.goalsToOneUser.sort((goal1, goal2) => {
+          return Number(goal1.order) - Number(goal2.order);
+        });
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+
+    this.api.getTasks()
+      .subscribe((res: any) => {
+        this.dataTasks = res;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
   }
 
   public position(): void {
+    console.log('position aufgerufen ');
     let position = 0;
-    this.data.forEach((goal: Goals) => {
+    this.goalsToOneUser.forEach((goal: Goals) => {
+      console.log('vor api aufruf : ' + goal.order);
       position += 1;
       goal.order = String(position);
       this.api.updateGoalOrder(goal._id, goal).subscribe((data: Goals) => {
       }, error => {
       });
+      console.log('nach api aufruf : ' + goal.order);
     });
   }
 
   drop(event: CdkDragDrop<Goals[]>) {
     if (event.previousContainer === event.container) {
+      console.log('drop aufgerufen');
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       this.position();
     } else {

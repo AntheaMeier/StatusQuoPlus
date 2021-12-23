@@ -1,8 +1,9 @@
 .style {
-  margin: 1%;
+  height: 80%;
   box-shadow: 0px 0px 8px #E8E4E1;
   font-family: "Klavika", sans-serif;
   color: #0071B9;
+  margin: 1%;
 }
 
 .style2 {
@@ -65,6 +66,11 @@
   margin-bottom: 150%;
 }
 
+
+
+
+
+
 .main-card {
   height: 80%;
   max-width: 60%;
@@ -97,6 +103,7 @@
   max-width: 150px;
   max-height: 80px;
   margin: 20px;
+
 }
 
 .icon-styling {
