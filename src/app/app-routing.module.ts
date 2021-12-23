@@ -4,7 +4,8 @@ import {ResponsiveHeaderComponent} from "./responsive-header/responsive-header.c
 import {AuthGuardService} from "./auth-guard.service";
 
 const routes: Routes = [
-  {path: '',
+  {
+    path: '',
     component: ResponsiveHeaderComponent,
     canActivate: [AuthGuardService]
   }
