@@ -46,11 +46,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {LoginComponent} from './login/login.component';
 import {AuthGuardService} from "./auth-guard.service";
 import { DeleteConfirmationDialogComponent } from './goals/delete-confirmation-dialog/delete-confirmation-dialog';
-
 import { TodoComponent } from './todo/todo.component';
 import { DeleteTaskDialogComponent} from "./todo/delete-task-dialog/delete-task-dialog.component";
-import { GridComponent } from './grid/grid.component';
-
 import { AnnualReviewComponent } from './annual-review/annual-review.component';
 import { ListReviewsComponent } from './annual-review/list-reviews/list-reviews.component';
 
@@ -66,7 +63,6 @@ import { ListReviewsComponent } from './annual-review/list-reviews/list-reviews.
     DeleteConfirmationDialogComponent,
     TodoComponent,
     DeleteTaskDialogComponent,
-    GridComponent,
     AnnualReviewComponent,
     ListReviewsComponent,
   ],
@@ -87,7 +83,6 @@ import { ListReviewsComponent } from './annual-review/list-reviews/list-reviews.
         LayoutModule,
         MatSidenavModule,
         MatListModule,
-        MatCardModule,
         A11yModule,
         ClipboardModule,
         CdkStepperModule,
@@ -99,7 +94,6 @@ import { ListReviewsComponent } from './annual-review/list-reviews/list-reviews.
         MatBottomSheetModule,
         MatButtonModule,
         MatButtonToggleModule,
-        MatCardModule,
         MatCheckboxModule,
         MatChipsModule,
         MatStepperModule,

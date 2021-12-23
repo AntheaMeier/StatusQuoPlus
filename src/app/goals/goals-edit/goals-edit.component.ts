@@ -2,7 +2,7 @@ import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {GoalsCreateComponent} from "../goals-create/goals-create.component";
 import { Router, ActivatedRoute } from '@angular/router';
-import { ApiService } from '../../shared/api.service';
+import { ApiService } from '../../services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({

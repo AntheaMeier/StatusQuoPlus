@@ -37,10 +37,7 @@ mat-grid-tile {
   background-color: violet;
 }
 
-
 /*-->Drag and drop*/
-
-
 
 .cdk-drag-preview {
   box-sizing: border-box;

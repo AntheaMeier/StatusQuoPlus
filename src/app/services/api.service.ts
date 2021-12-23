@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {Observable, of, throwError} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import {catchError, tap, map} from 'rxjs/operators';
-import {Goals} from "./goals";
-import {Login} from "./login";
-import {Tasks} from "./tasks";
-import { Review } from './review';
+import {Goals} from "../shared/goals";
+import {Login} from "../shared/login";
+import {Tasks} from "../shared/tasks";
+import { Review } from '../shared/review';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})

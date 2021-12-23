@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ApiService} from '../../shared/api.service';
+import {ApiService} from '../../services/api.service';
 import {Goals} from "../../shared/goals";
 import {MatDialog} from '@angular/material/dialog';
 import {Output, EventEmitter} from '@angular/core';
@@ -9,7 +9,6 @@ import {GoalsEditComponent} from "../goals-edit/goals-edit.component";
 import {DeleteConfirmationDialogComponent} from '../delete-confirmation-dialog/delete-confirmation-dialog';
 import {Tasks} from "../../shared/tasks";
 import {Login} from "../../shared/login";
-import {Team} from "../../shared/login";
 import {AuthService} from "../../services/auth.service";
 
 @Component({

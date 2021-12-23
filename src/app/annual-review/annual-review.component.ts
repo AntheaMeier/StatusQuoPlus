@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiService } from '../shared/api.service';
+import { ApiService } from '../services/api.service';
 import { Review } from '../shared/review';
 
 @Component({
@@ -11,12 +11,12 @@ import { Review } from '../shared/review';
 export class AnnualReviewComponent {
   review!: Review;
   idDialog: any = '';
-  
+
   enteredContent = "";
   enteredDate = "";
 
   isLoadingResults = true;
-  
+
   constructor(private api: ApiService) {}
 
   onAddPost(){

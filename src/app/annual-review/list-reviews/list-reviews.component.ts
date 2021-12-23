@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Review } from '../../shared/review';
-import { ApiService } from 'src/app/shared/api.service';
+import { ApiService } from 'src/app/services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
@@ -26,11 +26,11 @@ export class ListReviewsComponent implements OnInit {
   review: Review = { id: '', date: '', description: ''};
   reviews: Review[] = [];
   oldDescription: any;
-  
+
   constructor(
-    private api: ApiService, 
-    private router: Router, 
-    private route: ActivatedRoute, 
+    private api: ApiService,
+    private router: Router,
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     ) { }
 
@@ -55,7 +55,7 @@ export class ListReviewsComponent implements OnInit {
   //   this.getReview(this.route.snapshot.params.id);
   // this.reviewForm = this.formBuilder.group({
   //   'date' : [null, Validators.required],
-  //   'description' : [null, Validators.required] 
+  //   'description' : [null, Validators.required]
   //  });
   }
 

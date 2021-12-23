@@ -15,15 +15,12 @@
       <a mat-list-item *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">
         <div class="sidenav-text" (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">MEIN TEAM</div>
       </a>
-
       <a (click)='logout()' mat-list-item *ngIf="this.isLogin">
         <mat-icon>exit_to_app</mat-icon>
         <div class="sidenav-text">Logout</div>
       </a>
     </mat-nav-list>
   </mat-sidenav>
-
-
   <mat-sidenav-content>
     <mat-toolbar color="white">
       <button
@@ -42,7 +39,9 @@
         <div class="element-text" *ngIf="this.isLogin">PROTOKOLLE</div>
       </div>
       <div class="nav-element">
-        <div class="element-text" *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'" (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">MEIN TEAM</div>
+        <div class="element-text" *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'"
+             (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">MEIN TEAM
+        </div>
       </div>
       <span class="example-spacer"></span>
       <div class="nav-element">
@@ -89,42 +88,32 @@
     </div>
     <div class="content-components" *ngIf="selectedRole == 'Mitarbeiter_in'">
       <div class="one-component">
-        <app-goals *ngIf="this.isLogin" (showTasksClicked)="tasksToOneGoal = $event"  (showGoalid)="setGoalsid($event)"></app-goals>
+        <app-goals *ngIf="this.isLogin" (showTasksClicked)="tasksToOneGoal = $event"
+                   (showGoalid)="setGoalsid($event)"></app-goals>
       </div>
       <div class="one-component">
-
         <app-todo *ngIf="this.isLogin" [tasksToOneGoal]="tasksToOneGoal" [goalid]="goalid"></app-todo>
       </div>
     </div>
     <div class="content-components" *ngIf="selectedRole == 'Vorgesetzte_r'">
       <mat-card>
         <mat-card-content>
-          <mat-card  *ngFor="let member of teamVorgesetze" (click)="loadGoals(member.userid)">
-
+          <mat-card *ngFor="let member of teamVorgesetze" (click)="loadGoals(member.userid)">
             {{member.firstname}}
             {{member.surname}}
-
-            <!-- <div *ngFor="let member in teamVorgesetze">
-               <p>{{member.firstname}}</p>
-               <p>{{member.surname}}</p>
-             </div>-->
           </mat-card>
         </mat-card-content>
       </mat-card>
-
       <div *ngIf="clickedOnMitarbeiter">
-
         <div class="one-component">
-
-
-          <app-goals [selectedRole]="selectedRole" (showTasksClicked)="tasksToOneGoal = $event"  (showGoalid)="setGoalsid($event)" [idTeam]="idTeamMember"  [goalsToOneUser]="goalsToOneUser" ></app-goals>
+          <app-goals [selectedRole]="selectedRole" (showTasksClicked)="tasksToOneGoal = $event"
+                     (showGoalid)="setGoalsid($event)" [idTeam]="idTeamMember"
+                     [goalsToOneUser]="goalsToOneUser"></app-goals>
         </div>
-
         <div class="one-component">
-          <app-todo  [selectedRole]="selectedRole" [tasksToOneGoal]="tasksToOneGoal" [goalid]="goalid"></app-todo>
+          <app-todo [selectedRole]="selectedRole" [tasksToOneGoal]="tasksToOneGoal" [goalid]="goalid"></app-todo>
         </div>
       </div>
-
     </div>
     <app-annual-review *ngIf="this.isLogin"></app-annual-review>
   </mat-sidenav-content>
