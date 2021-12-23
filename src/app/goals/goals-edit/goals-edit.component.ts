@@ -1,9 +1,9 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {GoalsCreateComponent} from "../goals-create/goals-create.component";
-import { Router, ActivatedRoute } from '@angular/router';
-import { ApiService } from '../../shared/api.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Router, ActivatedRoute} from '@angular/router';
+import {ApiService} from '../../services/api.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-goals-edit',
@@ -15,23 +15,25 @@ export class GoalsEditComponent implements OnInit {
   @Input() idDialog: any;
   enteredValue = "";
   oldDescription: any;
-  articleForm: FormGroup =  this.formBuilder.group({
-    description: this.formBuilder.control('initial value', Validators.required)
-  });
-
   id = '';
   isLoadingResults = false;
+
+  articleForm: FormGroup = this.formBuilder.group({
+    description: this.formBuilder.control('initial value', Validators.required)
+  });
 
   constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<GoalsCreateComponent>,
               private router: Router, private route: ActivatedRoute,
               private api: ApiService, private formBuilder: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: any) {}
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(GoalsEditComponent, {
       width: '40%',
     });
-    dialogRef.afterClosed().subscribe(result => {});
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
   onNoClick(): void {
@@ -41,9 +43,8 @@ export class GoalsEditComponent implements OnInit {
   ngOnInit() {
     this.getGoal(this.data.id);
     this.articleForm = this.formBuilder.group({
-      'description' : ['', Validators.required]
+      'description': ['', Validators.required]
     });
-
   }
 
   getGoal(id: any) {

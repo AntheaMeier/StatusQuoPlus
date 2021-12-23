@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Observable, of, throwError} from 'rxjs';
-import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError, tap, map} from 'rxjs/operators';
-import {Goals} from "./goals";
-import {Login} from "./login";
-import {Tasks} from "./tasks";
-import { Review } from './review';
+import {Goals} from "../shared/goals";
+import {Login} from "../shared/login";
+import {Tasks} from "../shared/tasks";
+import {Review} from '../shared/review';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -61,14 +61,6 @@ export class ApiService {
   }
 
   // Goals
-  getGoals(): Observable<Goals[]> {
-    return this.http.get<Goals[]>(apiUrl)
-      .pipe(
-        tap(goal => console.log('fetched articles')),
-        catchError(this.handleError('getGoals', []))
-      );
-  }
-
   addGoal(goal: Goals): Observable<Goals> {
     return this.http.post<Goals>(apiUrl, goal, httpOptions).pipe(
       tap((goal: Goals) => console.log(`added goal w/ id=${goal._id}`)),
@@ -104,7 +96,7 @@ export class ApiService {
   getGoal(id: number): Observable<Goals> {
     const url = `${apiUrl}/${id}`;
     return this.http.get<Goals>(url).pipe(
-      tap(_ => console.log(`fetched article id=${id}`)),
+      tap(_ => console.log(`fetched goal id=${id}`)),
       catchError(this.handleError<Goals>(`getArticle id=${id}`))
     );
   }
@@ -112,7 +104,7 @@ export class ApiService {
   getGoalsToUser(id: any): Observable<Goals[]> {
     return this.http.get<Goals[]>(`${apiUrlUsersForGoal}/${id}`)
       .pipe(
-        tap(goal => console.log('fetched users for goal')),
+        tap(goal => console.log('fetched goals for user')),
         catchError(this.handleError('getUsersForGoal', []))
       );
   }
@@ -159,7 +151,6 @@ export class ApiService {
 
   updateTaskStatus(id: any, task: Tasks): Observable<any> {
     const url = `${apiUrlStatus}/${id}`;
-    console.log('api.service aufgerufen');
     return this.http.patch(url, task, httpOptions).pipe(
       tap(_ => console.log(`updated task status id=${id} und status=` + task.status)),
       catchError(this.handleError<any>('updateArticle'))

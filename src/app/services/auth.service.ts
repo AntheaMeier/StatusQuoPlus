@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor() { }
-
+  constructor() {
+  }
 
   getUserDetails(): any {
     return localStorage.getItem('userData') ? JSON.parse(<string>localStorage.getItem('userData')) : null;

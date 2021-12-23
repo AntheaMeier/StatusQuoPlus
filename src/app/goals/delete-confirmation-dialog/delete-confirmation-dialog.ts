@@ -1,13 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {GoalsCreateComponent} from "../goals-create/goals-create.component";
-import { Router } from '@angular/router';
-import { ApiService } from '../../shared/api.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Router} from '@angular/router';
+import {ApiService} from '../../services/api.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Tasks} from "../../shared/tasks";
-
-/** Error when invalid control is dirty, touched, or submitted. */
-
 
 @Component({
   selector: 'app-delete-confirmation-dialog',
@@ -15,23 +12,22 @@ import {Tasks} from "../../shared/tasks";
   styleUrls: ['./delete-confirmation-dialog.css'],
 })
 
-  export class DeleteConfirmationDialogComponent implements OnInit {
+export class DeleteConfirmationDialogComponent implements OnInit {
 
   oldDescription: any;
-
-  articleForm: FormGroup =  this.formBuilder.group({
-    description: this.formBuilder.control('initial value', Validators.required)
-  });
-
   id = '';
   isLoadingResults = false;
   isLoadingResultsTasksToGoal = false;
-  tasksToOneGoal : Tasks[] = [];
+  tasksToOneGoal: Tasks[] = [];
 
+  articleForm: FormGroup = this.formBuilder.group({
+    description: this.formBuilder.control('initial value', Validators.required)
+  });
 
   constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<GoalsCreateComponent>,
-                private router: Router, private api: ApiService, private formBuilder: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: any) {}
+              private router: Router, private api: ApiService, private formBuilder: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
   onNoClick(): void {
     this.dialog.closeAll();
@@ -39,7 +35,6 @@ import {Tasks} from "../../shared/tasks";
 
   ngOnInit() {
     this.getArticle(this.data.id);
-
   }
 
   getArticle(id: any) {
@@ -52,13 +47,7 @@ import {Tasks} from "../../shared/tasks";
     });
   }
 
-
-
-
   deleteGoal(id: any) {
-
-
-
     this.isLoadingResults = true;
     this.api.deleteGoal(id)
       .subscribe(res => {
@@ -68,15 +57,12 @@ import {Tasks} from "../../shared/tasks";
           this.isLoadingResults = false;
         }
       );
-
-
     this.api.getTasksToGoal(id)
       .subscribe((res: any) => {
         this.tasksToOneGoal = res;
         console.log('das ist res ' + res[0]._id)
-        let taskId =  ''
-        for(let i = 0 ; i < res.length; i++){
-         
+        let taskId = ''
+        for (let i = 0; i < res.length; i++) {
           taskId = res[i]._id;
           this.api.deleteTask(taskId)
             .subscribe(res => {
@@ -86,24 +72,13 @@ import {Tasks} from "../../shared/tasks";
                 this.isLoadingResults = false;
               }
             );
-
-
-
         }
-
         this.isLoadingResultsTasksToGoal = false;
-
-
-
       }, err => {
         console.log(err);
         this.isLoadingResultsTasksToGoal = false;
       });
-
-
-
-
-
+    window.location.reload()
   }
 
   onFormSubmit() {

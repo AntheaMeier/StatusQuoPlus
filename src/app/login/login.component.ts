@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { ApiService } from '../shared/api.service';
-import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
+import {ApiService} from '../services/api.service';
+import {AuthService} from '../services/auth.service';
+import {Router} from '@angular/router';
 import {Login} from "../shared/login";
 
 @Component({
@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
     this.isUserLogin();
-
     this.api.getUsers()
       .subscribe((res: any) => {
         this.data = res;
@@ -46,7 +45,9 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  get f(): any { return this.loginForm.controls; }
+  get f(): any {
+    return this.loginForm.controls;
+  }
 
   onSubmit(): void {
     this.submitted = true;
@@ -62,18 +63,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  isUserLogin(): void{
-    if (this.auth.getUserDetails() != null){
+  isUserLogin(): void {
+    if (this.auth.getUserDetails() != null) {
       this.isLogin = true;
     }
   }
 
-  logout(): void{
-    this.auth.clearStorage();
-    this.router.navigate(['/login']);
-  }
-
-  removeErrorMessage(): void{
-    this.loginInvalid=false;
+  removeErrorMessage(): void {
+    this.loginInvalid = false;
   }
 }
