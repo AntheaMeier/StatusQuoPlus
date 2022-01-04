@@ -19,6 +19,7 @@ import {AuthService} from "../../services/auth.service";
 
 export class GoalsCreateComponent implements OnInit {
   enteredValue = '';
+  placeholder = "Benenne dein Ziel...";
   newPost = '';
   idDialog: any = '';
   editable = false;
@@ -119,7 +120,7 @@ export class GoalsCreateComponent implements OnInit {
   onAddPost(id: any) {
     this.isLoadingResults = true;
     const simpleObject = {} as Goals;
-    simpleObject.description = "Click to edit";
+    simpleObject.description = this.placeholder;
     simpleObject.userid = id;
     this.api.addGoal(simpleObject)
       .subscribe((res: any) => {
