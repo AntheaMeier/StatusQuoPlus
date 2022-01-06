@@ -208,6 +208,7 @@ export class GoalsCreateComponent implements OnInit {
 
   setTheSelectedGoal(goal: Goals) {
     this.selectedGoal = goal;
+    this.editableId = goal._id;
   }
 
   setGoalsid(value: string) {

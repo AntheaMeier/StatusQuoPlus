@@ -15,7 +15,7 @@
           <div class="goal-description" *ngIf="!editable || (editableId != goal._id)" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(goal._id)">
             {{ goal.description }}
           </div>
-          <textarea name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup.enter)="updateAGoal(goal)"
+          <textarea class="textarea-styling" name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup.enter)="updateAGoal(goal)"
                     [value]="goal.description" *ngIf="editable && (editableId == goal._id)">
             </textarea>
           <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>

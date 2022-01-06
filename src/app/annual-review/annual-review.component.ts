@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ApiService} from '../services/api.service';
 import {Review} from '../shared/review';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-annual-review',
@@ -13,8 +14,10 @@ export class AnnualReviewComponent {
   enteredContent = "";
   enteredDate = "";
   isLoadingResults = true;
+  currentUrl = "";
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService, router: Router) {
+    this.currentUrl = router.url;
   }
 
   onAddPost() {

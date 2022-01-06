@@ -1,6 +1,6 @@
 <mat-card class="row style">
   <h3>UNTERJAEHRIGER AUSTAUSCH</h3>
-  <mat-card class="style2 col-md-6">
+  <mat-card class="style2 col-md-6" *ngIf="currentUrl != '/protokolle'">
     <mat-form-field class="col-md-12">
       <input
         [(ngModel)]="enteredDate"
@@ -30,6 +30,6 @@
     </button>
   </mat-card>
   <mat-card class="style2 col-md-6">
-    <app-list-reviews></app-list-reviews>
+    <app-list-reviews [currentUrl]="currentUrl"></app-list-reviews>
   </mat-card>
 </mat-card>

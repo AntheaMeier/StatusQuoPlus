@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Review} from '../../shared/review';
 import {ApiService} from 'src/app/services/api.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -19,6 +19,7 @@ export class ListReviewsComponent implements OnInit {
   isLoadingResults = true;
   review: Review = {id: '', date: '', description: ''};
   reviews: Review[] = [];
+  @Input() currentUrl = "";
 
   reviewForm: FormGroup = this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required)
