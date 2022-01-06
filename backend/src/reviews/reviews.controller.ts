@@ -1,46 +1,58 @@
-import { Controller, Post, Body, Get, Param, Patch, Delete } from "@nestjs/common";
-import { ReviewsService } from "./reviews.service";
+import {Controller, Post, Body, Get, Param, Patch, Delete} from "@nestjs/common";
+import {ReviewsService} from "./reviews.service";
 
-@Controller('reviews') // filter for requests that start with 'reviews'
+@Controller('reviews')
 export class ReviewsController {
-    
-    constructor(private readonly reviewsService: ReviewsService) {}
+  constructor(private readonly reviewsService: ReviewsService) {
+  }
 
-    @Post()
-    async addReview(
-        @Body('date') revDate: string, 
-        @Body('description') revDesc: string
-    ) {
-        const generatedId = await this.reviewsService.insertProduct(
-            revDate, 
-            revDesc,
-            );
-        return {id: generatedId};
-    }
-    @Get()
-    async getAllReviews() {
-        const reviews = await this.reviewsService.getReviews();
-        return reviews;
-    }
+  @Post()
+  async addReview(
+    @Body('date') revDate: string,
+    @Body('description') revDesc: string,
+    @Body('userid') revUserid: string,
+  ) {
+    const generatedId = await this.reviewsService.insertReview(
+      revDate,
+      revDesc,
+      revUserid,
+    );
+    return {id: generatedId};
+  }
 
-    @Get(':id')
-    getReview(@Param('id') revId: string,) {
-        return this.reviewsService.getSingleReview(revId);
-    }
+  @Get()
+  async getAllReviews() {
+    const reviews = await this.reviewsService.getReviews();
+    return reviews;
+  }
 
-    @Patch(':id')
-    async updateReview(
-        @Param('id') revId: string, 
-        @Body('date') revDate: string, 
-        @Body('description') revDesc: string,
-        ) {
-           await this.reviewsService.updateReview(revId, revDate, revDesc);
-           return null; 
-    }
+  @Get(':id')
+  getReview(@Param('id') revId: string,) {
+    return this.reviewsService.getSingleReview(revId);
+  }
 
-    @Delete(':id')
-    async removeReview(@Param('id') revId: string,) {
-        await this.reviewsService.deleteReview(revId);
-        return null;
-    }
+  @Patch(':id')
+  async updateReview(
+    @Param('id') revId: string,
+    @Body('date') revDate: string,
+    @Body('description') revDesc: string,
+    @Body('userid') revUserid: string,
+  ) {
+    await this.reviewsService.updateReview(revId, revDate, revDesc, revUserid);
+    return null;
+  }
+
+  @Delete(':id')
+  async removeReview(@Param('id') revId: string,) {
+    await this.reviewsService.deleteReview(revId);
+    return null;
+  }
+
+  @Get('user/:userid')
+  async getAllReviewsToUser(
+    @Param('userid') userid: string,
+  ) {
+    const reviews = await this.reviewsService.getReviewsToUser(userid);
+    return reviews;
+  }
 }

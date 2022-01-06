@@ -18,9 +18,7 @@ import {AuthService} from "../../services/auth.service";
 })
 
 export class GoalsCreateComponent implements OnInit {
-  enteredValue = '';
   placeholder = "Benenne dein Ziel...";
-  newPost = '';
   idDialog: any = '';
   editable = false;
   data: Goals[] = [];
@@ -82,14 +80,6 @@ export class GoalsCreateComponent implements OnInit {
         this.goalsToOneUser.sort((goal1, goal2) => {
           return Number(goal1.order) - Number(goal2.order);
         });
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-    this.api.getTasks()
-      .subscribe((res: any) => {
-        this.dataTasks = res;
-        this.isLoadingResults = false;
       }, err => {
         console.log(err);
         this.isLoadingResults = false;
