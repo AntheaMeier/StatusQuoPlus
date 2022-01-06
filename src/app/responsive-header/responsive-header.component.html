@@ -7,13 +7,13 @@
     <mat-toolbar>Menü</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item *ngIf="this.isLogin">
-        <div class="sidenav-text" *ngIf="this.isLogin">ZIELE</div>
+        <div class="sidenav-text" *ngIf="this.isLogin" (click)="changeRoleToMitarbeiter_in()">ZIELE</div>
       </a>
       <a mat-list-item *ngIf="this.isLogin">
-        <div class="sidenav-text" mat-button>PROTOKOLLE</div>
+        <div class="sidenav-text" (click)="clickProtokoll()" routerLink="protokolle" mat-button>PROTOKOLLE</div>
       </a>
-      <a mat-list-item *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">
-        <div class="sidenav-text" (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">MEIN TEAM</div>
+      <a mat-list-item  (click)="reloadPage()" *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">
+        <div class="sidenav-text"  (click)="reloadPage()" (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">MEIN TEAM</div>
       </a>
       <a (click)='logout()' mat-list-item *ngIf="this.isLogin">
         <mat-icon>exit_to_app</mat-icon>
@@ -32,13 +32,13 @@
     </button>
     <span class="title">adesso</span>
     <div class="nav-element">
-      <div class="element-text" *ngIf="this.isLogin">ZIELE</div>
+      <div  class="element-text" (click)="changeRoleToMitarbeiter_in()" *ngIf="this.isLogin">ZIELE</div>
     </div>
     <div class="nav-element">
-      <div class="element-text" *ngIf="this.isLogin">PROTOKOLLE</div>
+      <div class="element-text" (click)="clickProtokoll()" routerLink="protokolle" *ngIf="this.isLogin">PROTOKOLLE</div>
     </div>
     <div class="nav-element">
-      <div class="element-text" *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'"
+      <div class="element-text" (click)="reloadPage()" *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'"
            (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">MEIN TEAM
       </div>
     </div>
@@ -58,6 +58,7 @@
       </div>
     </div>
   </mat-toolbar>
+  <div class="homepage" *ngIf="currentUrl == ''">
   <div class="content-components" *ngIf="selectedRole == 'Mitarbeiter_in'">
     <div class="one-component">
       <app-goals *ngIf="this.isLogin" (showTasksClicked)="tasksToOneGoal = $event"
@@ -66,9 +67,7 @@
     <div class="one-component">
       <app-todo *ngIf="this.isLogin" [tasksToOneGoal]="tasksToOneGoal" [goalid]="goalid"></app-todo>
     </div>
-    <div class="one-component">
-      <app-annual-review *ngIf="this.isLogin"></app-annual-review>
-    </div>
+
   </div>
   <div class="content-components" *ngIf="selectedRole == 'Vorgesetzte_r'">
     <mat-card>
@@ -93,4 +92,6 @@
       </div>
     </div>
   </div>
+  </div>
+  <router-outlet></router-outlet>
 </mat-sidenav-container>

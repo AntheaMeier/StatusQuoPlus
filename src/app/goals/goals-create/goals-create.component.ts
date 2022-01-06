@@ -39,9 +39,13 @@ export class GoalsCreateComponent implements OnInit {
   userID = JSON.stringify(this.user.id);
   showTasksToOneGoal = false;
   showGoalsToOneUser = false;
+  isSingleClick: Boolean = true;
+  editableId: String = '';
+
   @Input() goalsToOneUser: Goals[] = [];
   @Input() idTeam = "";
   @Input() selectedRole: String = "Mitarbeiter_in";
+
 
   constructor(public dialog: MatDialog,
               private router: Router,
@@ -209,4 +213,24 @@ export class GoalsCreateComponent implements OnInit {
   setGoalsid(value: string) {
     this.showGoalid.emit(value);
   }
+
+
+
+// für die Doppelklick-Funktion
+  method1CallForClick(){
+    this.isSingleClick = true;
+    setTimeout(()=>{
+      if(this.isSingleClick){
+      }
+    },250)
+  }
+  method2CallForDblClick(id: String){
+    this.isSingleClick = false;
+      this.setEditableToTrue()
+  }
+
+  isVorgesetzte_r() : boolean{
+    return (this.selectedRole == 'Vorgesetzte_r');
+  }
+
 }

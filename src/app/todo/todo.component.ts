@@ -25,6 +25,9 @@ export class TodoComponent implements OnInit {
   status = '';
   editable = false;
   showData: boolean = false;
+  isSingleClick: Boolean = true;
+  editableId: String = '';
+
 
   constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute,) {
   }
@@ -195,4 +198,26 @@ export class TodoComponent implements OnInit {
       );
     this.editable = false;
   }
+
+  method1CallForClick(){
+    this.isSingleClick = true;
+    setTimeout(()=>{
+      if(this.isSingleClick){
+      }
+    },250)
+  }
+  method2CallForDblClick(id : String){
+    this.isSingleClick = false;
+    this.editableId = id;
+    this.changeEditable();
+  }
+
+
+  isVorgesetzte_r() : boolean{
+
+    return (this.selectedRole == 'Vorgesetzte_r');
+
+}
+
+
 }

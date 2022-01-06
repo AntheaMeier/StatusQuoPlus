@@ -33,6 +33,10 @@ export class ResponsiveHeaderComponent {
   idTeamMember = "";
   tasksToOneGoal: Tasks[] = [];
   goalsToOneUser: Goals[] = [];
+  currentUrl: String = ''
+
+
+
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -49,11 +53,24 @@ export class ResponsiveHeaderComponent {
     this.loginForm = formBuilder.group({
       title: formBuilder.control('initial value', Validators.required)
     });
+
+
+    if(window.location.href != 'http://localhost:4200/'){
+      this.currentUrl = window.location.href;
+
+    }
+
+    else{
+      this.currentUrl='';
+    }
+
   }
 
   setLoggedIn(data: boolean) {
     this.loggedIn = data;
   }
+
+
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -94,7 +111,14 @@ export class ResponsiveHeaderComponent {
   onSelectVorgesetzte_r() {
     this.selectedRole = "Vorgesetzte_r"
     this.tasksToOneGoal = [];
+    this.clickedOnMitarbeiter= false;
   }
+
+
+  changeRoleToMitarbeiter_in(){
+    this.selectedRole ="Mitarbeiter_in";
+    this.router.navigate(['/']);
+    this.currentUrl= '';  }
 
   onClickVorgesetzter() {
     this.api.getUser(this.idLoggedInUser)
@@ -124,5 +148,18 @@ export class ResponsiveHeaderComponent {
         this.isLoadingResults = false;
       });
     this.idTeamMember = userid;
+  }
+
+
+
+  reloadPage() {
+    this.router.navigate(['/']);
+    this.currentUrl= '';
+
+  }
+
+  clickProtokoll() {
+    this.currentUrl=  window.location.href;
+
   }
 }
