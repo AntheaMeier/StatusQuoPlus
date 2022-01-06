@@ -18,6 +18,7 @@ const apiUrlStatus = 'http://localhost:3000/tasks/status';
 const apiUrlTasksForGoal = 'http://localhost:3000/tasks/goal';
 const apiUrlUsersForGoal = 'http://localhost:3000/goals/user';
 const apiUrlReviews = 'http://localhost:3000/reviews';
+const apiUrlUsersForReview = 'http://localhost:3000/reviews/user';
 
 @Injectable({
   providedIn: 'root'
@@ -110,14 +111,6 @@ export class ApiService {
   }
 
   // Tasks
-  getTasks(): Observable<Tasks[]> {
-    return this.http.get<Tasks[]>(apiUrlTasks)
-      .pipe(
-        tap(task => console.log('fetched tasks')),
-        catchError(this.handleError('getTasks', []))
-      );
-  }
-
   addTask(task: Tasks): Observable<Tasks> {
     return this.http.post<Tasks>(apiUrlTasks, task, httpOptions).pipe(
       tap((task: Tasks) => console.log(`added task w/ id=${task._id}`)),
@@ -160,18 +153,18 @@ export class ApiService {
   // Reviews
   addReview(review: Review): Observable<Review> {
     return this.http.post<Review>(apiUrlReviews, review, httpOptions).pipe(
-      tap((review: Review) => console.log(`added review w/ id=${review.id}`)),
+      tap((review: Review) => console.log(`added review w/ id=${review._id}`)),
       catchError(this.handleError<Review>('addReview'))
     );
   }
 
-  getReviews(): Observable<Review[]> {
+/*  getReviews(): Observable<Review[]> {
     return this.http.get<Review[]>(apiUrlReviews)
       .pipe(
         tap(review => console.log('fetched reviews')),
         catchError(this.handleError('getReviews', []))
       );
-  }
+  }*/
 
   getReview(id: number): Observable<Review> {
     const url = `${apiUrlReviews}/${id}`;
@@ -195,5 +188,13 @@ export class ApiService {
       tap(_ => console.log(`updated review id=${id}`)),
       catchError(this.handleError<any>('updateReview'))
     );
+  }
+
+  getReviewsToUser(id: any): Observable<Review[]> {
+    return this.http.get<Review[]>(`${apiUrlUsersForReview}/${id}`)
+      .pipe(
+        tap(goal => console.log('fetched reviews for user')),
+        catchError(this.handleError('getUsersForReviews', []))
+      );
   }
 }

@@ -77,14 +77,6 @@ export class GoalsCreateComponent implements OnInit {
         console.log(err);
         this.isLoadingResults = false;
       });
-    this.api.getTasks()
-      .subscribe((res: any) => {
-        this.dataTasks = res;
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
   }
 
   public position(): void {
