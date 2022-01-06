@@ -24,7 +24,7 @@ export class ListReviewsComponent implements OnInit {
   idloggedInUser: String = "";
   dataUsers: Login[] = [];
   showReviewsToOneUser = false;
-  @Input() idTeam = "";
+  @Input() idTeamMember = "";
   @Input() reviewsToOneUser: Review[] = [];
 
   reviewForm: FormGroup = this.formBuilder.group({
@@ -50,19 +50,8 @@ export class ListReviewsComponent implements OnInit {
         this.isLoadingResults = false;
       });
     this.idloggedInUser = this.auth.getUserDetails().user_info._id;
-    if (this.idTeam == "") {
       this.getReviewDetails(this.idloggedInUser);
-    } else {
-      this.getReviewDetails(this.idTeam)
-    }
-    this.api.getReviewsToUser(this.idloggedInUser)
-      .subscribe((res: any) => {
-        this.reviewsToOneUser = res;
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
+
     this.getReviewDetails(this.route.snapshot.params.id);
   }
 

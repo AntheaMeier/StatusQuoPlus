@@ -18,6 +18,8 @@ export class AnnualReviewComponent {
   isLoadingResults = true;
   currentUrl = "";
 
+  @Input() idTeamMember = "";
+
   idloggedInUser: String = "";
   dataUsers: Login[] = [];
   showReviewsToOneUser = false;
@@ -28,6 +30,7 @@ export class AnnualReviewComponent {
               private auth: AuthService,
               router: Router) {
       this.currentUrl = router.url;
+      console.log(this.currentUrl);
 
     }
 

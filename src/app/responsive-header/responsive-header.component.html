@@ -74,7 +74,8 @@
   <div class="content-components" *ngIf="selectedRole == 'Vorgesetzte_r'">
     <mat-card>
       <mat-card-content>
-        <mat-card *ngFor="let member of teamVorgesetze" (click)="loadGoals(member.userid)">
+        <mat-card *ngFor="let member of teamVorgesetze" (click)="loadGoals(member.userid)"
+        (click)="loadReviews(member.userid)">
           {{member.firstname}}
           {{member.surname}}
         </mat-card>
@@ -92,7 +93,7 @@
                   [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone" [goalid]="goalid"></app-todo>
       </div>
       <div class="one-component">
-        <app-annual-review></app-annual-review>
+        <app-annual-review [reviewsToOneUser]="reviewsToOneUser" [idTeamMember]="idTeamMember"></app-annual-review>
       </div>
     </div>
   </div>

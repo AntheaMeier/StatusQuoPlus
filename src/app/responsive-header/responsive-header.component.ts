@@ -9,6 +9,7 @@ import {Login, Team} from "../shared/login";
 import {ApiService} from "../services/api.service";
 import {Tasks} from "../shared/tasks";
 import {Goals} from "../shared/goals";
+import {Review} from "../shared/review";
 
 @Component({
   selector: 'app-responsive-header',
@@ -36,6 +37,8 @@ export class ResponsiveHeaderComponent {
   tasksToDoing: Tasks[] = [];
   tasksToDone: Tasks[] = [];
   goalsToOneUser: Goals[] = [];
+  reviewsToOneUser: Review[] = [];
+
   currentUrl: String = ''
 
 
@@ -169,5 +172,21 @@ export class ResponsiveHeaderComponent {
 
   clickLogo() {
     console.log('Click Logo: ' + this.tasksToTodo);
+  }
+
+  loadReviews(userid: string) {
+    this.reviewsToOneUser = [];
+    this.clickedOnMitarbeiter = true;
+    this.api.getReviewsToUser(userid)
+      .subscribe((res: any) => {
+        this.reviewsToOneUser = res;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+    this.idTeamMember = userid;
+
+
   }
 }
