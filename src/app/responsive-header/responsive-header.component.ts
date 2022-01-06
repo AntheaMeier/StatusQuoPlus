@@ -32,6 +32,9 @@ export class ResponsiveHeaderComponent {
   clickedOnMitarbeiter = false;
   idTeamMember = "";
   tasksToOneGoal: Tasks[] = [];
+  tasksToTodo: Tasks[] = [];
+  tasksToDoing: Tasks[] = [];
+  tasksToDone: Tasks[] = [];
   goalsToOneUser: Goals[] = [];
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -114,6 +117,8 @@ export class ResponsiveHeaderComponent {
 
   loadGoals(userid: any) {
     this.tasksToOneGoal = [];
+    this.tasksToTodo = [];
+    console.log(this.tasksToTodo);
     this.clickedOnMitarbeiter = true;
     this.api.getGoalsToUser(userid)
       .subscribe((res: any) => {
@@ -124,5 +129,9 @@ export class ResponsiveHeaderComponent {
         this.isLoadingResults = false;
       });
     this.idTeamMember = userid;
+  }
+
+  clickLogo() {
+    console.log('Click Logo: ' + this.tasksToTodo);
   }
 }

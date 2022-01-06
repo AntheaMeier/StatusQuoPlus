@@ -1,15 +1,14 @@
-<div *ngInit="fillArrays()"></div>
 <div cdkDropListGroup>
   <div
     cdkDropList
     #todoList="cdkDropList"
-    [cdkDropListData]="tasksToOneGoal"
+    [cdkDropListData]="tasksToTodo"
     class="example-list"
     (cdkDropListDropped)="dropInTodo($event)">
     <mat-card class="main-card">TODO
       <mat-icon (click)="addTask()" *ngIf="selectedRole == 'Mitarbeiter_in'">add</mat-icon>
       <mat-card class="inner-card" *ngIf="!editable" (click)="changeEditable()">
-        <mat-card class="small-card" *ngFor="let task of tasksToOneGoal" cdkDrag>
+        <mat-card class="small-card" *ngFor="let task of tasksToTodo" cdkDrag>
           {{ task.description }}
           <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
             <mat-icon (click)="deleteDialog(task.
@@ -19,7 +18,7 @@
         </mat-card>
       </mat-card>
       <mat-card class="inner-card" *ngIf="editable">
-        <mat-card class="small-card" *ngFor="let task of tasksToOneGoal" cdkDrag>
+        <mat-card class="small-card" *ngFor="let task of tasksToTodo" cdkDrag>
           <input value="{{task.description}}" (keyup)="getTheInput($event)" aria-label="Edit"
                  (keyup.enter)="updateATask(task)">
         </mat-card>

@@ -32,6 +32,9 @@ export class GoalsCreateComponent implements OnInit {
   id = '';
   dataTasks: Tasks[] = [];
   tasksToOneGoal: Tasks[] = [];
+  @Output() tasksToTodo = new EventEmitter<Tasks[]>();
+  @Output() tasksToDoing = new EventEmitter<Tasks[]>();
+  @Output() tasksToDone = new EventEmitter<Tasks[]>();
   @Output() showGoalid = new EventEmitter<string>();
   goal: Goals = {_id: '', description: '', order: '', userid: ''};
   user: Login = {id: '', username: '', password: '', firstname: '', surname: '', email: '', role: '', team: []};
@@ -51,6 +54,7 @@ export class GoalsCreateComponent implements OnInit {
               private auth: AuthService,
   ) {
   }
+
 
   ngOnInit() {
     this.api.getUsers()
@@ -155,6 +159,40 @@ export class GoalsCreateComponent implements OnInit {
         this.isLoadingResults = false;
       });
     this.showTasksToOneGoal = true;
+
+
+    //TODO
+    this.api.getTasksToStatus(id, 'todo')
+      .subscribe((res: any) => {
+        console.log(res);
+        this.tasksToTodo.emit(res);
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+
+    //DOING
+    this.api.getTasksToStatus(id, 'doing')
+      .subscribe((res: any) => {
+        console.log(res);
+        this.tasksToDoing.emit(res);
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+
+    //DONE
+    this.api.getTasksToStatus(id, 'done')
+      .subscribe((res: any) => {
+        console.log(res);
+        this.tasksToDone.emit(res);
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
   }
 
   deleteDialog(id: any): void {

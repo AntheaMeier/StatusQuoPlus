@@ -14,6 +14,7 @@ import {DeleteTaskDialogComponent} from "./delete-task-dialog/delete-task-dialog
 export class TodoComponent implements OnInit {
 
   @Input() tasksToOneGoal: Tasks[] = [];
+  @Input() tasksToTodo: Tasks[] = [];
   @Input() tasksToDoing: Tasks[] = [];
   @Input() tasksToDone: Tasks[] = [];
   @Input() goalid: string = '';
@@ -24,33 +25,20 @@ export class TodoComponent implements OnInit {
   isLoadingResults = true;
   status = '';
   editable = false;
-  showData: boolean = false;
 
   constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute,) {
   }
 
   ngOnInit(): void {
+
   }
 
-  fillArrays() {
-    for (let task of this.tasksToOneGoal) {
-      if (task.status == "doing") {
-        let index = this.tasksToOneGoal.indexOf(task);
-        this.tasksToOneGoal.splice(index, 1);
-        this.tasksToDoing.push(task);
-      } else if (task.status == "done") {
-        let index = this.tasksToOneGoal.indexOf(task);
-        this.tasksToOneGoal.splice(index, 1);
-        this.tasksToDone.push(task);
-      }
-    }
-    this.ngOnInit();
-  }
+
 
   // TODO
 
   public changeStatusToTodo(): void {
-    this.tasksToOneGoal.forEach((task: Tasks) => {
+    this.tasksToTodo.forEach((task: Tasks) => {
       if (task.status != 'todo') {
         console.log(task._id);
         task.status = String('todo');
@@ -63,7 +51,7 @@ export class TodoComponent implements OnInit {
   }
 
   dropInTodo(event: CdkDragDrop<any>) {
-    console.log('vorher ' + this.tasksToOneGoal);
+    console.log('vorher ' + this.tasksToTodo);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       console.log('moveIteminArray aufgerufen');
@@ -74,7 +62,7 @@ export class TodoComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
-      console.log('nachher ' + this.tasksToOneGoal);
+      console.log('nachher ' + this.tasksToTodo);
       this.changeStatusToTodo();
     }
   }
@@ -96,7 +84,6 @@ export class TodoComponent implements OnInit {
   }
 
   dropInDoing(event: CdkDragDrop<any>) {
-    console.log('vorher ' + this.tasksToOneGoal);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       console.log('moveIteminArray aufgerufen');
@@ -107,13 +94,12 @@ export class TodoComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
-      console.log('nachher ' + this.tasksToOneGoal);
       this.changeStatusToDoing();
     }
   }
 
-  // DONE
 
+  // DONE
   public changeStatusToDone(): void {
     this.tasksToDone.forEach((task: Tasks) => {
       if (task.status != 'done') {
