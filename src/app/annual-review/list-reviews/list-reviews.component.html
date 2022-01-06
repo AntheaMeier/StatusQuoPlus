@@ -1,7 +1,6 @@
 <mat-accordion multi="true" *ngIf="reviews.length > 0">
-  <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
-    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)"> 
-      <mat-expansion-panel *ngFor="let review of reviews" cdkDrag hideToggle>
+  <cdk-virtual-scroll-viewport itemSize="50" class="viewport"> 
+      <mat-expansion-panel *ngFor="let review of reviews" hideToggle>
         <mat-expansion-panel-header>
           {{ review.date }} 
         </mat-expansion-panel-header>
@@ -29,7 +28,6 @@
           </button>
         </mat-action-row>
       </mat-expansion-panel>
-    </div>
   </cdk-virtual-scroll-viewport>
 </mat-accordion>
 <p class="info-text mat-body1" *ngIf="reviews.length === 0">No reviews added yet.</p>
