@@ -3,6 +3,7 @@ import {Review} from '../../shared/review';
 import {ApiService} from 'src/app/services/api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-list-reviews',
@@ -103,5 +104,9 @@ export class ListReviewsComponent implements OnInit {
 
   editOnOff() {
     this.edit = !this.edit;
+  }
+
+  drop(event: CdkDragDrop<Review[]>) {
+    moveItemInArray(this.reviews, event.previousIndex, event.currentIndex);
   }
 }
