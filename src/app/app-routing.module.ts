@@ -12,12 +12,15 @@ const routes: Routes = [
   {
     path: 'ziele',
     component: GoalsCreateComponent,
+    canActivate: [AuthGuardService]
 
   },
 
   {
     path: 'protokolle',
     component: AnnualReviewComponent,
+    canActivate: [AuthGuardService]
+
 
   }
 ];
