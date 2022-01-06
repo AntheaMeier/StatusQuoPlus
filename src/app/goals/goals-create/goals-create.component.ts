@@ -46,6 +46,7 @@ export class GoalsCreateComponent implements OnInit {
   @Input() goalsToOneUser: Goals[] = [];
   @Input() idTeam = "";
   @Input() selectedRole: String = "Mitarbeiter_in";
+  progress: number = 0;
 
   constructor(public dialog: MatDialog,
               private router: Router,
@@ -74,6 +75,36 @@ export class GoalsCreateComponent implements OnInit {
     this.api.getGoalsToUser(this.idloggedInUser)
       .subscribe((res: any) => {
         this.goalsToOneUser = res;
+
+
+        /*console.log('kurz vor der Schleife');
+        console.log('länge: ' + this.goalsToOneUser);
+        for(let i=0; i < this.goalsToOneUser.length; i++) {
+          console.log('schleife');
+          this.api.getTasksToGoal(this.goalsToOneUser[i]._id).subscribe((res: any) => {
+            this.tasksToOneGoal = res;
+
+          }, err => {
+            console.log(err);
+            this.isLoadingResults = false;
+          });
+
+          this.api.getTasksToStatus(this.goalsToOneUser[i]._id, 'done')
+            .subscribe((res: any) => {
+              console.log(res);
+              this.tasksToDone = res;
+              this.isLoadingResults = false;
+            }, err => {
+              console.log(err);
+              this.isLoadingResults = false;
+            });
+
+          this.progress = (this.tasksToDone.length/this.tasksToOneGoal.length)*100;
+          console.log(this.progress);
+          console.log('tasktoneGoal' + this.tasksToOneGoal.length);
+          console.log('tasktoDone' + this.tasksToDone.length);
+        }*/
+
         this.isLoadingResults = false;
         this.goalsToOneUser.sort((goal1, goal2) => {
           return Number(goal1.order) - Number(goal2.order);
@@ -90,6 +121,7 @@ export class GoalsCreateComponent implements OnInit {
         console.log(err);
         this.isLoadingResults = false;
       });
+
   }
 
   public position(): void {
@@ -193,6 +225,7 @@ export class GoalsCreateComponent implements OnInit {
         console.log(err);
         this.isLoadingResults = false;
       });
+
   }
 
   deleteDialog(id: any): void {

@@ -13,9 +13,11 @@
                   (click)="setTheSelectedGoal(goal)" (click)="showTasks(goal._id)">
           <mat-icon (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
 
-          <input class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true" ondblclick="this.readOnly=''" [(ngModel)]="goal.description" placeholder="Name des Goals" name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateAGoal(goal)">
+          <input class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
+                 ondblclick="this.readOnly=''" [(ngModel)]="goal.description" placeholder="Name des Goals"
+                 name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateAGoal(goal)">
 
-          <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+          <mat-progress-bar mode="determinate" [value]="this.progress"></mat-progress-bar>
         </mat-card>
       </div>
     </mat-card-content>
