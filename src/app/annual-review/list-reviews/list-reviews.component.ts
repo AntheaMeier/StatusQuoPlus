@@ -12,7 +12,6 @@ import {AuthService} from "../../services/auth.service";
   styleUrls: ['./list-reviews.component.css']
 })
 export class ListReviewsComponent implements OnInit {
-
   edit = false;
   enteredContent = '';
   _id = '';
@@ -20,7 +19,6 @@ export class ListReviewsComponent implements OnInit {
   description = '';
   isLoadingResults = true;
   review: Review = {_id: '', date: '', description: '', userid: ''};
-  // reviews: Review[] = [];
   idloggedInUser: String = "";
   dataUsers: Login[] = [];
   showReviewsToOneUser = false;
@@ -67,7 +65,6 @@ export class ListReviewsComponent implements OnInit {
   }
 
   getReviewDetails(id: any) {
-    console.log("dnkasnfafnam,dfw");
     this.api.getReviewsToUser(id)
       .subscribe((data: any) => {
         this.reviewsToOneUser = data;

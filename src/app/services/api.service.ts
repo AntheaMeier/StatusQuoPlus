@@ -158,22 +158,6 @@ export class ApiService {
     );
   }
 
-/*  getReviews(): Observable<Review[]> {
-    return this.http.get<Review[]>(apiUrlReviews)
-      .pipe(
-        tap(review => console.log('fetched reviews')),
-        catchError(this.handleError('getReviews', []))
-      );
-  }*/
-
-  getReview(id: number): Observable<Review> {
-    const url = `${apiUrlReviews}/${id}`;
-    return this.http.get<Review>(url).pipe(
-      tap(_ => console.log(`fetched review id=${id}`)),
-      catchError(this.handleError<Review>(`getReview id=${id}`))
-    );
-  }
-
   deleteReview(id: any): Observable<Review> {
     const url = `${apiUrlReviews}/${id}`;
     return this.http.delete<Review>(url, httpOptions).pipe(

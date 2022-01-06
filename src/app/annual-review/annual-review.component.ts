@@ -68,7 +68,6 @@ export class AnnualReviewComponent {
   }
 
   getReviewDetails(id: any) {
-    console.log("dnkasnfafnam,dfw");
     this.api.getReviewsToUser(id)
       .subscribe((data: any) => {
         this.reviewsToOneUser = data;

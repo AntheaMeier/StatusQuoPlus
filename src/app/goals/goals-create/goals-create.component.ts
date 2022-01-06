@@ -18,8 +18,6 @@ import {AuthService} from "../../services/auth.service";
 })
 
 export class GoalsCreateComponent implements OnInit {
-  enteredValue = '';
-  newPost = '';
   idDialog: any = '';
   editable = false;
   data: Goals[] = [];
