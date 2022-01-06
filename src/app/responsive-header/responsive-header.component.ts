@@ -117,6 +117,7 @@ export class ResponsiveHeaderComponent {
   onSelectVorgesetzte_r() {
     this.selectedRole = "Vorgesetzte_r"
     this.tasksToOneGoal = [];
+    this.reviewsToOneUser = [];
     this.clickedOnMitarbeiter= false;
   }
 
