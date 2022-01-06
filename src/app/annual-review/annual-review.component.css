@@ -7,8 +7,8 @@
 }
 
 .style2 {
-  height: 78%;
-  width: 48%;
+  height: 100%;
+  width: 98%;
   background-color: #E8E4E1;
   margin: 1%;
   position: relative;
@@ -41,3 +41,8 @@ input {
   background-color: #0071B9;
   color: white;
 }
+
+.mat-form-field {
+  width: 100%;
+}
+

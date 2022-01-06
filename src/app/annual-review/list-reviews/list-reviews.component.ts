@@ -52,6 +52,24 @@ export class ListReviewsComponent implements OnInit {
     this.getReviewDetails(this.route.snapshot.params.id);
   }
 
+  // reload(): void {
+  //   this.api.getReviews()
+  //     .subscribe((res: any) => {
+  //       this.reviews = res;
+  //       this.isLoadingResults = false;
+  //     }, err => {
+  //       console.log(err);
+  //       this.isLoadingResults = false;
+  //     });
+  // }
+
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
   onFormSubmit(id: any) {
     this.isLoadingResults = true;
     this.api.updateReview(id, this.reviewForm.value)
@@ -64,6 +82,7 @@ export class ListReviewsComponent implements OnInit {
           this.isLoadingResults = false;
         }
       );
+      this.reloadCurrentRoute();
   }
 
   deleteReview(id: any) {
@@ -78,7 +97,7 @@ export class ListReviewsComponent implements OnInit {
             this.isLoadingResults = false;
           }
         );
-      this.ngOnInit();
+        this.reloadCurrentRoute();
     }
   }
 
