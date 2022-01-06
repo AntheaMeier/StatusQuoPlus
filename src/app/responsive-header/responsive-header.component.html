@@ -30,7 +30,7 @@
       *ngIf="isHandset$ | async">
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
-    <span class="title">adesso</span>
+    <span class="title" (click)="clickLogo()">adesso</span>
     <div class="nav-element">
       <div  class="element-text" (click)="changeRoleToMitarbeiter_in()" *ngIf="this.isLogin">ZIELE</div>
     </div>
@@ -62,10 +62,12 @@
   <div class="content-components" *ngIf="selectedRole == 'Mitarbeiter_in'">
     <div class="one-component">
       <app-goals *ngIf="this.isLogin" (showTasksClicked)="tasksToOneGoal = $event"
-                 (showGoalid)="setGoalsid($event)"></app-goals>
+                 (showGoalid)="setGoalsid($event)"
+                 (tasksToTodo)="tasksToTodo = $event" (tasksToDoing)="tasksToDoing = $event" (tasksToDone)="tasksToDone = $event"></app-goals>
     </div>
     <div class="one-component">
-      <app-todo *ngIf="this.isLogin" [tasksToOneGoal]="tasksToOneGoal" [goalid]="goalid"></app-todo>
+      <app-todo *ngIf="this.isLogin" [tasksToOneGoal]="tasksToOneGoal" [goalid]="goalid"
+                [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone"></app-todo>
     </div>
 
   </div>
@@ -82,10 +84,12 @@
       <div class="one-component">
         <app-goals [selectedRole]="selectedRole" (showTasksClicked)="tasksToOneGoal = $event"
                    (showGoalid)="setGoalsid($event)" [idTeam]="idTeamMember"
-                   [goalsToOneUser]="goalsToOneUser"></app-goals>
+                   [goalsToOneUser]="goalsToOneUser"
+                   (tasksToTodo)="tasksToTodo = $event" (tasksToDoing)="tasksToDoing = $event" (tasksToDone)="tasksToDone = $event" ></app-goals>
       </div>
       <div class="one-component">
-        <app-todo [selectedRole]="selectedRole" [tasksToOneGoal]="tasksToOneGoal" [goalid]="goalid"></app-todo>
+        <app-todo [selectedRole]="selectedRole" [tasksToOneGoal]="tasksToOneGoal"
+                  [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone" [goalid]="goalid"></app-todo>
       </div>
       <div class="one-component">
         <app-annual-review></app-annual-review>

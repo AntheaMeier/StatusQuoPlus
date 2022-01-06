@@ -42,6 +42,15 @@ export class TasksController{
 
     }
 
+  @Patch(':status/:id')
+  async updateTaskStatus(
+    @Param('id') taskId: string,
+    @Body('status') taskStatus: string,
+  ) {
+    await this.tasksService.updateTaskStatus(taskId, taskStatus);
+    return null;
+  }
+
     @Delete(':id')
    async removeProduct(@Param('id') taskId: string) {
     await this.tasksService.deleteTask(taskId);
@@ -55,6 +64,16 @@ export class TasksController{
 
     ){
     const tasks = await this.tasksService.getTasksToGoal(goalid);
+    return tasks;
+  }
+
+  @Get('goal/:goalid/:status')
+  async getAllTasksToStatus(
+    @Param('goalid') goalid: string,
+    @Param('status') status: string,
+
+  ){
+    const tasks = await this.tasksService.getTasksToStatus(goalid, status);
     return tasks;
   }
 

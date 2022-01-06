@@ -32,6 +32,9 @@ export class ResponsiveHeaderComponent {
   clickedOnMitarbeiter = false;
   idTeamMember = "";
   tasksToOneGoal: Tasks[] = [];
+  tasksToTodo: Tasks[] = [];
+  tasksToDoing: Tasks[] = [];
+  tasksToDone: Tasks[] = [];
   goalsToOneUser: Goals[] = [];
   currentUrl: String = ''
 
@@ -138,6 +141,8 @@ export class ResponsiveHeaderComponent {
 
   loadGoals(userid: any) {
     this.tasksToOneGoal = [];
+    this.tasksToTodo = [];
+    console.log(this.tasksToTodo);
     this.clickedOnMitarbeiter = true;
     this.api.getGoalsToUser(userid)
       .subscribe((res: any) => {
@@ -159,7 +164,10 @@ export class ResponsiveHeaderComponent {
   }
 
   clickProtokoll() {
-    this.currentUrl=  window.location.href;
+    this.currentUrl = window.location.href;
+  }
 
+  clickLogo() {
+    console.log('Click Logo: ' + this.tasksToTodo);
   }
 }

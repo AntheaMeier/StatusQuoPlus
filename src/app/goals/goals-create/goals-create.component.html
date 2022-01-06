@@ -18,6 +18,7 @@
           <textarea class="textarea-styling" name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup.enter)="updateAGoal(goal)"
                     [value]="goal.description" *ngIf="editable && (editableId == goal._id)">
             </textarea>
+
           <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
         </mat-card>
       </div>

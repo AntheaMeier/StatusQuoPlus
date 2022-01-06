@@ -56,7 +56,9 @@
   border-radius: 4px;
 }
 
+
 .textarea-styling {
+
   width: 100%;
   border: none;
   word-break: break-word;
@@ -65,10 +67,13 @@
 
 
 textarea::placeholder {
+
   opacity: 0.5;
   font-style: italic;
 }
 
+
 textarea:focus {
+
   outline: none;
 }

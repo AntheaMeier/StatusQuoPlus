@@ -18,6 +18,7 @@ const apiUrlStatus = 'http://localhost:3000/tasks/status';
 const apiUrlTasksForGoal = 'http://localhost:3000/tasks/goal';
 const apiUrlUsersForGoal = 'http://localhost:3000/goals/user';
 const apiUrlReviews = 'http://localhost:3000/reviews';
+const apiUrlTasksForStatus = 'http://localhost:3000/tasks/goal';
 
 @Injectable({
   providedIn: 'root'
@@ -146,6 +147,14 @@ export class ApiService {
       .pipe(
         tap(task => console.log('fetched tasks for goal')),
         catchError(this.handleError('getTasksForGoal', []))
+      );
+  }
+
+  getTasksToStatus(id: any, status: any): Observable<Tasks[]> {
+    return this.http.get<Tasks[]>(`${apiUrlTasksForStatus}/${id}/${status}`)
+      .pipe(
+        tap(task => console.log('fetched tasks to status')),
+        catchError(this.handleError('getTasksToStatus', []))
       );
   }
 
