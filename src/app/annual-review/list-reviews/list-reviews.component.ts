@@ -53,17 +53,6 @@ export class ListReviewsComponent implements OnInit {
     this.getReviewDetails(this.route.snapshot.params.id);
   }
 
-  // reload(): void {
-  //   this.api.getReviews()
-  //     .subscribe((res: any) => {
-  //       this.reviews = res;
-  //       this.isLoadingResults = false;
-  //     }, err => {
-  //       console.log(err);
-  //       this.isLoadingResults = false;
-  //     });
-  // }
-
   reloadCurrentRoute() {
     let currentUrl = this.router.url;
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
