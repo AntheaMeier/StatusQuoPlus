@@ -50,6 +50,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatStepperModule} from "@angular/material/stepper";
+import { DeleteDialogComponent } from './annual-review/delete-dialog/delete-dialog.component';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import {MatStepperModule} from "@angular/material/stepper";
     DeleteTaskDialogComponent,
     AnnualReviewComponent,
     ListReviewsComponent,
+    DeleteDialogComponent,
   ],
   imports: [
     MatExpansionModule,

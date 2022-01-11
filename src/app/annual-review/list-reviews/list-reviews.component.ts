@@ -3,6 +3,8 @@ import {Review} from '../../shared/review';
 import {ApiService} from 'src/app/services/api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-list-reviews',
@@ -19,6 +21,7 @@ export class ListReviewsComponent implements OnInit {
   isLoadingResults = true;
   review: Review = {id: '', date: '', description: ''};
   reviews: Review[] = [];
+  idDialog: any = '';
 
   reviewForm: FormGroup = this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required)
@@ -29,6 +32,7 @@ export class ListReviewsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
+    public dialog: MatDialog,
   ) {
   }
 
@@ -71,27 +75,17 @@ export class ListReviewsComponent implements OnInit {
           this.isLoadingResults = false;
         }
       );
-      this.reloadCurrentRoute();
   }
 
-  deleteReview(id: any) {
-    if (confirm('Are you sure you want to delete this item?')) {
-      this.isLoadingResults = true;
-      this.api.deleteReview(id)
-        .subscribe(res => {
-            this.isLoadingResults = false;
-            this.router.navigate(['/articles']);
-          }, (err) => {
-            console.log(err);
-            this.isLoadingResults = false;
-          }
-        );
-        this.reloadCurrentRoute();
-    }
+  deleteDialog(id: any): void {
+    this.idDialog = id;
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '40%',
+      data: {'id': this.idDialog}
+    });
   }
 
   editOnOff() {
     this.edit = !this.edit;
   }
-
 }
