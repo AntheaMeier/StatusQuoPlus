@@ -1,12 +1,24 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {ResponsiveHeaderComponent} from "./responsive-header/responsive-header.component";
 import {AuthGuardService} from "./auth-guard.service";
+import {TeamviewComponent} from "./teamview/teamview.component";
+import {GoalsCreateComponent} from "./goals/goals-create/goals-create.component";
+import {AnnualReviewComponent} from "./annual-review/annual-review.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: ResponsiveHeaderComponent,
+    component: GoalsCreateComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'teamview/:id',
+    component: TeamviewComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'protokolle',
+    component: AnnualReviewComponent,
     canActivate: [AuthGuardService]
   }
 ];

@@ -93,10 +93,7 @@ export class TasksService{
   private async findTask(id: string): Promise<Task> {
     let task;
     try{
-
-
-
-       task = await this.taskModel.findById(id);
+      task = await this.taskModel.findById(id);
 
     }
     catch(error){

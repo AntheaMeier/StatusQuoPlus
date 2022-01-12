@@ -50,6 +50,9 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatStepperModule} from "@angular/material/stepper";
+import { TeamviewComponent } from './teamview/teamview.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import {CdkAccordionModule} from "@angular/cdk/accordion";
 
 
 @NgModule({
@@ -64,6 +67,7 @@ import {MatStepperModule} from "@angular/material/stepper";
     DeleteTaskDialogComponent,
     AnnualReviewComponent,
     ListReviewsComponent,
+    TeamviewComponent,
   ],
   imports: [
     MatExpansionModule,
@@ -112,6 +116,8 @@ import {MatStepperModule} from "@angular/material/stepper";
     MatTooltipModule,
     OverlayModule,
     PortalModule,
+    MatTabsModule,
+    CdkAccordionModule,
   ],
   providers: [AuthGuardService],
   bootstrap: [AppComponent]

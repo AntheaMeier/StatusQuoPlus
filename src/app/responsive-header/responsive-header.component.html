@@ -7,14 +7,20 @@
     <mat-toolbar>Menü</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item *ngIf="this.isLogin">
-        <div class="sidenav-text" *ngIf="this.isLogin">ZIELE</div>
+        <div class="sidenav-text" *ngIf="this.isLogin" (click)="goToGoals(idLoggedInUser, 'Mitarbeiter_in')">ZIELE</div>
       </a>
-      <a mat-list-item *ngIf="this.isLogin">
+      <a mat-list-item *ngIf="this.isLogin" [routerLink]="'/protokolle'">
         <div class="sidenav-text" mat-button>PROTOKOLLE</div>
       </a>
-      <a mat-list-item *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">
-        <div class="sidenav-text" (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">MEIN TEAM</div>
-      </a>
+      <div>
+        <a mat-list-item (click)="onSelectVorgesetzte_r()" (click)="reloadPage()" *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">
+          <div class="sidenav-text"  (click)="reloadPage()" (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">MEIN TEAM</div>
+        </a>
+        <a mat-list-item class="sidenav-text members-styling" *ngFor="let member of teamVorgesetze" (click)="goToTeamview(member.userid, 'Vorgesetzte_r')">
+          {{member.firstname}}
+          {{member.surname}}
+        </a>
+      </div>
       <a (click)='logout()' mat-list-item *ngIf="this.isLogin">
         <mat-icon>exit_to_app</mat-icon>
         <div class="sidenav-text">Logout</div>
@@ -58,6 +64,7 @@
       </div>
     </div>
   </mat-toolbar>
+  <!--
   <div class="content-components" *ngIf="selectedRole == 'Mitarbeiter_in'">
     <div class="one-component">
       <app-goals *ngIf="this.isLogin" (showTasksClicked)="tasksToOneGoal = $event"
@@ -72,6 +79,10 @@
       <app-annual-review *ngIf="this.isLogin"></app-annual-review>
     </div>
   </div>
+
+
+
+  TEAMVIEW
   <div class="content-components" *ngIf="selectedRole == 'Vorgesetzte_r'">
     <mat-card>
       <mat-card-content>
@@ -82,6 +93,7 @@
       </mat-card-content>
     </mat-card>
     <div *ngIf="clickedOnMitarbeiter">
+
       <div class="one-component">
         <app-goals [selectedRole]="selectedRole" (showTasksClicked)="tasksToOneGoal = $event"
                    (showGoalid)="setGoalsid($event)" [idTeam]="idTeamMember"
@@ -96,5 +108,6 @@
         <app-annual-review></app-annual-review>
       </div>
     </div>
-  </div>
+  </div>-->
+    <router-outlet class="router-outlet-styling"></router-outlet>
 </mat-sidenav-container>

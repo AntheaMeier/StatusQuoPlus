@@ -83,3 +83,12 @@ input::placeholder {
 input:focus {
   outline: none;
 }
+
+
+.todo-matcard {
+  width: 100%;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+}

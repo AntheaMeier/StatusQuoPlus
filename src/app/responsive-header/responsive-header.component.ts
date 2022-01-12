@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectorRef, Component, Output} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map, shareReplay} from 'rxjs/operators';
@@ -9,6 +9,7 @@ import {Login, Team} from "../shared/login";
 import {ApiService} from "../services/api.service";
 import {Tasks} from "../shared/tasks";
 import {Goals} from "../shared/goals";
+import {Review} from "../shared/review";
 
 @Component({
   selector: 'app-responsive-header',
@@ -29,13 +30,11 @@ export class ResponsiveHeaderComponent {
   idLoggedInUser: String = "";
   teamVorgesetze: Team[] = [];
   goalid: string = "";
-  clickedOnMitarbeiter = false;
-  idTeamMember = "";
+  @Output() idTeamMember = "";
   tasksToOneGoal: Tasks[] = [];
   tasksToTodo: Tasks[] = [];
-  tasksToDoing: Tasks[] = [];
-  tasksToDone: Tasks[] = [];
-  goalsToOneUser: Goals[] = [];
+  currentUrl: String = '';
+
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -48,7 +47,7 @@ export class ResponsiveHeaderComponent {
               private router: Router,
               private formBuilder: FormBuilder,
               private api: ApiService,
-  ) {
+              private cdr: ChangeDetectorRef) {
     this.loginForm = formBuilder.group({
       title: formBuilder.control('initial value', Validators.required)
     });
@@ -58,7 +57,17 @@ export class ResponsiveHeaderComponent {
     this.loggedIn = data;
   }
 
+  goToTeamview(userid: any, selectedRole: any): void {
+    this.router.navigate(['/teamview/' + userid], {state: {data: {userid, selectedRole}}});
+  }
+
+  goToGoals(userid: any, selectedRole: any): void {
+    this.router.navigate([''], {state: {data: {userid, selectedRole}}});
+  }
+
+
   ngOnInit(): void {
+    this.goToGoals(this.idLoggedInUser, 'Mitarbeiter_in');
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -95,7 +104,7 @@ export class ResponsiveHeaderComponent {
   }
 
   onSelectVorgesetzte_r() {
-    this.selectedRole = "Vorgesetzte_r"
+    this.selectedRole = "Vorgesetzte_r";
     this.tasksToOneGoal = [];
   }
 
@@ -115,23 +124,18 @@ export class ResponsiveHeaderComponent {
     this.goalid = id;
   }
 
-  loadGoals(userid: any) {
-    this.tasksToOneGoal = [];
-    this.tasksToTodo = [];
-    console.log(this.tasksToTodo);
-    this.clickedOnMitarbeiter = true;
-    this.api.getGoalsToUser(userid)
-      .subscribe((res: any) => {
-        this.goalsToOneUser = res;
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-    this.idTeamMember = userid;
+  reloadPage() {
+    this.router.navigate(['/']);
+    this.currentUrl= '';
+
+  }
+
+  clickProtokoll() {
+    this.currentUrl = window.location.href;
   }
 
   clickLogo() {
     console.log('Click Logo: ' + this.tasksToTodo);
   }
+
 }
