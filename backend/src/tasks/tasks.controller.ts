@@ -14,33 +14,33 @@ export class TasksController{
     @Body('goalid') taskGoalid: string,
 
   ) {
-   const generatedId = await this.tasksService.insertTask(taskDesc, taskStatus, taskGoalid);
-   return{id: generatedId};
+    const generatedId = await this.tasksService.insertTask(taskDesc, taskStatus, taskGoalid);
+    return{id: generatedId};
 
 
   }
 
   @Get()
-    async getAllProducts(){
-      const tasks = await this.tasksService.getTasks();
-      return tasks;
-    }
+  async getAllProducts(){
+    const tasks = await this.tasksService.getTasks();
+    return tasks;
+  }
 
-    @Get(':id')
+  @Get(':id')
   getTask(@Param('id') taskId: string){
     return this.tasksService.getSingleTask(taskId);
-    }
+  }
 
-    @Patch(':id')
-   async updateProduct(
-      @Param('id') taskId: string,
-      @Body('description') taskDesc: string,
-      @Body('status') taskStatus: string,
-      @Body('goalid') taskGoalid: string,){
+  @Patch(':id')
+  async updateProduct(
+    @Param('id') taskId: string,
+    @Body('description') taskDesc: string,
+    @Body('status') taskStatus: string,
+    @Body('goalid') taskGoalid: string,){
     await this.tasksService.updateTask(taskId,taskDesc,taskStatus,taskGoalid);
     return null;
 
-    }
+  }
 
   @Patch(':status/:id')
   async updateTaskStatus(
@@ -51,18 +51,18 @@ export class TasksController{
     return null;
   }
 
-    @Delete(':id')
-   async removeProduct(@Param('id') taskId: string) {
+  @Delete(':id')
+  async removeProduct(@Param('id') taskId: string) {
     await this.tasksService.deleteTask(taskId);
     return null;
-    }
+  }
 
 
-    @Get('goal/:goalid')
+  @Get('goal/:goalid')
   async getAllTasksToGoal(
-      @Param('goalid') goalid: string,
+    @Param('goalid') goalid: string,
 
-    ){
+  ){
     const tasks = await this.tasksService.getTasksToGoal(goalid);
     return tasks;
   }
@@ -76,16 +76,6 @@ export class TasksController{
     const tasks = await this.tasksService.getTasksToStatus(goalid, status);
     return tasks;
   }
-
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectorRef, Component, Output} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map, shareReplay} from 'rxjs/operators';
@@ -30,8 +30,7 @@ export class ResponsiveHeaderComponent {
   idLoggedInUser: String = "";
   teamVorgesetze: Team[] = [];
   goalid: string = "";
-  clickedOnMitarbeiter = false;
-  idTeamMember = "";
+  @Output() idTeamMember = "";
   tasksToOneGoal: Tasks[] = [];
   tasksToTodo: Tasks[] = [];
   tasksToDoing: Tasks[] = [];
@@ -58,6 +57,8 @@ export class ResponsiveHeaderComponent {
               private router: Router,
               private formBuilder: FormBuilder,
               private api: ApiService,
+              private cdr: ChangeDetectorRef
+
   ) {
 
     this.loginForm = formBuilder.group({
@@ -80,10 +81,21 @@ export class ResponsiveHeaderComponent {
     this.loggedIn = data;
   }
 
+  goToTeamview(userid: any, selectedRole: any): void {
+    this.router.navigate(['/teamview/' + userid], {state: {data: {userid, selectedRole}}});
+  }
+
+  goToGoals(userid: any, selectedRole: any): void {
+    this.router.navigate([''], {state: {data: {userid, selectedRole}}});
+  }
+
+
 
 
   ngOnInit(): void {
-    this.currentUrl = this.router.url;
+      this.currentUrl = this.router.url;
+
+    this.goToGoals(this.idLoggedInUser, 'Mitarbeiter_in');
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -130,9 +142,8 @@ export class ResponsiveHeaderComponent {
   }
 
   onSelectVorgesetzte_r() {
-    this.selectedRole = "Vorgesetzte_r"
+    this.selectedRole = "Vorgesetzte_r";
     this.tasksToOneGoal = [];
-    this.clickedOnMitarbeiter= false;
   }
 
 
@@ -159,23 +170,6 @@ export class ResponsiveHeaderComponent {
     this.goalid = id;
   }
 
-  loadGoals(userid: any) {
-    this.clickedOnMitarbeiter = true;
-    this.tasksToOneGoal = [];
-    this.tasksToTodo = [];
-    console.log(this.tasksToTodo);
-    this.api.getGoalsToUser(userid)
-      .subscribe((res: any) => {
-        this.goalsToOneUser = res;
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-    this.idTeamMember = userid;
-  }
-
-
 
   reloadPage() {
     this.router.navigate(['/']);
@@ -187,11 +181,16 @@ export class ResponsiveHeaderComponent {
     this.currentUrl = window.location.href;
   }
 
+
+
+
+
+
   clickLogo() {
     console.log('Click Logo: ' + this.tasksToTodo);
   }
 
-  loadReviews(userid: string) {
+ /* loadReviews(userid: string) {
     this.clickedOnMitarbeiter = true;
     this.api.getReviewsToUser(userid)
       .subscribe((res: any) => {
@@ -204,11 +203,12 @@ export class ResponsiveHeaderComponent {
     this.idTeamMember = userid;
 
 
-  }
+  }*/
 
   changeUrl(id:String) {
     this.currentUrl = 'board';
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
       this.router.navigate(['board/',id]));
   }
+
 }

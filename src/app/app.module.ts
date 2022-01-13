@@ -56,6 +56,10 @@ import {MatStepperModule} from "@angular/material/stepper";
 import { BoardMemberComponent } from './board-member/board-member.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
+import { TeamviewComponent } from './teamview/teamview.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import {CdkAccordionModule} from "@angular/cdk/accordion";
+
 export function playerFactory() {
   return import('lottie-web');
 }
@@ -74,6 +78,7 @@ export function playerFactory() {
     ListReviewsComponent,
     BoardMemberComponent,
     NotFoundComponent,
+    TeamviewComponent,
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),
@@ -124,6 +129,8 @@ export function playerFactory() {
     MatTooltipModule,
     OverlayModule,
     PortalModule,
+    MatTabsModule,
+    CdkAccordionModule,
   ],
   providers: [AuthGuardService],
   bootstrap: [AppComponent]

@@ -55,19 +55,21 @@ export class TodoComponent implements OnInit {
   }
 
   dropInTodo(event: CdkDragDrop<any>) {
-    console.log('vorher ' + this.tasksToTodo);
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log('moveIteminArray aufgerufen');
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-      console.log('nachher ' + this.tasksToTodo);
-      this.changeStatusToTodo();
+    if(this.selectedRole == 'Mitarbeiter_in') {
+      console.log('vorher ' + this.tasksToTodo);
+      if (event.previousContainer === event.container) {
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        console.log('moveIteminArray aufgerufen');
+      } else {
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex,
+        );
+        console.log('nachher ' + this.tasksToTodo);
+        this.changeStatusToTodo();
+      }
     }
   }
 
@@ -88,17 +90,19 @@ export class TodoComponent implements OnInit {
   }
 
   dropInDoing(event: CdkDragDrop<any>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log('moveIteminArray aufgerufen');
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-      this.changeStatusToDoing();
+    if(this.selectedRole == 'Mitarbeiter_in') {
+      if (event.previousContainer === event.container) {
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        console.log('moveIteminArray aufgerufen');
+      } else {
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex,
+        );
+        this.changeStatusToDoing();
+      }
     }
   }
 
@@ -118,19 +122,21 @@ export class TodoComponent implements OnInit {
   }
 
   dropInDone(event: CdkDragDrop<any>) {
-    console.log('vorher ' + this.tasksToOneGoal);
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log('moveIteminArray aufgerufen');
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-      console.log('nachher ' + this.tasksToOneGoal);
-      this.changeStatusToDone();
+    if(this.selectedRole == 'Mitarbeiter_in') {
+      console.log('vorher ' + this.tasksToOneGoal);
+      if (event.previousContainer === event.container) {
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        console.log('moveIteminArray aufgerufen');
+      } else {
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex,
+        );
+        console.log('nachher ' + this.tasksToOneGoal);
+        this.changeStatusToDone();
+      }
     }
   }
 
