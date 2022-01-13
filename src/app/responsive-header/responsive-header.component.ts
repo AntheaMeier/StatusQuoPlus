@@ -39,6 +39,7 @@ export class ResponsiveHeaderComponent {
   goalsToOneUser: Goals[] = [];
   reviewsToOneUser: Review[] = [];
 
+
   currentUrl: String = ''
 
 
@@ -97,6 +98,16 @@ export class ResponsiveHeaderComponent {
     this.roleLoggedInUser = this.auth.getUserDetails().user_info.role;
     this.idLoggedInUser = this.auth.getUserDetails().user_info._id;
     this.roleLoggedInUser = this.auth.getUserDetails().user_info.role;
+
+    this.api.getUser(this.idLoggedInUser)
+      .subscribe((res: Login) => {
+        console.log('get user ' + res.firstname);
+        this.teamVorgesetze = res.team;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
   }
 
   get f(): any {
@@ -117,7 +128,6 @@ export class ResponsiveHeaderComponent {
   onSelectVorgesetzte_r() {
     this.selectedRole = "Vorgesetzte_r"
     this.tasksToOneGoal = [];
-    this.reviewsToOneUser = [];
     this.clickedOnMitarbeiter= false;
   }
 
@@ -144,10 +154,10 @@ export class ResponsiveHeaderComponent {
   }
 
   loadGoals(userid: any) {
+    this.clickedOnMitarbeiter = true;
     this.tasksToOneGoal = [];
     this.tasksToTodo = [];
     console.log(this.tasksToTodo);
-    this.clickedOnMitarbeiter = true;
     this.api.getGoalsToUser(userid)
       .subscribe((res: any) => {
         this.goalsToOneUser = res;
@@ -176,7 +186,6 @@ export class ResponsiveHeaderComponent {
   }
 
   loadReviews(userid: string) {
-    this.reviewsToOneUser = [];
     this.clickedOnMitarbeiter = true;
     this.api.getReviewsToUser(userid)
       .subscribe((res: any) => {

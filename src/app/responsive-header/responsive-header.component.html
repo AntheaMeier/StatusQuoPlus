@@ -15,10 +15,6 @@
       <a mat-list-item  (click)="reloadPage()" *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">
         <div class="sidenav-text"  (click)="reloadPage()" (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">MEIN TEAM</div>
       </a>
-      <a mat-list-item class="sidenav-text" *ngFor="let member of teamVorgesetze" (click)="loadGoals(member.userid)" (click)="loadReviews(member.userid)">
-        {{member.firstname}}
-        {{member.surname}}
-      </a>
       <a (click)='logout()' mat-list-item *ngIf="this.isLogin">
         <mat-icon>exit_to_app</mat-icon>
         <div class="sidenav-text">Logout</div>
@@ -63,35 +59,44 @@
     </div>
   </mat-toolbar>
   <div class="homepage" *ngIf="currentUrl == ''">
-  <div class="content-components" *ngIf="selectedRole == 'Mitarbeiter_in'">
-    <div class="one-component">
-      <app-goals *ngIf="this.isLogin" (showTasksClicked)="tasksToOneGoal = $event"
-                 (showGoalid)="setGoalsid($event)"
-                 (tasksToTodo)="tasksToTodo = $event" (tasksToDoing)="tasksToDoing = $event" (tasksToDone)="tasksToDone = $event"></app-goals>
-    </div>
-    <div class="one-component">
-      <app-todo *ngIf="this.isLogin" [tasksToOneGoal]="tasksToOneGoal" [goalid]="goalid"
-                [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone"></app-todo>
-    </div>
+    <div class="content-components" *ngIf="selectedRole == 'Mitarbeiter_in'">
+      <div class="one-component">
+        <app-goals *ngIf="this.isLogin" (showTasksClicked)="tasksToOneGoal = $event"
+                   (showGoalid)="setGoalsid($event)"
+                   (tasksToTodo)="tasksToTodo = $event" (tasksToDoing)="tasksToDoing = $event" (tasksToDone)="tasksToDone = $event"></app-goals>
+      </div>
+      <div class="one-component">
+        <app-todo *ngIf="this.isLogin" [tasksToOneGoal]="tasksToOneGoal" [goalid]="goalid"
+                  [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone"></app-todo>
+      </div>
 
-  </div>
-  <div class="content-components" *ngIf="selectedRole == 'Vorgesetzte_r'">
-    <div *ngIf="clickedOnMitarbeiter">
-      <div class="one-component">
-        <app-goals [selectedRole]="selectedRole" (showTasksClicked)="tasksToOneGoal = $event"
-                   (showGoalid)="setGoalsid($event)" [idTeam]="idTeamMember"
-                   [goalsToOneUser]="goalsToOneUser"
-                   (tasksToTodo)="tasksToTodo = $event" (tasksToDoing)="tasksToDoing = $event" (tasksToDone)="tasksToDone = $event" ></app-goals>
-      </div>
-      <div class="one-component">
-        <app-todo [selectedRole]="selectedRole" [tasksToOneGoal]="tasksToOneGoal"
-                  [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone" [goalid]="goalid"></app-todo>
-      </div>
-      <div class="one-component">
-        <app-annual-review [reviewsToOneUser]="reviewsToOneUser" [idTeamMember]="idTeamMember"></app-annual-review>
+    </div>
+    <div class="content-components" *ngIf="selectedRole == 'Vorgesetzte_r'">
+      <mat-card>
+        <mat-card-content>
+          <mat-card *ngFor="let member of teamVorgesetze" (click)="loadGoals(member.userid)"
+                    (click)="loadReviews(member.userid)">
+            {{member.firstname}}
+            {{member.surname}}
+          </mat-card>
+        </mat-card-content>
+      </mat-card>
+      <div *ngIf="clickedOnMitarbeiter">
+        <div class="one-component">
+          <app-goals [selectedRole]="selectedRole" (showTasksClicked)="tasksToOneGoal = $event"
+                     (showGoalid)="setGoalsid($event)" [idTeam]="idTeamMember"
+                     [goalsToOneUser]="goalsToOneUser"
+                     (tasksToTodo)="tasksToTodo = $event" (tasksToDoing)="tasksToDoing = $event" (tasksToDone)="tasksToDone = $event" ></app-goals>
+        </div>
+        <div class="one-component">
+          <app-todo [selectedRole]="selectedRole" [tasksToOneGoal]="tasksToOneGoal"
+                    [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone" [goalid]="goalid"></app-todo>
+        </div>
+        <div class="one-component">
+          <app-annual-review [selectedRole]="selectedRole" [reviewsToOneUser]="reviewsToOneUser" [idTeamMember]="idTeamMember"></app-annual-review>
+        </div>
       </div>
     </div>
-  </div>
   </div>
   <router-outlet></router-outlet>
 </mat-sidenav-container>

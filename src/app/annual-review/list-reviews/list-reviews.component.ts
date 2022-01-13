@@ -18,6 +18,7 @@ export class ListReviewsComponent implements OnInit {
   date = '';
   description = '';
   isLoadingResults = true;
+  @Input() selectedRole : String = "";
 
   @Input() currentUrl = "";
   review: Review = {_id: '', date: '', description: '', userid: ''};
@@ -41,6 +42,7 @@ export class ListReviewsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('INITIALIZED!!!')
     this.api.getUsers()
       .subscribe((res: any) => {
         this.dataUsers = res;
@@ -50,21 +52,31 @@ export class ListReviewsComponent implements OnInit {
         this.isLoadingResults = false;
       });
     this.idloggedInUser = this.auth.getUserDetails().user_info._id;
+    if(this.selectedRole!= "Vorgesetzte_r") {
       this.getReviewDetails(this.idloggedInUser);
+    }
 
-    this.getReviewDetails(this.route.snapshot.params.id);
+    if(this.selectedRole == "Vorgesetzte_r"){
+      this.getReviewDetails(this.idTeamMember);
+      console.log('id member ' + this.idTeamMember);
+    }
+
+
+    //this.getReviewDetails(this.route.snapshot.params.id);
   }
 
   getReviewDetails(id: any) {
-    this.api.getReviewsToUser(id)
-      .subscribe((data: any) => {
-        this.reviewsToOneUser = data;
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-    this.showReviewsToOneUser = true;
+
+      this.api.getReviewsToUser(id)
+        .subscribe((data: any) => {
+          this.reviewsToOneUser = data;
+          this.isLoadingResults = false;
+        }, err => {
+          console.log(err);
+          this.isLoadingResults = false;
+        });
+      this.showReviewsToOneUser = true;
+
   }
 
   onFormSubmit(id: any) {

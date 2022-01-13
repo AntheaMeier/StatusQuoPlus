@@ -19,6 +19,7 @@ export class AnnualReviewComponent {
   currentUrl = "";
 
   @Input() idTeamMember = "";
+  @Input() selectedRole : String = "";
 
   idloggedInUser: String = "";
   dataUsers: Login[] = [];
@@ -29,10 +30,10 @@ export class AnnualReviewComponent {
   constructor(private api: ApiService,
               private auth: AuthService,
               router: Router) {
-      this.currentUrl = router.url;
-      console.log(this.currentUrl);
+    this.currentUrl = router.url;
+    console.log(this.currentUrl);
 
-    }
+  }
 
 
   ngOnInit() {
@@ -45,10 +46,10 @@ export class AnnualReviewComponent {
         this.isLoadingResults = false;
       });
     this.idloggedInUser = this.auth.getUserDetails().user_info._id;
-    if (this.idTeam == "") {
+    if (this.selectedRole != "Vorgesetzte_r") {
       this.getReviewDetails(this.idloggedInUser);
-    } else {
-      this.getReviewDetails(this.idTeam)
+    } if(this.selectedRole == "Vorgesetzte_r") {
+      this.getReviewDetails(this.idTeamMember)
     }
     this.api.getGoalsToUser(this.idloggedInUser)
       .subscribe((res: any) => {
@@ -61,6 +62,9 @@ export class AnnualReviewComponent {
   }
 
   onAddPost(id: any) {
+    if(this.selectedRole == "Vorgesetzte_r"){
+     id = this.idTeamMember;
+    }
     this.isLoadingResults = true;
     const simpleObject = {} as Review;
     simpleObject.date = this.enteredDate;
@@ -77,14 +81,17 @@ export class AnnualReviewComponent {
   }
 
   getReviewDetails(id: any) {
-    this.api.getReviewsToUser(id)
-      .subscribe((data: any) => {
-        this.reviewsToOneUser = data;
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-    this.showReviewsToOneUser = true;
-  }
+
+      this.api.getReviewsToUser(id)
+        .subscribe((data: any) => {
+          this.reviewsToOneUser = data;
+          this.isLoadingResults = false;
+        }, err => {
+          console.log(err);
+          this.isLoadingResults = false;
+        });
+      this.showReviewsToOneUser = true;
+    }
+
+
 }

@@ -232,7 +232,7 @@ export class GoalsCreateComponent implements OnInit {
   }
 
   getTheInput(e: any) {
-    this.description = e.target.value;
+    this.description = e.target.value ;
   }
 
   setTheSelectedGoal(goal: Goals) {
