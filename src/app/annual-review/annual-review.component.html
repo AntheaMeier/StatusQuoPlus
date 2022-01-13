@@ -1,35 +1,42 @@
-<mat-card class="row style">
-  <h3>UNTERJAEHRIGER AUSTAUSCH</h3>
+
+<mat-card class="row style">UNTERJAEHRIGER AUSTAUSCH
+  <mat-icon (click)="addPostForm()">add</mat-icon>
   <mat-card class="style2 col-md-6" *ngIf="currentUrl != '/protokolle'">
-    <mat-form-field class="col-md-12">
-      <input
-        [(ngModel)]="enteredDate"
-        id="dateEntry"
-        matInput type="text"
-        name="date"
-        required
-        placeholder="Datum"
-        #date="ngModel">
-      <mat-error *ngIf="date.invalid">Please enter a date</mat-error>
-    </mat-form-field>
-    <mat-form-field class="col-md-12">
-            <textarea
-              [(ngModel)]="enteredContent"
-              id="content"
-              matInput rows="6"
-              name="content"
-              required
-              placeholder="Notizen zum unterjaehrigen Austausch"
-              #content="ngModel">
-            </textarea>
-      <mat-error *ngIf="content.invalid">Please enter content</mat-error>
-    </mat-form-field>
-    <button
+    <mat-expansion-panel hideToggle *ngIf = "addPost">
+      <mat-expansion-panel-header>
+        <mat-form-field class="col-md-12">
+          <input 
+            matInput type="text"
+            [(ngModel)]="enteredDate"
+            id="dateEntry"
+            name="date"
+            required
+            placeholder="Datum"
+            #date="ngModel">
+          <mat-error *ngIf="date.invalid">Datum eingeben</mat-error>
+        </mat-form-field>
+      </mat-expansion-panel-header>
+      <mat-form-field style="white-space: pre-wrap;">
+        <textarea
+          [(ngModel)]="enteredContent"
+          id="content"
+          matInput rows="6"
+          name="content"
+          required
+          placeholder="Notizen zum unterjaehrigen Austausch"
+          #content="ngModel">
+        </textarea>
+  <mat-error *ngIf="content.invalid">Notizen eingeben</mat-error>
+</mat-form-field>
+      <mat-action-row>
+        <button
+
       mat-raised-button *ngIf=true matSuffix
       type="submit" (click)=onAddPost(idloggedInUser)>Save
     </button>
-  </mat-card>
-  <mat-card class="style2 col-md-6">
+      </mat-action-row>
+    </mat-expansion-panel>
     <app-list-reviews [selectedRole]="selectedRole" [reviewsToOneUser]="reviewsToOneUser" [idTeamMember]="idTeamMember" [currentUrl]="currentUrl"></app-list-reviews>
-  </mat-card>
+
+
 </mat-card>

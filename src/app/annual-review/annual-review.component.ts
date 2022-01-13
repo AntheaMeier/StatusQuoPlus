@@ -1,4 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
+import { Router } from '@angular/router';
+
 import {ApiService} from '../services/api.service';
 import {Review} from '../shared/review';
 import {Router} from "@angular/router";
@@ -11,7 +13,13 @@ import {AuthService} from "../services/auth.service";
   styleUrls: ['./annual-review.component.css']
 })
 
-export class AnnualReviewComponent {
+
+export class AnnualReviewComponent implements OnInit {
+  
+   review!: Review;
+
+  addPost = false;
+
   enteredContent = "";
   enteredDate = "";
   isLoadingResults = true;
@@ -47,6 +55,12 @@ export class AnnualReviewComponent {
     this.idloggedInUser = this.auth.getUserDetails().user_info._id;
 
   }
+  
+    reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
 
   onAddPost(id: any) {
     if(this.selectedRole == "Vorgesetzte_r"){
@@ -64,7 +78,12 @@ export class AnnualReviewComponent {
         console.log(err);
         this.isLoadingResults = false;
       });
-    window.location.reload()
+    this.reloadCurrentRoute();
+    this.addPost = false;
+  }
+
+  addPostForm() {
+    this.addPost = !this.addPost;
   }
 
 

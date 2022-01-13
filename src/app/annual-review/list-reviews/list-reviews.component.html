@@ -1,10 +1,11 @@
+
 <mat-accordion multi="true" *ngIf="reviewsToOneUser.length > 0">
   <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
-    <mat-expansion-panel *ngFor="let review of reviewsToOneUser">
+    <mat-expansion-panel *ngFor="let review of reviewsToOneUser" hideToggle>
       <mat-expansion-panel-header>
         {{ review.date }}
       </mat-expansion-panel-header>
-      <p *ngIf="!edit">{{ review.description }}</p>
+      <p *ngIf="!edit" style="white-space: pre-wrap;">{{ review.description }}</p>
       <form [formGroup]="reviewForm" (ngSubmit)="onFormSubmit(review._id)">
             <textarea
               rows="5"

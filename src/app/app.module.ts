@@ -35,7 +35,6 @@ import {ClipboardModule} from "@angular/cdk/clipboard";
 import {CdkTreeModule} from "@angular/cdk/tree";
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
-
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatNativeDateModule, MatRippleModule} from "@angular/material/core";
 import {MatMenuModule} from "@angular/material/menu";
@@ -53,9 +52,9 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatStepperModule} from "@angular/material/stepper";
+import { DeleteDialogComponent } from './annual-review/delete-dialog/delete-dialog.component';
 import { BoardMemberComponent } from './board-member/board-member.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-
 import { TeamviewComponent } from './teamview/teamview.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {CdkAccordionModule} from "@angular/cdk/accordion";
@@ -76,6 +75,7 @@ export function playerFactory() {
     DeleteTaskDialogComponent,
     AnnualReviewComponent,
     ListReviewsComponent,
+    DeleteDialogComponent,
     BoardMemberComponent,
     NotFoundComponent,
     TeamviewComponent,

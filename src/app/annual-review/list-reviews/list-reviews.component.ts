@@ -3,6 +3,8 @@ import {Review} from '../../shared/review';
 import {ApiService} from 'src/app/services/api.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import {Login} from "../../shared/login";
 import {AuthService} from "../../services/auth.service";
 
@@ -18,6 +20,7 @@ export class ListReviewsComponent implements OnInit {
   date = '';
   description = '';
   isLoadingResults = true;
+  idDialog: any = '';
   @Input() selectedRole : String = "";
 
   @Input() currentUrl = "";
@@ -37,12 +40,12 @@ export class ListReviewsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
+    public dialog: MatDialog,
     private auth: AuthService,
   ) {
   }
 
   ngOnInit(): void {
-    console.log('INITIALIZED!!!')
     this.api.getUsers()
       .subscribe((res: any) => {
         this.dataUsers = res;
@@ -79,6 +82,13 @@ export class ListReviewsComponent implements OnInit {
 
   }
 
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
   onFormSubmit(id: any) {
     this.isLoadingResults = true;
     this.api.updateReview(id, this.reviewForm.value)
@@ -93,20 +103,12 @@ export class ListReviewsComponent implements OnInit {
       );
   }
 
-  deleteReview(id: any) {
-    if (confirm('Are you sure you want to delete this item?')) {
-      this.isLoadingResults = true;
-      this.api.deleteReview(id)
-        .subscribe(res => {
-            this.isLoadingResults = false;
-            this.router.navigate(['/articles']);
-          }, (err) => {
-            console.log(err);
-            this.isLoadingResults = false;
-          }
-        );
-      this.ngOnInit();
-    }
+  deleteDialog(id: any): void {
+    this.idDialog = id;
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '40%',
+      data: {'id': this.idDialog}
+    });
   }
 
   editOnOff() {
