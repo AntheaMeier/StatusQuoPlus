@@ -46,19 +46,7 @@ export class AnnualReviewComponent {
         this.isLoadingResults = false;
       });
     this.idloggedInUser = this.auth.getUserDetails().user_info._id;
-    if (this.selectedRole != "Vorgesetzte_r") {
-      this.getReviewDetails(this.idloggedInUser);
-    } if(this.selectedRole == "Vorgesetzte_r") {
-      this.getReviewDetails(this.idTeamMember)
-    }
-    this.api.getGoalsToUser(this.idloggedInUser)
-      .subscribe((res: any) => {
-        this.reviewsToOneUser = res;
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
+
   }
 
   onAddPost(id: any) {
@@ -80,18 +68,6 @@ export class AnnualReviewComponent {
     window.location.reload()
   }
 
-  getReviewDetails(id: any) {
-
-      this.api.getReviewsToUser(id)
-        .subscribe((data: any) => {
-          this.reviewsToOneUser = data;
-          this.isLoadingResults = false;
-        }, err => {
-          console.log(err);
-          this.isLoadingResults = false;
-        });
-      this.showReviewsToOneUser = true;
-    }
 
 
 }
