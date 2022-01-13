@@ -5,6 +5,9 @@ import {AuthGuardService} from "./auth-guard.service";
 import {GoalsCreateComponent} from "./goals/goals-create/goals-create.component";
 import {TodoComponent} from "./todo/todo.component";
 import {AnnualReviewComponent} from "./annual-review/annual-review.component";
+import {BoardMemberComponent} from "./board-member/board-member.component";
+import {RoleGuard} from "./role.guard";
+import {NotFoundComponent} from "./not-found/not-found.component";
 
 const routes: Routes = [
 
@@ -15,6 +18,12 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
 
   },
+  {
+    path: 'notfound',
+    component: NotFoundComponent,
+    canActivate: [AuthGuardService]
+
+  },
 
   {
     path: 'protokolle',
@@ -22,7 +31,18 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
 
 
+  },
+
+  {
+    path: 'board/:id',
+    component: BoardMemberComponent,
+    canActivate: [AuthGuardService, RoleGuard]
+
+
+
   }
+
+
 ];
 
 @NgModule({

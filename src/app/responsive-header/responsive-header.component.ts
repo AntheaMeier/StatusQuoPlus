@@ -41,6 +41,8 @@ export class ResponsiveHeaderComponent {
 
 
   currentUrl: String = ''
+  panelOpenState = false;
+
 
 
 
@@ -57,6 +59,7 @@ export class ResponsiveHeaderComponent {
               private formBuilder: FormBuilder,
               private api: ApiService,
   ) {
+
     this.loginForm = formBuilder.group({
       title: formBuilder.control('initial value', Validators.required)
     });
@@ -80,6 +83,7 @@ export class ResponsiveHeaderComponent {
 
 
   ngOnInit(): void {
+    this.currentUrl = this.router.url;
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -133,9 +137,11 @@ export class ResponsiveHeaderComponent {
 
 
   changeRoleToMitarbeiter_in(){
+    console.log("geklickt");
     this.selectedRole ="Mitarbeiter_in";
+    this.currentUrl= '';
     this.router.navigate(['/']);
-    this.currentUrl= '';  }
+     }
 
   onClickVorgesetzter() {
     this.api.getUser(this.idLoggedInUser)
@@ -198,5 +204,11 @@ export class ResponsiveHeaderComponent {
     this.idTeamMember = userid;
 
 
+  }
+
+  changeUrl(id:String) {
+    this.currentUrl = 'board';
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['board/',id]));
   }
 }

@@ -12,7 +12,6 @@ import {AuthService} from "../services/auth.service";
 })
 
 export class AnnualReviewComponent {
-  review!: Review;
   enteredContent = "";
   enteredDate = "";
   isLoadingResults = true;
