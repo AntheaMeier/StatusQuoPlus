@@ -14,6 +14,7 @@ import {DeleteTaskDialogComponent} from "./delete-task-dialog/delete-task-dialog
 export class TodoComponent implements OnInit {
 
   @Input() tasksToOneGoal: Tasks[] = [];
+  @Input() tasksToTodo: Tasks[] = [];
   @Input() tasksToDoing: Tasks[] = [];
   @Input() tasksToDone: Tasks[] = [];
   @Input() goalid: string = '';
@@ -33,27 +34,15 @@ export class TodoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
-  fillArrays() {
-    for (let task of this.tasksToOneGoal) {
-      if (task.status == "doing") {
-        let index = this.tasksToOneGoal.indexOf(task);
-        this.tasksToOneGoal.splice(index, 1);
-        this.tasksToDoing.push(task);
-      } else if (task.status == "done") {
-        let index = this.tasksToOneGoal.indexOf(task);
-        this.tasksToOneGoal.splice(index, 1);
-        this.tasksToDone.push(task);
-      }
-    }
-    this.ngOnInit();
-  }
+
 
   // TODO
 
   public changeStatusToTodo(): void {
-    this.tasksToOneGoal.forEach((task: Tasks) => {
+    this.tasksToTodo.forEach((task: Tasks) => {
       if (task.status != 'todo') {
         console.log(task._id);
         task.status = String('todo');
@@ -66,19 +55,21 @@ export class TodoComponent implements OnInit {
   }
 
   dropInTodo(event: CdkDragDrop<any>) {
-    console.log('vorher ' + this.tasksToOneGoal);
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log('moveIteminArray aufgerufen');
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-      console.log('nachher ' + this.tasksToOneGoal);
-      this.changeStatusToTodo();
+    if(this.selectedRole == 'Mitarbeiter_in') {
+      console.log('vorher ' + this.tasksToTodo);
+      if (event.previousContainer === event.container) {
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        console.log('moveIteminArray aufgerufen');
+      } else {
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex,
+        );
+        console.log('nachher ' + this.tasksToTodo);
+        this.changeStatusToTodo();
+      }
     }
   }
 
@@ -99,24 +90,24 @@ export class TodoComponent implements OnInit {
   }
 
   dropInDoing(event: CdkDragDrop<any>) {
-    console.log('vorher ' + this.tasksToOneGoal);
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log('moveIteminArray aufgerufen');
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-      console.log('nachher ' + this.tasksToOneGoal);
-      this.changeStatusToDoing();
+    if(this.selectedRole == 'Mitarbeiter_in') {
+      if (event.previousContainer === event.container) {
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        console.log('moveIteminArray aufgerufen');
+      } else {
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex,
+        );
+        this.changeStatusToDoing();
+      }
     }
   }
 
-  // DONE
 
+  // DONE
   public changeStatusToDone(): void {
     this.tasksToDone.forEach((task: Tasks) => {
       if (task.status != 'done') {
@@ -131,19 +122,21 @@ export class TodoComponent implements OnInit {
   }
 
   dropInDone(event: CdkDragDrop<any>) {
-    console.log('vorher ' + this.tasksToOneGoal);
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log('moveIteminArray aufgerufen');
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-      console.log('nachher ' + this.tasksToOneGoal);
-      this.changeStatusToDone();
+    if(this.selectedRole == 'Mitarbeiter_in') {
+      console.log('vorher ' + this.tasksToOneGoal);
+      if (event.previousContainer === event.container) {
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        console.log('moveIteminArray aufgerufen');
+      } else {
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex,
+        );
+        console.log('nachher ' + this.tasksToOneGoal);
+        this.changeStatusToDone();
+      }
     }
   }
 

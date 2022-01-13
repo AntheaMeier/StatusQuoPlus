@@ -33,6 +33,8 @@ import {BrowserModule} from "@angular/platform-browser";
 import {LayoutModule} from "@angular/cdk/layout";
 import {ClipboardModule} from "@angular/cdk/clipboard";
 import {CdkTreeModule} from "@angular/cdk/tree";
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatNativeDateModule, MatRippleModule} from "@angular/material/core";
 import {MatMenuModule} from "@angular/material/menu";
@@ -51,7 +53,15 @@ import {MatChipsModule} from "@angular/material/chips";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatStepperModule} from "@angular/material/stepper";
 import { DeleteDialogComponent } from './annual-review/delete-dialog/delete-dialog.component';
+import { BoardMemberComponent } from './board-member/board-member.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { TeamviewComponent } from './teamview/teamview.component';
+import {MatTabsModule} from "@angular/material/tabs";
+import {CdkAccordionModule} from "@angular/cdk/accordion";
 
+export function playerFactory() {
+  return import('lottie-web');
+}
 
 @NgModule({
   declarations: [
@@ -66,8 +76,13 @@ import { DeleteDialogComponent } from './annual-review/delete-dialog/delete-dial
     AnnualReviewComponent,
     ListReviewsComponent,
     DeleteDialogComponent,
+    BoardMemberComponent,
+    NotFoundComponent,
+    TeamviewComponent,
   ],
   imports: [
+    LottieModule.forRoot({player: playerFactory}),
+
     MatExpansionModule,
     ScrollingModule,
     ReactiveFormsModule,
@@ -114,6 +129,8 @@ import { DeleteDialogComponent } from './annual-review/delete-dialog/delete-dial
     MatTooltipModule,
     OverlayModule,
     PortalModule,
+    MatTabsModule,
+    CdkAccordionModule,
   ],
   providers: [AuthGuardService],
   bootstrap: [AppComponent]

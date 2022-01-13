@@ -2,6 +2,11 @@
   display: block;
 }
 
+.sidenav-container {
+  height: 100%;
+  background-color: transparent;
+}
+
 .sidenav {
   width: 200px;
 }
@@ -86,4 +91,13 @@ img {
 
 .rollen-verteilung-side {
   margin-top: 7.5px;
+}
+
+.router-outlet-styling {
+  height: 100%;
+  background-color: transparent !important;
+}
+
+.members-styling {
+  margin-left: 20%;
 }

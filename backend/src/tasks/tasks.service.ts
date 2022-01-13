@@ -54,6 +54,14 @@ export class TasksService{
 
   }
 
+  async updateTaskStatus(taskId: string, status: string) {
+    const updatedTaskStatus = await this.findTask(taskId);
+    if (status) {
+      updatedTaskStatus.status = status;
+    }
+    updatedTaskStatus.save();
+  }
+
   async deleteTask(taskId: string){
     const result = await this.taskModel.deleteOne({_id:taskId}).exec();
   }
@@ -85,10 +93,7 @@ export class TasksService{
   private async findTask(id: string): Promise<Task> {
     let task;
     try{
-
-
-
-       task = await this.taskModel.findById(id);
+      task = await this.taskModel.findById(id);
 
     }
     catch(error){
@@ -105,4 +110,23 @@ export class TasksService{
   }
 
 
+  async getTasksToStatus(goalid: string, status: string) {
+    let tasks;
+
+    try{
+      tasks = await this.taskModel.find( { goalid: goalid, status: status } )
+
+    }
+
+    catch(error){
+      throw new NotFoundException('Could not find task')
+    }
+
+    if(!tasks){
+      throw new NotFoundException('Could not find task task')
+
+    }
+
+    return tasks;
+  }
 }

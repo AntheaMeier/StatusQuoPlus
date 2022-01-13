@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectorRef, Component, Output} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map, shareReplay} from 'rxjs/operators';
@@ -9,6 +9,7 @@ import {Login, Team} from "../shared/login";
 import {ApiService} from "../services/api.service";
 import {Tasks} from "../shared/tasks";
 import {Goals} from "../shared/goals";
+import {Review} from "../shared/review";
 
 @Component({
   selector: 'app-responsive-header',
@@ -29,11 +30,18 @@ export class ResponsiveHeaderComponent {
   idLoggedInUser: String = "";
   teamVorgesetze: Team[] = [];
   goalid: string = "";
-  clickedOnMitarbeiter = false;
-  idTeamMember = "";
+  @Output() idTeamMember = "";
   tasksToOneGoal: Tasks[] = [];
+  tasksToTodo: Tasks[] = [];
+  tasksToDoing: Tasks[] = [];
+  tasksToDone: Tasks[] = [];
   goalsToOneUser: Goals[] = [];
+  reviewsToOneUser: Review[] = [];
+
+
   currentUrl: String = ''
+  panelOpenState = false;
+
 
 
 
@@ -49,7 +57,10 @@ export class ResponsiveHeaderComponent {
               private router: Router,
               private formBuilder: FormBuilder,
               private api: ApiService,
+              private cdr: ChangeDetectorRef
+
   ) {
+
     this.loginForm = formBuilder.group({
       title: formBuilder.control('initial value', Validators.required)
     });
@@ -70,9 +81,21 @@ export class ResponsiveHeaderComponent {
     this.loggedIn = data;
   }
 
+  goToTeamview(userid: any, selectedRole: any): void {
+    this.router.navigate(['/teamview/' + userid], {state: {data: {userid, selectedRole}}});
+  }
+
+  goToGoals(userid: any, selectedRole: any): void {
+    this.router.navigate([''], {state: {data: {userid, selectedRole}}});
+  }
+
+
 
 
   ngOnInit(): void {
+      this.currentUrl = this.router.url;
+
+    this.goToGoals(this.idLoggedInUser, 'Mitarbeiter_in');
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -91,6 +114,16 @@ export class ResponsiveHeaderComponent {
     this.roleLoggedInUser = this.auth.getUserDetails().user_info.role;
     this.idLoggedInUser = this.auth.getUserDetails().user_info._id;
     this.roleLoggedInUser = this.auth.getUserDetails().user_info.role;
+
+    this.api.getUser(this.idLoggedInUser)
+      .subscribe((res: Login) => {
+        console.log('get user ' + res.firstname);
+        this.teamVorgesetze = res.team;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
   }
 
   get f(): any {
@@ -109,16 +142,17 @@ export class ResponsiveHeaderComponent {
   }
 
   onSelectVorgesetzte_r() {
-    this.selectedRole = "Vorgesetzte_r"
+    this.selectedRole = "Vorgesetzte_r";
     this.tasksToOneGoal = [];
-    this.clickedOnMitarbeiter= false;
   }
 
 
   changeRoleToMitarbeiter_in(){
+    console.log("geklickt");
     this.selectedRole ="Mitarbeiter_in";
+    this.currentUrl= '';
     this.router.navigate(['/']);
-    this.currentUrl= '';  }
+     }
 
   onClickVorgesetzter() {
     this.api.getUser(this.idLoggedInUser)
@@ -136,21 +170,6 @@ export class ResponsiveHeaderComponent {
     this.goalid = id;
   }
 
-  loadGoals(userid: any) {
-    this.tasksToOneGoal = [];
-    this.clickedOnMitarbeiter = true;
-    this.api.getGoalsToUser(userid)
-      .subscribe((res: any) => {
-        this.goalsToOneUser = res;
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-    this.idTeamMember = userid;
-  }
-
-
 
   reloadPage() {
     this.router.navigate(['/']);
@@ -159,7 +178,37 @@ export class ResponsiveHeaderComponent {
   }
 
   clickProtokoll() {
-    this.currentUrl=  window.location.href;
-
+    this.currentUrl = window.location.href;
   }
+
+
+
+
+
+
+  clickLogo() {
+    console.log('Click Logo: ' + this.tasksToTodo);
+  }
+
+ /* loadReviews(userid: string) {
+    this.clickedOnMitarbeiter = true;
+    this.api.getReviewsToUser(userid)
+      .subscribe((res: any) => {
+        this.reviewsToOneUser = res;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+    this.idTeamMember = userid;
+
+
+  }*/
+
+  changeUrl(id:String) {
+    this.currentUrl = 'board';
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+      this.router.navigate(['board/',id]));
+  }
+
 }
