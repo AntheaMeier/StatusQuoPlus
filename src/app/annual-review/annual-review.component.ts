@@ -1,5 +1,4 @@
 import {Component, OnInit, Input} from '@angular/core';
-import { Router } from '@angular/router';
 
 import {ApiService} from '../services/api.service';
 import {Review} from '../shared/review';
@@ -15,7 +14,7 @@ import {AuthService} from "../services/auth.service";
 
 
 export class AnnualReviewComponent implements OnInit {
-  
+
    review!: Review;
 
   addPost = false;
@@ -36,7 +35,7 @@ export class AnnualReviewComponent implements OnInit {
 
   constructor(private api: ApiService,
               private auth: AuthService,
-              router: Router) {
+              private router: Router) {
     this.currentUrl = router.url;
     console.log(this.currentUrl);
 
@@ -55,12 +54,12 @@ export class AnnualReviewComponent implements OnInit {
     this.idloggedInUser = this.auth.getUserDetails().user_info._id;
 
   }
-  
+
     reloadCurrentRoute() {
     let currentUrl = this.router.url;
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigate([currentUrl]);
-    });
+    });}
 
   onAddPost(id: any) {
     if(this.selectedRole == "Vorgesetzte_r"){

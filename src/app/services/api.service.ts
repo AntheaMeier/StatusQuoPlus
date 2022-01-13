@@ -190,4 +190,12 @@ export class ApiService {
         catchError(this.handleError('getUsersForReviews', []))
       );
   }
+
+  getReview(id: number): Observable<Review> {
+    const url = `${apiUrlReviews}/${id}`;
+    return this.http.get<Review>(url).pipe(
+      tap(_ => console.log(`fetched review id=${id}`)),
+      catchError(this.handleError<Review>(`getReview id=${id}`))
+    );
+  }
 }
