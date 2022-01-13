@@ -68,6 +68,7 @@ export class AnnualReviewComponent implements OnInit {
     this.isLoadingResults = true;
     const simpleObject = {} as Review;
     simpleObject.date = this.enteredDate;
+    console.log(this.enteredDate);
     simpleObject.description = this.enteredContent;
     simpleObject.userid = id;
     this.api.addReview(simpleObject)

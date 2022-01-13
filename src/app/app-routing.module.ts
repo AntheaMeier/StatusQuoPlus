@@ -30,10 +30,11 @@ const routes: Routes = [
     component: GoalsCreateComponent,
     canActivate: [AuthGuardService]
   },
+
   {
     path: 'teamview/:id',
     component: TeamviewComponent,
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService, RoleGuard]
   },
   {
     path: 'protokolle',
