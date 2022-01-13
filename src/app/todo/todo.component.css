@@ -29,7 +29,8 @@
 }
 
 .icon-styling {
-  margin-bottom: 150%;
+  position: absolute;
+  top: -25px;
 }
 
 
@@ -61,4 +62,33 @@ mat-grid-tile {
 
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+
+.input-styling {
+  width: 100%;
+  border: none;
+  word-break: break-word;
+  background-color: transparent;
+  color: #857971;
+}
+
+
+input::placeholder {
+  opacity: 0.5;
+  font-style: italic;
+}
+
+input:focus {
+  outline: none;
+}
+
+
+.todo-matcard {
+  width: 100%;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
 }

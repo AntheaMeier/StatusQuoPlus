@@ -1,16 +1,16 @@
-<mat-accordion multi="true" *ngIf="reviews.length > 0">
+<mat-accordion multi="true" *ngIf="reviewsToOneUser.length > 0">
   <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
-    <mat-expansion-panel *ngFor="let review of reviews">
+    <mat-expansion-panel *ngFor="let review of reviewsToOneUser">
       <mat-expansion-panel-header>
         {{ review.date }}
       </mat-expansion-panel-header>
       <p *ngIf="!edit">{{ review.description }}</p>
-      <form [formGroup]="reviewForm" (ngSubmit)="onFormSubmit(review.id)">
+      <form [formGroup]="reviewForm" (ngSubmit)="onFormSubmit(review._id)">
             <textarea
               rows="5"
               *ngIf="edit"
               (keyup.enter)="editOnOff()"
-              (keyup.enter)="onFormSubmit(review.id)"
+              (keyup.enter)="onFormSubmit(review._id)"
               (keyup.esc)="editOnOff()"
               type="submit"
               placeholder="{{ review.description }}"
@@ -19,15 +19,15 @@
               [(ngModel)]="enteredContent"
             >{{ review.description }}</textarea>
       </form>
-      <mat-action-row>
+      <mat-action-row *ngIf="currentUrl != '/protokolle'">
         <button mat-button color="primary" class="style4" (click)="editOnOff()">
           <mat-icon class="style5">edit</mat-icon>
         </button>
-        <button mat-button color="warn" (click)="deleteReview(review.id)" class="style4">
+        <button mat-button color="warn" (click)="deleteReview(review._id)" class="style4">
           <mat-icon class="style5">delete</mat-icon>
         </button>
       </mat-action-row>
     </mat-expansion-panel>
   </cdk-virtual-scroll-viewport>
 </mat-accordion>
-<p class="info-text mat-body1" *ngIf="reviews.length === 0">No reviews added yet.</p>
+<p class="info-text mat-body1" *ngIf="reviewsToOneUser.length === 0">No reviews added yet.</p>
