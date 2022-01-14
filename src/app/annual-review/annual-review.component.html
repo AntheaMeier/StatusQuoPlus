@@ -6,13 +6,16 @@
       <mat-expansion-panel-header>
         <mat-form-field class="col-md-12">
           <input
-            matInput type="text"
+            readonly='true'
+            matInput [matDatepicker]="picker"
             [(ngModel)]="enteredDate"
             id="dateEntry"
             name="date"
             required
             placeholder="Datum"
             #date="ngModel">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
           <mat-error *ngIf="date.invalid">Datum eingeben</mat-error>
         </mat-form-field>
       </mat-expansion-panel-header>
