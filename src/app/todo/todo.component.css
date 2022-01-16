@@ -24,6 +24,11 @@
   color: #857971;
 }
 
+.small-card-done {
+  background-color: #b4ccb4;
+  color: #857971;
+}
+
 .button-styling {
   float: right;
 }
@@ -71,7 +76,7 @@ mat-grid-tile {
   border: none;
   word-break: break-word;
   background-color: transparent;
-  color: #857971;
+  /*color: #857971;*/
 }
 
 
@@ -84,6 +89,10 @@ input:focus {
   outline: none;
 }
 
+.small-card:hover {
+  background-color: #59A3D2;
+  border-radius: 4px;
+}
 
 .todo-matcard {
   width: 100%;
@@ -92,3 +101,4 @@ input:focus {
   padding: 0;
   box-shadow: none;
 }
+

@@ -32,20 +32,17 @@ export class GoalsCreateComponent implements OnInit {
   dataTasks: Tasks[] = [];
   tasksToOneGoal: Tasks[] = [];
 
-  goal: Goals = {_id: '', description: '', order: '', userid: ''};
   user: Login = {id: '', username: '', password: '', firstname: '', surname: '', email: '', role: '', team: []};
   dataUsers: Login[] = [];
   idloggedInUser: String = "";
   userID = JSON.stringify(this.user.id);
   showTasksToOneGoal = false;
   showGoalsToOneUser = false;
-  isSingleClick: Boolean = true;
   editableId: String = '';
 
   @Input() goalsToOneUser: Goals[] = [];
   @Input() idMember = "";
   @Input() selectedRole = "";
-  progress: number = 0;
 
   //Tasks an todo schicken
   tasksToTodo: Tasks[] = [];
@@ -68,7 +65,6 @@ export class GoalsCreateComponent implements OnInit {
       this.dataUser = history.state.data;
       this.idMember = this.dataUser.userid;
       this.selectedRole = this.dataUser.selectedRole;
-      console.log('die aktuelle userid: ' + this.idMember + 'und die Rolle: ' + this.selectedRole);
     }
 
     this.api.getUsers()
@@ -88,33 +84,6 @@ export class GoalsCreateComponent implements OnInit {
     this.api.getGoalsToUser(this.idloggedInUser)
       .subscribe((res: any) => {
         this.goalsToOneUser = res;
-
-
-        /*console.log('kurz vor der Schleife');
-        console.log('länge: ' + this.goalsToOneUser);
-        for(let i=0; i < this.goalsToOneUser.length; i++) {
-          console.log('schleife');
-          this.api.getTasksToGoal(this.goalsToOneUser[i]._id).subscribe((res: any) => {
-            this.tasksToOneGoal = res;
-          }, err => {
-            console.log(err);
-            this.isLoadingResults = false;
-          });
-          this.api.getTasksToStatus(this.goalsToOneUser[i]._id, 'done')
-            .subscribe((res: any) => {
-              console.log(res);
-              this.tasksToDone = res;
-              this.isLoadingResults = false;
-            }, err => {
-              console.log(err);
-              this.isLoadingResults = false;
-            });
-          this.progress = (this.tasksToDone.length/this.tasksToOneGoal.length)*100;
-          console.log(this.progress);
-          console.log('tasktoneGoal' + this.tasksToOneGoal.length);
-          console.log('tasktoDone' + this.tasksToDone.length);
-        }*/
-
         this.isLoadingResults = false;
         this.goalsToOneUser.sort((goal1, goal2) => {
           return Number(goal1.order) - Number(goal2.order);
@@ -127,16 +96,13 @@ export class GoalsCreateComponent implements OnInit {
   }
 
   public position(): void {
-    console.log('position aufgerufen ');
     let position = 0;
     this.goalsToOneUser.forEach((goal: Goals) => {
-      console.log('vor api aufruf : ' + goal.order);
       position += 1;
       goal.order = String(position);
       this.api.updateGoalOrder(goal._id, goal).subscribe((data: Goals) => {
       }, error => {
       });
-      console.log('nach api aufruf : ' + goal.order);
     });
   }
 
@@ -202,7 +168,6 @@ export class GoalsCreateComponent implements OnInit {
     //TODO
     this.api.getTasksToStatus(id, 'todo')
       .subscribe((res: any) => {
-        console.log(res);
         this.tasksToTodo = res;
         this.isLoadingResults = false;
       }, err => {
@@ -213,7 +178,6 @@ export class GoalsCreateComponent implements OnInit {
     //DOING
     this.api.getTasksToStatus(id, 'doing')
       .subscribe((res: any) => {
-        console.log(res);
         this.tasksToDoing = res;
         this.isLoadingResults = false;
       }, err => {
@@ -224,7 +188,6 @@ export class GoalsCreateComponent implements OnInit {
     //DONE
     this.api.getTasksToStatus(id, 'done')
       .subscribe((res: any) => {
-        console.log(res);
         this.tasksToDone = res;
         this.isLoadingResults = false;
       }, err => {
@@ -256,6 +219,10 @@ export class GoalsCreateComponent implements OnInit {
     });
   }
 
+  getTheInput(e: any) {
+    this.description = e.target.value;
+  }
+
   updateAGoal(goal: Goals) {
       this.isLoadingResults = true;
       goal.description = this.description;
@@ -270,16 +237,6 @@ export class GoalsCreateComponent implements OnInit {
       this.editable = false;
   }
 
-  setEditableToTrue() {
-    if (this.selectedRole == 'Mitarbeiter_in') {
-      this.editable = true;
-    }
-  }
-
-  getTheInput(e: any) {
-    this.description = e.target.value ;
-  }
-
   setTheSelectedGoal(goal: Goals) {
     this.selectedGoal = goal;
     this.editableId = goal._id;
@@ -288,24 +245,4 @@ export class GoalsCreateComponent implements OnInit {
   setGoalsid(value: string) {
     this.showGoalid = value;
   }
-
-
-
-// für die Doppelklick-Funktion
-  method1CallForClick(){
-    this.isSingleClick = true;
-    setTimeout(()=>{
-      if(this.isSingleClick){
-      }
-    },250)
-  }
-  method2CallForDblClick(id: String){
-    this.isSingleClick = false;
-      this.setEditableToTrue()
-  }
-
-  isVorgesetzte_r() : boolean{
-    return (this.selectedRole == 'Vorgesetzte_r');
-  }
-
 }

@@ -1,17 +1,18 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Tasks} from "../shared/tasks";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {MatDialog} from "@angular/material/dialog";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {ApiService} from "../services/api.service";
 import {DeleteTaskDialogComponent} from "./delete-task-dialog/delete-task-dialog.component";
+import {Goals} from "../shared/goals";
 
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css']
 })
-export class TodoComponent implements OnInit {
+export class TodoComponent {
 
   @Input() tasksToOneGoal: Tasks[] = [];
   @Input() tasksToTodo: Tasks[] = [];
@@ -20,46 +21,44 @@ export class TodoComponent implements OnInit {
   @Input() goalid: string = '';
   @Input() selectedRole: String = "Mitarbeiter_in";
 
+  @Output() showTasksClicked = new EventEmitter<Tasks[]>();
+
+
   task: Tasks = {goalid: '', _id: '', description: '', status: ''};
+  selectedTask: Tasks = {_id: '', description: '', status: '', goalid: ''};
   description = '';
   isLoadingResults = true;
   status = '';
   editable = false;
-  showData: boolean = false;
-  isSingleClick: Boolean = true;
   editableId: String = '';
+  readOnly = true;
+  placeholder = "Benenne deine Task...";
+  showTaskid = '';
+  showTasksToOneGoal = false;
 
-
-  constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute,) {
+  constructor(public dialog: MatDialog,
+              private router: Router,
+              private api: ApiService,
+  ) {
   }
-
-  ngOnInit(): void {
-
-  }
-
 
 
   // TODO
 
-  public changeStatusToTodo(): void {
+  changeStatusToTodo(): void {
     this.tasksToTodo.forEach((task: Tasks) => {
       if (task.status != 'todo') {
-        console.log(task._id);
         task.status = String('todo');
         this.api.updateTaskStatus(task._id, task).subscribe((task: Tasks) => {
-        }, error => {
-          console.log('hat nicht funktioniert');
-        });
+        })
       }
     });
   }
 
   dropInTodo(event: CdkDragDrop<any>) {
     if(this.selectedRole == 'Mitarbeiter_in') {
-      console.log('vorher ' + this.tasksToTodo);
       if (event.previousContainer === event.container) {
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-        console.log('moveIteminArray aufgerufen');
       } else {
         transferArrayItem(
           event.previousContainer.data,
@@ -67,7 +66,6 @@ export class TodoComponent implements OnInit {
           event.previousIndex,
           event.currentIndex,
         );
-        console.log('nachher ' + this.tasksToTodo);
         this.changeStatusToTodo();
       }
     }
@@ -75,16 +73,12 @@ export class TodoComponent implements OnInit {
 
   // DOING
 
-  public changeStatusToDoing(): void {
-    console.log('changeStatustoDoing augerufen')
+  changeStatusToDoing(): void {
     this.tasksToDoing.forEach((task: Tasks) => {
       if (task.status != 'doing') {
-        console.log(task._id);
         task.status = String('doing');
         this.api.updateTaskStatus(task._id, task).subscribe((task: Tasks) => {
-        }, error => {
-          console.log('hat nicht funktioniert');
-        });
+        })
       }
     });
   }
@@ -93,7 +87,6 @@ export class TodoComponent implements OnInit {
     if(this.selectedRole == 'Mitarbeiter_in') {
       if (event.previousContainer === event.container) {
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-        console.log('moveIteminArray aufgerufen');
       } else {
         transferArrayItem(
           event.previousContainer.data,
@@ -111,22 +104,17 @@ export class TodoComponent implements OnInit {
   public changeStatusToDone(): void {
     this.tasksToDone.forEach((task: Tasks) => {
       if (task.status != 'done') {
-        console.log(task._id);
         task.status = String('done');
         this.api.updateTaskStatus(task._id, task).subscribe((task: Tasks) => {
-        }, error => {
-          console.log('hat nicht funktioniert');
-        });
+        })
       }
     });
   }
 
   dropInDone(event: CdkDragDrop<any>) {
     if(this.selectedRole == 'Mitarbeiter_in') {
-      console.log('vorher ' + this.tasksToOneGoal);
       if (event.previousContainer === event.container) {
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-        console.log('moveIteminArray aufgerufen');
       } else {
         transferArrayItem(
           event.previousContainer.data,
@@ -134,7 +122,6 @@ export class TodoComponent implements OnInit {
           event.previousIndex,
           event.currentIndex,
         );
-        console.log('nachher ' + this.tasksToOneGoal);
         this.changeStatusToDone();
       }
     }
@@ -143,7 +130,7 @@ export class TodoComponent implements OnInit {
   addTask() {
     this.isLoadingResults = true;
     const simpleObject = {} as Tasks;
-    simpleObject.description = "Click to edit";
+    simpleObject.description = this.placeholder;
     simpleObject.status = "todo";
     simpleObject.goalid = this.goalid;
 
@@ -158,24 +145,16 @@ export class TodoComponent implements OnInit {
   }
 
   deleteDialog(id: any): void {
-    let idDialog = id;
     const dialogRef = this.dialog.open(DeleteTaskDialogComponent, {
       width: '40%',
-      data: {'_id': idDialog}
+      data: {'_id': id}
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.ngOnInit()
     });
-  }
-
-  changeEditable() {
-    if (this.selectedRole == 'Mitarbeiter_in') {
-      this.editable = true;
-    }
   }
 
   getTheInput(e: any) {
-    this.description = e.target.value;
+      this.description = e.target.value;
   }
 
   updateATask(task: Tasks) {
@@ -192,25 +171,79 @@ export class TodoComponent implements OnInit {
     this.editable = false;
   }
 
-  method1CallForClick(){
-    this.isSingleClick = true;
-    setTimeout(()=>{
-      if(this.isSingleClick){
+  setTasksid(value: string) {
+    this.showTaskid = value;
+  }
+
+  setTheSelectedTask(task: Tasks) {
+    this.selectedTask = task;
+    this.editableId = task._id;
+  }
+
+  showTasks(id: any) {
+    this.api.getTasksToGoal(id)
+      .subscribe((res: any) => {
+        this.tasksToOneGoal = res;
+        this.showTasksClicked.emit(this.tasksToOneGoal);
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+    this.showTasksToOneGoal = true;
+
+
+    //TODO
+    this.api.getTasksToStatus(id, 'todo')
+      .subscribe((res: any) => {
+        this.tasksToTodo = res;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+
+    //DOING
+    this.api.getTasksToStatus(id, 'doing')
+      .subscribe((res: any) => {
+        this.tasksToDoing = res;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+
+    //DONE
+    this.api.getTasksToStatus(id, 'done')
+      .subscribe((res: any) => {
+        this.tasksToDone = res;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+
+  }
+
+/*  edit () {
+    return {
+      restrict: 'E',
+      scope: {
+        value: '='
+      },
+      link: function ($scope: any, element: any) {
+        let inputElement = element(element.children()[1]);
+        element.addClass('edit-in-place');
+        $scope.editing = false;
+        $scope.edit = function () {
+          $scope.editing = true;
+          element.addClass('active');
+          inputElement[0].focus();
+        }; /!*inputElement.prop('onblur', function() {
+          $scope.editing = false;
+          element.removeClass('active');
+        });*!/
       }
-    },250)
-  }
-  method2CallForDblClick(id : String){
-    this.isSingleClick = false;
-    this.editableId = id;
-    this.changeEditable();
-  }
-
-
-  isVorgesetzte_r() : boolean{
-
-    return (this.selectedRole == 'Vorgesetzte_r');
-
-}
-
-
+    };
+  }*/
 }

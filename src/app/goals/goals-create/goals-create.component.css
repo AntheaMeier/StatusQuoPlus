@@ -58,7 +58,6 @@
 
 
 .input-styling {
-
   width: 100%;
   border: none;
   word-break: break-word;
@@ -67,14 +66,12 @@
 
 
 input::placeholder {
-
   opacity: 0.5;
   font-style: italic;
 }
 
 
 input:focus {
-
   outline: none;
 }
 

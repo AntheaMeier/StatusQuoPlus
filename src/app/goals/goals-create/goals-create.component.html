@@ -21,8 +21,8 @@
       (click)="showTasks(goal._id)"
       (click)="setGoalsid(goal._id)">
       <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-        <mat-card class="goals-matcard" *ngIf="selectedRole != 'Mitarbeiter_in'">{{goal.description}}</mat-card>
-        <input *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
+        <mat-card class="goals-matcard" *ngIf="selectedRole == 'Vorgesetzte_r'">{{goal.description}}</mat-card>
+        <input *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text"
                ondblclick="this.readOnly=''" [(ngModel)]="goal.description" placeholder="Name des Goals"
                name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateAGoal(goal)">
         <span class="example-accordion-item-description">
