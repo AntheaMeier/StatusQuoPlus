@@ -5,7 +5,6 @@ import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {ApiService} from "../services/api.service";
 import {DeleteTaskDialogComponent} from "./delete-task-dialog/delete-task-dialog.component";
-import {Goals} from "../shared/goals";
 
 @Component({
   selector: 'app-todo',
@@ -23,25 +22,21 @@ export class TodoComponent {
 
   @Output() showTasksClicked = new EventEmitter<Tasks[]>();
 
-
   task: Tasks = {goalid: '', _id: '', description: '', status: ''};
-  selectedTask: Tasks = {_id: '', description: '', status: '', goalid: ''};
   description = '';
   isLoadingResults = true;
   status = '';
+  _id = '';
   editable = false;
-  editableId: String = '';
   readOnly = true;
   placeholder = "Benenne deine Task...";
-  showTaskid = '';
-  showTasksToOneGoal = false;
+  value = 'Clear me';
 
   constructor(public dialog: MatDialog,
               private router: Router,
               private api: ApiService,
   ) {
   }
-
 
   // TODO
 
@@ -127,21 +122,22 @@ export class TodoComponent {
     }
   }
 
-  addTask() {
-    this.isLoadingResults = true;
-    const simpleObject = {} as Tasks;
-    simpleObject.description = this.placeholder;
-    simpleObject.status = "todo";
-    simpleObject.goalid = this.goalid;
-
-    this.api.addTask(simpleObject)
-      .subscribe((res: any) => {
-        this.isLoadingResults = false;
-      }, (err: any) => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-    window.location.reload()
+  addTask(id: any) {
+    if (this.selectedRole == 'Mitarbeiter_in') {
+      this.isLoadingResults = true;
+      const simpleObject = {} as Tasks;
+      simpleObject.description = this.placeholder;
+      simpleObject.status = "todo";
+      simpleObject.goalid = id;
+      this.api.addTask(simpleObject)
+        .subscribe((res: any) => {
+          this.isLoadingResults = false;
+        }, (err: any) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        });
+      window.location.reload()
+    }
   }
 
   deleteDialog(id: any): void {
@@ -158,6 +154,7 @@ export class TodoComponent {
   }
 
   updateATask(task: Tasks) {
+    console.log(task)
     this.isLoadingResults = true;
     task.description = this.description;
     this.api.updateTask(task._id, task)
@@ -169,81 +166,12 @@ export class TodoComponent {
         }
       );
     this.editable = false;
+    window.location.reload()
   }
 
-  setTasksid(value: string) {
-    this.showTaskid = value;
+  changeEditable(){
+    if(this.selectedRole=='Mitarbeiter_in') {
+      this.editable = true;
+    }
   }
-
-  setTheSelectedTask(task: Tasks) {
-    this.selectedTask = task;
-    this.editableId = task._id;
-  }
-
-  showTasks(id: any) {
-    this.api.getTasksToGoal(id)
-      .subscribe((res: any) => {
-        this.tasksToOneGoal = res;
-        this.showTasksClicked.emit(this.tasksToOneGoal);
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-    this.showTasksToOneGoal = true;
-
-
-    //TODO
-    this.api.getTasksToStatus(id, 'todo')
-      .subscribe((res: any) => {
-        this.tasksToTodo = res;
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-
-    //DOING
-    this.api.getTasksToStatus(id, 'doing')
-      .subscribe((res: any) => {
-        this.tasksToDoing = res;
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-
-    //DONE
-    this.api.getTasksToStatus(id, 'done')
-      .subscribe((res: any) => {
-        this.tasksToDone = res;
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-
-  }
-
-/*  edit () {
-    return {
-      restrict: 'E',
-      scope: {
-        value: '='
-      },
-      link: function ($scope: any, element: any) {
-        let inputElement = element(element.children()[1]);
-        element.addClass('edit-in-place');
-        $scope.editing = false;
-        $scope.edit = function () {
-          $scope.editing = true;
-          element.addClass('active');
-          inputElement[0].focus();
-        }; /!*inputElement.prop('onblur', function() {
-          $scope.editing = false;
-          element.removeClass('active');
-        });*!/
-      }
-    };
-  }*/
 }

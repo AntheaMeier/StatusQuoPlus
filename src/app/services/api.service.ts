@@ -70,6 +70,7 @@ export class ApiService {
     );
   }
 
+
   deleteGoal(id: any): Observable<Goals> {
     const url = `${apiUrl}/${id}`;
     return this.http.delete<Goals>(url, httpOptions).pipe(
@@ -134,6 +135,8 @@ export class ApiService {
       catchError(this.handleError<any>('updateArticle'))
     );
   }
+
+
 
   getTasksToGoal(id: any): Observable<Tasks[]> {
     return this.http.get<Tasks[]>(`${apiUrlTasksForGoal}/${id}`)

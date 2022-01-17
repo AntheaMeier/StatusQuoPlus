@@ -224,6 +224,7 @@ export class GoalsCreateComponent implements OnInit {
   }
 
   updateAGoal(goal: Goals) {
+    console.log(goal)
       this.isLoadingResults = true;
       goal.description = this.description;
       this.api.updateGoal(goal._id, goal)

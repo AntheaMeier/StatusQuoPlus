@@ -5,7 +5,7 @@
   color: #0071B9;
 }
 
-.inner-card {
+::ng-deep.inner-card {
   height: 80%;
   position: relative;
   overflow: hidden;
@@ -21,7 +21,11 @@
 
 .small-card {
   background-color: #E8E4E1;
-  color: #857971;
+}
+
+.small-card:hover {
+  background-color: #59A3D2;
+  border-radius: 4px;
 }
 
 .small-card-done {
@@ -31,11 +35,12 @@
 
 .button-styling {
   float: right;
+  color: #857971;
 }
 
 .icon-styling {
   position: absolute;
-  top: -25px;
+  top: -3px;
 }
 
 
@@ -76,9 +81,29 @@ mat-grid-tile {
   border: none;
   word-break: break-word;
   background-color: transparent;
-  /*color: #857971;*/
 }
 
+::ng-deep.mat-form-field-flex.ng-tns-c107-1 {
+  background-color: #E8E4E1 !important;
+  border-radius: 4px !important;
+
+  margin-right: 135px !important;
+}
+
+::ng-deep.mat-form-field-wrapper {
+  background-color: white !important;
+}
+
+::ng-deep.mat-form-field-infix {
+  padding: 16px !important;
+  border: none !important;
+  box-shadow: none;
+  margin-right: 135px !important;
+}
+
+::ng-deep.mat-card {
+  box-shadow: none;
+}
 
 input::placeholder {
   opacity: 0.5;
@@ -87,11 +112,6 @@ input::placeholder {
 
 input:focus {
   outline: none;
-}
-
-.small-card:hover {
-  background-color: #59A3D2;
-  border-radius: 4px;
 }
 
 .todo-matcard {
