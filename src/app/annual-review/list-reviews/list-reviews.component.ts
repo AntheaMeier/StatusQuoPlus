@@ -21,6 +21,7 @@ export class ListReviewsComponent implements OnInit {
   description = '';
   isLoadingResults = true;
   idDialog: any = '';
+
   @Input() selectedRole : String = "";
 
   @Input() currentUrl = "";
@@ -35,6 +36,7 @@ export class ListReviewsComponent implements OnInit {
     description: this.formBuilder.control('initial value', Validators.required)
   });
 
+
   constructor(
     private api: ApiService,
     private router: Router,
@@ -44,7 +46,7 @@ export class ListReviewsComponent implements OnInit {
     private auth: AuthService,
   ) {
   }
-
+  
   ngOnInit(): void {
     this.api.getUsers()
       .subscribe((res: any) => {

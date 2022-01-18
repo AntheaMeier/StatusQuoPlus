@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {Login} from "../shared/login";
 import {AuthService} from "../services/auth.service";
 import * as moment from 'moment';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-annual-review',
@@ -37,9 +38,11 @@ export class AnnualReviewComponent implements OnInit {
   constructor(private api: ApiService,
               private auth: AuthService,
               private router: Router,
+              private dateAdapter: DateAdapter<Date>,
               ) {
     this.currentUrl = router.url;
     console.log(this.currentUrl);
+    this.dateAdapter.setLocale('de');
 
   }
 
