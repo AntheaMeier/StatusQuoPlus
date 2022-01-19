@@ -1,8 +1,7 @@
 
 <mat-accordion multi="true" *ngIf="reviewsToOneUser.length > 0">
-  <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
     <mat-expansion-panel *ngFor="let review of reviewsToOneUser" hideToggle>
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header style="background-color: #E8E4E1">
         {{ review.date }}
       </mat-expansion-panel-header>
       <p *ngIf="!edit" style="white-space: pre-wrap;">{{ review.description }}</p>
@@ -19,10 +18,6 @@
               value=""
               [(ngModel)]="review.description"
             >{{ review.description }}</textarea>
-
-
-
-
       </form>
       <mat-action-row *ngIf="currentUrl != '/protokolle'">
         <button mat-button color="primary" class="style4" (click)="editOnOff()">
@@ -33,6 +28,5 @@
         </button>
       </mat-action-row>
     </mat-expansion-panel>
-  </cdk-virtual-scroll-viewport>
 </mat-accordion>
 <p class="info-text mat-body1" *ngIf="reviewsToOneUser.length === 0">No reviews added yet.</p>
