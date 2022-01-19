@@ -1,12 +1,4 @@
-.style {
-  margin: 1%;
-  box-shadow: 0px 0px 8px #E8E4E1;
-  font-family: "Klavika", sans-serif;
-  color: #0071B9;
-  padding-bottom: 350px;
-}
-
-.goalsCard {
+.reviewsCard {
   height: 80%;
   box-shadow: none;
   font-family: "Klavika", sans-serif;
@@ -16,17 +8,8 @@
 
 .mat-expansion-panel {
   background-color: #E8E4E1;
-  padding: 8px;
-}
-
-.style2 {
-  height: 100%;
-  width: 98%;
-  background-color: #E8E4E1;
-  margin: 1%;
-  position: relative;
-  float: left;
-  display: inline;
+  box-shadow: none;
+  padding: 4px;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {
@@ -57,5 +40,9 @@ input {
 
 .mat-form-field {
   width: 100%;
+}
+
+.icon-display {
+  font-size: 15px;
 }
 
