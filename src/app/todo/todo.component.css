@@ -21,14 +21,17 @@
 
 .small-card {
   background-color: #E8E4E1;
+  display: flex;
   align-items: baseline;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  border-radius: 4px;
 }
 
-
-.small-card:hover {
-  background-color: #59A3D2;
-  border-radius: 4px;
-
+.alignment {
+  text-align:left;
+  flex: 80%;
+  margin: 0;
 }
 
 .small-card-done {
@@ -36,15 +39,20 @@
   color: #857971;
 }
 
-
 .button-styling {
-  color: #857971;
-  float: right;
+  align-items: flex-end;
+  flex: 10%;
 }
 
-.icon-styling {
-  position: absolute;
-  top: -3px;
+.button-styling2 {
+  float:right;
+  flex: 10%;
+}
+
+.expansion-panel {
+  margin-bottom: 3%;
+  margin-top: 3%;
+  padding: 16px;
 }
 
 
@@ -104,6 +112,16 @@ mat-grid-tile {
   box-shadow: none;
   margin-right: 135px !important;
 }
+
+::ng-deep.mat-form-field-flex {
+  display: inline-flex;
+  align-items: baseline;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 3%;
+}
+
+
 
 ::ng-deep.mat-card {
   box-shadow: none;
