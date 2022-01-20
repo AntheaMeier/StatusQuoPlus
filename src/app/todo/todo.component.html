@@ -7,17 +7,17 @@
     (cdkDropListDropped)="dropInTodo($event)">
     <mat-card class="main-card">TODO
       <mat-icon class="icon-display" (click)="addPostForm()">add</mat-icon>
-      <mat-expansion-panel class="expansion-panel" hideToggle *ngIf="addPost" [expanded]="true">
+      <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true">
         <mat-form-field style="white-space: pre-wrap;">
-        <textarea
-          [(ngModel)]="enteredContent"
-          id="content"
-          matInput rows="6"
-          name="content"
-          required
-          placeholder="Deine Todo"
-          #content="ngModel">
-        </textarea>
+          <textarea
+            [(ngModel)]="enteredContent"
+            id="content"
+            matInput rows="6"
+            name="content"
+            required
+            placeholder="Deine Todo"
+            #content="ngModel">
+          </textarea>
           <mat-error *ngIf="content.invalid">Notizen eingeben</mat-error>
         </mat-form-field>
         <mat-action-row>

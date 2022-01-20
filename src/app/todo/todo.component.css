@@ -1,22 +1,32 @@
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
 .main-card {
-  margin: 1%;
-  box-shadow: 0 0 8px #E8E4E1;
+  margin: 3%;
+  height: 80%;
   font-family: "Klavika", sans-serif;
   color: #0071B9;
 }
 
-::ng-deep.inner-card {
-  height: 80%;
-  position: relative;
-  overflow: hidden;
-  border: none !important;
-  box-shadow: none !important;
+::ng-deep.mat-card {
+  box-shadow: none;
 }
 
-.mat-card-content {
-  height: 100%;
-  position: center;
-  overflow: auto;
+.icon-display {
+  font-size: 15px;
+}
+
+::ng-deep.mat-expansion-panel {
+  background-color: #E8E4E1;
+  margin-bottom: 3%;
+  margin-top: 3%;
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 
 .small-card {
@@ -26,17 +36,19 @@
   flex-direction: row;
   flex-wrap: nowrap;
   border-radius: 4px;
+  margin-bottom: 3%;
+  margin-top: 3%;
+}
+
+.small-card-done {
+  background-color: #b4ccb4;
+  color: #857971;
 }
 
 .alignment {
   text-align:left;
   flex: 80%;
   margin: 0;
-}
-
-.small-card-done {
-  background-color: #b4ccb4;
-  color: #857971;
 }
 
 .button-styling {
@@ -49,18 +61,31 @@
   flex: 10%;
 }
 
-.expansion-panel {
-  margin-bottom: 3%;
-  margin-top: 3%;
-  padding: 16px;
+::ng-deep.mat-form-field {
+  width: 100%;
 }
 
-
-mat-grid-tile {
-  background-color: violet;
+::ng-deep.mat-form-field-underline {
+  background-color: #0071B9 !important;
 }
 
-/*-->Drag and drop*/
+::ng-deep.mat-form-field-ripple {
+  background-color: #0071B9 !important;
+}
+
+::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: #E8E4E1 !important;
+  height: 10% !important;
+}
+
+::ng-deep.mat-raised-button {
+  background-color: #0071B9;
+  color: white;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  color: #0071B9 !important;
+}
 
 .cdk-drag-preview {
   box-sizing: border-box;
@@ -77,70 +102,3 @@ mat-grid-tile {
 .cdk-drag-animating {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
-
-.example-box:last-child {
-  border: none;
-}
-
-.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-
-
-.input-styling {
-  width: 100%;
-  border: none;
-  word-break: break-word;
-  background-color: transparent;
-}
-
-::ng-deep.mat-form-field-flex.ng-tns-c107-1 {
-  background-color: #E8E4E1 !important;
-  border-radius: 4px !important;
-
-  margin-right: 135px !important;
-}
-
-::ng-deep.mat-form-field-wrapper {
-  background-color: white !important;
-}
-
-::ng-deep.mat-form-field-infix {
-  padding: 16px !important;
-  border: none !important;
-  box-shadow: none;
-  margin-right: 135px !important;
-}
-
-::ng-deep.mat-form-field-flex {
-  display: inline-flex;
-  align-items: baseline;
-  box-sizing: border-box;
-  width: 100%;
-  margin-top: 3%;
-}
-
-
-
-::ng-deep.mat-card {
-  box-shadow: none;
-}
-
-input::placeholder {
-  opacity: 0.5;
-  font-style: italic;
-}
-
-input:focus {
-  outline: none;
-}
-
-.todo-matcard {
-  width: 100%;
-  background-color: transparent;
-  margin: 0;
-  padding: 0;
-  box-shadow: none;
-}
-
