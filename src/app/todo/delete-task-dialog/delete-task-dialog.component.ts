@@ -11,34 +11,52 @@ import {Tasks} from "../../shared/tasks";
   styleUrls: ['./delete-task-dialog.component.css']
 })
 export class DeleteTaskDialogComponent implements OnInit {
-  oldDescription: any;
+
+  id =  '';
+  isLoadingResults = false;
+  task : Tasks = { _id: '', description: '', status: '', goalid: ''};
+
 
   articleForm: FormGroup =  this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required)
   });
 
-  id :String =  '';
-  isLoadingResults = false;
-  task : Tasks = { _id: '', description: '', status: '', goalid: ''};
 
 
 
-  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<TodoComponent>,
-              private router: Router, private api: ApiService, private formBuilder: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(public dialog: MatDialog,
+              public dialogRef: MatDialogRef<TodoComponent>,
+              private router: Router,
+              private api: ApiService,
+              private formBuilder: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   onNoClick(): void {
     this.dialog.closeAll();
   }
 
   ngOnInit() {
-
+    this.getTodo(this.data.id);
   }
 
+  getTodo(id: any) {
+    this.api.getTodo(id).subscribe((data: any) => {
+      this.id = data.id;
+      this.articleForm.setValue({
+        description: data.description,
+      });
+    });
+  }
 
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
 
   deleteGoal(id: any) {
-    console.log('das ist die id ' + id);
     this.isLoadingResults = true;
     this.api.deleteTask(id)
       .subscribe(res => {
@@ -47,11 +65,12 @@ export class DeleteTaskDialogComponent implements OnInit {
           console.log(err);
           this.isLoadingResults = false;
         }
-      );
+       );
+    this.reloadCurrentRoute();
   }
 
   onFormSubmit() {
-    this.deleteGoal(this.data._id);
+    this.deleteGoal(this.data.id);
     this.dialog.closeAll();
   }
 

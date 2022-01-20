@@ -21,11 +21,14 @@
 
 .small-card {
   background-color: #E8E4E1;
+  align-items: baseline;
 }
+
 
 .small-card:hover {
   background-color: #59A3D2;
   border-radius: 4px;
+
 }
 
 .small-card-done {
@@ -33,9 +36,10 @@
   color: #857971;
 }
 
+
 .button-styling {
-  float: right;
   color: #857971;
+  float: right;
 }
 
 .icon-styling {

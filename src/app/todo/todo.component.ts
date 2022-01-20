@@ -4,6 +4,9 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag
 import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {ApiService} from "../services/api.service";
+import {Login} from "../shared/login";
+import {AuthService} from "../services/auth.service";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DeleteTaskDialogComponent} from "./delete-task-dialog/delete-task-dialog.component";
 
 @Component({
@@ -11,7 +14,7 @@ import {DeleteTaskDialogComponent} from "./delete-task-dialog/delete-task-dialog
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css']
 })
-export class TodoComponent {
+export class TodoComponent implements OnInit {
 
   @Input() tasksToOneGoal: Tasks[] = [];
   @Input() tasksToTodo: Tasks[] = [];
@@ -19,6 +22,8 @@ export class TodoComponent {
   @Input() tasksToDone: Tasks[] = [];
   @Input() goalid: string = '';
   @Input() selectedRole: String = "Mitarbeiter_in";
+  @Input() currentUrl = "";
+  @Input() idTeamMember = "";
 
   @Output() showTasksClicked = new EventEmitter<Tasks[]>();
 
@@ -29,16 +34,119 @@ export class TodoComponent {
   _id = '';
   editable = false;
   readOnly = true;
-  placeholder = "Benenne deine Task...";
-  value = 'Clear me';
+  value = 'Clear me'
+  idloggedInUser: String = "";
+  dataUsers: Login[] = [];
+  showTasksToOneUser = false;
+  idDialog: any = '';
+  edit = false;
+  addPost = false;
+  enteredContent = "";
+
+  todoForm: FormGroup = this.formBuilder.group({
+    description: this.formBuilder.control('initial value', Validators.required)
+  });
 
   constructor(public dialog: MatDialog,
               private router: Router,
               private api: ApiService,
+              private auth: AuthService,
+              private formBuilder: FormBuilder,
   ) {
   }
 
-  // TODO
+  ngOnInit(): void {
+    this.api.getUsers()
+      .subscribe((res: any) => {
+        this.dataUsers = res;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+    this.idloggedInUser = this.auth.getUserDetails().user_info._id;
+    if (this.selectedRole != "Vorgesetzte_r") {
+      this.getTodoDetails(this.idloggedInUser);
+    }
+
+    if (this.selectedRole == "Vorgesetzte_r") {
+      this.getTodoDetails(this.idTeamMember);
+      console.log('id member ' + this.idTeamMember);
+    }
+  }
+
+  getTodoDetails(id: any) {
+    this.api.getTasksToGoal(id)
+      .subscribe((data: any) => {
+        this.tasksToOneGoal = data;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+    this.showTasksToOneUser = true;
+
+  }
+
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
+  addTask(id: any) {
+    if (this.selectedRole == 'Mitarbeiter_in') {
+      this.isLoadingResults = true;
+      const simpleObject = {} as Tasks;
+      simpleObject.description = this.enteredContent;
+      simpleObject.status = "todo";
+      simpleObject.goalid = id;
+      this.api.addTask(simpleObject)
+        .subscribe((res: any) => {
+          this.isLoadingResults = false;
+        }, (err: any) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        });
+      this.reloadCurrentRoute();
+      this.addPost = false;
+    }
+  }
+
+  addPostForm() {
+    this.addPost = !this.addPost;
+  }
+
+  onFormSubmit(id: any) {
+    this.isLoadingResults = true;
+    this.api.updateTask(id, this.todoForm.value)
+      .subscribe((res: any) => {
+          const id = res._id;
+          console.log(id)
+          this.isLoadingResults = false;
+          // this.router.navigate(['/show-todo', id]);
+        }, (err: any) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        }
+      );
+  }
+
+  deleteDialog(id: any): void {
+    console.log(id)
+    this.idDialog = id;
+    this.dialog.open(DeleteTaskDialogComponent, {
+      width: '40%',
+      data: {'id': this.idDialog}
+    });
+  }
+
+  editOnOff() {
+    this.edit = !this.edit;
+  }
+
+// TODO
 
   changeStatusToTodo(): void {
     this.tasksToTodo.forEach((task: Tasks) => {
@@ -51,7 +159,7 @@ export class TodoComponent {
   }
 
   dropInTodo(event: CdkDragDrop<any>) {
-    if(this.selectedRole == 'Mitarbeiter_in') {
+    if (this.selectedRole == 'Mitarbeiter_in') {
       if (event.previousContainer === event.container) {
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       } else {
@@ -79,7 +187,7 @@ export class TodoComponent {
   }
 
   dropInDoing(event: CdkDragDrop<any>) {
-    if(this.selectedRole == 'Mitarbeiter_in') {
+    if (this.selectedRole == 'Mitarbeiter_in') {
       if (event.previousContainer === event.container) {
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       } else {
@@ -107,7 +215,7 @@ export class TodoComponent {
   }
 
   dropInDone(event: CdkDragDrop<any>) {
-    if(this.selectedRole == 'Mitarbeiter_in') {
+    if (this.selectedRole == 'Mitarbeiter_in') {
       if (event.previousContainer === event.container) {
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       } else {
@@ -121,57 +229,5 @@ export class TodoComponent {
       }
     }
   }
-
-  addTask(id: any) {
-    if (this.selectedRole == 'Mitarbeiter_in') {
-      this.isLoadingResults = true;
-      const simpleObject = {} as Tasks;
-      simpleObject.description = this.placeholder;
-      simpleObject.status = "todo";
-      simpleObject.goalid = id;
-      this.api.addTask(simpleObject)
-        .subscribe((res: any) => {
-          this.isLoadingResults = false;
-        }, (err: any) => {
-          console.log(err);
-          this.isLoadingResults = false;
-        });
-      window.location.reload()
-    }
-  }
-
-  deleteDialog(id: any): void {
-    const dialogRef = this.dialog.open(DeleteTaskDialogComponent, {
-      width: '40%',
-      data: {'_id': id}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
-
-  getTheInput(e: any) {
-      this.description = e.target.value;
-  }
-
-  updateATask(task: Tasks) {
-    console.log(task)
-    this.isLoadingResults = true;
-    task.description = this.description;
-    this.api.updateTask(task._id, task)
-      .subscribe((res: any) => {
-          this.isLoadingResults = false;
-        }, (err: any) => {
-          console.log(err);
-          this.isLoadingResults = false;
-        }
-      );
-    this.editable = false;
-    window.location.reload()
-  }
-
-  changeEditable(){
-    if(this.selectedRole=='Mitarbeiter_in') {
-      this.editable = true;
-    }
-  }
 }
+
