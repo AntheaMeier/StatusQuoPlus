@@ -28,6 +28,10 @@ export class DeleteTaskDialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   onNoClick(): void {
+    this.dialogRef.close({event:'Close'});
+
+
+
     this.dialog.closeAll();
   }
 
@@ -51,6 +55,9 @@ export class DeleteTaskDialogComponent implements OnInit {
   }
 
   onFormSubmit() {
+
+    this.dialogRef.close({event:'Delete'});
+
     this.deleteGoal(this.data._id);
     this.dialog.closeAll();
   }

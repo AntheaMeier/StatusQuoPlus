@@ -1,3 +1,6 @@
+
+
+
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav"
                fixedInViewport
@@ -5,7 +8,7 @@
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
                [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menü</mat-toolbar>
-    
+
     <mat-nav-list>
 
 
@@ -27,7 +30,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div *ngFor="let member of teamVorgesetze">
-          <a  (click)="changeUrl(member.userid)"  (click)="goToTeamview(member.userid, 'Vorgesetzte_r')"> {{member.firstname}}
+          <a  (click)="changeUrl(member.userid)"  (click)="goToTeamview(member.userid, 'Vorgesetzte_r', member.firstname, member.surname)"> {{member.firstname}}
           </a>
         </div>
       </mat-expansion-panel>
@@ -35,6 +38,7 @@
         <mat-icon>exit_to_app</mat-icon>
         <div class="sidenav-text">Logout</div>
       </a>
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-toolbar color="white">
@@ -73,5 +77,10 @@
       </div>
     </div>
   </mat-toolbar>
-    <router-outlet class="router-outlet-styling"></router-outlet>
+
+  <router-outlet class="router-outlet-styling"></router-outlet>
+
+
+
 </mat-sidenav-container>
+

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Goals} from "../shared/goals";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../services/api.service";
 import {Review} from "../shared/review";
 
@@ -16,14 +16,19 @@ export class TeamviewComponent implements OnInit {
   submitted = false;
   isLoadingResults = true;
   goalid: string = "";
-  idMember = "";
+  idMember : any = "";
   goalsToOneUser: Goals[] = [];
   selectedRole = "";
-  data = {userid: '', selectedRole: ''};
+  data = {userid: '', selectedRole: '', surname:'', firstname:''};
+  selectedId : any = ''
+
+  surname = ""
+  firstname= ""
 
   constructor(private breakpointObserver: BreakpointObserver,
               private router: Router,
               private api: ApiService,
+              private route: ActivatedRoute
   ) {}
 
 
@@ -41,14 +46,25 @@ export class TeamviewComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+
     if(history.state.data != null) {
+
       this.data = history.state.data;
       this.idMember = this.data.userid;
+      this.surname = this.data.surname;
+      this.firstname = this.data.firstname;
+
       this.selectedRole = this.data.selectedRole;
       console.log('die aktuelle userid: ' + this.idMember + 'und die Rolle: ' + this.selectedRole);
+
       this.loadGoals(this.idMember);
       this.loadReviews(this.idMember);
     }
+
+    this.idMember = this.route.snapshot.paramMap.get('id');
+    this.loadReviews(this.idMember);
+    this.loadGoals(this.idMember);
 
   }
 

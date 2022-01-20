@@ -11,13 +11,17 @@ import {LoginComponent} from "./login/login.component";
 
 const routes: Routes = [
 
-
   {
-    path: 'ziele',
-    component: GoalsCreateComponent,
-    canActivate: [AuthGuardService]
+    path: 'login',
+    component: LoginComponent,
+
+
+
 
   },
+
+
+
   {
     path: 'notfound',
     component: NotFoundComponent,
@@ -30,7 +34,6 @@ const routes: Routes = [
     component: GoalsCreateComponent,
     canActivate: [AuthGuardService]
   },
-
   {
     path: 'teamview/:id',
     component: TeamviewComponent,
@@ -52,14 +55,26 @@ const routes: Routes = [
 
 
   },
+
   {
-    path: 'login',
-    component: LoginComponent,
+    path: '**',
+    component: NotFoundComponent,
+    canActivate: [AuthGuardService]
 
 
 
 
-  }
+
+  },
+
+
+
+
+
+
+
+
+
 
 
 ];

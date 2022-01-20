@@ -10,6 +10,7 @@ import {DeleteConfirmationDialogComponent} from '../delete-confirmation-dialog/d
 import {Tasks} from "../../shared/tasks";
 import {Login} from "../../shared/login";
 import {AuthService} from "../../services/auth.service";
+import {prepareSyntheticPropertyName} from "@angular/compiler/src/render3/util";
 
 @Component({
   selector: 'app-goals',
@@ -35,23 +36,37 @@ export class GoalsCreateComponent implements OnInit {
   goal: Goals = {_id: '', description: '', order: '', userid: ''};
   user: Login = {id: '', username: '', password: '', firstname: '', surname: '', email: '', role: '', team: []};
   dataUsers: Login[] = [];
-  idloggedInUser: String = "";
+  idloggedInUser: any =  '';
   userID = JSON.stringify(this.user.id);
   showTasksToOneGoal = false;
   showGoalsToOneUser = false;
   isSingleClick: Boolean = true;
   editableId: String = '';
+  newTask: Tasks = {goalid: '', _id: '', description: '', status: ''};
+  deleteTodo :String = "";
+  decision: String = 'yes';
 
   @Input() goalsToOneUser: Goals[] = [];
-  @Input() idMember = "";
+  @Input() idMember : any = "";
   @Input() selectedRole = "";
   progress: number = 0;
+  progressArray: number[] = [];
 
   //Tasks an todo schicken
   tasksToTodo: Tasks[] = [];
   tasksToDoing: Tasks[] = [];
   tasksToDone: Tasks[] = [];
   showGoalid = '';
+  resid: String = "";
+
+  reso : number = 0;
+  rest : number = 0;
+currentUrl= '';
+  allTasksLength: number= 99;
+  allTasksDoneLength: number = 99;
+
+
+
 
 
   constructor(public dialog: MatDialog,
@@ -64,6 +79,19 @@ export class GoalsCreateComponent implements OnInit {
 
 
   ngOnInit() {
+
+
+
+    console.log('selectedRole goals ' + this.selectedRole);
+
+    this.progressArray = [];
+    console.log('current url ' + this.currentUrl);
+    this.currentUrl= this.router.url;
+
+    if(this.currentUrl == '/'){
+      this.selectedRole = 'Mitarbeiter_in'
+    }
+    console.log('goals init');
     if(history.state.data != null) {
       this.dataUser = history.state.data;
       this.idMember = this.dataUser.userid;
@@ -80,9 +108,16 @@ export class GoalsCreateComponent implements OnInit {
         this.isLoadingResults = false;
       });
     this.idloggedInUser = this.auth.getUserDetails().user_info._id;
-    if (this.idMember == "") {
+    if (this.currentUrl == '/') {
+
+
       this.showGoals(this.idloggedInUser);
     } else {
+      console.log("22222");
+      this.idMember = this.route.snapshot.paramMap.get('id');
+
+
+
       this.showGoals(this.idMember)
     }
     this.api.getGoalsToUser(this.idloggedInUser)
@@ -124,7 +159,89 @@ export class GoalsCreateComponent implements OnInit {
         this.isLoadingResults = false;
       });
 
+
+    this.fillProgressArray();
+
   }
+
+
+
+  fillProgressArray(): void{
+    this.progressArray=[];
+
+     this.api.getGoalsToUser(this.idloggedInUser)
+      .subscribe(async (res: any) => {
+        for (let i = 0; i < res.length; i++) {
+         this.getNumberAllTasks(res[i]._id);
+          this.getNumberAllTasksDone(res[i]._id);
+          let second =  await this.getNumberAllTasks(res[i]._id);
+          const first =  await this.getNumberAllTasksDone(res[i]._id);
+           second =  await this.getNumberAllTasks(res[i]._id);
+
+          console.log('index = ' + i + " all :" + second + ", done: " + first);
+
+
+           this.progress = first / second * 100;
+
+          if (this.progress == Number.POSITIVE_INFINITY || this.progress == Number.NEGATIVE_INFINITY)
+          {
+            this.progress=0;
+          }
+
+           console.log('heyecani meyecani yok ' + this.progress);
+           this.progressArray.push(this.progress);
+        }
+
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+
+  }
+
+  async getNumberAllTasks(goalid: String): Promise<number>{
+
+    let a= 99;
+
+
+     const res = await this.api.getTasksToGoal(goalid).toPromise();
+
+
+
+    console.log('bakalim ' + res.length);
+
+   return res.length;
+
+  }
+
+
+  async getNumberAllTasksDone(goalid: String): Promise<number>{
+
+
+
+    await this.api.getTasksToStatus(goalid, "done")
+      .subscribe((res: any) => {
+       console.log(typeof res.length);
+       this.allTasksDoneLength = res.length;
+
+
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+
+
+    console.log('return Wert ' + this.allTasksDoneLength)
+    return this.allTasksDoneLength;
+
+
+
+
+
+  }
+
 
   public position(): void {
     console.log('position aufgerufen ');
@@ -156,6 +273,9 @@ export class GoalsCreateComponent implements OnInit {
       }
     }
   }
+
+
+
 
   onAddPost(id: any) {
     if(this.selectedRole == 'Mitarbeiter_in') {
@@ -194,7 +314,7 @@ export class GoalsCreateComponent implements OnInit {
         this.isLoadingResults = false;
       }, err => {
         console.log(err);
-        this.isLoadingResults = false;
+        this.isLoadingResults = false
       });
     this.showTasksToOneGoal = true;
 
@@ -204,6 +324,11 @@ export class GoalsCreateComponent implements OnInit {
       .subscribe((res: any) => {
         console.log(res);
         this.tasksToTodo = res;
+
+
+        if(this.newTask.status == "todo") {
+          this.tasksToTodo.push(this.newTask);
+        }
         this.isLoadingResults = false;
       }, err => {
         console.log(err);
@@ -308,4 +433,34 @@ export class GoalsCreateComponent implements OnInit {
     return (this.selectedRole == 'Vorgesetzte_r');
   }
 
+  setNewtask($event: Tasks) {
+
+    this.newTask = $event;
+
+  }
+
+  deleteTask($event: String) {
+
+    this.deleteTodo = $event;
+
+  }
+
+  setDecision($event: String) {
+    this.decision = $event;
+    if(this.decision== 'yes'){
+      for(let i = 0; i < this.tasksToTodo.length; i++){
+        if(this.tasksToTodo[i]._id == this.deleteTodo){
+          if (i > -1) {
+            this.tasksToTodo.splice(i, 1);
+          }
+        }
+      }
+    }
+
+  }
+
+  loadProgressNew($event: boolean) {
+    this.fillProgressArray();
+
+  }
 }

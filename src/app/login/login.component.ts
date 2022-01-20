@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
           this.auth.setDataInLocalStorage('token', res.access_token);
           this.router.navigate([''])
           window.location.reload();
+
         });
       }
     }

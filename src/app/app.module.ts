@@ -58,6 +58,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { TeamviewComponent } from './teamview/teamview.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {CdkAccordionModule} from "@angular/cdk/accordion";
+import {RouterModule} from "@angular/router";
+import {RoleGuard} from "./role.guard";
 
 export function playerFactory() {
   return import('lottie-web');
@@ -131,6 +133,7 @@ export function playerFactory() {
     PortalModule,
     MatTabsModule,
     CdkAccordionModule,
+
   ],
   providers: [AuthGuardService],
   bootstrap: [AppComponent]

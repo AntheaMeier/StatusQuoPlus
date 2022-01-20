@@ -7,7 +7,7 @@
                  [cdkDropListData]="goalsToOneUser"
                  (cdkDropListDropped)="drop($event)">
     <cdk-accordion-item
-      cdkDrag
+      cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}"
       *ngFor="let goal of goalsToOneUser; let index = index;"
       #accordionItem="cdkAccordionItem"
       class="example-accordion-item"
@@ -21,12 +21,21 @@
       (click)="showTasks(goal._id)"
       (click)="setGoalsid(goal._id)">
       <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-        <mat-card class="goals-matcard" *ngIf="selectedRole != 'Mitarbeiter_in'">{{goal.description}}</mat-card>
+        <mat-card class="goals-matcard" *ngIf="selectedRole != 'Mitarbeiter_in' && currentUrl != '/'">
+          {{goal.description}}
+        </mat-card>
+
+        <mat-icon *ngIf="progressArray[index] == 100 && selectedRole == 'Mitarbeiter_in'">done_outline</mat-icon>
+
+
         <input *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
                ondblclick="this.readOnly=''" [(ngModel)]="goal.description" placeholder="Name des Goals"
                name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateAGoal(goal)">
+        <mat-progress-bar  *ngIf="selectedRole == 'Mitarbeiter_in'" mode="determinate" value="{{progressArray[index]}}"></mat-progress-bar>
+
+
         <span class="example-accordion-item-description">
-          <mat-icon (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
+          <mat-icon (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">cancel</mat-icon>
       </span>
       </div>
       <div
@@ -36,7 +45,8 @@
         [attr.id]="'accordion-body-' + index"
         [attr.aria-labelledby]="'accordion-header-' + index">
         <app-todo [selectedRole]="selectedRole" [tasksToOneGoal]="tasksToOneGoal" [goalid]="showGoalid"
-                  [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone"></app-todo>
+                  [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone"
+                  (newTodo)="setNewtask($event)"  (deleteTodo)= "deleteTask($event)"    (result)= "setDecision($event)"    (changedOrder) = "loadProgressNew($event)"></app-todo>
       </div>
     </cdk-accordion-item>
   </cdk-accordion>
