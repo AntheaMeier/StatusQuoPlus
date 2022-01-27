@@ -1,34 +1,62 @@
-.goalsCard {
-  height: 80%;
-  box-shadow: none;
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.main-card {
+  margin: 1%;
+  box-shadow: 0px 0px 8px #E8E4E1;
   font-family: "Klavika", sans-serif;
   color: #0071B9;
-  margin: 1%;
+  padding-bottom: 350px;
 }
 
-.inner-cardGoals {
-  height: 80%;
+::ng-deep.mat-card {
+  box-shadow: none;
+}
+
+.icon-display {
+  font-size: 15px;
+}
+
+::ng-deep.mat-expansion-panel {
   background-color: #E8E4E1;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
+  margin-bottom: 3%;
+  margin-top: 3%;
 }
 
-.greyGoalsCard {
-  height: 15%;
-  background-color: white;
-  color: #857971;
-  margin: 0 10% 5px auto;
+.small-card {
+  background-color: #E8E4E1;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  border-radius: 4px;
+  margin: 5%;
 }
 
-.content {
-  height: 100%;
-  position: center;
-  overflow: auto;
+.alignment {
+  text-align:left;
+  flex: 80%;
+  margin: 0;
+  padding-top: 1%;
 }
 
-::ng-deep .mat-focused .mat-form-field-label {
-  color: #0071B9 !important;
+.button-styling {
+  align-items: flex-end;
+  flex: 10%;
+}
+
+.button-styling2 {
+  float:right;
+  flex: 10%;
+}
+
+::ng-deep.mat-form-field {
+  width: 100%;
 }
 
 ::ng-deep.mat-form-field-underline {
@@ -44,81 +72,36 @@
   height: 10% !important;
 }
 
-::ng-deep .mat-progress-bar-fill::after {
+::ng-deep.mat-raised-button {
   background-color: #0071B9;
+  color: white;
 }
 
-::ng-deep .mat-progress-bar-buffer {
-  background: #E8E4E1;
+::ng-deep .mat-focused .mat-form-field-label {
+  color: #0071B9 !important;
 }
 
-::ng-deep .mat-progress-bar {
+.cdk-drag-preview {
+  box-sizing: border-box;
   border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 
-.input-styling {
-  width: 100%;
-  border: none;
-  word-break: break-word;
-  background-color: transparent;
-}
-
-
-input::placeholder {
-  opacity: 0.5;
-  font-style: italic;
-}
-
-
-input:focus {
-  outline: none;
-}
-
-
-
-/*ACCORDION*/
-.example-accordion {
-  display: block;
-  max-width: 100%;
-}
-
-.example-accordion-item {
-  display: block;
-  background-color: #E8E4E1;
-  margin-bottom: 2%;
-  border-radius: 4px;
-}
-
-
-.example-accordion-item-header {
+::ng-deep.mat-action-row {
   display: flex;
-  align-content: center;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 16px 8px 16px 24px;
 }
 
-.example-accordion-item-description {
-  color: #857971;
-}
-
-.example-accordion-item-body {
-  background-color: white !important;
-}
-
-.example-accordion-item-header,
-.example-accordion-item-body {
-  padding: 16px;
-}
-
-.example-accordion-item-header:hover {
-  background-color: #59A3D2;
-  border-radius: 4px;
-}
-
-.goals-matcard {
-  width: 100%;
-  background-color: transparent;
-  margin: 0;
-  padding: 0;
-  box-shadow: none;
-}

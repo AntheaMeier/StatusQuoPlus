@@ -62,6 +62,7 @@ export class DeleteTaskDialogComponent implements OnInit {
         }
        );
     this.reloadCurrentRoute();
+    window.location.reload()
   }
 
   onFormSubmit() {
