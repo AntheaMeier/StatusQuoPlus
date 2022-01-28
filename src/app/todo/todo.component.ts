@@ -48,6 +48,7 @@ export class TodoComponent implements OnInit {
   ngOnInit(): void {
 
 
+
   }
 
 
@@ -66,6 +67,8 @@ export class TodoComponent implements OnInit {
       }
     });
     this.changedOrder.emit(true);
+    window.location.reload();
+
 
   }
 
@@ -108,7 +111,9 @@ export class TodoComponent implements OnInit {
         });
       }
     });
-    this.changedOrder.emit(true);
+    this.changedOrder.emit();
+    window.location.reload();
+
 
   }
 
@@ -151,6 +156,7 @@ export class TodoComponent implements OnInit {
       }
     });
     this.changedOrder.emit(true);
+    window.location.reload();
 
   }
 
@@ -192,10 +198,14 @@ export class TodoComponent implements OnInit {
         this.isLoadingResults = false;
       });
 
+    window.location.reload();
+
   }
 
   deleteDialog(id: any): void {
     this.deleteTodo.emit(id);
+
+
 
 
     let idDialog = id;
@@ -203,17 +213,26 @@ export class TodoComponent implements OnInit {
       width: '40%',
       data: {'_id': idDialog}
     });
+
+
     dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      console.log('test');
+
+
+
+      console.log('dialog result' + result);
+
       if(result.event == 'Delete'){
+        console.log('yes selected');
         this.decision = 'yes'
         this.result.emit(this.decision);
       }
 
-      if(result.event == 'Close'){
+      if(result.event != 'Close'){
         this.decision = 'no'
         this.result.emit(this.decision);
       }
-      this.ngOnInit()
     });
   }
 
@@ -223,8 +242,7 @@ export class TodoComponent implements OnInit {
     }
   }
 
-  getTheInput(e: any, task: Tasks) {
-    task.description = e.target.value
+  getTheInput(e: any) {
     this.description = e.target.value;
   }
 
@@ -270,4 +288,7 @@ export class TodoComponent implements OnInit {
 }
 
 
+  geklickt() {
+    console.log('geklickt');
+  }
 }

@@ -8,8 +8,9 @@
     <mat-card class="main-card">TODO
       <mat-icon (click)="addTask()" *ngIf="selectedRole == 'Mitarbeiter_in'">add</mat-icon>
 
-      <mat-card class="inner-card" *ngIf="!editable" (click)="changeEditable()">
-        <mat-card class="small-card" *ngFor="let task of tasksToTodo" cdkDrag [cdkDragDisabled]="isVorgesetzte_r()">
+      <mat-card class="inner-card"   *ngFor="let task of tasksToTodo"   (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
+        <mat-card
+          (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)"  class="small-card"  *ngIf="!editable  || (editableId != task._id)"  cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" >
           {{ task.description }}
 
           <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
@@ -23,14 +24,11 @@
 
       </mat-card>
 
-      <mat-card class="inner-card" *ngIf="editable">
-        <mat-card class="small-card" *ngFor="let task of tasksToTodo" cdkDrag>
-
-          <input value="{{task.description}}"   (keyup)="getTheInput($event, task)"    aria-label="Edit" (keyup.enter) = "updateATask(task)">
+      <mat-card class="inner-card" *ngIf="editable  && (editableId == task._id)">
+        <mat-card class="small-card" *ngFor="let task of tasksToOneGoal" cdkDrag  cdkDragDisabled="{{isVorgesetzte_r()}}">
+          <input value="{{task.description}}" (keyup)="getTheInput($event)" aria-label="Edit"
+                 (keyup.enter)="updateATask(task)">
         </mat-card>
-
-
-
       </mat-card>
 
     </mat-card>
@@ -54,12 +52,13 @@
         <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag>
           <input *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
                  ondblclick="this.readOnly=''" [(ngModel)]="task.description" placeholder="Name des Goals"
-                 name="desc" (keyup)="getTheInput($event, task)" aria-label="Edit" (keyup)="updateATask(task)">
+                 name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateATask(task)">
 
           <mat-card class="todo-matcard" *ngIf="selectedRole == 'Vorgesetzte_r'">{{task.description}}</mat-card>
 
           <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
-            <mat-icon class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
+            <mat-icon   (click)="deleteDialog(task.
+              _id)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
           </button>
         </mat-card>
       </mat-card>
@@ -92,12 +91,12 @@
         <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag>
           <input  *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
                  ondblclick="this.readOnly=''" [(ngModel)]="task.description" placeholder="Name des Goals"
-                 name="desc" (keyup)="getTheInput($event, task)" aria-label="Edit" (keyup)="updateATask(task)">
+                 name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateATask(task)">
 
           <mat-card class="todo-matcard" *ngIf="selectedRole == 'Vorgesetzte_r'">{{task.description}}</mat-card>
 
           <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
-            <mat-icon *ngIf="selectedRole == 'Mitarbeiter_in'" class="icon-styling">cancel</mat-icon>
+            <mat-icon   (click)="deleteDialog(task._id)" *ngIf="selectedRole == 'Mitarbeiter_in'" class="icon-styling">cancel</mat-icon>
           </button>
         </mat-card>
       </mat-card>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {Goals} from "../../shared/goals";
 import {MatDialog} from '@angular/material/dialog';
@@ -11,6 +11,11 @@ import {Tasks} from "../../shared/tasks";
 import {Login} from "../../shared/login";
 import {AuthService} from "../../services/auth.service";
 import {prepareSyntheticPropertyName} from "@angular/compiler/src/render3/util";
+import {BehaviorSubject, Observable} from "rxjs";
+import {switchMap} from "rxjs/operators";
+import {CdkAccordion, CdkAccordionItem} from "@angular/cdk/accordion";
+import {localizedString} from "@angular/compiler/src/output/output_ast";
+
 
 @Component({
   selector: 'app-goals',
@@ -18,7 +23,7 @@ import {prepareSyntheticPropertyName} from "@angular/compiler/src/render3/util";
   styleUrls: ['./goals-create.component.css']
 })
 
-export class GoalsCreateComponent implements OnInit {
+export class GoalsCreateComponent  implements OnInit {
   placeholder = "Benenne dein Ziel...";
   idDialog: any = '';
   editable = false;
@@ -32,6 +37,7 @@ export class GoalsCreateComponent implements OnInit {
   id = '';
   dataTasks: Tasks[] = [];
   tasksToOneGoal: Tasks[] = [];
+  lel: any = "";
 
   goal: Goals = {_id: '', description: '', order: '', userid: ''};
   user: Login = {id: '', username: '', password: '', firstname: '', surname: '', email: '', role: '', team: []};
@@ -46,15 +52,24 @@ export class GoalsCreateComponent implements OnInit {
   deleteTodo :String = "";
   decision: String = 'yes';
 
+  refreshGoals$ = new BehaviorSubject<boolean>(true);
+
   @Input() goalsToOneUser: Goals[] = [];
   @Input() idMember : any = "";
   @Input() selectedRole = "";
   progress: number = 0;
   progressArray: number[] = [];
 
+
+  goalSelectedReload: any = '';
+
+
+
+
   //Tasks an todo schicken
   tasksToTodo: Tasks[] = [];
   tasksToDoing: Tasks[] = [];
+  hehe: boolean = true;
   tasksToDone: Tasks[] = [];
   showGoalid = '';
   resid: String = "";
@@ -75,10 +90,16 @@ currentUrl= '';
               private route: ActivatedRoute,
               private auth: AuthService,
   ) {
+
   }
 
 
-  ngOnInit() {
+  ngOnInit()
+  {
+    const element = document.getElementById('1');
+    this.goalSelectedReload = localStorage.getItem('selectedGoal');
+     this.setGoalsid(this.goalSelectedReload);
+     this.showTasks(this.goalSelectedReload);
 
 
 
@@ -120,6 +141,7 @@ currentUrl= '';
 
       this.showGoals(this.idMember)
     }
+
     this.api.getGoalsToUser(this.idloggedInUser)
       .subscribe((res: any) => {
         this.goalsToOneUser = res;
@@ -166,6 +188,7 @@ currentUrl= '';
 
 
 
+
   fillProgressArray(): void{
     this.progressArray=[];
 
@@ -188,7 +211,6 @@ currentUrl= '';
             this.progress=0;
           }
 
-           console.log('heyecani meyecani yok ' + this.progress);
            this.progressArray.push(this.progress);
         }
 
@@ -200,6 +222,8 @@ currentUrl= '';
 
   }
 
+
+
   async getNumberAllTasks(goalid: String): Promise<number>{
 
     let a= 99;
@@ -209,7 +233,6 @@ currentUrl= '';
 
 
 
-    console.log('bakalim ' + res.length);
 
    return res.length;
 
@@ -217,6 +240,7 @@ currentUrl= '';
 
 
   async getNumberAllTasksDone(goalid: String): Promise<number>{
+
 
 
 
@@ -307,6 +331,8 @@ currentUrl= '';
   }
 
   showTasks(id: any) {
+
+
     this.api.getTasksToGoal(id)
       .subscribe((res: any) => {
         this.tasksToOneGoal = res;
@@ -323,12 +349,18 @@ currentUrl= '';
     this.api.getTasksToStatus(id, 'todo')
       .subscribe((res: any) => {
         console.log(res);
+        this.currentUrl= this.router.url;
+
+        console.log('vah ' + this.currentUrl);
+
+        if(this.currentUrl != '/'){
+          this.tasksToTodo = [];}
         this.tasksToTodo = res;
 
 
-        if(this.newTask.status == "todo") {
+      /*  if(this.newTask.status == "todo") {
           this.tasksToTodo.push(this.newTask);
-        }
+        }*/
         this.isLoadingResults = false;
       }, err => {
         console.log(err);
@@ -406,6 +438,7 @@ currentUrl= '';
   }
 
   setTheSelectedGoal(goal: Goals) {
+    localStorage.setItem('selectedGoal', goal._id);
     this.selectedGoal = goal;
     this.editableId = goal._id;
   }
@@ -447,11 +480,11 @@ currentUrl= '';
 
   setDecision($event: String) {
     this.decision = $event;
-    if(this.decision== 'yes'){
+    if(this.decision == 'yes'){
       for(let i = 0; i < this.tasksToTodo.length; i++){
         if(this.tasksToTodo[i]._id == this.deleteTodo){
           if (i > -1) {
-            this.tasksToTodo.splice(i, 1);
+            // this.tasksToTodo.splice(i, 1);
           }
         }
       }
@@ -460,7 +493,10 @@ currentUrl= '';
   }
 
   loadProgressNew($event: boolean) {
-    this.fillProgressArray();
+    console.log('loadProgressNew aufgerufen');
+    // this.fillProgressArray();
 
   }
+
+
 }

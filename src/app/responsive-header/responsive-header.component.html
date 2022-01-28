@@ -29,7 +29,7 @@
             </a>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div *ngFor="let member of teamVorgesetze">
+        <div *ngFor="let member of teamVorgesetze" (click)="deleteSelectedGoalFromLocalStorage()">
           <a  (click)="changeUrl(member.userid)"  (click)="goToTeamview(member.userid, 'Vorgesetzte_r', member.firstname, member.surname)"> {{member.firstname}}
           </a>
         </div>
