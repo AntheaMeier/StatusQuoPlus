@@ -224,7 +224,6 @@ export class ResponsiveHeaderComponent {
 
 
   deleteSelectedGoalFromLocalStorage() {
-    this.selectedRole = 'Vorgesetze_r'
     localStorage.removeItem('selectedGoal');
 
   }

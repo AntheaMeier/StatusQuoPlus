@@ -52,6 +52,7 @@ export class GoalsCreateComponent  implements OnInit {
   deleteTodo :String = "";
   decision: String = 'yes';
 
+  idls: any = '';
   refreshGoals$ = new BehaviorSubject<boolean>(true);
 
   @Input() goalsToOneUser: Goals[] = [];
@@ -68,6 +69,7 @@ export class GoalsCreateComponent  implements OnInit {
 
   //Tasks an todo schicken
   tasksToTodo: Tasks[] = [];
+
   tasksToDoing: Tasks[] = [];
   hehe: boolean = true;
   tasksToDone: Tasks[] = [];
@@ -96,10 +98,22 @@ currentUrl= '';
 
   ngOnInit()
   {
+
+
+    this.idls= localStorage.getItem('selectedGoal');
     const element = document.getElementById('1');
     this.goalSelectedReload = localStorage.getItem('selectedGoal');
      this.setGoalsid(this.goalSelectedReload);
-     this.showTasks(this.goalSelectedReload);
+    this.currentUrl= this.router.url;
+
+    if(this.currentUrl == '/'){
+      this.showTasks(this.goalSelectedReload);
+
+    }
+
+    else{
+      this.showGoalid = '';
+    }
 
 
 
@@ -107,7 +121,7 @@ currentUrl= '';
 
     this.progressArray = [];
     console.log('current url ' + this.currentUrl);
-    this.currentUrl= this.router.url;
+
 
     if(this.currentUrl == '/'){
       this.selectedRole = 'Mitarbeiter_in'
@@ -333,6 +347,7 @@ currentUrl= '';
   showTasks(id: any) {
 
 
+
     this.api.getTasksToGoal(id)
       .subscribe((res: any) => {
         this.tasksToOneGoal = res;
@@ -351,11 +366,14 @@ currentUrl= '';
         console.log(res);
         this.currentUrl= this.router.url;
 
-        console.log('vah ' + this.currentUrl);
+
 
         if(this.currentUrl != '/'){
           this.tasksToTodo = [];}
         this.tasksToTodo = res;
+
+        if(this.currentUrl != '/'  && this.idls == "" ){
+          this.tasksToTodo = [];}
 
 
       /*  if(this.newTask.status == "todo") {
@@ -493,7 +511,6 @@ currentUrl= '';
   }
 
   loadProgressNew($event: boolean) {
-    console.log('loadProgressNew aufgerufen');
     // this.fillProgressArray();
 
   }

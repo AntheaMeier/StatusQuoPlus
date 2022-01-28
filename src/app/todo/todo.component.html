@@ -1,6 +1,8 @@
 <div cdkDropListGroup>
   <div
     cdkDropList
+    cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}"
+
     #todoList="cdkDropList"
     [cdkDropListData]="tasksToTodo"
     class="example-list"
@@ -38,6 +40,8 @@
 
   <div
     cdkDropList
+    cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}"
+
     #doingList="cdkDropList"
     [cdkDropListData]="tasksToDoing"
     class="example-list"
@@ -77,6 +81,8 @@
 
   <div
     cdkDropList
+    cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}"
+
     #doneList="cdkDropList"
     [cdkDropListData]="tasksToDone"
     class="example-list"

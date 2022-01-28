@@ -26,7 +26,7 @@
       </div>
       <div>
 
-        <app-todo [selectedRole]="selectedRole" [tasksToOneGoal]="tasksToOneGoal" [goalid]="showGoalid"
+        <app-todo [selectedRole]="selectedRole" [idls]="idls" [tasksToOneGoal]="tasksToOneGoal" [goalid]="showGoalid"
                   [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone"
                   (newTodo)="setNewtask($event)"  (deleteTodo)= "deleteTask($event)"    (result)= "setDecision($event)"    (changedOrder) = "loadProgressNew($event)"></app-todo>
       </div>

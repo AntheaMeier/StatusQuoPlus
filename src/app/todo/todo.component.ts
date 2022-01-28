@@ -31,6 +31,7 @@ export class TodoComponent implements OnInit {
   editableId: String = '';
   decision: String = '';
   currentUrl: String = '';
+  @Input() idls: String = '';
 
 
   @Output() newTodo = new EventEmitter<Tasks>();
@@ -43,9 +44,13 @@ export class TodoComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute,) {
 
+
   }
 
   ngOnInit(): void {
+
+
+
 
 
 
