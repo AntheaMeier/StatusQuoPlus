@@ -28,7 +28,7 @@ export class ListReviewsComponent implements OnInit {
   idloggedInUser: String = "";
   dataUsers: Login[] = [];
   showReviewsToOneUser = false;
-  @Input() idTeamMember = "";
+  @Input() idTeamMember: any = "";
   @Input() reviewsToOneUser: Review[] = [];
 
   reviewForm: FormGroup = this.formBuilder.group({
@@ -55,13 +55,21 @@ export class ListReviewsComponent implements OnInit {
         this.isLoadingResults = false;
       });
     this.idloggedInUser = this.auth.getUserDetails().user_info._id;
-    if(this.selectedRole!= "Vorgesetzte_r") {
+    if(this.selectedRole!= "Vorgesetzte_r" ) {
       this.getReviewDetails(this.idloggedInUser);
     }
 
     if(this.selectedRole == "Vorgesetzte_r"){
       this.getReviewDetails(this.idTeamMember);
       console.log('id member ' + this.idTeamMember);
+    }
+
+
+    if(this.currentUrl  == '/teamview/618cecd2e576c9b3d35be3d8' || this.currentUrl == '/teamview/61b1168ec69f475afd6ccd88') {
+      this.getReviewDetails(this.idTeamMember);
+
+
+
     }
 
 

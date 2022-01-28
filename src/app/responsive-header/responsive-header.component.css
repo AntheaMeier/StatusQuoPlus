@@ -101,3 +101,17 @@ img {
 .members-styling {
   margin-left: 20%;
 }
+
+
+.expansion-panel-styling {
+  box-shadow: none !important;
+  margin-left: -12%;
+}
+
+.expansion-panel-member-styling {
+  margin-left: 12% !important;
+  margin-top: 50% !important;
+  font-size: 15px !important;
+  line-height: 20px;
+
+}

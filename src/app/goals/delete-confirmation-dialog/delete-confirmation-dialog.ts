@@ -78,6 +78,7 @@ export class DeleteConfirmationDialogComponent implements OnInit {
         console.log(err);
         this.isLoadingResultsTasksToGoal = false;
       });
+    localStorage.removeItem('selectedGoal');
     window.location.reload()
   }
 

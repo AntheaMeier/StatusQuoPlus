@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Goals} from "../shared/goals";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../services/api.service";
 import {Review} from "../shared/review";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-teamview',
@@ -16,14 +17,20 @@ export class TeamviewComponent implements OnInit {
   submitted = false;
   isLoadingResults = true;
   goalid: string = "";
-  idMember = "";
+  idMember : any = "";
   goalsToOneUser: Goals[] = [];
   selectedRole = "";
-  data = {userid: '', selectedRole: ''};
+  currentMember = {userid: '', selectedRole: '', surname:'', firstname:''};
+  selectedId : any = ''
+
+  surname = ""
+  firstname= ""
 
   constructor(private breakpointObserver: BreakpointObserver,
               private router: Router,
               private api: ApiService,
+              private route: ActivatedRoute,
+              private auth: AuthService,
   ) {}
 
 
@@ -39,16 +46,24 @@ export class TeamviewComponent implements OnInit {
   }
 
 
-
   ngOnInit(): void {
-    if(history.state.data != null) {
-      this.data = history.state.data;
-      this.idMember = this.data.userid;
-      this.selectedRole = this.data.selectedRole;
-      console.log('die aktuelle userid: ' + this.idMember + 'und die Rolle: ' + this.selectedRole);
-      this.loadGoals(this.idMember);
-      this.loadReviews(this.idMember);
-    }
+    this.selectedRole = this.auth.getUserDetails().user_info.role;
+    this.idMember = this.route.snapshot.paramMap.get('id') || '';
+
+    console.log('Die idMember mit route snapshot ' + this.idMember);
+    this.api.getUser(this.idMember).subscribe((res: any) => {
+      this.currentMember = res;
+      this.surname = this.currentMember.surname;
+      this.firstname = this.currentMember.firstname;
+      this.isLoadingResults = false;
+    }, err => {
+      console.log(err);
+      this.isLoadingResults = false;
+    });
+
+
+    this.loadGoals(this.idMember);
+    this.loadReviews(this.idMember);
 
   }
 
