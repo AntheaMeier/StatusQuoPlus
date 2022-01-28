@@ -16,15 +16,17 @@
 
           <span>
             <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+
+              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">
+                edit
+              </mat-icon>
+
               <mat-icon  (click)="deleteDialog(task._id)"
                          class="icon-styling"
                          *ngIf="selectedRole == 'Mitarbeiter_in'">
                 cancel
               </mat-icon>
-  
-              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">
-                edit
-              </mat-icon>
+
             </button>
           </span>
         </mat-card>
@@ -50,15 +52,17 @@
 
           <span>
             <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+
+              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">
+                edit
+              </mat-icon>
+
               <mat-icon  (click)="deleteDialog(task._id)"
                          class="icon-styling"
                          *ngIf="selectedRole == 'Mitarbeiter_in'">
                 cancel
               </mat-icon>
 
-              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">
-                edit
-              </mat-icon>
             </button>
           </span>
         </mat-card>
@@ -83,15 +87,17 @@
 
           <span>
             <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+
+              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">
+                edit
+              </mat-icon>
+
               <mat-icon  (click)="deleteDialog(task._id)"
                          class="icon-styling"
                          *ngIf="selectedRole == 'Mitarbeiter_in'">
                 cancel
               </mat-icon>
 
-              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">
-                edit
-              </mat-icon>
             </button>
           </span>
         </mat-card>
