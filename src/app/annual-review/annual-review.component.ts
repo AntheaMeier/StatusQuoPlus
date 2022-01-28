@@ -15,7 +15,7 @@ import {AuthService} from "../services/auth.service";
 
 export class AnnualReviewComponent implements OnInit {
 
-   review!: Review;
+  review!: Review;
 
   addPost = false;
 

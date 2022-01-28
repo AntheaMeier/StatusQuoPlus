@@ -11,24 +11,22 @@
 
       <mat-card class="inner-card"   *ngFor="let task of tasksToTodo"   (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
         <mat-card
-          (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)"  class="small-card"  *ngIf="!editable  || (editableId != task._id)"  cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" >
+          cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" >
           {{ task.description }}
 
-          <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
-            <mat-icon  (click)="deleteDialog(task.
-              _id)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
-
-          </button>
-        </mat-card>
-
-
-
-      </mat-card>
-
-      <mat-card class="inner-card" *ngIf="editable  && (editableId == task._id)">
-        <mat-card class="small-card" *ngFor="let task of tasksToOneGoal" cdkDrag  cdkDragDisabled="{{isVorgesetzte_r()}}">
-          <input value="{{task.description}}" (keyup)="getTheInput($event)" aria-label="Edit"
-                 (keyup.enter)="updateATask(task)">
+          <span>
+            <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+              <mat-icon  (click)="deleteDialog(task._id)"
+                         class="icon-styling"
+                         *ngIf="selectedRole == 'Mitarbeiter_in'">
+                cancel
+              </mat-icon>
+  
+              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">
+                edit
+              </mat-icon>
+            </button>
+          </span>
         </mat-card>
       </mat-card>
 
@@ -47,27 +45,24 @@
 
       <mat-card class="inner-card"   *ngFor="let task of tasksToDoing"   (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
         <mat-card
-          (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)"  class="small-card"  *ngIf="!editable  || (editableId != task._id)"  cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" >
+          cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" >
           {{ task.description }}
 
-          <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
-            <mat-icon  (click)="deleteDialog(task.
-              _id)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
+          <span>
+            <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+              <mat-icon  (click)="deleteDialog(task._id)"
+                         class="icon-styling"
+                         *ngIf="selectedRole == 'Mitarbeiter_in'">
+                cancel
+              </mat-icon>
 
-          </button>
-        </mat-card>
-
-
-
-      </mat-card>
-
-      <mat-card class="inner-card" *ngIf="editable  && (editableId == task._id)">
-        <mat-card class="small-card" *ngFor="let task of tasksToOneGoal" cdkDrag  cdkDragDisabled="{{isVorgesetzte_r()}}">
-          <input value="{{task.description}}" (keyup)="getTheInput($event)" aria-label="Edit"
-                 (keyup.enter)="updateATask(task)">
+              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">
+                edit
+              </mat-icon>
+            </button>
+          </span>
         </mat-card>
       </mat-card>
-
     </mat-card>
   </div>
 
@@ -83,24 +78,22 @@
 
       <mat-card class="inner-card"   *ngFor="let task of tasksToDone"   (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
         <mat-card
-          (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)"  class="small-card"  *ngIf="!editable  || (editableId != task._id)"  cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" >
+          cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" >
           {{ task.description }}
 
-          <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
-            <mat-icon  (click)="deleteDialog(task.
-              _id)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
+          <span>
+            <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+              <mat-icon  (click)="deleteDialog(task._id)"
+                         class="icon-styling"
+                         *ngIf="selectedRole == 'Mitarbeiter_in'">
+                cancel
+              </mat-icon>
 
-          </button>
-        </mat-card>
-
-
-
-      </mat-card>
-
-      <mat-card class="inner-card" *ngIf="editable  && (editableId == task._id)">
-        <mat-card class="small-card" *ngFor="let task of tasksToOneGoal" cdkDrag  cdkDragDisabled="{{isVorgesetzte_r()}}">
-          <input value="{{task.description}}" (keyup)="getTheInput($event)" aria-label="Edit"
-                 (keyup.enter)="updateATask(task)">
+              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">
+                edit
+              </mat-icon>
+            </button>
+          </span>
         </mat-card>
       </mat-card>
 

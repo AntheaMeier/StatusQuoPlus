@@ -128,3 +128,9 @@ input:focus {
   padding: 0;
   box-shadow: none;
 }
+
+
+.button-styling {
+  float: right;
+  margin-top: -10px;
+}

@@ -26,11 +26,11 @@
 
 .button-styling {
   float: right;
+  margin-top: -10px;
 }
 
 .icon-styling {
-  position: absolute;
-  top: -25px;
+  color: #857971;
 }
 
 

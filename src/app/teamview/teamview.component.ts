@@ -4,6 +4,7 @@ import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../services/api.service";
 import {Review} from "../shared/review";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-teamview',
@@ -19,7 +20,7 @@ export class TeamviewComponent implements OnInit {
   idMember : any = "";
   goalsToOneUser: Goals[] = [];
   selectedRole = "";
-  data = {userid: '', selectedRole: '', surname:'', firstname:''};
+  currentMember = {userid: '', selectedRole: '', surname:'', firstname:''};
   selectedId : any = ''
 
   surname = ""
@@ -28,7 +29,8 @@ export class TeamviewComponent implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver,
               private router: Router,
               private api: ApiService,
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private auth: AuthService,
   ) {}
 
 
@@ -44,27 +46,24 @@ export class TeamviewComponent implements OnInit {
   }
 
 
-
   ngOnInit(): void {
+    this.selectedRole = this.auth.getUserDetails().user_info.role;
+    this.idMember = this.route.snapshot.paramMap.get('id') || '';
+
+    console.log('Die idMember mit route snapshot ' + this.idMember);
+    this.api.getUser(this.idMember).subscribe((res: any) => {
+      this.currentMember = res;
+      this.surname = this.currentMember.surname;
+      this.firstname = this.currentMember.firstname;
+      this.isLoadingResults = false;
+    }, err => {
+      console.log(err);
+      this.isLoadingResults = false;
+    });
 
 
-    if(history.state.data != null) {
-
-      this.data = history.state.data;
-      this.idMember = this.data.userid;
-      this.surname = this.data.surname;
-      this.firstname = this.data.firstname;
-
-      this.selectedRole = this.data.selectedRole;
-      console.log('die aktuelle userid: ' + this.idMember + 'und die Rolle: ' + this.selectedRole);
-
-      this.loadGoals(this.idMember);
-      this.loadReviews(this.idMember);
-    }
-
-    this.idMember = this.route.snapshot.paramMap.get('id');
-    this.loadReviews(this.idMember);
     this.loadGoals(this.idMember);
+    this.loadReviews(this.idMember);
 
   }
 

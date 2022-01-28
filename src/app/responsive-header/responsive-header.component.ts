@@ -98,12 +98,6 @@ export class ResponsiveHeaderComponent {
 
   ngOnInit(): void {
 
-
-
-
-
-
-
     console.log("url " + this.router.url);
       this.currentUrl = this.router.url;
 
@@ -217,9 +211,9 @@ export class ResponsiveHeaderComponent {
   }*/
 
   changeUrl(id:String) {
-    this.currentUrl = 'board';
+    this.currentUrl = 'teamview';
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-      this.router.navigate(['board/',id]));
+      this.router.navigate(['teamview/',id]));
   }
 
 

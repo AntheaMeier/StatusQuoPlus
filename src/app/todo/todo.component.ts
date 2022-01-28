@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../services/api.service";
 import {DeleteTaskDialogComponent} from "./delete-task-dialog/delete-task-dialog.component";
 import { Output, EventEmitter } from '@angular/core';
+import {TodoEditComponent} from "./todo-edit/todo-edit.component";
 
 @Component({
   selector: 'app-todo',
@@ -21,6 +22,8 @@ export class TodoComponent implements OnInit {
   @Input() goalid: string = '';
   @Input() selectedRole: String = "Mitarbeiter_in";
 
+  descriptionDialog: String = "";
+  idDialog: String = "";
   task: Tasks = {goalid: '', _id: '', description: '', status: ''};
   description = '';
   isLoadingResults = true;
@@ -49,12 +52,21 @@ export class TodoComponent implements OnInit {
 
   ngOnInit(): void {
 
-
-
-
-
-
   }
+
+
+  openDialog(id: any, description: any): void {
+    this.descriptionDialog = description;
+    this.idDialog = id;
+    const dialogRef = this.dialog.open(TodoEditComponent, {
+      width: '40%',
+      data: {'id': this.idDialog, 'description': this.descriptionDialog}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+  }
+
 
 
 
