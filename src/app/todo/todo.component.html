@@ -36,8 +36,80 @@
   </div>
 
 
+  <div
+    cdkDropList
+
+    #todoList="cdkDropList"
+    [cdkDropListData]="tasksToDoing"
+    class="example-list"
+    (cdkDropListDropped)="dropInDoing($event)">
+    <mat-card class="main-card">DOING
+
+      <mat-card class="inner-card"   *ngFor="let task of tasksToDoing"   (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
+        <mat-card
+          (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)"  class="small-card"  *ngIf="!editable  || (editableId != task._id)"  cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" >
+          {{ task.description }}
+
+          <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+            <mat-icon  (click)="deleteDialog(task.
+              _id)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
+
+          </button>
+        </mat-card>
+
+
+
+      </mat-card>
+
+      <mat-card class="inner-card" *ngIf="editable  && (editableId == task._id)">
+        <mat-card class="small-card" *ngFor="let task of tasksToOneGoal" cdkDrag  cdkDragDisabled="{{isVorgesetzte_r()}}">
+          <input value="{{task.description}}" (keyup)="getTheInput($event)" aria-label="Edit"
+                 (keyup.enter)="updateATask(task)">
+        </mat-card>
+      </mat-card>
+
+    </mat-card>
+  </div>
+
 
   <div
+    cdkDropList
+
+    #todoList="cdkDropList"
+    [cdkDropListData]="tasksToDone"
+    class="example-list"
+    (cdkDropListDropped)="dropInDone($event)">
+    <mat-card class="main-card">DONE
+
+      <mat-card class="inner-card"   *ngFor="let task of tasksToDone"   (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
+        <mat-card
+          (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)"  class="small-card"  *ngIf="!editable  || (editableId != task._id)"  cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" >
+          {{ task.description }}
+
+          <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
+            <mat-icon  (click)="deleteDialog(task.
+              _id)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">cancel</mat-icon>
+
+          </button>
+        </mat-card>
+
+
+
+      </mat-card>
+
+      <mat-card class="inner-card" *ngIf="editable  && (editableId == task._id)">
+        <mat-card class="small-card" *ngFor="let task of tasksToOneGoal" cdkDrag  cdkDragDisabled="{{isVorgesetzte_r()}}">
+          <input value="{{task.description}}" (keyup)="getTheInput($event)" aria-label="Edit"
+                 (keyup.enter)="updateATask(task)">
+        </mat-card>
+      </mat-card>
+
+    </mat-card>
+  </div>
+
+
+
+ <!-- <div
     cdkDropList
 
     #doingList="cdkDropList"
@@ -46,9 +118,9 @@
     (cdkDropListDropped)="dropInDoing($event)">
     <mat-card class="main-card">DOING
 
- <!--     <mat-card class="inner-card" *ngIf="!editable" >
+ &lt;!&ndash;     <mat-card class="inner-card" *ngIf="!editable" >
         <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
-          {{task.description}}-->
+          {{task.description}}&ndash;&gt;
 
       <mat-card class="inner-card">
         <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag  cdkDragDisabled="{{isVorgesetzte_r()}}">
@@ -66,12 +138,12 @@
       </mat-card>
 
 
-<!--      <mat-card class="inner-card" *ngIf="editable">
+&lt;!&ndash;      <mat-card class="inner-card" *ngIf="editable">
         <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}">
           <input value="{{task.description}}" (keyup)="getTheInput($event)" aria-label="Edit"
                  (keyup.enter)="updateATask(task)">
         </mat-card>
-      </mat-card>-->
+      </mat-card>&ndash;&gt;
 
     </mat-card>
   </div>
@@ -85,11 +157,11 @@
     class="example-list"
     (cdkDropListDropped)="dropInDone($event)">
     <mat-card class="main-card">DONE
-<!--<<<<<<< HEAD
+&lt;!&ndash;<<<<<<< HEAD
       <mat-card class="inner-card" *ngIf="!editable">
         <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}" (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
           {{task.description}}
-=======-->
+=======&ndash;&gt;
       <mat-card class="inner-card">
         <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag  cdkDragDisabled="{{isVorgesetzte_r()}}">
           <input  *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
@@ -106,3 +178,4 @@
     </mat-card>
   </div>
 </div>
+-->

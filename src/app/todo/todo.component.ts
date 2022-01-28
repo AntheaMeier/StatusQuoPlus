@@ -274,8 +274,8 @@ export class TodoComponent implements OnInit {
   }
   method2CallForDblClick(id : String){
     this.isSingleClick = false;
-    this.editableId = id;
-    this.changeEditable();
+    // this.editableId = id;
+    // this.changeEditable();
   }
 
 
