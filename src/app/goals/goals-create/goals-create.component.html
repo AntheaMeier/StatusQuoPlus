@@ -4,7 +4,7 @@
   [cdkDropListData]="goalsToOneUser"
   class="example-list"
   (cdkDropListDropped)="drop($event)">
-  <mat-card class="main-card">ZIELE
+  <mat-card class="goalsCard">ZIELE
     <mat-icon class="icon-display" *ngIf="selectedRole == 'Mitarbeiter_in'" (click)="addPostForm()">add</mat-icon>
     <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true">
       <mat-form-field style="white-space: pre-wrap;">
@@ -26,35 +26,44 @@
         </button>
       </mat-action-row>
     </mat-expansion-panel>
-    <mat-expansion-panel *ngFor="let goal of goalsToOneUser" hideToggle
-                         (click)="setTheSelectedGoal(goal)"
-                         (click)="showTasks(goal._id)"
-                         (click)="setGoalsid(goal._id)">
-      <mat-expansion-panel-header class="small-card">
-        <p class="alignment" *ngIf="!edit">{{ goal.description }}</p>
-        <form [formGroup]="goalForm" (ngSubmit)="onFormSubmit(goal._id)">
-            <textarea
-              rows="5"
-              *ngIf="edit"
-              (keyup.enter)="editOnOff()"
-              (keyup.enter)="onFormSubmit(goal._id)"
-              (keyup.esc)="editOnOff()"
-              type="submit"
-              placeholder="{{ goal.description }}"
-              formControlName="description"
-              [(ngModel)]="enteredContent"
-            >{{ goal.description }}</textarea>
-        </form>
-        <button mat-button color="primary" class="button-styling2" (click)="editOnOff()">
-          <mat-icon class="style5">edit</mat-icon>
-        </button>
-        <button mat-button color="warn" (click)="deleteDialog(goal._id)" class="button-styling">
-          <mat-icon class="style5">delete</mat-icon>
-        </button>
-      </mat-expansion-panel-header>
-      <app-todo [selectedRole]="selectedRole" [tasksToOneGoal]="tasksToOneGoal" [goalid]="showGoalid"
-                [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone"
-      ></app-todo>
-    </mat-expansion-panel>
-  </mat-card>
-</div>
+    
+    
+      <div class="example-accordion-item-header test"  [ngStyle]="{'background-color':goal._id === showGoalid ? 'lightblue' : 'white' }" (click)="setTheSelectedGoal(goal)"
+      (click)="showTasks(goal._id)"
+      (click)="setGoalsid(goal._id)" *ngFor="let goal of goalsToOneUser; let index = index;">
+        <div>
+
+        <mat-card class="goals-matcard">
+          {{goal.description}}
+        </mat-card>
+
+        <mat-icon *ngIf="progressArray[index] == 100 && selectedRole == 'Mitarbeiter_in'">done_outline</mat-icon>
+
+
+        <mat-progress-bar  *ngIf="selectedRole == 'Mitarbeiter_in'" mode="determinate" value="{{progressArray[index]}}"></mat-progress-bar>
+
+
+          <span class="example-accordion-item-description">
+            <mat-icon class="button-styling" (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">
+            cancel
+          </mat-icon>
+
+           <mat-icon class="button-styling" (click)="openDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">
+             edit
+           </mat-icon>
+
+
+        </span>
+
+        </div>
+
+        <div class="test" *ngIf="goal._id == showGoalid">
+
+          <app-todo [selectedRole]="selectedRole" [idls]="idls" [tasksToOneGoal]="tasksToOneGoal" [goalid]="showGoalid"
+                    [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone"
+                    (newTodo)="setNewtask($event)"  (deleteTodo)= "deleteTask($event)"    (result)= "setDecision($event)"    (changedOrder) = "loadProgressNew($event)"></app-todo>
+        </div>
+
+      </div>
+
+</mat-card>

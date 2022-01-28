@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {TodoComponent} from "../todo.component";
 import { Router } from '@angular/router';
@@ -27,7 +27,20 @@ export class DeleteTaskDialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
+
+
+
+  id :String =  '';
+  isLoadingResults = false;
+  task : Tasks = { _id: '', description: '', status: '', goalid: ''};
+
+
   onNoClick(): void {
+
+    this.dialogRef.close('Close');
+
+
+
     this.dialog.closeAll();
   }
 
@@ -52,6 +65,7 @@ export class DeleteTaskDialogComponent implements OnInit {
   }
 
   deleteGoal(id: any) {
+    this.dialogRef.close('Delete');
     this.isLoadingResults = true;
     this.api.deleteTask(id)
       .subscribe(res => {
@@ -60,13 +74,15 @@ export class DeleteTaskDialogComponent implements OnInit {
           console.log(err);
           this.isLoadingResults = false;
         }
-       );
-    this.reloadCurrentRoute();
-    window.location.reload()
+      );
+
+    window.location.reload();
+
   }
 
   onFormSubmit() {
-    this.deleteGoal(this.data.id);
+    this.dialogRef.close('Delete');
+    this.deleteGoal(this.data._id);
     this.dialog.closeAll();
   }
 

@@ -7,6 +7,7 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 import { MatDialog } from '@angular/material/dialog';
 import {Login} from "../../shared/login";
 import {AuthService} from "../../services/auth.service";
+import { EditReviewComponent } from '../edit-review/edit-review.component';
 
 @Component({
   selector: 'app-list-reviews',
@@ -21,6 +22,7 @@ export class ListReviewsComponent implements OnInit {
   description = '';
   isLoadingResults = true;
   idDialog: any = '';
+
   @Input() selectedRole : String = "";
 
   @Input() currentUrl = "";
@@ -28,13 +30,14 @@ export class ListReviewsComponent implements OnInit {
   idloggedInUser: String = "";
   dataUsers: Login[] = [];
   showReviewsToOneUser = false;
-  @Input() idTeamMember = "";
+  @Input() idTeamMember: any = "";
   @Input() reviewsToOneUser: Review[] = [];
 
   reviewForm: FormGroup = this.formBuilder.group({
-    description: this.formBuilder.control('initial value', Validators.required)
+    description: ['', Validators.required],
+    
   });
-
+  
   constructor(
     private api: ApiService,
     private router: Router,
@@ -44,7 +47,7 @@ export class ListReviewsComponent implements OnInit {
     private auth: AuthService,
   ) {
   }
-
+  
   ngOnInit(): void {
     this.api.getUsers()
       .subscribe((res: any) => {
@@ -55,7 +58,7 @@ export class ListReviewsComponent implements OnInit {
         this.isLoadingResults = false;
       });
     this.idloggedInUser = this.auth.getUserDetails().user_info._id;
-    if(this.selectedRole!= "Vorgesetzte_r") {
+    if(this.selectedRole!= "Vorgesetzte_r" ) {
       this.getReviewDetails(this.idloggedInUser);
     }
 
@@ -64,8 +67,12 @@ export class ListReviewsComponent implements OnInit {
       console.log('id member ' + this.idTeamMember);
     }
 
+    if(this.currentUrl  == '/teamview/618cecd2e576c9b3d35be3d8' || this.currentUrl == '/teamview/61b1168ec69f475afd6ccd88') {
+      this.getReviewDetails(this.idTeamMember);
 
-    //this.getReviewDetails(this.route.snapshot.params.id);
+
+
+    }
   }
 
   getReviewDetails(id: any) {
@@ -89,24 +96,18 @@ export class ListReviewsComponent implements OnInit {
     });
   }
 
-  onFormSubmit(id: any) {
-    this.isLoadingResults = true;
-    this.api.updateReview(id, this.reviewForm.value)
-      .subscribe((res: any) => {
-          const id = res._id;
-          this.isLoadingResults = false;
-          this.router.navigate(['/show-review', id]);
-        }, (err: any) => {
-          console.log(err);
-          this.isLoadingResults = false;
-        }
-      );
-  }
-
   deleteDialog(id: any): void {
     this.idDialog = id;
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '40%',
+      data: {'id': this.idDialog}
+    });
+  }
+
+  openEditDialog(id: any): void {
+    this.idDialog = id;
+    const dialogRef = this.dialog.open(EditReviewComponent, {
+      width: '80%',
       data: {'id': this.idDialog}
     });
   }

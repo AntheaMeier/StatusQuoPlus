@@ -128,6 +128,14 @@ export class ApiService {
     );
   }
 
+  getTask(id: number): Observable<Tasks> {
+    const url = `${apiUrlTasks}/${id}`;
+    return this.http.get<Tasks>(url).pipe(
+      tap(_ => console.log(`fetched task id=${id}`)),
+      catchError(this.handleError<Tasks>(`getArticle id=${id}`))
+    );
+  }
+
   updateTask(id: any, task: Tasks): Observable<any> {
     const url = `${apiUrlTasks}/${id}`;
     console.log(url)

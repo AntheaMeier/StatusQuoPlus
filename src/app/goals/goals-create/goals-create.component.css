@@ -105,3 +105,61 @@
   padding: 16px 8px 16px 24px;
 }
 
+
+.test{
+  display:block;
+}
+
+
+
+/*ACCORDION*/
+.example-accordion {
+  display: block;
+  max-width: 100%;
+}
+
+.example-accordion-item {
+  display: block;
+  background-color: #E8E4E1;
+  margin-bottom: 2%;
+  border-radius: 4px;
+}
+
+
+.example-accordion-item-header {
+  align-content: center;
+  justify-content: space-between;
+}
+
+.example-accordion-item-description {
+  color: #857971;
+}
+
+.example-accordion-item-body {
+  background-color: white !important;
+}
+
+.example-accordion-item-header,
+.example-accordion-item-body {
+  padding: 16px;
+}
+
+.example-accordion-item-header:hover {
+  background-color: #59A3D2;
+  border-radius: 4px;
+}
+
+.goals-matcard {
+  width: 100%;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+
+.button-styling {
+  float: right;
+  margin-top: -20px;
+}
+

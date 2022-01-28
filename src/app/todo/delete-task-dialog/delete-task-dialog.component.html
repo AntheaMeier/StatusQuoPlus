@@ -2,8 +2,8 @@
   <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
   </form>
 </div>
-<p style="font-weight: bold;">Are you sure you want to delete this todo?</p>
-<div mat-dialog-actions>
+<p style="font-weight: bold;">Are you sure you want to delete this task?</p>
+<div mat-dialog-actions >
   <form [formGroup]="articleForm" (keyup.enter)="onFormSubmit()">
     <button mat-button (click)="onNoClick()">No Thanks</button>
     <button (click)="onFormSubmit()" type="submit" [disabled]="!articleForm.valid" mat-flat-button color="primary">

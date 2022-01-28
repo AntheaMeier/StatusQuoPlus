@@ -59,7 +59,11 @@ export class ResponsiveHeaderComponent {
               private api: ApiService,
               private cdr: ChangeDetectorRef
 
+
   ) {
+
+
+
 
     this.loginForm = formBuilder.group({
       title: formBuilder.control('initial value', Validators.required)
@@ -81,8 +85,8 @@ export class ResponsiveHeaderComponent {
     this.loggedIn = data;
   }
 
-  goToTeamview(userid: any, selectedRole: any): void {
-    this.router.navigate(['/teamview/' + userid], {state: {data: {userid, selectedRole}}});
+  goToTeamview(userid: any, selectedRole: any, surname: any, firstname: any): void {
+    this.router.navigate(['/teamview/' + userid], {state: {data: {userid, selectedRole, surname, firstname}}});
   }
 
   goToGoals(userid: any, selectedRole: any): void {
@@ -93,9 +97,10 @@ export class ResponsiveHeaderComponent {
 
 
   ngOnInit(): void {
+
+    console.log("url " + this.router.url);
       this.currentUrl = this.router.url;
 
-    this.goToGoals(this.idLoggedInUser, 'Mitarbeiter_in');
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -206,9 +211,14 @@ export class ResponsiveHeaderComponent {
   }*/
 
   changeUrl(id:String) {
-    this.currentUrl = 'board';
+    this.currentUrl = 'teamview';
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-      this.router.navigate(['board/',id]));
+      this.router.navigate(['teamview/',id]));
   }
 
+
+  deleteSelectedGoalFromLocalStorage() {
+    localStorage.removeItem('selectedGoal');
+
+  }
 }
