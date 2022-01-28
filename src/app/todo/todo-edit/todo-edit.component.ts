@@ -68,5 +68,6 @@ export class TodoEditComponent implements OnInit {
         }
       );
     this.dialogRef.close();
+    window.location.reload();
   }
 }

@@ -17,13 +17,13 @@ import { DateAdapter } from '@angular/material/core';
 
 export class AnnualReviewComponent implements OnInit {
 
-   review!: Review;  
+   review!: Review;
 
 
   addPost = false;
 
   enteredContent = "";
-  enteredDate!: string; 
+  enteredDate!: string;
   isLoadingResults = true;
   currentUrl = "";
 
@@ -93,8 +93,8 @@ export class AnnualReviewComponent implements OnInit {
         console.log(err);
         this.isLoadingResults = false;
       });
-    this.reloadCurrentRoute();
     this.addPost = false;
+    window.location.reload();
   }
 
   addPostForm() {

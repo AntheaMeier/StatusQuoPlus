@@ -22,7 +22,7 @@ export class EditReviewComponent implements OnInit {
 
   reviewForm: FormGroup = this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required),
-    
+
   });
 
   constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<ListReviewsComponent>,
@@ -34,9 +34,9 @@ export class EditReviewComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(ListReviewsComponent, {
       width: '80%',
-      
+
     });
-    
+
     dialogRef.afterClosed().subscribe(result => {
     });
   }
@@ -66,9 +66,7 @@ export class EditReviewComponent implements OnInit {
     this.isLoadingResults = true;
     this.api.updateReview(this.data.id, this.reviewForm.value)
       .subscribe((res: any) => {
-          const id = res._id;
           this.isLoadingResults = false;
-          this.router.navigate(['/show-review', id]);
         }, (err: any) => {
           console.log(err);
           this.isLoadingResults = false;

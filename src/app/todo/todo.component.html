@@ -28,33 +28,30 @@
           </button>
         </mat-action-row>
       </mat-expansion-panel>
-      
 
 
+      <mat-card
+        *ngFor="let task of tasksToTodo"
+        cdkDrag [cdkDragDisabled]="isVorgesetzte_r()">
+        {{ task.description }}
 
-      <mat-card class="inner-card"   *ngFor="let task of tasksToTodo"   (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
-        <mat-card
-          cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" >
-          {{ task.description }}
-
-          <span>
+        <span>
             <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
 
-              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">
+              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling"
+                        *ngIf="selectedRole == 'Mitarbeiter_in'">
                 edit
               </mat-icon>
 
-              <mat-icon  (click)="deleteDialog(task._id)"
-                         class="icon-styling"
-                         *ngIf="selectedRole == 'Mitarbeiter_in'">
+              <mat-icon (click)="deleteDialog(task._id)"
+                        class="icon-styling"
+                        *ngIf="selectedRole == 'Mitarbeiter_in'">
                 cancel
               </mat-icon>
 
             </button>
           </span>
-        </mat-card>
       </mat-card>
-
     </mat-card>
   </div>
 
@@ -67,22 +64,22 @@
     class="example-list"
     (cdkDropListDropped)="dropInDoing($event)">
     <mat-card class="main-card">DOING
-
-      <mat-card class="inner-card"   *ngFor="let task of tasksToDoing"   (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
         <mat-card
-          cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" >
+          *ngFor="let task of tasksToDoing"
+          cdkDrag [cdkDragDisabled]="isVorgesetzte_r()">
           {{ task.description }}
 
           <span>
             <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
 
-              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">
+              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling"
+                        *ngIf="selectedRole == 'Mitarbeiter_in'">
                 edit
               </mat-icon>
 
-              <mat-icon  (click)="deleteDialog(task._id)"
-                         class="icon-styling"
-                         *ngIf="selectedRole == 'Mitarbeiter_in'">
+              <mat-icon (click)="deleteDialog(task._id)"
+                        class="icon-styling"
+                        *ngIf="selectedRole == 'Mitarbeiter_in'">
                 cancel
               </mat-icon>
 
@@ -90,7 +87,6 @@
           </span>
         </mat-card>
       </mat-card>
-    </mat-card>
   </div>
 
   <div
@@ -101,22 +97,22 @@
     class="example-list"
     (cdkDropListDropped)="dropInDone($event)">
     <mat-card class="main-card">DONE
-
-      <mat-card class="inner-card"   *ngFor="let task of tasksToDone"   (click)="method1CallForClick()" (dblclick)="method2CallForDblClick(task._id)">
         <mat-card
-          cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" >
+          *ngFor="let task of tasksToDone"
+          cdkDrag [cdkDragDisabled]="isVorgesetzte_r()">
           {{ task.description }}
 
           <span>
             <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
 
-              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling" *ngIf="selectedRole == 'Mitarbeiter_in'">
+              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling"
+                        *ngIf="selectedRole == 'Mitarbeiter_in'">
                 edit
               </mat-icon>
 
-              <mat-icon  (click)="deleteDialog(task._id)"
-                         class="icon-styling"
-                         *ngIf="selectedRole == 'Mitarbeiter_in'">
+              <mat-icon (click)="deleteDialog(task._id)"
+                        class="icon-styling"
+                        *ngIf="selectedRole == 'Mitarbeiter_in'">
                 cancel
               </mat-icon>
 
@@ -124,9 +120,5 @@
           </span>
         </mat-card>
       </mat-card>
-
-    </mat-card>
   </div>
-
-    </mat-card>
-  </div>
+</div>

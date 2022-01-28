@@ -4,6 +4,7 @@ import {TodoComponent} from "../todo.component";
 import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Tasks} from "../../shared/tasks";
 
 @Component({
   selector: 'app-delete-task-dialog',
@@ -12,7 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class DeleteTaskDialogComponent implements OnInit {
 
-  id =  '';
+
   isLoadingResults = false;
 
   articleForm: FormGroup =  this.formBuilder.group({
@@ -31,7 +32,7 @@ export class DeleteTaskDialogComponent implements OnInit {
 
 
   id :String =  '';
-  isLoadingResults = false;
+
   task : Tasks = { _id: '', description: '', status: '', goalid: ''};
 
 

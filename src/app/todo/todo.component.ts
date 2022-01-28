@@ -2,13 +2,12 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Tasks} from "../shared/tasks";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {MatDialog} from "@angular/material/dialog";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../services/api.service";
 import {Login} from "../shared/login";
 import {AuthService} from "../services/auth.service";
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DeleteTaskDialogComponent} from "./delete-task-dialog/delete-task-dialog.component";
-import { Output, EventEmitter } from '@angular/core';
 import {TodoEditComponent} from "./todo-edit/todo-edit.component";
 
 @Component({
@@ -37,13 +36,12 @@ export class TodoComponent implements OnInit {
   status = '';
   _id = '';
   editable = false;
-  
+
   readOnly = true;
   value = 'Clear me'
   idloggedInUser: String = "";
   dataUsers: Login[] = [];
   showTasksToOneUser = false;
-  idDialog: any = '';
   edit = false;
   addPost = false;
   enteredContent = "";
@@ -66,7 +64,6 @@ export class TodoComponent implements OnInit {
   isSingleClick: Boolean = true;
   editableId: String = '';
   decision: String = '';
-  currentUrl: String = '';
   @Input() idls: String = '';
 
 
@@ -90,9 +87,10 @@ export class TodoComponent implements OnInit {
     if (this.selectedRole != "Vorgesetzte_r") {
       this.getTodoDetails(this.idloggedInUser);
     }
+  }
 
 
-  
+
   getTodoDetails(id: any) {
     this.api.getTasksToGoal(id)
       .subscribe((data: any) => {
@@ -127,8 +125,8 @@ export class TodoComponent implements OnInit {
           console.log(err);
           this.isLoadingResults = false;
         });
-      this.reloadCurrentRoute();
       this.addPost = false;
+      window.location.reload();
     }
   }
 
@@ -277,25 +275,7 @@ export class TodoComponent implements OnInit {
   }
 
 
-  addTask() {
-    this.isLoadingResults = true;
-    const simpleObject = {} as Tasks;
-    simpleObject.description = "Benenne deine Task";
-    simpleObject.status = "todo";
-    simpleObject.goalid = this.goalid;
-    this.newTodo.emit(simpleObject);
 
-    this.api.addTask(simpleObject)
-      .subscribe((res: any) => {
-        this.isLoadingResults = false;
-      }, (err: any) => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-
-    window.location.reload();
-
-  }
 
   deleteDialog(id: any): void {
     this.deleteTodo.emit(id);
