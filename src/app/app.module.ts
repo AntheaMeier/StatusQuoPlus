@@ -136,6 +136,10 @@ export function playerFactory() {
     CdkAccordionModule,
 
   ],
+  exports: [
+    MatInputModule,
+    MatFormFieldModule,
+  ],
   providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })

@@ -5,23 +5,23 @@ import {MatDialog} from '@angular/material/dialog';
 import {Output, EventEmitter} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {GoalsEditComponent} from "../goals-edit/goals-edit.component";
 import {DeleteConfirmationDialogComponent} from '../delete-confirmation-dialog/delete-confirmation-dialog';
 import {Tasks} from "../../shared/tasks";
 import {Login} from "../../shared/login";
 import {AuthService} from "../../services/auth.service";
+import {FormGroup, Validators, FormBuilder} from "@angular/forms";
 import {prepareSyntheticPropertyName} from "@angular/compiler/src/render3/util";
 import {BehaviorSubject, Observable} from "rxjs";
 import {switchMap} from "rxjs/operators";
 import {CdkAccordion, CdkAccordionItem} from "@angular/cdk/accordion";
 import {localizedString} from "@angular/compiler/src/output/output_ast";
 
-
 @Component({
   selector: 'app-goals',
   templateUrl: './goals-create.component.html',
   styleUrls: ['./goals-create.component.css']
 })
+
 
 export class GoalsCreateComponent  implements OnInit {
   placeholder = "Benenne dein Ziel...";
@@ -30,24 +30,25 @@ export class GoalsCreateComponent  implements OnInit {
   data: Goals[] = [];
   dataUser = {userid: '', selectedRole: ''};
   isLoadingResults = true;
-  selectedGoal: Goals = {_id: '', description: '', order: '', userid: ''};
-  @Output() showTasksClicked = new EventEmitter<Tasks[]>();
-  @Output() showGoalsClicked = new EventEmitter<Goals[]>();
   description = '';
   id = '';
   dataTasks: Tasks[] = [];
+  addPost = false;
+  enteredContent = "";
   tasksToOneGoal: Tasks[] = [];
   lel: any = "";
 
   goal: Goals = {_id: '', description: '', order: '', userid: ''};
+
   user: Login = {id: '', username: '', password: '', firstname: '', surname: '', email: '', role: '', team: []};
   dataUsers: Login[] = [];
   idloggedInUser: any =  '';
   userID = JSON.stringify(this.user.id);
-  showTasksToOneGoal = false;
-  showGoalsToOneUser = false;
-  isSingleClick: Boolean = true;
+  idDialog: any = '';
+  tasksToOneGoal: Tasks[] = [];
   editableId: String = '';
+  selectedGoal: Goals = {_id: '', description: '', order: '', userid: ''};
+  showTasksToOneGoal = false;
   newTask: Tasks = {goalid: '', _id: '', description: '', status: ''};
   deleteTodo :String = "";
   decision: String = 'yes';
@@ -55,9 +56,13 @@ export class GoalsCreateComponent  implements OnInit {
   idls: any = '';
   refreshGoals$ = new BehaviorSubject<boolean>(true);
 
+
   @Input() goalsToOneUser: Goals[] = [];
   @Input() idMember : any = "";
   @Input() selectedRole = "";
+  @Output() showTasksClicked = new EventEmitter<Tasks[]>();
+  @Output() showGoalsClicked = new EventEmitter<Goals[]>();
+
   progress: number = 0;
   progressArray: number[] = [];
 
@@ -85,26 +90,23 @@ currentUrl= '';
 
 
 
+  goalForm: FormGroup = this.formBuilder.group({
+    description: this.formBuilder.control('initial value', Validators.required)
+  });
 
   constructor(public dialog: MatDialog,
               private router: Router,
               private api: ApiService,
               private route: ActivatedRoute,
               private auth: AuthService,
+              private formBuilder: FormBuilder,
   ) {
 
   }
 
 
-  ngOnInit()
-  {
-
-
+  ngOnInit() {
     this.currentUrl= this.router.url;
-
-
-
-
     this.idls= localStorage.getItem('selectedGoal');
     const element = document.getElementById('1');
     this.goalSelectedReload = localStorage.getItem('selectedGoal');
@@ -169,39 +171,21 @@ currentUrl= '';
         this.goalsToOneUser = res;
 
 
-        /*console.log('kurz vor der Schleife');
-        console.log('länge: ' + this.goalsToOneUser);
-        for(let i=0; i < this.goalsToOneUser.length; i++) {
-          console.log('schleife');
-          this.api.getTasksToGoal(this.goalsToOneUser[i]._id).subscribe((res: any) => {
-            this.tasksToOneGoal = res;
-          }, err => {
-            console.log(err);
-            this.isLoadingResults = false;
-          });
-          this.api.getTasksToStatus(this.goalsToOneUser[i]._id, 'done')
-            .subscribe((res: any) => {
-              console.log(res);
-              this.tasksToDone = res;
-              this.isLoadingResults = false;
-            }, err => {
-              console.log(err);
-              this.isLoadingResults = false;
-            });
-          this.progress = (this.tasksToDone.length/this.tasksToOneGoal.length)*100;
-          console.log(this.progress);
-          console.log('tasktoneGoal' + this.tasksToOneGoal.length);
-          console.log('tasktoDone' + this.tasksToDone.length);
-        }*/
+       
 
         this.isLoadingResults = false;
         this.goalsToOneUser.sort((goal1, goal2) => {
           return Number(goal1.order) - Number(goal2.order);
         });
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
+      this.idloggedInUser = this.auth.getUserDetails().user_info._id;
+      if (this.selectedRole != "Vorgesetzte_r") {
+        this.getGoalDetails(this.idloggedInUser);
+      }
+      if (this.selectedRole == "Vorgesetzte_r") {
+        this.getGoalDetails(this.idMember);
+        console.log('id member ' + this.idMember);
+      }
+  }
 
 
     this.fillProgressArray();
@@ -290,21 +274,18 @@ currentUrl= '';
 
 
   public position(): void {
-    console.log('position aufgerufen ');
     let position = 0;
     this.goalsToOneUser.forEach((goal: Goals) => {
-      console.log('vor api aufruf : ' + goal.order);
       position += 1;
       goal.order = String(position);
       this.api.updateGoalOrder(goal._id, goal).subscribe((data: Goals) => {
       }, error => {
       });
-      console.log('nach api aufruf : ' + goal.order);
     });
   }
 
   drop(event: CdkDragDrop<Goals[]>) {
-    if(this.selectedRole == 'Mitarbeiter_in') {
+    if (this.selectedRole == 'Mitarbeiter_in') {
       if (event.previousContainer === event.container) {
         console.log('drop aufgerufen');
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -324,32 +305,80 @@ currentUrl= '';
 
 
   onAddPost(id: any) {
-    if(this.selectedRole == 'Mitarbeiter_in') {
-      this.isLoadingResults = true;
-      const simpleObject = {} as Goals;
-      simpleObject.description = this.placeholder;
-      simpleObject.userid = id;
-      this.api.addGoal(simpleObject)
-        .subscribe((res: any) => {
-          this.isLoadingResults = false;
-        }, (err: any) => {
-          console.log(err);
-          this.isLoadingResults = false;
-        });
-      window.location.reload()
+    if (this.selectedRole == 'Vorgesetzte_r') {
+      id = this.idMember
     }
+    this.isLoadingResults = true;
+    const simpleObject = {} as Goals;
+    simpleObject.description = this.enteredContent;
+    simpleObject.userid = id;
+    this.api.addGoal(simpleObject)
+      .subscribe((res: any) => {
+        this.isLoadingResults = false;
+      }, (err: any) => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+    this.reloadCurrentRoute();
+    this.addPost = false;
+    window.location.reload()
   }
 
-  showGoals(id: any) {
+  addPostForm() {
+    this.addPost = !this.addPost;
+  }
+
+  getGoalDetails(id: any) {
     this.api.getGoalsToUser(id)
       .subscribe((res: any) => {
         this.goalsToOneUser = res;
         this.isLoadingResults = false;
+        this.goalsToOneUser.sort((goal1, goal2) => {
+          return Number(goal1.order) - Number(goal2.order);
+        });
       }, err => {
         console.log(err);
         this.isLoadingResults = false;
       });
-    this.showGoalsToOneUser = true;
+    this.showTasksToOneGoal = true;
+  }
+
+  onFormSubmit(id: any) {
+    this.isLoadingResults = true;
+    this.api.updateGoal(id, this.goalForm.value)
+      .subscribe((res: any) => {
+          const id = res._id;
+          console.log(id)
+          this.isLoadingResults = false;
+          // this.router.navigate(['/show-todo', id]);
+        }, (err: any) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        }
+      );
+    window.location.reload()
+  }
+
+  deleteDialog(id: any): void {
+    console.log(id)
+    this.idDialog = id;
+    this.dialog.open(DeleteConfirmationDialogComponent, {
+      width: '40%',
+      data: {'id': this.idDialog}
+    });
+  }
+
+  editOnOff() {
+    this.edit = !this.edit;
+  }
+
+  setGoalsid(value: string) {
+    this.showGoalid = value;
+  }
+
+  setTheSelectedGoal(goal: Goals) {
+    this.selectedGoal = goal;
+    this.editableId = goal._id;
   }
 
   showTasks(id: any) {
@@ -396,7 +425,6 @@ currentUrl= '';
     //DOING
     this.api.getTasksToStatus(id, 'doing')
       .subscribe((res: any) => {
-        console.log(res);
         this.tasksToDoing = res;
         this.isLoadingResults = false;
       }, err => {
@@ -407,7 +435,6 @@ currentUrl= '';
     //DONE
     this.api.getTasksToStatus(id, 'done')
       .subscribe((res: any) => {
-        console.log(res);
         this.tasksToDone = res;
         this.isLoadingResults = false;
       }, err => {

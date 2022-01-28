@@ -4,18 +4,28 @@ import {TodoComponent} from "../todo.component";
 import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {Tasks} from "../../shared/tasks";
+
 @Component({
   selector: 'app-delete-task-dialog',
   templateUrl: './delete-task-dialog.component.html',
   styleUrls: ['./delete-task-dialog.component.css']
 })
 export class DeleteTaskDialogComponent implements OnInit {
-  oldDescription: any;
+
+  id =  '';
+  isLoadingResults = false;
 
   articleForm: FormGroup =  this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required)
   });
+
+  constructor(public dialog: MatDialog,
+              public dialogRef: MatDialogRef<TodoComponent>,
+              private router: Router,
+              private api: ApiService,
+              private formBuilder: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
 
 
@@ -24,11 +34,6 @@ export class DeleteTaskDialogComponent implements OnInit {
   isLoadingResults = false;
   task : Tasks = { _id: '', description: '', status: '', goalid: ''};
 
-
-
-  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<TodoComponent>,
-              private router: Router, private api: ApiService, private formBuilder: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   onNoClick(): void {
 
@@ -40,16 +45,27 @@ export class DeleteTaskDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.getTodo(this.data.id);
   }
 
+  getTodo(id: any) {
+    this.api.getTodo(id).subscribe((data: any) => {
+      this.id = data.id;
+      this.articleForm.setValue({
+        description: data.description,
+      });
+    });
+  }
 
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
 
   deleteGoal(id: any) {
     this.dialogRef.close('Delete');
-
-
-    console.log('das ist die id ' + id);
     this.isLoadingResults = true;
     this.api.deleteTask(id)
       .subscribe(res => {
@@ -65,7 +81,6 @@ export class DeleteTaskDialogComponent implements OnInit {
   }
 
   onFormSubmit() {
-
     this.dialogRef.close('Delete');
     this.deleteGoal(this.data._id);
     this.dialog.closeAll();

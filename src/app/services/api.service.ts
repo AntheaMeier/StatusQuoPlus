@@ -70,6 +70,7 @@ export class ApiService {
     );
   }
 
+
   deleteGoal(id: any): Observable<Goals> {
     const url = `${apiUrl}/${id}`;
     return this.http.delete<Goals>(url, httpOptions).pipe(
@@ -137,9 +138,20 @@ export class ApiService {
 
   updateTask(id: any, task: Tasks): Observable<any> {
     const url = `${apiUrlTasks}/${id}`;
+    console.log(url)
+    console.log(task)
+    console.log(id)
     return this.http.patch(url, task, httpOptions).pipe(
       tap(_ => console.log(`updated task id=${id}`)),
       catchError(this.handleError<any>('updateArticle'))
+    );
+  }
+
+  getTodo(id: number): Observable<Tasks> {
+    const url = `${apiUrlTasks}/${id}`;
+    return this.http.get<Tasks>(url).pipe(
+      tap(_ => console.log(`fetched task id=${id}`)),
+      catchError(this.handleError<Tasks>(`getTask id=${id}`))
     );
   }
 

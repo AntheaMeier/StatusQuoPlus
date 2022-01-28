@@ -1,9 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Tasks} from "../shared/tasks";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {MatDialog} from "@angular/material/dialog";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {ApiService} from "../services/api.service";
+import {Login} from "../shared/login";
+import {AuthService} from "../services/auth.service";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DeleteTaskDialogComponent} from "./delete-task-dialog/delete-task-dialog.component";
 import { Output, EventEmitter } from '@angular/core';
 import {TodoEditComponent} from "./todo-edit/todo-edit.component";
@@ -21,6 +24,10 @@ export class TodoComponent implements OnInit {
   @Input() tasksToDone: Tasks[] = [];
   @Input() goalid: string = '';
   @Input() selectedRole: String = "Mitarbeiter_in";
+  @Input() currentUrl = "";
+  @Input() idTeamMember = "";
+
+  @Output() showTasksClicked = new EventEmitter<Tasks[]>();
 
   descriptionDialog: String = "";
   idDialog: String = "";
@@ -28,7 +35,33 @@ export class TodoComponent implements OnInit {
   description = '';
   isLoadingResults = true;
   status = '';
+  _id = '';
   editable = false;
+  
+  readOnly = true;
+  value = 'Clear me'
+  idloggedInUser: String = "";
+  dataUsers: Login[] = [];
+  showTasksToOneUser = false;
+  idDialog: any = '';
+  edit = false;
+  addPost = false;
+  enteredContent = "";
+
+  todoForm: FormGroup = this.formBuilder.group({
+    description: this.formBuilder.control('initial value', Validators.required)
+  });
+
+  constructor(public dialog: MatDialog,
+              private router: Router,
+              private api: ApiService,
+              private auth: AuthService,
+              private formBuilder: FormBuilder,
+              private route: ActivatedRoute,
+  ) {
+  }
+
+
   showData: boolean = false;
   isSingleClick: Boolean = true;
   editableId: String = '';
@@ -44,16 +77,79 @@ export class TodoComponent implements OnInit {
 
 
 
-
-  constructor(public dialog: MatDialog, private router: Router, private api: ApiService, private route: ActivatedRoute,) {
-
-
-  }
-
   ngOnInit(): void {
+    this.api.getUsers()
+      .subscribe((res: any) => {
+        this.dataUsers = res;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+    this.idloggedInUser = this.auth.getUserDetails().user_info._id;
+    if (this.selectedRole != "Vorgesetzte_r") {
+      this.getTodoDetails(this.idloggedInUser);
+    }
+
+
+  
+  getTodoDetails(id: any) {
+    this.api.getTasksToGoal(id)
+      .subscribe((data: any) => {
+        this.tasksToOneGoal = data;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+    this.showTasksToOneUser = true;
 
   }
 
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
+  addTask(id: any) {
+    if (this.selectedRole == 'Mitarbeiter_in') {
+      this.isLoadingResults = true;
+      const simpleObject = {} as Tasks;
+      simpleObject.description = this.enteredContent;
+      simpleObject.status = "todo";
+      simpleObject.goalid = id;
+      this.api.addTask(simpleObject)
+        .subscribe((res: any) => {
+          this.isLoadingResults = false;
+        }, (err: any) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        });
+      this.reloadCurrentRoute();
+      this.addPost = false;
+    }
+  }
+
+  addPostForm() {
+    this.addPost = !this.addPost;
+  }
+
+  onFormSubmit(id: any) {
+    this.isLoadingResults = true;
+    this.api.updateTask(id, this.todoForm.value)
+      .subscribe((res: any) => {
+          const id = res._id;
+          console.log(id)
+          this.isLoadingResults = false;
+          // this.router.navigate(['/show-todo', id]);
+        }, (err: any) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        }
+      );
+  }
 
   openDialog(id: any, description: any): void {
     this.descriptionDialog = description;
@@ -69,18 +165,14 @@ export class TodoComponent implements OnInit {
 
 
 
+// TODO
 
-  // TODO
-
-  public changeStatusToTodo(): void {
+  changeStatusToTodo(): void {
     this.tasksToTodo.forEach((task: Tasks) => {
       if (task.status != 'todo') {
-        console.log(task._id);
         task.status = String('todo');
         this.api.updateTaskStatus(task._id, task).subscribe((task: Tasks) => {
-        }, error => {
-          console.log('hat nicht funktioniert');
-        });
+        })
       }
     });
     this.changedOrder.emit(true);
@@ -90,12 +182,10 @@ export class TodoComponent implements OnInit {
   }
 
   dropInTodo(event: CdkDragDrop<any>) {
-    if(this.selectedRole == 'Mitarbeiter_in') {
-      console.log('vorher ' + this.tasksToTodo);
+    if (this.selectedRole == 'Mitarbeiter_in') {
       if (event.previousContainer === event.container) {
         console.log('bewegt');
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-        console.log('moveIteminArray aufgerufen');
       } else {
         console.log('bewegt todo');
 
@@ -106,9 +196,7 @@ export class TodoComponent implements OnInit {
           event.previousIndex,
           event.currentIndex,
         );
-        console.log('bewegt');
 
-        console.log('nachher ' + this.tasksToTodo);
         this.changeStatusToTodo();
       }
     }
@@ -116,16 +204,12 @@ export class TodoComponent implements OnInit {
 
   // DOING
 
-  public changeStatusToDoing(): void {
-    console.log('changeStatustoDoing augerufen')
+  changeStatusToDoing(): void {
     this.tasksToDoing.forEach((task: Tasks) => {
       if (task.status != 'doing') {
-        console.log(task._id);
         task.status = String('doing');
         this.api.updateTaskStatus(task._id, task).subscribe((task: Tasks) => {
-        }, error => {
-          console.log('hat nicht funktioniert');
-        });
+        })
       }
     });
     this.changedOrder.emit();
@@ -135,11 +219,10 @@ export class TodoComponent implements OnInit {
   }
 
   dropInDoing(event: CdkDragDrop<any>) {
-    if(this.selectedRole == 'Mitarbeiter_in') {
+    if (this.selectedRole == 'Mitarbeiter_in') {
       if (event.previousContainer === event.container) {
 
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-        console.log('moveIteminArray aufgerufen');
       } else {
         this.changedOrder.emit(true);
 
@@ -164,12 +247,9 @@ export class TodoComponent implements OnInit {
   public changeStatusToDone(): void {
     this.tasksToDone.forEach((task: Tasks) => {
       if (task.status != 'done') {
-        console.log(task._id);
         task.status = String('done');
         this.api.updateTaskStatus(task._id, task).subscribe((task: Tasks) => {
-        }, error => {
-          console.log('hat nicht funktioniert');
-        });
+        })
       }
     });
     this.changedOrder.emit(true);
@@ -178,11 +258,9 @@ export class TodoComponent implements OnInit {
   }
 
   dropInDone(event: CdkDragDrop<any>) {
-    if(this.selectedRole == 'Mitarbeiter_in') {
-      console.log('vorher ' + this.tasksToOneGoal);
+    if (this.selectedRole == 'Mitarbeiter_in') {
       if (event.previousContainer === event.container) {
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-        console.log('moveIteminArray aufgerufen');
       } else {
         this.changedOrder.emit(true);
         console.log('bewegt done');
@@ -193,11 +271,11 @@ export class TodoComponent implements OnInit {
           event.previousIndex,
           event.currentIndex,
         );
-        console.log('nachher ' + this.tasksToOneGoal);
         this.changeStatusToDone();
       }
     }
   }
+
 
   addTask() {
     this.isLoadingResults = true;
@@ -309,3 +387,4 @@ export class TodoComponent implements OnInit {
     console.log('geklickt');
   }
 }
+

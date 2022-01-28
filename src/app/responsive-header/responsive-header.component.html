@@ -12,13 +12,16 @@
 
       <a mat-list-item *ngIf="this.isLogin" (click)="goToGoals(idLoggedInUser, 'Mitarbeiter_in')">
         <div class="sidenav-text" *ngIf="this.isLogin">ZIELE</div>
+
       </a>
       <a mat-list-item *ngIf="this.isLogin" [routerLink]="'/protokolle'">
         <div class="sidenav-text" mat-button>PROTOKOLLE</div>
       </a>
 
 
+
       <mat-expansion-panel class="expansion-panel-styling" *ngIf="this.roleLoggedInUser== 'Vorgesetzte_r'" (opened)="panelOpenState = true"
+
                            (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
