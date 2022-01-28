@@ -100,11 +100,19 @@ currentUrl= '';
   {
 
 
+    this.currentUrl= this.router.url;
+
+
+
+
     this.idls= localStorage.getItem('selectedGoal');
     const element = document.getElementById('1');
     this.goalSelectedReload = localStorage.getItem('selectedGoal');
+    console.log('iphone ' + this.goalSelectedReload);
+
+    if(this.goalSelectedReload)
+
      this.setGoalsid(this.goalSelectedReload);
-    this.currentUrl= this.router.url;
 
     if(this.currentUrl == '/'){
       this.showTasks(this.goalSelectedReload);
@@ -456,7 +464,9 @@ currentUrl= '';
   }
 
   setTheSelectedGoal(goal: Goals) {
-    localStorage.setItem('selectedGoal', goal._id);
+    if(this.currentUrl == '/')
+    {
+    localStorage.setItem('selectedGoal', goal._id);}
     this.selectedGoal = goal;
     this.editableId = goal._id;
   }

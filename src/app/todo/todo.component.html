@@ -1,7 +1,6 @@
 <div cdkDropListGroup>
   <div
     cdkDropList
-    cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}"
 
     #todoList="cdkDropList"
     [cdkDropListData]="tasksToTodo"
@@ -40,7 +39,6 @@
 
   <div
     cdkDropList
-    cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}"
 
     #doingList="cdkDropList"
     [cdkDropListData]="tasksToDoing"
@@ -53,7 +51,7 @@
           {{task.description}}-->
 
       <mat-card class="inner-card">
-        <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag>
+        <mat-card class="small-card" *ngFor="let task of tasksToDoing" cdkDrag  cdkDragDisabled="{{isVorgesetzte_r()}}">
           <input *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
                  ondblclick="this.readOnly=''" [(ngModel)]="task.description" placeholder="Name des Goals"
                  name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateATask(task)">
@@ -81,7 +79,6 @@
 
   <div
     cdkDropList
-    cdkDrag cdkDragDisabled="{{isVorgesetzte_r()}}"
 
     #doneList="cdkDropList"
     [cdkDropListData]="tasksToDone"
@@ -94,7 +91,7 @@
           {{task.description}}
 =======-->
       <mat-card class="inner-card">
-        <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag>
+        <mat-card class="small-card" *ngFor="let task of tasksToDone" cdkDrag  cdkDragDisabled="{{isVorgesetzte_r()}}">
           <input  *ngIf="selectedRole == 'Mitarbeiter_in'" class="input-styling" type="text" auxclick="this.readOnly=false" readonly="true"
                  ondblclick="this.readOnly=''" [(ngModel)]="task.description" placeholder="Name des Goals"
                  name="desc" (keyup)="getTheInput($event)" aria-label="Edit" (keyup)="updateATask(task)">
