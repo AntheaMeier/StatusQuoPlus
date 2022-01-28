@@ -2,9 +2,10 @@
   <mat-icon *ngIf="selectedRole == 'Mitarbeiter_in'" (click)="onAddPost(idloggedInUser)">add</mat-icon>
 
 
-      <div class="example-accordion-item-header"  [ngStyle]="{'background-color':goal._id === showGoalid ? 'lightblue' : 'white' }" (click)="setTheSelectedGoal(goal)"
+      <div class="example-accordion-item-header test"  [ngStyle]="{'background-color':goal._id === showGoalid ? 'lightblue' : 'white' }" (click)="setTheSelectedGoal(goal)"
       (click)="showTasks(goal._id)"
       (click)="setGoalsid(goal._id)" *ngFor="let goal of goalsToOneUser; let index = index;">
+        <div>
         <mat-card class="goals-matcard" *ngIf="selectedRole != 'Mitarbeiter_in' && currentUrl != '/'">
           {{goal.description}}
         </mat-card>
@@ -21,14 +22,15 @@
         <span class="example-accordion-item-description">
           <mat-icon (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">cancel</mat-icon>
       </span>
+        </div>
 
+        <div class="test" *ngIf="goal._id == showGoalid">
 
-      </div>
-      <div>
+          <app-todo [selectedRole]="selectedRole" [idls]="idls" [tasksToOneGoal]="tasksToOneGoal" [goalid]="showGoalid"
+                    [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone"
+                    (newTodo)="setNewtask($event)"  (deleteTodo)= "deleteTask($event)"    (result)= "setDecision($event)"    (changedOrder) = "loadProgressNew($event)"></app-todo>
+        </div>
 
-        <app-todo [selectedRole]="selectedRole" [idls]="idls" [tasksToOneGoal]="tasksToOneGoal" [goalid]="showGoalid"
-                  [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone"
-                  (newTodo)="setNewtask($event)"  (deleteTodo)= "deleteTask($event)"    (result)= "setDecision($event)"    (changedOrder) = "loadProgressNew($event)"></app-todo>
       </div>
 
 </mat-card>
