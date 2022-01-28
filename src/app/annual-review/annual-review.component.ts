@@ -5,6 +5,8 @@ import {Review} from '../shared/review';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Login} from "../shared/login";
 import {AuthService} from "../services/auth.service";
+import * as moment from 'moment';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-annual-review',
@@ -15,12 +17,13 @@ import {AuthService} from "../services/auth.service";
 
 export class AnnualReviewComponent implements OnInit {
 
-  review!: Review;
+   review!: Review;  
+
 
   addPost = false;
 
   enteredContent = "";
-  enteredDate = "";
+  enteredDate!: string; 
   isLoadingResults = true;
   currentUrl = "";
 
@@ -36,9 +39,12 @@ export class AnnualReviewComponent implements OnInit {
   constructor(private api: ApiService,
               private auth: AuthService,
               private router: Router,
-     private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private dateAdapter: DateAdapter<Date>,
+              ) {
     this.currentUrl = router.url;
     console.log(this.currentUrl);
+    this.dateAdapter.setLocale('de');
 
   }
 
@@ -61,7 +67,6 @@ export class AnnualReviewComponent implements OnInit {
     this.idloggedInUser = this.auth.getUserDetails().user_info._id;
 
   }
-
     reloadCurrentRoute() {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigate([this.currentUrl]);
@@ -76,8 +81,9 @@ export class AnnualReviewComponent implements OnInit {
 
     this.isLoadingResults = true;
     const simpleObject = {} as Review;
-    simpleObject.date = this.enteredDate;
-    console.log(this.enteredDate);
+    var date = moment(this.enteredDate).format('DD.MM.yyyy');
+    simpleObject.date = date;
+
     simpleObject.description = this.enteredContent;
     simpleObject.userid = id;
     this.api.addReview(simpleObject)

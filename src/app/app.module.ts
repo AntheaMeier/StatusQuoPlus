@@ -56,6 +56,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { TeamviewComponent } from './teamview/teamview.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {CdkAccordionModule} from "@angular/cdk/accordion";
+import { EditReviewComponent } from './annual-review/edit-review/edit-review.component';
 import {RouterModule} from "@angular/router";
 import {RoleGuard} from "./role.guard";
 import { TodoEditComponent } from './todo/todo-edit/todo-edit.component';
@@ -79,6 +80,7 @@ export function playerFactory() {
     DeleteDialogComponent,
     NotFoundComponent,
     TeamviewComponent,
+    EditReviewComponent,
     TodoEditComponent,
   ],
   imports: [
