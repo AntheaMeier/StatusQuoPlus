@@ -59,7 +59,6 @@ export class AnnualReviewComponent implements OnInit {
     this.idloggedInUser = this.auth.getUserDetails().user_info._id;
 
   }
-
     reloadCurrentRoute() {
     let currentUrl = this.router.url;
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {

@@ -58,6 +58,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { TeamviewComponent } from './teamview/teamview.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {CdkAccordionModule} from "@angular/cdk/accordion";
+import { EditReviewComponent } from './annual-review/edit-review/edit-review.component';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -79,6 +80,7 @@ export function playerFactory() {
     BoardMemberComponent,
     NotFoundComponent,
     TeamviewComponent,
+    EditReviewComponent,
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),

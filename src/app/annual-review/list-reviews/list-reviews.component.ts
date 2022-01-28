@@ -7,6 +7,7 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 import { MatDialog } from '@angular/material/dialog';
 import {Login} from "../../shared/login";
 import {AuthService} from "../../services/auth.service";
+import { EditReviewComponent } from '../edit-review/edit-review.component';
 
 @Component({
   selector: 'app-list-reviews',
@@ -33,10 +34,10 @@ export class ListReviewsComponent implements OnInit {
   @Input() reviewsToOneUser: Review[] = [];
 
   reviewForm: FormGroup = this.formBuilder.group({
-    description: this.formBuilder.control('initial value', Validators.required)
+    description: ['', Validators.required],
+    
   });
-
-
+  
   constructor(
     private api: ApiService,
     private router: Router,
@@ -65,9 +66,6 @@ export class ListReviewsComponent implements OnInit {
       this.getReviewDetails(this.idTeamMember);
       console.log('id member ' + this.idTeamMember);
     }
-
-
-    //this.getReviewDetails(this.route.snapshot.params.id);
   }
 
   getReviewDetails(id: any) {
@@ -91,24 +89,18 @@ export class ListReviewsComponent implements OnInit {
     });
   }
 
-  onFormSubmit(id: any) {
-    this.isLoadingResults = true;
-    this.api.updateReview(id, this.reviewForm.value)
-      .subscribe((res: any) => {
-          const id = res._id;
-          this.isLoadingResults = false;
-          this.router.navigate(['/show-review', id]);
-        }, (err: any) => {
-          console.log(err);
-          this.isLoadingResults = false;
-        }
-      );
-  }
-
   deleteDialog(id: any): void {
     this.idDialog = id;
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '40%',
+      data: {'id': this.idDialog}
+    });
+  }
+
+  openEditDialog(id: any): void {
+    this.idDialog = id;
+    const dialogRef = this.dialog.open(EditReviewComponent, {
+      width: '80%',
       data: {'id': this.idDialog}
     });
   }
