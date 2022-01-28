@@ -26,8 +26,8 @@
         </button>
       </mat-action-row>
     </mat-expansion-panel>
-    
-    
+
+
       <div class="example-accordion-item-header test"  [ngStyle]="{'background-color':goal._id === showGoalid ? 'lightblue' : 'white' }" (click)="setTheSelectedGoal(goal)"
       (click)="showTasks(goal._id)"
       (click)="setGoalsid(goal._id)" *ngFor="let goal of goalsToOneUser; let index = index;">
@@ -67,3 +67,4 @@
       </div>
 
 </mat-card>
+</div>
