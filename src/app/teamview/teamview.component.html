@@ -5,4 +5,6 @@
   <mat-tab label="PROTOKOLLE">
     <app-annual-review [selectedRole]="selectedRole" [reviewsToOneUser]="reviewsToOneUser" [idTeamMember]="idMember"></app-annual-review>
   </mat-tab>
+  <mat-tab class="name-styling" [disabled]="true" [label]="this.firstname + ' ' + this.surname">
+  </mat-tab>
 </mat-tab-group>

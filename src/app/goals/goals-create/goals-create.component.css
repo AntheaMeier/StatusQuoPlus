@@ -78,6 +78,10 @@ input:focus {
   outline: none;
 }
 
+.test{
+  display:block;
+}
+
 
 
 /*ACCORDION*/
@@ -95,7 +99,6 @@ input:focus {
 
 
 .example-accordion-item-header {
-  display: flex;
   align-content: center;
   justify-content: space-between;
 }
@@ -124,4 +127,10 @@ input:focus {
   margin: 0;
   padding: 0;
   box-shadow: none;
+}
+
+
+.button-styling {
+  float: right;
+  margin-top: -20px;
 }
