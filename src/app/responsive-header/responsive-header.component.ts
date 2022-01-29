@@ -39,6 +39,7 @@ export class ResponsiveHeaderComponent {
   reviewsToOneUser: Review[] = [];
 
 
+
   currentUrl: String = ''
   panelOpenState = false;
 
