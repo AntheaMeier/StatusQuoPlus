@@ -1,9 +1,8 @@
-<div
-  cdkDropList
-  #goalList="cdkDropList"
-  [cdkDropListData]="goalsToOneUser"
-  class="example-list"
-  (cdkDropListDropped)="drop($event)">
+<div  cdkDropList
+      #goalList="cdkDropList"
+      [cdkDropListData]="goalsToOneUser"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
   <mat-card class="goalsCard">ZIELE
     <mat-icon class="icon-display" *ngIf="selectedRole == 'Mitarbeiter_in'" (click)="addPostForm()">add</mat-icon>
     <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true">
@@ -28,13 +27,13 @@
     </mat-expansion-panel>
 
 
-    <div class="example-accordion-item-header test"
+    <div
+      class="example-accordion-item-header test"
          (click)="setTheSelectedGoal(goal)"
          (click)="showTasks(goal._id)"
          (click)="setGoalsid(goal._id)"
          *ngFor="let goal of goalsToOneUser; let index = index;">
-      <div>
-        <mat-card [ngStyle]="{'background-color':goal._id === showGoalid ? 'lightblue' : '#E8E4E1' }"
+        <mat-card [cdkDragDisabled]="isVorgesetzte_r()" cdkDrag [ngStyle]="{'background-color':goal._id === showGoalid ? 'lightblue' : '#E8E4E1' }"
                   class="goals-matcard">
           <mat-icon style="color: green;" *ngIf="progressArray[index] == 100 && selectedRole == 'Mitarbeiter_in'">done_outline</mat-icon>
 
@@ -53,11 +52,18 @@
             </mat-icon>
         </span>
         </mat-card>
-      </div>
+
       <div class="test" *ngIf="goal._id == showGoalid">
-        <app-todo [selectedRole]="selectedRole" [idls]="idls" [tasksToOneGoal]="tasksToOneGoal" [goalid]="showGoalid"
-                  [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone"
-                  (newTodo)="setNewtask($event)" (deleteTodo)="deleteTask($event)" (result)="setDecision($event)"
+        <app-todo [selectedRole]="selectedRole"
+                  [idls]="idls"
+                  [tasksToOneGoal]="tasksToOneGoal"
+                  [goalid]="showGoalid"
+                  [tasksToTodo]="tasksToTodo"
+                  [tasksToDoing]="tasksToDoing"
+                  [tasksToDone]="tasksToDone"
+                  (newTodo)="setNewtask($event)"
+                  (deleteTodo)="deleteTask($event)"
+                  (result)="setDecision($event)"
                   (changedOrder)="loadProgressNew($event)"></app-todo>
       </div>
     </div>
