@@ -31,6 +31,7 @@
 
 
       <mat-card
+        class="task-card"
         *ngFor="let task of tasksToTodo"
         cdkDrag [cdkDragDisabled]="isVorgesetzte_r()">
         {{ task.description }}
@@ -65,6 +66,7 @@
     (cdkDropListDropped)="dropInDoing($event)">
     <mat-card class="main-card">DOING
         <mat-card
+          class="task-card"
           *ngFor="let task of tasksToDoing"
           cdkDrag [cdkDragDisabled]="isVorgesetzte_r()">
           {{ task.description }}
@@ -98,6 +100,7 @@
     (cdkDropListDropped)="dropInDone($event)">
     <mat-card class="main-card">DONE
         <mat-card
+          class="task-card"
           *ngFor="let task of tasksToDone"
           cdkDrag [cdkDragDisabled]="isVorgesetzte_r()">
           {{ task.description }}

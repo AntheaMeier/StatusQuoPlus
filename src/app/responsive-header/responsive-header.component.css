@@ -63,7 +63,7 @@
 .random-user-side-text {
   margin-top: 10px;
   margin-left: 10px;
-  color: grey;
+  color: #857971;
   font-size: 10px;
 }
 
@@ -106,12 +106,32 @@ img {
 .expansion-panel-styling {
   box-shadow: none !important;
   margin-left: -12%;
+  background-color: transparent;
 }
 
 .expansion-panel-member-styling {
-  margin-left: 12% !important;
-  margin-top: 50% !important;
+  margin-left: 20% !important;
   font-size: 15px !important;
-  line-height: 20px;
+  line-height: 30px !important;
+  color: #857971;
+}
 
+.expansion-panel-member-styling:hover {
+  color: #0071B9;
+}
+
+.dropdown-member-styling {
+  margin-left: 10% !important;
+  font-size: 15px !important;
+  line-height: 30px !important;
+  color: #857971;
+  text-decoration: none;
+}
+
+.dropdown-member-styling:hover {
+  color: #0071B9;
+}
+
+a {
+  cursor: pointer;
 }

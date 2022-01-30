@@ -61,16 +61,27 @@
     <span class="title" (click)="clickLogo()">
       <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Adesso_AG_logo.svg" />
     </span>
+
     <div class="nav-element" (click)="changeRoleToMitarbeiter_in()">
       <div  class="element-text"  *ngIf="this.isLogin">ZIELE</div>
     </div>
+
     <div class="nav-element "  (click)="clickProtokoll()">
       <div class="element-text" routerLink="protokolle" *ngIf="this.isLogin">PROTOKOLLE</div>
     </div>
-    <div class="nav-element"  (click)="reloadPage() " (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">
-      <div class="element-text" *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">MEIN TEAM
+
+    <div class="nav-element"(click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">
+      <div class="element-text" [matMenuTriggerFor]="menu" *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">MEIN TEAM
+        <mat-menu #menu="matMenu">
+          <div *ngFor="let member of teamVorgesetze" (click)="deleteSelectedGoalFromLocalStorage()">
+            <a class="dropdown-member-styling" (click)="changeUrl(member.userid)" (click)="goToTeamview(member.userid, 'Vorgesetzte_r', member.surname, member.firstname)">
+              {{member.firstname}} {{member.surname}}
+            </a>
+          </div>
+        </mat-menu>
       </div>
     </div>
+
     <span class="example-spacer"></span>
     <div class="nav-element">
       <div class="element-text">

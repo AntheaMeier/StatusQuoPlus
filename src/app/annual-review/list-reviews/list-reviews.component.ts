@@ -35,9 +35,9 @@ export class ListReviewsComponent implements OnInit {
 
   reviewForm: FormGroup = this.formBuilder.group({
     description: ['', Validators.required],
-    
+
   });
-  
+
   constructor(
     private api: ApiService,
     private router: Router,
@@ -47,7 +47,7 @@ export class ListReviewsComponent implements OnInit {
     private auth: AuthService,
   ) {
   }
-  
+
   ngOnInit(): void {
     this.api.getUsers()
       .subscribe((res: any) => {
@@ -86,6 +86,8 @@ export class ListReviewsComponent implements OnInit {
           this.isLoadingResults = false;
         });
       this.showReviewsToOneUser = true;
+
+
 
   }
 

@@ -28,43 +28,38 @@
     </mat-expansion-panel>
 
 
-      <div class="example-accordion-item-header test"  [ngStyle]="{'background-color':goal._id === showGoalid ? 'lightblue' : 'white' }" (click)="setTheSelectedGoal(goal)"
-      (click)="showTasks(goal._id)"
-      (click)="setGoalsid(goal._id)" *ngFor="let goal of goalsToOneUser; let index = index;">
-        <div>
+    <div class="example-accordion-item-header test"
+         (click)="setTheSelectedGoal(goal)"
+         (click)="showTasks(goal._id)"
+         (click)="setGoalsid(goal._id)"
+         *ngFor="let goal of goalsToOneUser; let index = index;">
+      <div>
+        <mat-card [ngStyle]="{'background-color':goal._id === showGoalid ? 'lightblue' : '#E8E4E1' }"
+                  class="goals-matcard">
+          <mat-icon style="color: green;" *ngIf="progressArray[index] == 100 && selectedRole == 'Mitarbeiter_in'">done_outline</mat-icon>
 
-        <mat-card class="goals-matcard">
           {{goal.description}}
-        </mat-card>
 
-        <mat-icon *ngIf="progressArray[index] == 100 && selectedRole == 'Mitarbeiter_in'">done_outline</mat-icon>
-
-
-        <mat-progress-bar  *ngIf="selectedRole == 'Mitarbeiter_in'" mode="determinate" value="{{progressArray[index]}}"></mat-progress-bar>
-
-
-          <span class="example-accordion-item-description">
-            <mat-icon class="button-styling" (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">
+          <mat-progress-bar class="progressbar-styling" *ngIf="selectedRole == 'Mitarbeiter_in'" mode="determinate"
+                            value="{{progressArray[index]}}"></mat-progress-bar>
+          <span class="span-styling">
+            <mat-icon class="button-styling" (click)="deleteDialog(goal._id)"
+                      *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">
             cancel
-          </mat-icon>
-
-           <mat-icon class="button-styling" (click)="openDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">
+            </mat-icon>
+            <mat-icon class="button-styling" (click)="openDialog(goal._id)"
+                     *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">
              edit
-           </mat-icon>
-
-
+            </mat-icon>
         </span>
-
-        </div>
-
-        <div class="test" *ngIf="goal._id == showGoalid">
-
-          <app-todo [selectedRole]="selectedRole" [idls]="idls" [tasksToOneGoal]="tasksToOneGoal" [goalid]="showGoalid"
-                    [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone"
-                    (newTodo)="setNewtask($event)"  (deleteTodo)= "deleteTask($event)"    (result)= "setDecision($event)"    (changedOrder) = "loadProgressNew($event)"></app-todo>
-        </div>
-
+        </mat-card>
       </div>
-
-</mat-card>
+      <div class="test" *ngIf="goal._id == showGoalid">
+        <app-todo [selectedRole]="selectedRole" [idls]="idls" [tasksToOneGoal]="tasksToOneGoal" [goalid]="showGoalid"
+                  [tasksToTodo]="tasksToTodo" [tasksToDoing]="tasksToDoing" [tasksToDone]="tasksToDone"
+                  (newTodo)="setNewtask($event)" (deleteTodo)="deleteTask($event)" (result)="setDecision($event)"
+                  (changedOrder)="loadProgressNew($event)"></app-todo>
+      </div>
+    </div>
+  </mat-card>
 </div>

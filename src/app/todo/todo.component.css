@@ -10,21 +10,19 @@
   margin: 3%;
   height: 80%;
   font-family: "Klavika", sans-serif;
+  font-size: 15px;
   color: #0071B9;
+  background-color: #E8E4E1;
+  box-shadow: none;
 }
 
-::ng-deep.mat-card {
+.task-card {
+  background-color: white;
   box-shadow: none;
 }
 
 .icon-display {
   font-size: 15px;
-}
-
-::ng-deep.mat-expansion-panel {
-  background-color: #E8E4E1;
-  margin-bottom: 3%;
-  margin-top: 3%;
 }
 
 .small-card {
@@ -38,57 +36,13 @@
   margin-top: 3%;
 }
 
-.small-card-done {
-  background-color: #b4ccb4;
-  color: #857971;
-}
-
-.alignment {
-  text-align:left;
-  flex: 80%;
-  margin: 0;
-}
-
 .button-styling {
   align-items: flex-end;
   flex: 10%;
 }
 
-.button-styling2 {
-  float:right;
-  flex: 10%;
-}
-
-::ng-deep.mat-form-field {
-  width: 100%;
-  float: right;
-  margin-top: -10px;
-}
-
 .icon-styling {
   color: #857971;
-}
-
-::ng-deep.mat-form-field-underline {
-  background-color: #0071B9 !important;
-}
-
-::ng-deep.mat-form-field-ripple {
-  background-color: #0071B9 !important;
-}
-
-::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
-  background-color: #E8E4E1 !important;
-  height: 10% !important;
-}
-
-::ng-deep.mat-raised-button {
-  background-color: #0071B9;
-  color: white;
-}
-
-::ng-deep .mat-focused .mat-form-field-label {
-  color: #0071B9 !important;
 }
 
 .cdk-drag-preview {

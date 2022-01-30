@@ -2,24 +2,17 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.example-box:last-child {
-  border: none;
-}
-
-.main-card {
-  margin: 1%;
-  box-shadow: 0px 0px 8px #E8E4E1;
-  font-family: "Klavika", sans-serif;
-  color: #0071B9;
-  padding-bottom: 350px;
-}
-
-::ng-deep.mat-card {
-  box-shadow: none;
-}
 
 .icon-display {
   font-size: 15px;
+  color: #0071B9 !important;
+  box-shadow: none;
+}
+
+.goalsCard {
+  font-size: 15px;
+  color: #0071B9 !important;
+  box-shadow: none;
 }
 
 ::ng-deep.mat-expansion-panel {
@@ -28,53 +21,13 @@
   margin-top: 3%;
 }
 
-.small-card {
-  background-color: #E8E4E1;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  border-radius: 4px;
-  margin: 5%;
-}
-
-.alignment {
-  text-align:left;
-  flex: 80%;
-  margin: 0;
-  padding-top: 1%;
-}
-
 .button-styling {
-  align-items: flex-end;
-  flex: 10%;
+  flex: 20%;
+  margin-top: -60%;
 }
 
-.button-styling2 {
-  float:right;
-  flex: 10%;
-}
-
-::ng-deep.mat-form-field {
-  width: 100%;
-}
-
-::ng-deep.mat-form-field-underline {
-  background-color: #0071B9 !important;
-}
-
-::ng-deep.mat-form-field-ripple {
-  background-color: #0071B9 !important;
-}
-
-::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
-  background-color: #E8E4E1 !important;
-  height: 10% !important;
-}
-
-::ng-deep.mat-raised-button {
-  background-color: #0071B9;
-  color: white;
+.span-styling {
+  float: right;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {
@@ -97,69 +50,45 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-
-::ng-deep.mat-action-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  padding: 16px 8px 16px 24px;
-}
-
-
 .test{
   display:block;
 }
 
-
-
-/*ACCORDION*/
-.example-accordion {
-  display: block;
-  max-width: 100%;
-}
-
-.example-accordion-item {
-  display: block;
-  background-color: #E8E4E1;
-  margin-bottom: 2%;
-  border-radius: 4px;
-}
-
-
 .example-accordion-item-header {
   align-content: center;
   justify-content: space-between;
-}
-
-.example-accordion-item-description {
-  color: #857971;
-}
-
-.example-accordion-item-body {
-  background-color: white !important;
-}
-
-.example-accordion-item-header,
-.example-accordion-item-body {
   padding: 16px;
-}
-
-.example-accordion-item-header:hover {
-  background-color: #59A3D2;
-  border-radius: 4px;
 }
 
 .goals-matcard {
   width: 100%;
-  background-color: transparent;
-  margin: 0;
-  padding: 0;
+  background-color: #E8E4E1;
+  margin: 0 auto;
+  padding: 1%;
   box-shadow: none;
 }
 
 
-.button-styling {
-  float: right;
-  margin-top: -20px;
+@media screen and (max-width: 844px) {
+  .goals-matcard {
+    padding: 2%;
+  }
+
+  .progressbar-styling {
+    margin-top: 3% !important;
+  }
 }
 
+
+.progressbar-styling {
+  margin-top: 1% !important;
+  border-radius: 4px;
+}
+
+::ng-deep .mat-progress-bar-fill::after {
+  background-color: #0071B9;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+  background: white;
+}
