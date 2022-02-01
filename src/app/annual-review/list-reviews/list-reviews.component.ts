@@ -110,6 +110,7 @@ export class ListReviewsComponent implements OnInit {
     this.idDialog = id;
     const dialogRef = this.dialog.open(EditReviewComponent, {
       width: '80%',
+      height: '80%',
       data: {'id': this.idDialog}
     });
   }
