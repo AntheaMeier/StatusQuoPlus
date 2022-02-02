@@ -170,6 +170,7 @@ export class GoalsCreateComponent implements OnInit {
         console.log(err);
         this.isLoadingResults = false;
       });
+
     this.fillProgressArray();
   }
 
@@ -203,6 +204,7 @@ export class GoalsCreateComponent implements OnInit {
         this.isLoadingResults = false;
       });
   }
+
 
 
   async getNumberAllTasks(goalid: String): Promise<number> {
@@ -278,6 +280,8 @@ export class GoalsCreateComponent implements OnInit {
     const simpleObject = {} as Goals;
     simpleObject.description = this.enteredContent;
     simpleObject.userid = id;
+    simpleObject.order = "" + (this.goalsToOneUser.length+1);
+
     this.api.addGoal(simpleObject)
       .subscribe((res: any) => {
         this.isLoadingResults = false;
@@ -445,4 +449,6 @@ export class GoalsCreateComponent implements OnInit {
     }
     return (this.selectedRole == 'Vorgesetzte_r');
   }
+
+
 }
