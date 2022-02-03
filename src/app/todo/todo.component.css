@@ -19,10 +19,14 @@
 .task-card {
   background-color: white;
   box-shadow: none;
+  margin-bottom: 2%;
+  padding: 2%;
+  color: #857971;
 }
 
 .icon-display {
   font-size: 15px;
+  float: right;
 }
 
 .small-card {

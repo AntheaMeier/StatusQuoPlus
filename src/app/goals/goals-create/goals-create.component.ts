@@ -166,20 +166,17 @@ export class GoalsCreateComponent implements OnInit {
         this.goalsToOneUser.sort((goal1, goal2) => {
           return Number(goal1.order) - Number(goal2.order);
         });
+        this.fillProgressArray();
       }, err => {
         console.log(err);
         this.isLoadingResults = false;
       });
-
-    this.fillProgressArray();
   }
 
 
-  fillProgressArray(): void {
+  async fillProgressArray() {
     this.progressArray = [];
-
-    this.api.getGoalsToUser(this.idloggedInUser)
-      .subscribe(async (res: any) => {
+    let res = this.goalsToOneUser;
         for (let i = 0; i < res.length; i++) {
           this.getNumberAllTasks(res[i]._id);
           this.getNumberAllTasksDone(res[i]._id);
@@ -197,12 +194,6 @@ export class GoalsCreateComponent implements OnInit {
 
           this.progressArray.push(this.progress);
         }
-
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
   }
 
 
@@ -246,6 +237,8 @@ export class GoalsCreateComponent implements OnInit {
       if (event.previousContainer === event.container) {
         console.log('drop aufgerufen');
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+        moveItemInArray(this.progressArray, event.previousIndex, event.currentIndex);
+
         this.position();
       } else {
         transferArrayItem(
