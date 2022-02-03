@@ -1,9 +1,8 @@
-<h1>The task you want to update:</h1>
-<h2>"{{oldDescription}}"</h2>
+<div class="container-styling">
+<h1>Hier kannst du deine Task bearbeiten:</h1>
 <div mat-dialog-content>
   <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
-    <mat-form-field appearance="fill">
-      <mat-label>your updated task</mat-label>
+    <mat-form-field appearance="outline">
       <input [(ngModel)]="enteredValue" matInput placeholder="My task" formControlName="description"
              value="">
       <mat-error>
@@ -12,9 +11,10 @@
     </mat-form-field>
   </form>
 </div>
+</div>
 <div mat-dialog-actions>
   <form [formGroup]="articleForm">
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button class="save-button" mat-button (keyup.enter)="onFormSubmit()" (click)="onFormSubmit()" type="submit" [disabled]="!articleForm.valid">Save</button>
+    <button mat-button (click)="onNoClick()">Abbrechen</button>
+    <button class="save-button" mat-button (keyup.enter)="onFormSubmit()" (click)="onFormSubmit()" type="submit" [disabled]="!articleForm.valid">Speichern</button>
   </form>
 </div>

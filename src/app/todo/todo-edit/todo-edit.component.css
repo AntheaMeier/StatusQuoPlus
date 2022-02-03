@@ -2,3 +2,24 @@
   background-color: #0071B9;
   color: white;
 }
+
+mat-form-field {
+  width: 100%;
+}
+
+.mat-dialog-actions {
+  float: right;
+}
+
+
+.mat-input-element {
+  color: #857971;
+}
+
+
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #857971;
+}
+
+
+
