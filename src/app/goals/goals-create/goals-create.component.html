@@ -35,16 +35,17 @@
          (click)="setGoalsid(goal._id)"
          *ngFor="let goal of goalsToOneUser; let index = index">
 
-      <mat-expansion-panel hideToggle class="panel-styling" [expanded]="showGoalid == goal._id">
+      <mat-expansion-panel cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" hideToggle class="panel-styling" [expanded]="showGoalid == goal._id">
         <mat-expansion-panel-header class="panel-header-styling">
-        <mat-card [cdkDragDisabled]="isVorgesetzte_r()" cdkDrag [ngStyle]="{'background-color':goal._id === showGoalid ? 'lightblue' : '#E8E4E1' }"
+        <mat-card [ngStyle]="{'background-color':goal._id === showGoalid ? 'lightblue' : '#E8E4E1' }"
                   class="goals-matcard">
-          <mat-icon style="color: green;" *ngIf="progressArray[index] == 100 && selectedRole == 'Mitarbeiter_in'">done_outline</mat-icon>
 
           <div class="description-styling">
             {{goal.description}}
           </div>
-          <mat-progress-bar class="progressbar-styling" *ngIf="selectedRole == 'Mitarbeiter_in'" mode="determinate"
+
+          <mat-progress-bar [ngClass]="{'green-progress':progressArray[index] == 100 && selectedRole == 'Mitarbeiter_in'}"
+                            *ngIf="selectedRole == 'Mitarbeiter_in'" class="progressbar-styling" mode="determinate"
                             value="{{progressArray[index]}}"></mat-progress-bar>
           <span class="span-styling">
             <mat-icon class="button-styling" (click)="openDialog(goal._id)"
@@ -74,6 +75,9 @@
                   (changedOrder)="loadProgressNew($event)"></app-todo>
       </div>
       </mat-expansion-panel>
+    </div>
+    <div *ngIf="goalsToOneUser.length == 0" class="description-styling">
+      <p>Du hast noch keine Ziele</p>
     </div>
   </mat-card>
 </div>

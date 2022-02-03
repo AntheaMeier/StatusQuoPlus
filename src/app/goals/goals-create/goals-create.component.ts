@@ -237,7 +237,6 @@ export class GoalsCreateComponent implements OnInit {
         console.log('drop aufgerufen');
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
         moveItemInArray(this.progressArray, event.previousIndex, event.currentIndex);
-
         this.position();
       } else {
         transferArrayItem(
@@ -247,7 +246,6 @@ export class GoalsCreateComponent implements OnInit {
           event.currentIndex,
         );
       }
-
   }
 
 

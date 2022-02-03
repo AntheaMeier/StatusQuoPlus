@@ -98,9 +98,8 @@ export class ResponsiveHeaderComponent {
 
 
   ngOnInit(): void {
-
     console.log("url " + this.router.url);
-      this.currentUrl = this.router.url;
+    this.currentUrl = this.router.url;
 
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -220,6 +219,5 @@ export class ResponsiveHeaderComponent {
 
   deleteSelectedGoalFromLocalStorage() {
     localStorage.removeItem('selectedGoal');
-
   }
 }
