@@ -1,7 +1,4 @@
-.button-styling {
-  float: right;
-}
-
-.icon-styling {
-  margin-bottom: 150%;
+.save-button {
+  background-color: #0071B9;
+  color: white;
 }

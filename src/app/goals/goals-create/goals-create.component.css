@@ -2,11 +2,12 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-
 .icon-display {
   font-size: 15px;
-  color: #0071B9 !important;
-  box-shadow: none;
+}
+
+.icon-display:hover {
+  curser: pointer;
 }
 
 .goalsCard {
@@ -22,6 +23,7 @@
 
 .button-styling {
   flex: 20%;
+  color: #857971;
 }
 
 .span-styling {
@@ -59,12 +61,13 @@
 }
 
 .goals-matcard {
-  display: block;
+  color: #857971;
   width: 100%;
   background-color: #E8E4E1;
   margin: 0 auto;
   padding: 1%;
   box-shadow: none;
+  word-wrap: break-word;
 }
 
 
@@ -112,13 +115,5 @@
 }
 
 .description-styling {
-  width: 95%;
 
-}
-
-@media screen and (max-width: 1190px) {
-  .description-styling {
-    width: 93%;
-
-  }
 }

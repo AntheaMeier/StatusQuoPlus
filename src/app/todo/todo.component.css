@@ -26,7 +26,6 @@
 
 .icon-display {
   font-size: 15px;
-  float: right;
 }
 
 .small-card {
@@ -41,8 +40,15 @@
 }
 
 .button-styling {
-  align-items: flex-end;
-  flex: 10%;
+  flex: 20%;
+}
+
+.button-styling:hover {
+  cursor: pointer;
+}
+
+.span-styling {
+  float: right;
 }
 
 .icon-styling {

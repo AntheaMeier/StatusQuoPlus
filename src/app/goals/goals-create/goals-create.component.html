@@ -47,15 +47,15 @@
           <mat-progress-bar class="progressbar-styling" *ngIf="selectedRole == 'Mitarbeiter_in'" mode="determinate"
                             value="{{progressArray[index]}}"></mat-progress-bar>
           <span class="span-styling">
+            <mat-icon class="button-styling" (click)="openDialog(goal._id)"
+                      *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">
+             edit
+            </mat-icon>
             <mat-icon class="button-styling" (click)="deleteDialog(goal._id)"
                       *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">
             cancel
             </mat-icon>
-            <mat-icon class="button-styling" (click)="openDialog(goal._id)"
-                     *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">
-             edit
-            </mat-icon>
-        </span>
+          </span>
         </mat-card>
 
         </mat-expansion-panel-header>

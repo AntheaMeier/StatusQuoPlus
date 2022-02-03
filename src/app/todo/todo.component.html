@@ -35,21 +35,13 @@
         cdkDrag [cdkDragDisabled]="isVorgesetzte_r()">
         {{ task.description }}
 
-        <span>
-            <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
-
-              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling"
-                        *ngIf="selectedRole == 'Mitarbeiter_in'">
+        <span class="span-styling">
+              <mat-icon class="button-styling" (click)="openDialog(task._id, task.description)" *ngIf="selectedRole == 'Mitarbeiter_in'">
                 edit
               </mat-icon>
-
-              <mat-icon (click)="deleteDialog(task._id)"
-                        class="icon-styling"
-                        *ngIf="selectedRole == 'Mitarbeiter_in'">
+              <mat-icon class="button-styling" (click)="deleteDialog(task._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">
                 cancel
               </mat-icon>
-
-            </button>
           </span>
       </mat-card>
     </mat-card>
@@ -70,21 +62,13 @@
           cdkDrag [cdkDragDisabled]="isVorgesetzte_r()">
           {{ task.description }}
 
-          <span>
-            <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
-
-              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling"
-                        *ngIf="selectedRole == 'Mitarbeiter_in'">
+          <span class="span-styling">
+              <mat-icon class="button-styling" (click)="openDialog(task._id, task.description)" *ngIf="selectedRole == 'Mitarbeiter_in'">
                 edit
               </mat-icon>
-
-              <mat-icon (click)="deleteDialog(task._id)"
-                        class="icon-styling"
-                        *ngIf="selectedRole == 'Mitarbeiter_in'">
+              <mat-icon class="button-styling" (click)="deleteDialog(task._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">
                 cancel
               </mat-icon>
-
-            </button>
           </span>
         </mat-card>
       </mat-card>
@@ -104,21 +88,13 @@
           cdkDrag [cdkDragDisabled]="isVorgesetzte_r()">
           {{ task.description }}
 
-          <span>
-            <button class="button-styling" mat-button *ngIf="true" matSuffix mat-icon-button aria-label="Delete">
-
-              <mat-icon (click)="openDialog(task._id, task.description)" class="icon-styling"
-                        *ngIf="selectedRole == 'Mitarbeiter_in'">
+          <span class="span-styling">
+              <mat-icon class="button-styling" (click)="openDialog(task._id, task.description)" *ngIf="selectedRole == 'Mitarbeiter_in'">
                 edit
               </mat-icon>
-
-              <mat-icon (click)="deleteDialog(task._id)"
-                        class="icon-styling"
-                        *ngIf="selectedRole == 'Mitarbeiter_in'">
+              <mat-icon class="button-styling" (click)="deleteDialog(task._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">
                 cancel
               </mat-icon>
-
-            </button>
           </span>
         </mat-card>
       </mat-card>
