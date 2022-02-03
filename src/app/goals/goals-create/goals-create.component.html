@@ -41,8 +41,9 @@
                   class="goals-matcard">
           <mat-icon style="color: green;" *ngIf="progressArray[index] == 100 && selectedRole == 'Mitarbeiter_in'">done_outline</mat-icon>
 
-          {{goal.description}}
-
+          <div class="description-styling">
+            {{goal.description}}
+          </div>
           <mat-progress-bar class="progressbar-styling" *ngIf="selectedRole == 'Mitarbeiter_in'" mode="determinate"
                             value="{{progressArray[index]}}"></mat-progress-bar>
           <span class="span-styling">
