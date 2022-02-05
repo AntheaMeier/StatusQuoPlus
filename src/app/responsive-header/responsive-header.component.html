@@ -36,14 +36,11 @@
             {{member.firstname}} {{member.surname}}
           </a>
         </div>
-
-
       </mat-expansion-panel>
       <a (click)='logout()' mat-list-item *ngIf="this.isLogin">
         <mat-icon>exit_to_app</mat-icon>
         <div class="sidenav-text">Logout</div>
       </a>
-
     </mat-nav-list>
   </mat-sidenav>
 
@@ -83,7 +80,7 @@
     </div>
 
     <span class="example-spacer"></span>
-    <div class="nav-element">
+    <div class="title">
       <div class="element-text">
         {{firstNameloggedInUser + ' ' + lastNameloggedInUser}}
       </div>

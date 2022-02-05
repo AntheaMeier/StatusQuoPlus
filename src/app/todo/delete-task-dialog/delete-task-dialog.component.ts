@@ -13,9 +13,9 @@ import {Tasks} from "../../shared/tasks";
 })
 export class DeleteTaskDialogComponent implements OnInit {
 
-
+  id :String =  '';
+  task : Tasks = { _id: '', description: '', status: '', goalid: ''};
   isLoadingResults = false;
-
   articleForm: FormGroup =  this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required)
   });
@@ -28,20 +28,8 @@ export class DeleteTaskDialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-
-
-
-  id :String =  '';
-
-  task : Tasks = { _id: '', description: '', status: '', goalid: ''};
-
-
   onNoClick(): void {
-
     this.dialogRef.close('Close');
-
-
-
     this.dialog.closeAll();
   }
 
@@ -76,9 +64,7 @@ export class DeleteTaskDialogComponent implements OnInit {
           this.isLoadingResults = false;
         }
       );
-
     window.location.reload();
-
   }
 
   onFormSubmit() {
@@ -86,5 +72,4 @@ export class DeleteTaskDialogComponent implements OnInit {
     this.deleteGoal(this.data._id);
     this.dialog.closeAll();
   }
-
 }

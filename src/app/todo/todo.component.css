@@ -22,6 +22,7 @@
   margin-bottom: 2%;
   padding: 2%;
   color: #857971;
+  word-wrap: break-word;
 }
 
 .icon-display {
@@ -48,7 +49,19 @@
 }
 
 .span-styling {
-  float: right;
+  position: absolute;
+  bottom: 2px;
+  right: 5px;
+}
+
+.description-styling {
+  width: 90%;
+}
+
+@media screen and (max-width: 800px){
+  .description-styling {
+    width: 85%;
+  }
 }
 
 .icon-styling {

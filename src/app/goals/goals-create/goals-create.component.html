@@ -37,15 +37,16 @@
 
       <mat-expansion-panel cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" hideToggle class="panel-styling" [expanded]="showGoalid == goal._id">
         <mat-expansion-panel-header class="panel-header-styling">
-        <mat-card [ngStyle]="{'background-color':goal._id === showGoalid ? '#BFDCEE' : '#E8E4E1' }"
+        <mat-card [ngStyle]="{'background-color':goal._id === showGoalid ? '#BFDCEE' : '#E8E4E1'}"
                   class="goals-matcard">
 
           <div class="description-styling">
             {{goal.description}}
           </div>
-
           <mat-progress-bar [ngClass]="{'green-progress':progressArray[index] == 100 && selectedRole == 'Mitarbeiter_in'}"
-                            *ngIf="selectedRole == 'Mitarbeiter_in'" class="progressbar-styling" mode="determinate"
+                            *ngIf="selectedRole == 'Mitarbeiter_in'"
+                            class="progressbar-styling"
+                            mode="determinate"
                             value="{{progressArray[index]}}"></mat-progress-bar>
           <span class="span-styling">
             <mat-icon class="button-styling" (click)="openDialog(goal._id)"
