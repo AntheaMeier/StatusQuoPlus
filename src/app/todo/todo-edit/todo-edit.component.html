@@ -1,16 +1,14 @@
-<div class="container-styling">
 <h1>Hier kannst du deine Task bearbeiten:</h1>
 <div mat-dialog-content>
   <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
     <mat-form-field appearance="outline">
-      <input [(ngModel)]="enteredValue" matInput placeholder="My task" formControlName="description"
+      <input [(ngModel)]="enteredValue" matInput placeholder="meine Task" formControlName="description"
              value="">
       <mat-error>
-        <span>Please enter description</span>
+        <span>Bitte gib eine Beschreibung ein</span>
       </mat-error>
     </mat-form-field>
   </form>
-</div>
 </div>
 <div mat-dialog-actions>
   <form [formGroup]="articleForm">

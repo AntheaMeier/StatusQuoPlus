@@ -14,10 +14,10 @@
             #date="ngModel">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-          <mat-error *ngIf="date.invalid">Datum eingeben</mat-error>
+          <mat-error *ngIf="date.invalid">Bitte gib ein Datum ein</mat-error>
         </mat-form-field>
       </mat-expansion-panel-header>
-      <mat-form-field style="white-space: pre-wrap;">
+      <mat-form-field appearance="outline" style="white-space: pre-wrap;">
         <textarea
           [(ngModel)]="enteredContent"
           id="content"
@@ -27,17 +27,11 @@
           placeholder="Notizen zum unterjaehrigen Austausch"
           #content="ngModel">
         </textarea>
-  <mat-error *ngIf="content.invalid">Notizen eingeben</mat-error>
+  <mat-error *ngIf="content.invalid">Bitte gib Notizen ein</mat-error>
 </mat-form-field>
       <mat-action-row>
-        <button
-
-      mat-raised-button *ngIf=true matSuffix
-      type="submit" (click)=onAddPost(idloggedInUser)>Save
-    </button>
+        <button mat-raised-button *ngIf=true matSuffix type="submit" (click)=onAddPost(idloggedInUser)>Speichern</button>
       </mat-action-row>
     </mat-expansion-panel>
     <app-list-reviews [selectedRole]="selectedRole" [reviewsToOneUser]="reviewsToOneUser" [idTeamMember]="idTeamMember" [currentUrl]="currentUrl"></app-list-reviews>
-
-
 </mat-card>

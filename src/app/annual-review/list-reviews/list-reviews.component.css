@@ -16,7 +16,7 @@ textarea {
 
 .mat-accordion .mat-expansion-panel {
   border-radius: 4px;
-  
+
 }
 
 .mat-expansion-panel {
@@ -28,5 +28,7 @@ textarea {
 }
 
 
-
+mat-icon:hover {
+  cursor: pointer;
+}
 

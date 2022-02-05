@@ -118,6 +118,7 @@
   bottom: 3px;
   width: 99%;
   left: 3px;
+  height: 8px;
 }
 
 ::ng-deep .mat-progress-bar-fill::after {
@@ -145,5 +146,18 @@
 
 .panel-header-styling:hover {
   background-color: transparent !important;
+}
+
+.mat-input-element {
+  color: #857971;
+}
+
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: #0071B9 !important;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-top: 2%;
 }
 

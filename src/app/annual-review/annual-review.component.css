@@ -46,3 +46,6 @@ input {
   font-size: 15px;
 }
 
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: #0071B9 !important;
+}

@@ -70,3 +70,16 @@
 .cdk-drag-animating {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
+
+.mat-input-element {
+  color: #857971;
+}
+
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: #0071B9 !important;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-top: 2%;
+}

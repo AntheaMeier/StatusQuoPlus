@@ -6,22 +6,22 @@
   <mat-card class="goalsCard">ZIELE
     <mat-icon class="icon-display" *ngIf="selectedRole == 'Mitarbeiter_in'" (click)="addPostForm()">add</mat-icon>
     <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true">
-      <mat-form-field style="white-space: pre-wrap;">
+      <mat-form-field appearance="outline" style="white-space: pre-wrap;">
                 <textarea
                   [(ngModel)]="enteredContent"
                   id="content"
                   matInput rows="6"
                   name="content"
                   required
-                  placeholder="Dein Goal"
+                  placeholder="Dein Ziel"
                   #content="ngModel">
                 </textarea>
-        <mat-error *ngIf="content.invalid">Notizen eingeben</mat-error>
+        <mat-error *ngIf="content.invalid">Bitte gib eine Beschreibung ein</mat-error>
       </mat-form-field>
       <mat-action-row>
         <button
-          mat-raised-button *ngIf=true matSuffix
-          type="submit" (click)=onAddPost(idloggedInUser)>Save
+          style="color: white; background-color: #0071B9" mat-raised-button *ngIf=true matSuffix
+          type="submit" (click)=onAddPost(idloggedInUser)>Speichern
         </button>
       </mat-action-row>
     </mat-expansion-panel>
@@ -37,7 +37,7 @@
 
       <mat-expansion-panel cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" hideToggle class="panel-styling" [expanded]="showGoalid == goal._id">
         <mat-expansion-panel-header class="panel-header-styling">
-        <mat-card [ngStyle]="{'background-color':goal._id === showGoalid ? 'lightblue' : '#E8E4E1' }"
+        <mat-card [ngStyle]="{'background-color':goal._id === showGoalid ? '#BFDCEE' : '#E8E4E1' }"
                   class="goals-matcard">
 
           <div class="description-styling">

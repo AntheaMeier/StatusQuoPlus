@@ -8,7 +8,7 @@
     <mat-card class="main-card">TODO
       <mat-icon class="icon-display" (click)="addPostForm()" *ngIf="selectedRole == 'Mitarbeiter_in'">add</mat-icon>
       <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true">
-        <mat-form-field style="white-space: pre-wrap;">
+        <mat-form-field appearance="outline" style="white-space: pre-wrap;">
           <textarea
             [(ngModel)]="enteredContent"
             id="content"
@@ -18,12 +18,12 @@
             placeholder="Deine Todo"
             #content="ngModel">
           </textarea>
-          <mat-error *ngIf="content.invalid">Notizen eingeben</mat-error>
+          <mat-error *ngIf="content.invalid">Bitte gib eine Beschreibung ein</mat-error>
         </mat-form-field>
         <mat-action-row>
           <button
-            mat-raised-button *ngIf=true matSuffix
-            type="submit" (click)=addTask(goalid)>Save
+            style="color: white; background-color: #0071B9" mat-raised-button *ngIf=true matSuffix
+            type="submit" (click)=addTask(goalid)>Speichern
           </button>
         </mat-action-row>
       </mat-expansion-panel>

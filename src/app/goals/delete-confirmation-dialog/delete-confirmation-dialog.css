@@ -1,7 +1,8 @@
-.button-styling {
-  float: right;
+.delete-button {
+  background-color: #0071B9;
+  color: white;
 }
 
-.icon-styling {
-  margin-bottom: 150%;
+.mat-dialog-actions {
+  float: right;
 }
