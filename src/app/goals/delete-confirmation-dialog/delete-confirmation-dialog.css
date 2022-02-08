@@ -6,3 +6,9 @@
 .mat-dialog-actions {
   float: right;
 }
+
+@media screen and (max-width: 844px) {
+  button {
+    padding: 5px;
+  }
+}
