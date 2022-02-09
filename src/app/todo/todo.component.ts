@@ -66,11 +66,14 @@ export class TodoComponent implements OnInit {
   decision: String = '';
   @Input() idls: String = '';
 
+  clickedTask = false;
+
 
   @Output() newTodo = new EventEmitter<Tasks>();
   @Output() deleteTodo = new EventEmitter<String>();
   @Output() result = new EventEmitter<String>();
   @Output() changedOrder = new EventEmitter<boolean>();
+  @Output() clickedAddTask = new EventEmitter<boolean>();
 
 
 
@@ -131,6 +134,7 @@ export class TodoComponent implements OnInit {
   }
 
   addPostForm() {
+    this.clickedAddTask.emit(true);
     this.addPost = !this.addPost;
   }
 
@@ -365,6 +369,17 @@ export class TodoComponent implements OnInit {
 
   geklickt() {
     console.log('geklickt');
+  }
+
+  clickedOnTask() {
+    if(this.clickedTask == false && this.selectedRole!='Vorgesetzte_r'){
+      this.clickedTask = true;
+    }
+
+    else{
+      this.clickedTask = false;
+    }
+    this.clickedAddTask.emit(this.clickedTask);
   }
 }
 

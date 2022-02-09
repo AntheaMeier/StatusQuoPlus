@@ -105,7 +105,6 @@ export class GoalsCreateComponent implements OnInit {
     this.idls = localStorage.getItem('selectedGoal');
     const element = document.getElementById('1');
     this.goalSelectedReload = localStorage.getItem('selectedGoal');
-    console.log('iphone ' + this.goalSelectedReload);
 
     if (this.goalSelectedReload)
 
@@ -119,7 +118,6 @@ export class GoalsCreateComponent implements OnInit {
     }
 
 
-    console.log('selectedRole goals ' + this.selectedRole);
 
     this.progressArray = [];
     console.log('current url ' + this.currentUrl);
@@ -198,25 +196,15 @@ export class GoalsCreateComponent implements OnInit {
 
 
   async getNumberAllTasks(goalid: String): Promise<number> {
-    let a = 99;
     const res = await this.api.getTasksToGoal(goalid).toPromise();
     return res.length;
   }
 
 
   async getNumberAllTasksDone(goalid: String): Promise<number> {
-    await this.api.getTasksToStatus(goalid, "done")
-      .subscribe((res: any) => {
-        console.log(typeof res.length);
-        this.allTasksDoneLength = res.length;
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
+    const res = await this.api.getTasksToStatus(goalid, "done").toPromise();
 
-    console.log('return Wert ' + this.allTasksDoneLength)
-    return this.allTasksDoneLength;
+    return res.length;
   }
 
 
