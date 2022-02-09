@@ -61,6 +61,7 @@
 @media screen and (max-width: 800px){
   .description-styling {
     width: 85%;
+    padding: 3.5%;
   }
 }
 
