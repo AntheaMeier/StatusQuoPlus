@@ -186,9 +186,6 @@ export class GoalsCreateComponent implements OnInit {
 
           this.progress = first / second * 100;
 
-          if (this.progress == Number.POSITIVE_INFINITY || this.progress == Number.NEGATIVE_INFINITY) {
-            this.progress = 0;
-          }
           this.progressArray.push(this.progress);
         }
   }
