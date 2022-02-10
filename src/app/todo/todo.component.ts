@@ -243,9 +243,6 @@ export class TodoComponent implements OnInit {
     }
   }
 
-
-
-
   deleteDialog(id: any): void {
     this.deleteTodo.emit(id);
     let idDialog = id;
@@ -274,38 +271,6 @@ export class TodoComponent implements OnInit {
       this.editable = true;
     }
   }
-
-  getTheInput(e: any) {
-    this.description = e.target.value;
-  }
-
-  updateATask(task: Tasks) {
-    this.isLoadingResults = true;
-    task.description = this.description;
-    this.api.updateTask(task._id, task)
-      .subscribe((res: any) => {
-          this.isLoadingResults = false;
-        }, (err: any) => {
-          console.log(err);
-          this.isLoadingResults = false;
-        }
-      );
-    this.editable = false;
-  }
-
-  method1CallForClick(){
-    this.isSingleClick = true;
-    setTimeout(()=>{
-      if(this.isSingleClick){
-      }
-    },250)
-  }
-  method2CallForDblClick(id : String){
-    this.isSingleClick = false;
-    // this.editableId = id;
-    // this.changeEditable();
-  }
-
 
   isVorgesetzte_r() : boolean{
     this.currentUrl = this.router.url;
