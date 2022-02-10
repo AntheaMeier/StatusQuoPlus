@@ -33,20 +33,8 @@ export class ResponsiveHeaderComponent {
   @Output() idTeamMember = "";
   tasksToOneGoal: Tasks[] = [];
   tasksToTodo: Tasks[] = [];
-  tasksToDoing: Tasks[] = [];
-  tasksToDone: Tasks[] = [];
-  goalsToOneUser: Goals[] = [];
-  reviewsToOneUser: Review[] = [];
-
-
-
   currentUrl: String = ''
   panelOpenState = false;
-
-
-
-
-
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -58,28 +46,16 @@ export class ResponsiveHeaderComponent {
               private router: Router,
               private formBuilder: FormBuilder,
               private api: ApiService,
-              private cdr: ChangeDetectorRef
-
-
-  ) {
-
-
-
-
+              private cdr: ChangeDetectorRef) {
     this.loginForm = formBuilder.group({
       title: formBuilder.control('initial value', Validators.required)
     });
-
-
     if(window.location.href != 'http://localhost:4200/'){
       this.currentUrl = window.location.href;
-
     }
-
     else{
       this.currentUrl='';
     }
-
   }
 
   setLoggedIn(data: boolean) {
@@ -93,9 +69,6 @@ export class ResponsiveHeaderComponent {
   goToGoals(userid: any, selectedRole: any): void {
     this.router.navigate([''], {state: {data: {userid, selectedRole}}});
   }
-
-
-
 
   ngOnInit(): void {
     console.log("url " + this.router.url);
@@ -151,7 +124,6 @@ export class ResponsiveHeaderComponent {
     this.tasksToOneGoal = [];
   }
 
-
   changeRoleToMitarbeiter_in(){
     console.log("geklickt");
     this.selectedRole ="Mitarbeiter_in";
@@ -175,47 +147,15 @@ export class ResponsiveHeaderComponent {
     this.goalid = id;
   }
 
-
-  reloadPage() {
-    this.router.navigate(['/']);
-    this.currentUrl= '';
-
-  }
-
   clickProtokoll() {
     this.currentUrl = window.location.href;
   }
-
-
-
-
-
-
-  clickLogo() {
-    console.log('Click Logo: ' + this.tasksToTodo);
-  }
-
- /* loadReviews(userid: string) {
-    this.clickedOnMitarbeiter = true;
-    this.api.getReviewsToUser(userid)
-      .subscribe((res: any) => {
-        this.reviewsToOneUser = res;
-        this.isLoadingResults = false;
-      }, err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
-    this.idTeamMember = userid;
-
-
-  }*/
 
   changeUrl(id:String) {
     this.currentUrl = 'teamview';
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
       this.router.navigate(['teamview/',id]));
   }
-
 
   deleteSelectedGoalFromLocalStorage() {
     localStorage.removeItem('selectedGoal');

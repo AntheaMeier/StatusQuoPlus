@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
         this.api.postTypeRequest('', this.loginForm.value).subscribe((res: any) => {
           this.auth.setDataInLocalStorage('userData', JSON.stringify(res));
           this.auth.setDataInLocalStorage('token', res.access_token);
-          this.router.navigate([''])
+          this.router.navigate(['']);
           window.location.reload();
         });
       }

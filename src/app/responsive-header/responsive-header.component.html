@@ -1,28 +1,18 @@
-
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav"
                fixedInViewport
                [attr.role]="(isHandset$) ? 'dialog' : 'navigation'"
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
-               [opened]="(isHandset$ | async) === false">
+               [opened]="this.isLogin && (isHandset$ | async) === false">
     <mat-toolbar>Menü</mat-toolbar>
-
     <mat-nav-list>
-
-
       <a mat-list-item *ngIf="this.isLogin" (click)="goToGoals(idLoggedInUser, 'Mitarbeiter_in')">
         <div class="sidenav-text" *ngIf="this.isLogin">ZIELE</div>
-
       </a>
       <a mat-list-item *ngIf="this.isLogin" (click)="deleteSelectedGoalFromLocalStorage()" [routerLink]="'/protokolle'">
         <div class="sidenav-text" mat-button>PROTOKOLLE</div>
       </a>
-
-
-
-      <mat-expansion-panel class="expansion-panel-styling" *ngIf="this.roleLoggedInUser== 'Vorgesetzte_r'" (opened)="panelOpenState = true"
-
-                           (closed)="panelOpenState = false">
+      <mat-expansion-panel class="expansion-panel-styling" *ngIf="this.roleLoggedInUser== 'Vorgesetzte_r'" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <a mat-list-item *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">
@@ -43,30 +33,24 @@
       </a>
     </mat-nav-list>
   </mat-sidenav>
-
-
-
   <mat-toolbar color="white">
     <button
       type="button"
       aria-label="Toggle sidenav"
       mat-icon-button
       (click)="drawer.toggle()"
-      *ngIf="this.isLogin">
+      *ngIf="this.isLogin && (isHandset$ | async)">
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
-    <span class="title" (click)="clickLogo()">
+    <span class="title">
       <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Adesso_AG_logo.svg" />
     </span>
-
     <div class="nav-element" (click)="changeRoleToMitarbeiter_in()">
       <div  class="element-text"  *ngIf="this.isLogin">ZIELE</div>
     </div>
-
     <div class="nav-element " (click)="deleteSelectedGoalFromLocalStorage()" (click)="clickProtokoll()">
       <div class="element-text" routerLink="protokolle" *ngIf="this.isLogin">PROTOKOLLE</div>
     </div>
-
     <div class="nav-element"(click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">
       <div class="element-text" [matMenuTriggerFor]="menu" *ngIf="this.isLogin && this.roleLoggedInUser=='Vorgesetzte_r'">MEIN TEAM
         <mat-menu #menu="matMenu">
@@ -78,7 +62,6 @@
         </mat-menu>
       </div>
     </div>
-
     <span class="example-spacer"></span>
     <div class="title">
       <div class="element-text">
@@ -95,10 +78,6 @@
       </div>
     </div>
   </mat-toolbar>
-
   <router-outlet class="router-outlet-styling"></router-outlet>
-
-
-
 </mat-sidenav-container>
 
