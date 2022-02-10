@@ -8,8 +8,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Login, Team} from "../shared/login";
 import {ApiService} from "../services/api.service";
 import {Tasks} from "../shared/tasks";
-import {Goals} from "../shared/goals";
-import {Review} from "../shared/review";
 
 @Component({
   selector: 'app-responsive-header',

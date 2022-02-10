@@ -45,9 +45,6 @@ export class TodoComponent implements OnInit {
   todoForm: FormGroup = this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required)
   });
-  showData: boolean = false;
-  isSingleClick: Boolean = true;
-  editableId: String = '';
   decision: String = '';
   @Input() idls: String = '';
   @Output() newTodo = new EventEmitter<Tasks>();
@@ -59,8 +56,7 @@ export class TodoComponent implements OnInit {
               private router: Router,
               private api: ApiService,
               private auth: AuthService,
-              private formBuilder: FormBuilder,
-              private route: ActivatedRoute,) {}
+              private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.api.getUsers()
@@ -87,13 +83,6 @@ export class TodoComponent implements OnInit {
         this.isLoadingResults = false;
       });
     this.showTasksToOneUser = true;
-  }
-
-  reloadCurrentRoute() {
-    let currentUrl = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate([currentUrl]);
-    });
   }
 
   addTask(id: any) {
@@ -264,12 +253,6 @@ export class TodoComponent implements OnInit {
         this.result.emit(this.decision);
       }
     });
-  }
-
-  changeEditable() {
-    if (this.selectedRole == 'Mitarbeiter_in') {
-      this.editable = true;
-    }
   }
 
   isVorgesetzte_r() : boolean{
