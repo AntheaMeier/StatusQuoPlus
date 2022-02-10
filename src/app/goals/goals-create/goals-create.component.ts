@@ -293,7 +293,7 @@ export class GoalsCreateComponent implements OnInit {
   deleteDialog(id: any): void {
     this.idDialog = id;
     const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
-      width: '40%',
+      width: '50%',
       data: {'id': this.idDialog}
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -360,7 +360,7 @@ export class GoalsCreateComponent implements OnInit {
   openDialog(id: any): void {
     this.idDialog = id;
     const dialogRef = this.dialog.open(GoalsEditComponent, {
-      width: '40%',
+      width: '50%',
       data: {'id': this.idDialog, 'description': this.description}
     });
     dialogRef.afterClosed().subscribe(result => {

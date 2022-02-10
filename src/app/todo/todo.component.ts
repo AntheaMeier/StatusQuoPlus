@@ -18,16 +18,14 @@ import {TodoEditComponent} from "./todo-edit/todo-edit.component";
 export class TodoComponent implements OnInit {
 
   @Input() tasksToOneGoal: Tasks[] = [];
-   @Input() tasksToTodo: Tasks[] = [];
+  @Input() tasksToTodo: Tasks[] = [];
   @Input() tasksToDoing: Tasks[] = [];
   @Input() tasksToDone: Tasks[] = [];
   @Input() goalid: string = '';
   @Input() selectedRole: String = "Mitarbeiter_in";
   @Input() currentUrl = "";
   @Input() idTeamMember = "";
-
   @Output() showTasksClicked = new EventEmitter<Tasks[]>();
-
   descriptionDialog: String = "";
   idDialog: String = "";
   task: Tasks = {goalid: '', _id: '', description: '', status: ''};
@@ -36,7 +34,6 @@ export class TodoComponent implements OnInit {
   status = '';
   _id = '';
   editable = false;
-
   readOnly = true;
   value = 'Clear me'
   idloggedInUser: String = "";
@@ -45,35 +42,25 @@ export class TodoComponent implements OnInit {
   edit = false;
   addPost = false;
   enteredContent = "";
-
   todoForm: FormGroup = this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required)
   });
+  showData: boolean = false;
+  isSingleClick: Boolean = true;
+  editableId: String = '';
+  decision: String = '';
+  @Input() idls: String = '';
+  @Output() newTodo = new EventEmitter<Tasks>();
+  @Output() deleteTodo = new EventEmitter<String>();
+  @Output() result = new EventEmitter<String>();
+  @Output() changedOrder = new EventEmitter<boolean>();
 
   constructor(public dialog: MatDialog,
               private router: Router,
               private api: ApiService,
               private auth: AuthService,
               private formBuilder: FormBuilder,
-              private route: ActivatedRoute,
-  ) {
-  }
-
-
-  showData: boolean = false;
-  isSingleClick: Boolean = true;
-  editableId: String = '';
-  decision: String = '';
-  @Input() idls: String = '';
-
-
-
-  @Output() newTodo = new EventEmitter<Tasks>();
-  @Output() deleteTodo = new EventEmitter<String>();
-  @Output() result = new EventEmitter<String>();
-  @Output() changedOrder = new EventEmitter<boolean>();
-
-
+              private route: ActivatedRoute,) {}
 
   ngOnInit(): void {
     this.api.getUsers()
@@ -90,8 +77,6 @@ export class TodoComponent implements OnInit {
     }
   }
 
-
-
   getTodoDetails(id: any) {
     this.api.getTasksToGoal(id)
       .subscribe((data: any) => {
@@ -102,7 +87,6 @@ export class TodoComponent implements OnInit {
         this.isLoadingResults = false;
       });
     this.showTasksToOneUser = true;
-
   }
 
   reloadCurrentRoute() {
@@ -154,14 +138,13 @@ export class TodoComponent implements OnInit {
     this.descriptionDialog = description;
     this.idDialog = id;
     const dialogRef = this.dialog.open(TodoEditComponent, {
-      width: '40%',
+      width: '50%',
       data: {'id': this.idDialog, 'description': this.descriptionDialog}
     });
     dialogRef.afterClosed().subscribe(result => {
       this.ngOnInit();
     });
   }
-
 
 
 // TODO
@@ -176,8 +159,6 @@ export class TodoComponent implements OnInit {
     });
     this.changedOrder.emit(true);
     window.location.reload();
-
-
   }
 
   dropInTodo(event: CdkDragDrop<any>) {
@@ -187,15 +168,12 @@ export class TodoComponent implements OnInit {
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       } else {
         console.log('bewegt todo');
-
-
         transferArrayItem(
           event.previousContainer.data,
           event.container.data,
           event.previousIndex,
           event.currentIndex,
         );
-
         this.changeStatusToTodo();
       }
     }
@@ -213,22 +191,15 @@ export class TodoComponent implements OnInit {
     });
     this.changedOrder.emit();
     window.location.reload();
-
-
   }
 
   dropInDoing(event: CdkDragDrop<any>) {
     if (this.selectedRole == 'Mitarbeiter_in') {
       if (event.previousContainer === event.container) {
-
         moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       } else {
         this.changedOrder.emit(true);
-
-
         console.log('bewegt doing');
-
-
         transferArrayItem(
           event.previousContainer.data,
           event.container.data,
@@ -237,7 +208,6 @@ export class TodoComponent implements OnInit {
         );
         this.changeStatusToDoing();
       }
-
     }
   }
 
@@ -253,7 +223,6 @@ export class TodoComponent implements OnInit {
     });
     this.changedOrder.emit(true);
     window.location.reload();
-
   }
 
   dropInDone(event: CdkDragDrop<any>) {
@@ -263,7 +232,6 @@ export class TodoComponent implements OnInit {
       } else {
         this.changedOrder.emit(true);
         console.log('bewegt done');
-
         transferArrayItem(
           event.previousContainer.data,
           event.container.data,
@@ -280,31 +248,20 @@ export class TodoComponent implements OnInit {
 
   deleteDialog(id: any): void {
     this.deleteTodo.emit(id);
-
-
-
-
     let idDialog = id;
     const dialogRef = this.dialog.open(DeleteTaskDialogComponent, {
-      width: '40%',
+      width: '50%',
       data: {'_id': idDialog}
     });
-
-
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       console.log('test');
-
-
-
       console.log('dialog result' + result);
-
       if(result.event == 'Delete'){
         console.log('yes selected');
         this.decision = 'yes'
         this.result.emit(this.decision);
       }
-
       if(result.event != 'Close'){
         this.decision = 'no'
         this.result.emit(this.decision);
@@ -351,23 +308,15 @@ export class TodoComponent implements OnInit {
 
 
   isVorgesetzte_r() : boolean{
-
     this.currentUrl = this.router.url;
-
     if(this.currentUrl != '/'){
       return true;
     }
-
-
     return (this.selectedRole == 'Vorgesetzte_r');
-
-}
-
+  }
 
   geklickt() {
     console.log('geklickt');
   }
-
-
 }
 

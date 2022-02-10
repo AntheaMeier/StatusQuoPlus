@@ -29,7 +29,7 @@ export class TodoEditComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(TodoEditComponent, {
-      width: '40%',
+      width: '50%',
     });
     dialogRef.afterClosed().subscribe(result => {
     });
