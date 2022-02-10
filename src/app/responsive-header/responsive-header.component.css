@@ -10,6 +10,12 @@
 .sidenav {
   width: 200px;
 }
+.mat-toolbar {
+  background-color: white !important;
+  border-bottom: #E8E4E1;
+  border-bottom-style: solid !important;
+  border-bottom-width: thin;
+}
 
 .sidenav .mat-toolbar {
   background: inherit;
