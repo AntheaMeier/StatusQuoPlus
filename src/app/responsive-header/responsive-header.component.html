@@ -63,20 +63,25 @@
       </div>
     </div>
     <span class="example-spacer"></span>
-    <div class="title">
-      <div class="element-text">
-        {{firstNameloggedInUser + ' ' + lastNameloggedInUser}}
+    <!--    ng-container is a pseudo element that doesnt get rendered-->
+    <!--    async pipe is neccessary so you dont have to subscribe and unsubscribe !IMPORTANT otherwise browser gets crashed-->
+    <!--    reference: https://angular.io/api/common/AsyncPipe -->
+    <ng-container *ngIf="loginData$ | async as loginData">
+      <div class="title">
+        <div class="element-text">
+          {{loginData.firstname + ' ' + loginData.surname}}
+        </div>
       </div>
-    </div>
-    <div (click)='logout()' class="nav-element" *ngIf="this.isLogin">
-      <button mat-icon-button class="example-icon"
-              aria-label="Example icon-button with input icon">
-        <mat-icon>exit_to_app</mat-icon>
-      </button>
-      <div class="element-text">
-        Logout
+      <div (click)='logout()' class="nav-element">
+        <button mat-icon-button class="example-icon"
+                aria-label="Example icon-button with input icon">
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
+        <div class="element-text">
+          Logout
+        </div>
       </div>
-    </div>
+    </ng-container>
   </mat-toolbar>
   <router-outlet class="router-outlet-styling"></router-outlet>
 </mat-sidenav-container>
