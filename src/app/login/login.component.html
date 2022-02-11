@@ -1,8 +1,6 @@
 <div class='row style' *ngIf='!this.isLogin'>
   <h3 class="headline">LOGIN</h3>
-  <mat-error *ngIf="loginInvalid">
-    The username and password were not recognized
-  </mat-error>
+
   <form class="style2 col-lg" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class='form-group'>
       <input (keypress)="removeErrorMessage()" (keydown.backspace)="removeErrorMessage()" class='form-control'
@@ -20,6 +18,9 @@
         <div *ngIf="f.password.errors">Password is required</div>
       </div>
     </div>
+    <mat-error *ngIf="loginInvalid">
+      The username and password were not recognized
+    </mat-error>
     <div align="center">
       <button class='buttonLogin btn btn-outline-secondary'
               mat-raised-button *ngIf=true matSuffix

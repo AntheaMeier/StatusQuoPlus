@@ -16,7 +16,9 @@ export class LoginComponent implements OnInit {
   submitted = false;
   data: LoginData[] = [];
   isLoadingResults = true;
+  notloggedIn = true;
   loginInvalid = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,12 +54,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.loginInvalid = false;
     this.submitted = true;
     for (let i of this.data) {
       if (
         i.username === this.loginForm.get('username')?.value &&
         i.password === this.loginForm.get('password')?.value
       ) {
+        this.notloggedIn = false;
         // todo: if you subscribe an observable that comes from backend you MUST unsubscribe it as well. Otherwise your browser will be crashed.
         // see here: https://blog.bitsrc.io/6-ways-to-unsubscribe-from-observables-in-angular-ab912819a78f
         // really.. it's important, you will get crazy otherwise :D
@@ -68,8 +72,15 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['']);
           });
       }
+
+
+      }
+    if(this.notloggedIn){
+      this.loginInvalid = true;}
+
     }
-  }
+
+
 
   isUserLogin(): void {
     if (this.auth.getUserDetails() != null) {
