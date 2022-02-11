@@ -16,7 +16,7 @@
         </button>
 
       </p>
-      <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true">
+      <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true" style="background-color: white; margin-bottom: 1.0em;">
         <mat-form-field appearance="outline" style="white-space: pre-wrap;">
           <textarea
             [(ngModel)]="enteredContent"
@@ -29,7 +29,7 @@
           </textarea>
           <mat-error *ngIf="content.invalid">Bitte gib eine Beschreibung ein</mat-error>
         </mat-form-field>
-        <mat-action-row>
+        <mat-action-row style="background-color: white">
           <button
             style="color: white; background-color: #0071B9" mat-raised-button *ngIf=true matSuffix
             type="submit" (click)=addTask(goalid)>Speichern
