@@ -64,7 +64,7 @@ import { TodoEditComponent } from './components/todo/todo-edit/todo-edit.compone
 export function playerFactory() {
   return import('lottie-web');
 }
-gi
+
 @NgModule({
   declarations: [
     AppComponent,
