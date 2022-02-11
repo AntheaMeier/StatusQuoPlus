@@ -5,8 +5,19 @@
       (cdkDropListDropped)="drop($event)">
   <mat-card class="goalsCard">
     <p>ZIELE
-     <mat-icon class="icon-display" *ngIf="selectedRole == 'Mitarbeiter_in'" (click)="addPostForm()">add</mat-icon>
+
     </p>
+
+
+
+    <div  *ngIf="selectedRole == 'Mitarbeiter_in'" (click)="addPostForm()" class="center">
+
+    <button class="bttn">
+        <span>
+     <span class="icon-display">+</span>
+          </span>
+    </button>
+    </div>
     <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true">
       <mat-form-field appearance="outline" style="white-space: pre-wrap;">
                 <textarea
@@ -57,7 +68,7 @@
             </mat-icon>
             <mat-icon class="button-styling" (click)="deleteDialog(goal._id)"
                       *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">
-            cancel
+            delete_outline
             </mat-icon>
           </span>
         </mat-card>

@@ -1,3 +1,48 @@
+.bttn {
+  margin-bottom: 3%;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #0071B9;
+  outline: none;
+  transition: 1s ease-in-out;
+  border-radius: 50% ;
+
+}
+
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.bttn:hover {
+  transition: 1s ease-in-out;
+  background: #0071B9 ;
+  opacity: 0.4;
+  color:white;
+}
+
+
+
+.bttn span {
+  color: gray;
+  font-size: 25px;
+  font-weight: 100;
+}
+
+
+
+
+
+
+
+
+
+
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
