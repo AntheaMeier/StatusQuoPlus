@@ -6,18 +6,22 @@
   <mat-card class="goalsCard">
     <p>ZIELE
 
-    </p>
-
-
-
-    <div  *ngIf="selectedRole == 'Mitarbeiter_in'" (click)="addPostForm()" class="center">
-
-    <button class="bttn">
+      <button  *ngIf="selectedRole == 'Mitarbeiter_in'" (click)="addPostForm()" class="bttn">
         <span>
      <span class="icon-display">+</span>
           </span>
-    </button>
+      </button>
+
+    </p>
+
+    <div *ngIf="goalsToOneUser.length == 0" class="description-styling">
+      <p>Du hast noch keine Ziele</p>
     </div>
+
+
+
+
+
     <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true">
       <mat-form-field appearance="outline" style="white-space: pre-wrap;">
                 <textarea
@@ -90,8 +94,6 @@
       </div>
       </mat-expansion-panel>
     </div>
-    <div *ngIf="goalsToOneUser.length == 0" class="description-styling">
-      <p>Du hast noch keine Ziele</p>
-    </div>
+
   </mat-card>
 </div>

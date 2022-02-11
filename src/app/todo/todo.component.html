@@ -5,15 +5,17 @@
     [cdkDropListData]="tasksToTodo"
     class="example-list"
     (cdkDropListDropped)="dropInTodo($event)">
-    <mat-card class="main-card">TODO
-      <div  (click)="addPostForm()" *ngIf="selectedRole == 'Mitarbeiter_in'" class="center">
+    <mat-card class="main-card">
+      <p>TODO
 
-        <button class="bttn icon-display">
+
+        <button (click)="addPostForm()" *ngIf="selectedRole == 'Mitarbeiter_in'" class="bttn icon-display">
         <span>
      <span class="icon-display">+</span>
           </span>
         </button>
-      </div>
+
+      </p>
       <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true">
         <mat-form-field appearance="outline" style="white-space: pre-wrap;">
           <textarea
