@@ -1,4 +1,3 @@
-
 import {Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common'
 import {TasksService} from "./tasks.service";
 
@@ -12,12 +11,9 @@ export class TasksController{
     @Body('description') taskDesc: string,
     @Body('status') taskStatus: string,
     @Body('goalid') taskGoalid: string,
-
   ) {
     const generatedId = await this.tasksService.insertTask(taskDesc, taskStatus, taskGoalid);
     return{id: generatedId};
-
-
   }
 
   @Get()
@@ -39,7 +35,6 @@ export class TasksController{
     @Body('goalid') taskGoalid: string,){
     await this.tasksService.updateTask(taskId,taskDesc,taskStatus,taskGoalid);
     return null;
-
   }
 
   @Patch(':status/:id')
@@ -57,11 +52,9 @@ export class TasksController{
     return null;
   }
 
-
   @Get('goal/:goalid')
   async getAllTasksToGoal(
     @Param('goalid') goalid: string,
-
   ){
     const tasks = await this.tasksService.getTasksToGoal(goalid);
     return tasks;
@@ -71,11 +64,8 @@ export class TasksController{
   async getAllTasksToStatus(
     @Param('goalid') goalid: string,
     @Param('status') status: string,
-
   ){
     const tasks = await this.tasksService.getTasksToStatus(goalid, status);
     return tasks;
   }
-
-
 }

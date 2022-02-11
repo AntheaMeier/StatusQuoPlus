@@ -34,9 +34,7 @@ export class EditReviewComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(ListReviewsComponent, {
       width: '80%',
-
     });
-
     dialogRef.afterClosed().subscribe(result => {
     });
   }
@@ -82,5 +80,4 @@ export class EditReviewComponent implements OnInit {
       this.router.navigate([currentUrl]);
     });
   }
-
 }

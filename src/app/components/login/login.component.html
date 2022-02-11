@@ -1,6 +1,5 @@
 <div class='row style' *ngIf='!this.isLogin'>
   <h3 class="headline">LOGIN</h3>
-
   <form class="style2 col-lg" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class='form-group'>
       <input (keypress)="removeErrorMessage()" (keydown.backspace)="removeErrorMessage()" class='form-control'

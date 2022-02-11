@@ -55,9 +55,6 @@ export class ReviewsService {
 
   async deleteReview(revId: string) {
     const result = await this.reviewModel.deleteOne({_id: revId}).exec();
-    // if (result.n === 0) {
-    //     throw new NotFoundException("Could not find review.");
-    // }
   }
 
   async getReviewsToUser(userid: string) {

@@ -7,14 +7,11 @@
     (cdkDropListDropped)="dropInTodo($event)">
     <mat-card class="main-card">
       <p>TODO
-
-
         <button (click)="addPostForm()" *ngIf="selectedRole == 'Mitarbeiter_in'" class="bttn icon-display">
-        <span>
-     <span class="icon-display">+</span>
+          <span>
+            <span class="icon-display">+</span>
           </span>
         </button>
-
       </p>
       <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true" style="background-color: white; margin-bottom: 1.0em;">
         <mat-form-field appearance="outline" style="white-space: pre-wrap;">
@@ -36,81 +33,64 @@
           </button>
         </mat-action-row>
       </mat-expansion-panel>
-
-
       <mat-card
         class="task-card"
         *ngFor="let task of tasksToTodo"
         cdkDrag [cdkDragDisabled]="isVorgesetzte_r()">
         <div class="description-styling">
-        {{ task.description }}
+          {{ task.description }}
         </div>
         <span class="span-styling">
-              <mat-icon class="button-styling" (click)="openDialog(task._id, task.description)" *ngIf="selectedRole == 'Mitarbeiter_in'">
-                edit
-              </mat-icon>
-              <mat-icon class="button-styling" (click)="deleteDialog(task._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">
-                delete_outline
-              </mat-icon>
-          </span>
+          <mat-icon class="button-styling" (click)="openDialog(task._id, task.description)" *ngIf="selectedRole == 'Mitarbeiter_in'">edit</mat-icon>
+          <mat-icon class="button-styling" (click)="deleteDialog(task._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">delete_outline</mat-icon>
+        </span>
       </mat-card>
     </mat-card>
   </div>
 
-
   <div
     cdkDropList
-
     #todoList="cdkDropList"
     [cdkDropListData]="tasksToDoing"
     class="example-list"
     (cdkDropListDropped)="dropInDoing($event)">
     <mat-card class="main-card">
       <div class="span-title">DOING</div>
-        <mat-card
-          class="task-card"
-          *ngFor="let task of tasksToDoing"
-          cdkDrag [cdkDragDisabled]="isVorgesetzte_r()">
-          <div class="description-styling">
+      <mat-card
+        class="task-card"
+        *ngFor="let task of tasksToDoing"
+        cdkDrag [cdkDragDisabled]="isVorgesetzte_r()">
+        <div class="description-styling">
           {{ task.description }}
-          </div>
-          <span class="span-styling">
-              <mat-icon class="button-styling" (click)="openDialog(task._id, task.description)" *ngIf="selectedRole == 'Mitarbeiter_in'">
-                edit
-              </mat-icon>
-              <mat-icon class="button-styling" (click)="deleteDialog(task._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">
-                delete_outline
-              </mat-icon>
-          </span>
-        </mat-card>
+        </div>
+        <span class="span-styling">
+          <mat-icon class="button-styling" (click)="openDialog(task._id, task.description)" *ngIf="selectedRole == 'Mitarbeiter_in'">edit</mat-icon>
+          <mat-icon class="button-styling" (click)="deleteDialog(task._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">delete_outline</mat-icon>
+        </span>
       </mat-card>
+    </mat-card>
   </div>
 
   <div
     cdkDropList
-
     #todoList="cdkDropList"
     [cdkDropListData]="tasksToDone"
     class="example-list"
     (cdkDropListDropped)="dropInDone($event)">
     <mat-card class="main-card">
       <div class="span-title">DONE</div>
-        <mat-card
-          class="task-card"
-          *ngFor="let task of tasksToDone"
-          cdkDrag [cdkDragDisabled]="isVorgesetzte_r()">
-          <div class="description-styling">
+      <mat-card
+        class="task-card"
+        *ngFor="let task of tasksToDone"
+        cdkDrag [cdkDragDisabled]="isVorgesetzte_r()">
+        <div class="description-styling">
           {{ task.description }}
-          </div>
-          <span class="span-styling">
-              <mat-icon class="button-styling" (click)="openDialog(task._id, task.description)" *ngIf="selectedRole == 'Mitarbeiter_in'">
-                edit
-              </mat-icon>
-              <mat-icon class="button-styling" (click)="deleteDialog(task._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">
-                delete_outline
-              </mat-icon>
-          </span>
-        </mat-card>
+        </div>
+        <span class="span-styling">
+          <mat-icon class="button-styling" (click)="openDialog(task._id, task.description)" *ngIf="selectedRole == 'Mitarbeiter_in'">edit</mat-icon>
+          <mat-icon class="button-styling" (click)="deleteDialog(task._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">delete_outline</mat-icon>
+        </span>
       </mat-card>
+    </mat-card>
   </div>
 </div>

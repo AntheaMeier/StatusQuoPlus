@@ -9,31 +9,28 @@
       <a mat-list-item *ngIf="(loginData$ | async)" (click)="goToGoals(idLoggedInUser, 'Mitarbeiter_in')">
         <div class="sidenav-text" *ngIf="(loginData$ | async)">ZIELE</div>
       </a>
-      <a mat-list-item *ngIf="(loginData$ | async)" (click)="deleteSelectedGoalFromLocalStorage()" [routerLink]="'/protokolle'">
+      <a mat-list-item *ngIf="(loginData$ | async)" (click)="deleteSelectedGoalFromLocalStorage()"
+         [routerLink]="'/protokolle'">
         <div class="sidenav-text" mat-button>PROTOKOLLE</div>
       </a>
       <ng-container *ngIf="loginData$ | async as loginData">
-
-      <mat-expansion-panel class="expansion-panel-styling" *ngIf="loginData.role=='Vorgesetzte_r'" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-
-          <mat-panel-title>
-
-            <a mat-list-item *ngIf="loginData.role=='Vorgesetzte_r'">
-              <div class="sidenav-text">MEIN TEAM</div>
+        <mat-expansion-panel class="expansion-panel-styling" *ngIf="loginData.role=='Vorgesetzte_r'"
+                             (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <a mat-list-item *ngIf="loginData.role=='Vorgesetzte_r'">
+                <div class="sidenav-text">MEIN TEAM</div>
+              </a>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div *ngFor="let member of loginData.team" (click)="deleteSelectedGoalFromLocalStorage()">
+            <a class="expansion-panel-member-styling" (click)="changeUrl(member.userid)"
+               (click)="goToTeamview(member.userid, 'Vorgesetzte_r', member.surname, member.firstname)">
+              {{member.firstname}} {{member.surname}}
             </a>
-
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div *ngFor="let member of loginData.team" (click)="deleteSelectedGoalFromLocalStorage()">
-          <a class="expansion-panel-member-styling" (click)="changeUrl(member.userid)"
-             (click)="goToTeamview(member.userid, 'Vorgesetzte_r', member.surname, member.firstname)">
-            {{member.firstname}} {{member.surname}}
-          </a>
-        </div>
-      </mat-expansion-panel>
+          </div>
+        </mat-expansion-panel>
       </ng-container>
-
       <a (click)='logout()' mat-list-item *ngIf="(loginData$ | async)">
         <mat-icon>exit_to_app</mat-icon>
         <div class="sidenav-text">Logout</div>
@@ -50,32 +47,29 @@
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
     <span class="title">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Adesso_AG_logo.svg" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Adesso_AG_logo.svg"/>
     </span>
     <div class="nav-element" (click)="changeRoleToMitarbeiter_in()">
-      <div  class="element-text"  *ngIf="(loginData$ | async)">ZIELE</div>
+      <div class="element-text" *ngIf="(loginData$ | async)">ZIELE</div>
     </div>
     <div class="nav-element " (click)="deleteSelectedGoalFromLocalStorage()" (click)="clickProtokoll()">
       <div class="element-text" routerLink="protokolle" *ngIf="(loginData$ | async)">PROTOKOLLE</div>
     </div>
     <ng-container *ngIf="loginData$ | async as loginData">
-
-    <div class="nav-element"(click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">
-      <div class="element-text" [matMenuTriggerFor]="menu" *ngIf="loginData.role=='Vorgesetzte_r'">MEIN TEAM
-        <mat-menu #menu="matMenu">
-          <div *ngFor="let member of loginData.team" (click)="deleteSelectedGoalFromLocalStorage()">
-            <a class="dropdown-member-styling" (click)="changeUrl(member.userid)" (click)="goToTeamview(member.userid, 'Vorgesetzte_r', member.surname, member.firstname)">
-              {{member.firstname}} {{member.surname}}
-            </a>
-          </div>
-        </mat-menu>
+      <div class="nav-element" (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">
+        <div class="element-text" [matMenuTriggerFor]="menu" *ngIf="loginData.role=='Vorgesetzte_r'">MEIN TEAM
+          <mat-menu #menu="matMenu">
+            <div *ngFor="let member of loginData.team" (click)="deleteSelectedGoalFromLocalStorage()">
+              <a class="dropdown-member-styling" (click)="changeUrl(member.userid)"
+                 (click)="goToTeamview(member.userid, 'Vorgesetzte_r', member.surname, member.firstname)">
+                {{member.firstname}} {{member.surname}}
+              </a>
+            </div>
+          </mat-menu>
+        </div>
       </div>
-    </div>
     </ng-container>
     <span class="example-spacer"></span>
-    <!--    ng-container is a pseudo element that doesnt get rendered-->
-    <!--    async pipe is neccessary so you dont have to subscribe and unsubscribe !IMPORTANT otherwise browser gets crashed-->
-    <!--    reference: https://angular.io/api/common/AsyncPipe -->
     <ng-container *ngIf="loginData$ | async as loginData">
       <div class="title">
         <div class="element-text">
@@ -83,8 +77,7 @@
         </div>
       </div>
       <div (click)='logout()' class="nav-element">
-        <button mat-icon-button class="example-icon"
-                aria-label="Example icon-button with input icon">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with input icon">
           <mat-icon>exit_to_app</mat-icon>
         </button>
         <div class="element-text">
@@ -95,4 +88,3 @@
   </mat-toolbar>
   <router-outlet class="router-outlet-styling"></router-outlet>
 </mat-sidenav-container>
-

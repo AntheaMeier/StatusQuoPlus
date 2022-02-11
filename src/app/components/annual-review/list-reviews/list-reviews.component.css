@@ -1,6 +1,6 @@
 .viewport{
     height: 250px;
-  }
+}
 
 textarea {
   width: 100%;
@@ -16,7 +16,6 @@ textarea {
 
 .mat-accordion .mat-expansion-panel {
   border-radius: 4px;
-
 }
 
 .mat-expansion-panel {
@@ -26,7 +25,6 @@ textarea {
   border-radius: 4px;
   padding: 4px;
 }
-
 
 mat-icon:hover {
   cursor: pointer;

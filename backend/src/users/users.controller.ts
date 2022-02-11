@@ -50,8 +50,6 @@ export class UsersController {
     @Body('email') usersEmail: string,
     @Body('role') usersRole: string,
     @Body('team') usersTeam: Team
-
-
 ) {
     await this.usersService.updateUsers(usersId, usersUsername, usersPassword, usersFirstname, usersSurname, usersEmail, usersRole, usersTeam);
     return null;
@@ -62,6 +60,4 @@ export class UsersController {
     await this.usersService.deleteUsers(usersId);
     return null;
   }
-
-
 }

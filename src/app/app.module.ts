@@ -51,12 +51,12 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatStepperModule} from "@angular/material/stepper";
-import { DeleteDialogComponent } from './components/annual-review/delete-dialog/delete-dialog.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { TeamviewComponent } from './components/teamview/teamview.component';
+import {DeleteDialogComponent} from './components/annual-review/delete-dialog/delete-dialog.component';
+import {NotFoundComponent} from './components/not-found/not-found.component';
+import {TeamviewComponent} from './components/teamview/teamview.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {CdkAccordionModule} from "@angular/cdk/accordion";
-import { EditReviewComponent } from './components/annual-review/edit-review/edit-review.component';
+import {EditReviewComponent} from './components/annual-review/edit-review/edit-review.component';
 import {RouterModule} from "@angular/router";
 import {RoleGuard} from "./services/role.guard";
 import { TodoEditComponent } from './components/todo/todo-edit/todo-edit.component';
@@ -85,7 +85,6 @@ export function playerFactory() {
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),
-
     MatExpansionModule,
     ScrollingModule,
     ReactiveFormsModule,
@@ -102,7 +101,6 @@ export function playerFactory() {
     MatListModule,
     BrowserAnimationsModule,
     MatInputModule,
-
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
@@ -134,7 +132,6 @@ export function playerFactory() {
     PortalModule,
     MatTabsModule,
     CdkAccordionModule,
-
   ],
   exports: [
     MatInputModule,

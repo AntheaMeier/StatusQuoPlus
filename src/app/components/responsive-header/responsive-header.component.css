@@ -10,6 +10,7 @@
 .sidenav {
   width: 200px;
 }
+
 .mat-toolbar {
   background-color: white !important;
   border-bottom: #E8E4E1;
@@ -107,7 +108,6 @@ img {
 .members-styling {
   margin-left: 20%;
 }
-
 
 .expansion-panel-styling {
   box-shadow: none !important;

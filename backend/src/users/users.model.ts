@@ -1,12 +1,9 @@
 import * as mongoose from 'mongoose';
 
 const TeamSchema = new mongoose.Schema({
-
   userid: {type: String, required:true},
   firstname: {type: String},
   surname: {type: String},
-
-
 } ,{ _id : false });
 
 
@@ -34,15 +31,10 @@ export interface Users extends mongoose.Document {
   email: string;
   role: string;
   team: Team;
-
 }
-
 
 export interface Team extends mongoose.Document {
   userid: string;
-
   firstname: string;
   surname: string;
-
-
 }

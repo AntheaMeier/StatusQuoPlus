@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-
 import { ApiService } from '../../services/api.service';
 import { Review } from '../../models/review';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,22 +14,18 @@ import { DateAdapter } from '@angular/material/core';
 })
 export class AnnualReviewComponent implements OnInit {
   review!: Review;
-
   addPost = false;
-
   enteredContent = '';
   enteredDate!: string;
   isLoadingResults = true;
   currentUrl = '';
-
-  @Input() idTeamMember: any = '';
-  @Input() selectedRole: String = '';
-
   idloggedInUser: String = '';
   dataUsers: LoginData[] = [];
-  showReviewsToOneUser = false;
+
   @Input() reviewsToOneUser: Review[] = [];
   @Input() idTeam = '';
+  @Input() idTeamMember: any = '';
+  @Input() selectedRole: String = '';
 
   constructor(
     private api: ApiService,
@@ -45,14 +40,10 @@ export class AnnualReviewComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
     this.currentUrl = this.router.url;
-
     if (this.currentUrl != '/protokolle') {
       this.selectedRole = 'Vorgesetzte_r';
     }
-
     this.api.getUsers().subscribe(
       (res: any) => {
         this.dataUsers = res;
@@ -63,9 +54,9 @@ export class AnnualReviewComponent implements OnInit {
         this.isLoadingResults = false;
       }
     );
-
     this.idloggedInUser = this.auth.getUserDetails()._id;
   }
+
   reloadCurrentRoute() {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([this.currentUrl]);
@@ -77,12 +68,10 @@ export class AnnualReviewComponent implements OnInit {
       id = this.idTeamMember;
     }
     this.currentUrl = this.router.url;
-
     this.isLoadingResults = true;
     const simpleObject = {} as Review;
     var date = moment(this.enteredDate).format('DD.MM.yyyy');
     simpleObject.date = date;
-
     simpleObject.description = this.enteredContent;
     simpleObject.userid = id;
     this.api.addReview(simpleObject).subscribe(

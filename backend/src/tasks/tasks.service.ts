@@ -14,7 +14,6 @@ export class TasksService{
       description: desc,
       status,
       goalid,
-
     });
     const result = await newTask.save()
     return result.id as string;
@@ -29,7 +28,6 @@ export class TasksService{
   async getSingleTask(taskId: string){
     const task = await this.findTask(taskId);
     return {id: task.id, description: task.description, status: task.status, goalid: task.goalid};
-
   }
 
   async updateTask(
@@ -38,7 +36,6 @@ export class TasksService{
     const updatedTask = await this.findTask(taskId);
     if(description){
       updatedTask.description = description
-
     }
 
     if(status){
@@ -47,11 +44,8 @@ export class TasksService{
 
     if(goalid){
       updatedTask.goalid = goalid
-
     }
-
     updatedTask.save();
-
   }
 
   async updateTaskStatus(taskId: string, status: string) {
@@ -71,42 +65,28 @@ export class TasksService{
 
     try{
       tasks = await this.taskModel.find( { goalid: goalid } )
-
     }
-
     catch(error){
       throw new NotFoundException('Could not find task')
     }
-
     if(!tasks){
       throw new NotFoundException('Could not find task task')
-
     }
-
     return tasks;
-
-
-
-
   }
 
   private async findTask(id: string): Promise<Task> {
     let task;
     try{
       task = await this.taskModel.findById(id);
-
     }
     catch(error){
       throw new NotFoundException('Could not find task')
     }
-
     if(!task){
       throw new NotFoundException('Could not find task task')
-
     }
-
     return task;
-
   }
 
 
@@ -115,18 +95,13 @@ export class TasksService{
 
     try{
       tasks = await this.taskModel.find( { goalid: goalid, status: status } )
-
     }
-
     catch(error){
       throw new NotFoundException('Could not find task')
     }
-
     if(!tasks){
       throw new NotFoundException('Could not find task task')
-
     }
-
     return tasks;
   }
 }

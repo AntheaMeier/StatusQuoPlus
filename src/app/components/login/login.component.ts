@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ApiService } from '../../services/api.service';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { LoginData } from '../../models/loginData';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ApiService} from '../../services/api.service';
+import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
+import {LoginData} from '../../models/loginData';
 
 @Component({
   selector: 'app-login',
@@ -62,25 +62,17 @@ export class LoginComponent implements OnInit {
         i.password === this.loginForm.get('password')?.value
       ) {
         this.notloggedIn = false;
-        // todo: if you subscribe an observable that comes from backend you MUST unsubscribe it as well. Otherwise your browser will be crashed.
-        // see here: https://blog.bitsrc.io/6-ways-to-unsubscribe-from-observables-in-angular-ab912819a78f
-        // really.. it's important, you will get crazy otherwise :D
         this.api
           .postTypeRequest('', this.loginForm.value)
           .subscribe((res: any) => {
-            // you coud put this logic into a guard as well that is listening to loginData observable
             this.router.navigate(['']);
           });
       }
-
-
-      }
-    if(this.notloggedIn){
-      this.loginInvalid = true;}
-
     }
-
-
+    if (this.notloggedIn) {
+      this.loginInvalid = true;
+    }
+  }
 
   isUserLogin(): void {
     if (this.auth.getUserDetails() != null) {

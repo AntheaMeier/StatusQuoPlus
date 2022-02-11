@@ -1,23 +1,23 @@
 <mat-card class="reviewsCard">UNTERJAEHRIGER AUSTAUSCH
   <mat-icon *ngIf="selectedRole == 'Vorgesetzte_r'" class="icon-display" (click)="addPostForm()">add</mat-icon>
-    <mat-expansion-panel hideToggle *ngIf = "addPost" [expanded]="true">
-      <mat-expansion-panel-header style="background-color: #E8E4E1">
-        <mat-form-field class="col-md-12">
-          <input
-            readonly='true'
-            matInput [matDatepicker]="picker"
-            [(ngModel)]="enteredDate"
-            id="dateEntry"
-            name="date"
-            required
-            placeholder="Datum"
-            #date="ngModel">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          <mat-error *ngIf="date.invalid">Bitte gib ein Datum ein</mat-error>
-        </mat-form-field>
-      </mat-expansion-panel-header>
-      <mat-form-field appearance="outline" style="white-space: pre-wrap;">
+  <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true">
+    <mat-expansion-panel-header style="background-color: #E8E4E1">
+      <mat-form-field class="col-md-12">
+        <input
+          readonly='true'
+          matInput [matDatepicker]="picker"
+          [(ngModel)]="enteredDate"
+          id="dateEntry"
+          name="date"
+          required
+          placeholder="Datum"
+          #date="ngModel">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="date.invalid">Bitte gib ein Datum ein</mat-error>
+      </mat-form-field>
+    </mat-expansion-panel-header>
+    <mat-form-field appearance="outline" style="white-space: pre-wrap;">
         <textarea
           [(ngModel)]="enteredContent"
           id="content"
@@ -27,11 +27,12 @@
           placeholder="Notizen zum unterjaehrigen Austausch"
           #content="ngModel">
         </textarea>
-  <mat-error *ngIf="content.invalid">Bitte gib Notizen ein</mat-error>
-</mat-form-field>
-      <mat-action-row>
-        <button mat-raised-button *ngIf=true matSuffix type="submit" (click)=onAddPost(idloggedInUser)>Speichern</button>
-      </mat-action-row>
-    </mat-expansion-panel>
-    <app-list-reviews [selectedRole]="selectedRole" [reviewsToOneUser]="reviewsToOneUser" [idTeamMember]="idTeamMember" [currentUrl]="currentUrl"></app-list-reviews>
+      <mat-error *ngIf="content.invalid">Bitte gib Notizen ein</mat-error>
+    </mat-form-field>
+    <mat-action-row>
+      <button mat-raised-button *ngIf=true matSuffix type="submit" (click)=onAddPost(idloggedInUser)>Speichern</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+  <app-list-reviews [selectedRole]="selectedRole" [reviewsToOneUser]="reviewsToOneUser" [idTeamMember]="idTeamMember"
+                    [currentUrl]="currentUrl"></app-list-reviews>
 </mat-card>

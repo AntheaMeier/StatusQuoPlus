@@ -1,41 +1,30 @@
-<div  cdkDropList
-      #goalList="cdkDropList"
-      [cdkDropListData]="goalsToOneUser"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
+<div cdkDropList
+     #goalList="cdkDropList"
+     [cdkDropListData]="goalsToOneUser"
+     class="example-list"
+     (cdkDropListDropped)="drop($event)">
   <mat-card class="goalsCard">
     <p>ZIELE
-
-    <button  *ngIf="selectedRole == 'Mitarbeiter_in'" (click)="addPostForm()" class="bttn icon-display">
+      <button *ngIf="selectedRole == 'Mitarbeiter_in'" (click)="addPostForm()" class="bttn icon-display">
         <span>
-     <span class="icon-display">+</span>
-          </span>
+          <span class="icon-display">+</span>
+        </span>
       </button>
-
-
-
     </p>
-
-
     <div *ngIf="goalsToOneUser.length == 0" class="description-styling">
       <p>Du hast noch keine Ziele</p>
     </div>
-
-
-
-
-
     <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true">
       <mat-form-field appearance="outline" style="white-space: pre-wrap;">
-                <textarea
-                  [(ngModel)]="enteredContent"
-                  id="content"
-                  matInput rows="6"
-                  name="content"
-                  required
-                  placeholder="Dein Ziel"
-                  #content="ngModel">
-                </textarea>
+        <textarea
+          [(ngModel)]="enteredContent"
+          id="content"
+          matInput rows="6"
+          name="content"
+          required
+          placeholder="Dein Ziel"
+          #content="ngModel">
+        </textarea>
         <mat-error *ngIf="content.invalid">Bitte gib eine Beschreibung ein</mat-error>
       </mat-form-field>
       <mat-action-row>
@@ -45,58 +34,46 @@
         </button>
       </mat-action-row>
     </mat-expansion-panel>
-
-
-
     <div
       class="example-accordion-item-header test"
-         (click)="setTheSelectedGoal(goal)"
-         (click)="showTasks(goal._id)"
-         (click)="setGoalsid(goal._id)"
-         *ngFor="let goal of goalsToOneUser; let index = index">
-
+      (click)="setTheSelectedGoal(goal)"
+      (click)="showTasks(goal._id)"
+      (click)="setGoalsid(goal._id)"
+      *ngFor="let goal of goalsToOneUser; let index = index">
       <mat-expansion-panel cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" hideToggle class="panel-styling" [expanded]="showGoalid == goal._id">
         <mat-expansion-panel-header class="panel-header-styling">
-        <mat-card [ngStyle]="{'background-color':goal._id === showGoalid ? '#BFDCEE' : '#E8E4E1'}"
-                  class="goals-matcard">
-
-          <div class="description-styling">
-            {{goal.description}}
-          </div>
-          <mat-progress-bar [ngClass]="{'green-progress':progressArray[index] == 100 && selectedRole == 'Mitarbeiter_in'}"
-                            *ngIf="selectedRole == 'Mitarbeiter_in'"
-                            class="progressbar-styling"
-                            mode="determinate"
-                            value="{{progressArray[index]}}"></mat-progress-bar>
-          <span class="span-styling">
-            <mat-icon class="button-styling" (click)="openDialog(goal._id)"
-                      *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">
-             edit
-            </mat-icon>
-            <mat-icon class="button-styling" (click)="deleteDialog(goal._id)"
-                      *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">
-            delete_outline
-            </mat-icon>
-          </span>
-        </mat-card>
-
+          <mat-card [ngStyle]="{'background-color':goal._id === showGoalid ? '#BFDCEE' : '#E8E4E1'}" class="goals-matcard">
+            <div class="description-styling">
+              {{goal.description}}
+            </div>
+            <mat-progress-bar
+              [ngClass]="{'green-progress':progressArray[index] == 100 && selectedRole == 'Mitarbeiter_in'}"
+              *ngIf="selectedRole == 'Mitarbeiter_in'"
+              class="progressbar-styling"
+              mode="determinate"
+              value="{{progressArray[index]}}">
+            </mat-progress-bar>
+            <span class="span-styling">
+              <mat-icon class="button-styling" (click)="openDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">edit</mat-icon>
+              <mat-icon class="button-styling" (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">delete_outline</mat-icon>
+            </span>
+          </mat-card>
         </mat-expansion-panel-header>
-
-      <div class="test" *ngIf="goal._id == showGoalid">
-        <app-todo [selectedRole]="selectedRole"
-                  [idls]="idls"
-                  [tasksToOneGoal]="tasksToOneGoal"
-                  [goalid]="showGoalid"
-                  [tasksToTodo]="tasksToTodo"
-                  [tasksToDoing]="tasksToDoing"
-                  [tasksToDone]="tasksToDone"
-                  (newTodo)="setNewtask($event)"
-                  (deleteTodo)="deleteTask($event)"
-                  (result)="setDecision($event)"
-                  (changedOrder)="loadProgressNew($event)"></app-todo>
-      </div>
+        <div class="test" *ngIf="goal._id == showGoalid">
+          <app-todo [selectedRole]="selectedRole"
+                    [idls]="idls"
+                    [tasksToOneGoal]="tasksToOneGoal"
+                    [goalid]="showGoalid"
+                    [tasksToTodo]="tasksToTodo"
+                    [tasksToDoing]="tasksToDoing"
+                    [tasksToDone]="tasksToDone"
+                    (newTodo)="setNewtask($event)"
+                    (deleteTodo)="deleteTask($event)"
+                    (result)="setDecision($event)"
+                    (changedOrder)="loadProgressNew($event)">
+          </app-todo>
+        </div>
       </mat-expansion-panel>
     </div>
-
   </mat-card>
 </div>

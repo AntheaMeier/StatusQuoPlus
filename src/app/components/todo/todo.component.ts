@@ -1,10 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Tasks } from '../../models/tasks';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
@@ -126,7 +122,6 @@ export class TodoComponent implements OnInit {
         const id = res._id;
         console.log(id);
         this.isLoadingResults = false;
-        // this.router.navigate(['/show-todo', id]);
       },
       (err: any) => {
         console.log(err);
@@ -148,7 +143,6 @@ export class TodoComponent implements OnInit {
   }
 
   // TODO
-
   changeStatusToTodo(): void {
     this.tasksToTodo.forEach((task: Tasks) => {
       if (task.status != 'todo') {
@@ -183,7 +177,6 @@ export class TodoComponent implements OnInit {
   }
 
   // DOING
-
   changeStatusToDoing(): void {
     this.tasksToDoing.forEach((task: Tasks) => {
       if (task.status != 'doing') {

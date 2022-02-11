@@ -16,7 +16,6 @@ import { EditReviewComponent } from '../edit-review/edit-review.component';
 })
 export class ListReviewsComponent implements OnInit {
   edit = false;
-  enteredContent = '';
   _id = '';
   date = '';
   description = '';
@@ -111,9 +110,5 @@ export class ListReviewsComponent implements OnInit {
       height: '80%',
       data: { id: this.idDialog },
     });
-  }
-
-  editOnOff() {
-    this.edit = !this.edit;
   }
 }

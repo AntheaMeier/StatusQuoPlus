@@ -8,7 +8,7 @@ import { Tasks } from '../models/tasks';
 import { Review } from '../models/review';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({'Content-Type': 'application/json'}),
 };
 const apiUrl = 'http://localhost:3000/goals';
 const apiUrlLogin = 'http://localhost:3000/users';
@@ -26,11 +26,7 @@ const apiUrlUsersForReview = 'http://localhost:3000/reviews/user';
 })
 export class ApiService {
   apiUrlToken = 'http://localhost:3000/login';
-
-  // save and get your user data
-  // todo: make an extra service for login or put this code and login method aka postTypeRequest to auth.service
   private loginDataSubject: BehaviorSubject<LoginData | undefined>;
-  // use $ in name so you know that this is a stream/observable of data
   public loginData$: Observable<LoginData | undefined>;
 
   constructor(private http: HttpClient) {
@@ -53,7 +49,6 @@ export class ApiService {
     url: string,
     payload: LoginPayload
   ): Observable<LoginResponse> {
-    // get your user information and token
     return this.http
       .post<LoginResponse>(`${this.apiUrlToken}${url}`, payload)
       .pipe(

@@ -1,20 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ApiService } from '../../../services/api.service';
-import { Goals } from '../../../models/goals';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
-import { DeleteConfirmationDialogComponent } from '../delete-confirmation-dialog/delete-confirmation-dialog';
-import { Tasks } from '../../../models/tasks';
-import { LoginData, Role } from '../../../models/loginData';
-import { AuthService } from '../../../services/auth.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
-import { GoalsEditComponent } from '../goals-edit/goals-edit.component';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ApiService} from '../../../services/api.service';
+import {Goals} from '../../../models/goals';
+import {MatDialog} from '@angular/material/dialog';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {DeleteConfirmationDialogComponent} from '../delete-confirmation-dialog/delete-confirmation-dialog';
+import {Tasks} from '../../../models/tasks';
+import {LoginData, Role} from '../../../models/loginData';
+import {AuthService} from '../../../services/auth.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {BehaviorSubject} from 'rxjs';
+import {GoalsEditComponent} from '../goals-edit/goals-edit.component';
 
 @Component({
   selector: 'app-goals',
@@ -24,7 +20,7 @@ import { GoalsEditComponent } from '../goals-edit/goals-edit.component';
 export class GoalsCreateComponent implements OnInit {
   editable = false;
   data: Goals[] = [];
-  dataUser = { userid: '', selectedRole: '' };
+  dataUser = {userid: '', selectedRole: ''};
   isLoadingResults = true;
   description = '';
   id = '';
@@ -32,8 +28,7 @@ export class GoalsCreateComponent implements OnInit {
   addPost = false;
   enteredContent = '';
   lel: any = '';
-
-  goal: Goals = { _id: '', description: '', order: '', userid: '' };
+  goal: Goals = {_id: '', description: '', order: '', userid: ''};
 
   user: LoginData = {
     id: '',
@@ -51,9 +46,9 @@ export class GoalsCreateComponent implements OnInit {
   idDialog: any = '';
   tasksToOneGoal: Tasks[] = [];
   editableId: String = '';
-  selectedGoal: Goals = { _id: '', description: '', order: '', userid: '' };
+  selectedGoal: Goals = {_id: '', description: '', order: '', userid: ''};
   showTasksToOneGoal = false;
-  newTask: Tasks = { goalid: '', _id: '', description: '', status: '' };
+  newTask: Tasks = {goalid: '', _id: '', description: '', status: ''};
   deleteTodo: String = '';
   decision: String = 'yes';
 
@@ -69,18 +64,13 @@ export class GoalsCreateComponent implements OnInit {
   progress: number = 0;
   progressArray: number[] = [];
   showGoalsToOneUser = false;
-
   goalSelectedReload: any = '';
-
-  //Tasks an todo schicken
   tasksToTodo: Tasks[] = [];
-
   tasksToDoing: Tasks[] = [];
   hehe: boolean = true;
   tasksToDone: Tasks[] = [];
   showGoalid = '';
   resid: String = '';
-
   reso: number = 0;
   rest: number = 0;
   currentUrl = '';
@@ -98,7 +88,8 @@ export class GoalsCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private auth: AuthService,
     private formBuilder: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.currentUrl = this.router.url;
@@ -127,9 +118,9 @@ export class GoalsCreateComponent implements OnInit {
       this.selectedRole = this.dataUser.selectedRole;
       console.log(
         'die aktuelle userid: ' +
-          this.idMember +
-          'und die Rolle: ' +
-          this.selectedRole
+        this.idMember +
+        'und die Rolle: ' +
+        this.selectedRole
       );
     }
 
@@ -148,14 +139,12 @@ export class GoalsCreateComponent implements OnInit {
       this.showGoals(this.idloggedInUser);
     } else {
       this.idMember = this.route.snapshot.paramMap.get('id');
-
       this.showGoals(this.idMember);
     }
 
     this.api.getGoalsToUser(this.idloggedInUser).subscribe(
       (res: any) => {
         this.goalsToOneUser = res;
-
         this.isLoadingResults = false;
         this.goalsToOneUser.sort((goal1, goal2) => {
           return Number(goal1.order) - Number(goal2.order);
@@ -178,10 +167,7 @@ export class GoalsCreateComponent implements OnInit {
       let second = await this.getNumberAllTasks(res[i]._id);
       const first = await this.getNumberAllTasksDone(res[i]._id);
       second = await this.getNumberAllTasks(res[i]._id);
-
-
       this.progress = (first / second) * 100;
-
       this.progressArray.push(this.progress);
     }
   }
@@ -193,7 +179,6 @@ export class GoalsCreateComponent implements OnInit {
 
   async getNumberAllTasksDone(goalid: String): Promise<number> {
     const res = await this.api.getTasksToStatus(goalid, 'done').toPromise();
-
     return res.length;
   }
 
@@ -203,8 +188,10 @@ export class GoalsCreateComponent implements OnInit {
       position += 1;
       goal.order = String(position);
       this.api.updateGoalOrder(goal._id, goal).subscribe(
-        (data: Goals) => {},
-        (error) => {}
+        (data: Goals) => {
+        },
+        (error) => {
+        }
       );
     });
   }
@@ -280,7 +267,6 @@ export class GoalsCreateComponent implements OnInit {
         const id = res._id;
         console.log(id);
         this.isLoadingResults = false;
-        // this.router.navigate(['/show-todo', id]);
       },
       (err: any) => {
         console.log(err);
@@ -294,7 +280,7 @@ export class GoalsCreateComponent implements OnInit {
     this.idDialog = id;
     const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
       width: '50%',
-      data: { id: this.idDialog },
+      data: {id: this.idDialog},
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.ngOnInit();
@@ -365,7 +351,7 @@ export class GoalsCreateComponent implements OnInit {
     this.idDialog = id;
     const dialogRef = this.dialog.open(GoalsEditComponent, {
       width: '50%',
-      data: { id: this.idDialog, description: this.description },
+      data: {id: this.idDialog, description: this.description},
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.ngOnInit();
@@ -404,7 +390,6 @@ export class GoalsCreateComponent implements OnInit {
       for (let i = 0; i < this.tasksToTodo.length; i++) {
         if (this.tasksToTodo[i]._id == this.deleteTodo) {
           if (i > -1) {
-            // this.tasksToTodo.splice(i, 1);
           }
         }
       }
@@ -412,7 +397,6 @@ export class GoalsCreateComponent implements OnInit {
   }
 
   loadProgressNew($event: boolean) {
-    // this.fillProgressArray();
   }
 
   isVorgesetzte_r(): boolean {

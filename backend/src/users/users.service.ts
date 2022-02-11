@@ -90,7 +90,6 @@ export class UsersService {
     if (role) {
       updatedUsers.role = role;
     }
-
     if (team) {
       updatedUsers.team = team;
     }
@@ -101,6 +100,4 @@ export class UsersService {
     const result = await this.usersModel.deleteOne({_id: usersId}).exec();
     console.log(result);
   }
-
-
 }

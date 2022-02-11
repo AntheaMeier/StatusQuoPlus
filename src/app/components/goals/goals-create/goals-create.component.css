@@ -1,50 +1,31 @@
-
-
 .bttn {
   margin-bottom: 0.5em;
   margin-left: 0.4em;
-  width:2.2em;
+  width: 2.2em;
   height: 2.2em;
   cursor: pointer;
   background: transparent;
   border: 1px solid #0071B9;
   outline: none;
   transition: 1s ease-in-out;
-  border-radius: 50% ;
-
-
-
+  border-radius: 50%;
 }
-
-
-
 
 .bttn:hover {
   transition: 1s ease-in-out;
-  background: #0071B9 ;
+  background: #0071B9;
   opacity: 0.4;
-  color:white;
+  color: white;
 }
-
-
 
 .bttn span {
   color: #857971;
   font-size: 25px;
   font-weight: 100;
-
-
 }
-
-
-
 
 .icon-display {
   font-size: 15px;
-}
-
-.icon-display:hover {
-  curser: pointer;
 }
 
 .goalsCard {
@@ -74,7 +55,7 @@
   width: 90%;
 }
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 800px) {
   .description-styling {
     width: 85%;
   }
@@ -100,10 +81,9 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.test{
-  display:block;
+.test {
+  display: block;
 }
-
 
 .goals-matcard {
   color: #857971;
@@ -115,13 +95,11 @@
   word-wrap: break-word;
 }
 
-
 @media screen and (max-width: 844px) {
   .goals-matcard {
     padding: 5%;
   }
 }
-
 
 .progressbar-styling {
   border-radius: 4px;

@@ -8,9 +8,7 @@ import {NotFoundComponent} from "./components/not-found/not-found.component";
 import {TeamviewComponent} from "./components/teamview/teamview.component";
 import {LoginComponent} from "./components/login/login.component";
 
-
 const routes: Routes = [
-
   {
     path: '',
     component: GoalsCreateComponent,
@@ -25,9 +23,6 @@ const routes: Routes = [
     component: NotFoundComponent,
     canActivate: [AuthGuardService]
   },
-
-
-
   {
     path: 'teamview/:id',
     component: TeamviewComponent,
