@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { ApiService } from '../services/api.service';
-import { Review } from '../shared/review';
+import { ApiService } from '../../services/api.service';
+import { Review } from '../../models/review';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoginData } from '../shared/loginData';
-import { AuthService } from '../services/auth.service';
+import { LoginData } from '../../models/loginData';
+import { AuthService } from '../../services/auth.service';
 import * as moment from 'moment';
 import { DateAdapter } from '@angular/material/core';
 

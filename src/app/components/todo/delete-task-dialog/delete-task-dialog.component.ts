@@ -2,9 +2,9 @@ import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {TodoComponent} from "../todo.component";
 import { Router } from '@angular/router';
-import { ApiService } from '../../services/api.service';
+import { ApiService } from '../../../services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {Tasks} from "../../shared/tasks";
+import {Tasks} from "../../../models/tasks";
 
 @Component({
   selector: 'app-delete-task-dialog',

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Goals} from "../shared/goals";
+import {Goals} from "../../models/goals";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ApiService} from "../services/api.service";
-import {Review} from "../shared/review";
-import {AuthService} from "../services/auth.service";
+import {ApiService} from "../../services/api.service";
+import {Review} from "../../models/review";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-teamview',

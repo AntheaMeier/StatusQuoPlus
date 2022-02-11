@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {AuthGuardService} from "./auth-guard.service";
-import {GoalsCreateComponent} from "./goals/goals-create/goals-create.component";
-import {AnnualReviewComponent} from "./annual-review/annual-review.component";
-import {RoleGuard} from "./role.guard";
-import {NotFoundComponent} from "./not-found/not-found.component";
-import {TeamviewComponent} from "./teamview/teamview.component";
-import {LoginComponent} from "./login/login.component";
+import {AuthGuardService} from "./services/auth-guard.service";
+import {GoalsCreateComponent} from "./components/goals/goals-create/goals-create.component";
+import {AnnualReviewComponent} from "./components/annual-review/annual-review.component";
+import {RoleGuard} from "./services/role.guard";
+import {NotFoundComponent} from "./components/not-found/not-found.component";
+import {TeamviewComponent} from "./components/teamview/teamview.component";
+import {LoginComponent} from "./components/login/login.component";
 
 
 const routes: Routes = [

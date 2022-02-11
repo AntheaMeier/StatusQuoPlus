@@ -1,37 +1,42 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {GoalsCreateComponent} from "../goals-create/goals-create.component";
+import { ListReviewsComponent } from '../list-reviews/list-reviews.component';
 import {Router, ActivatedRoute} from '@angular/router';
-import {ApiService} from '../../services/api.service';
+import {ApiService} from '../../../services/api.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Review } from 'src/app/models/review';
 
 @Component({
-  selector: 'app-goals-edit',
-  templateUrl: './goals-edit.component.html',
-  styleUrls: ['./goals-edit.component.css'],
+  selector: 'app-edit-review',
+  templateUrl: './edit-review.component.html',
+  styleUrls: ['./edit-review.component.css']
 })
-export class GoalsEditComponent implements OnInit {
+export class EditReviewComponent implements OnInit {
 
   @Input() idDialog: any;
   enteredValue = "";
   oldDescription: any;
   id = '';
   isLoadingResults = false;
+  review!: Review;
 
-  articleForm: FormGroup = this.formBuilder.group({
-    description: this.formBuilder.control('initial value', Validators.required)
+  reviewForm: FormGroup = this.formBuilder.group({
+    description: this.formBuilder.control('initial value', Validators.required),
+
   });
 
-  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<GoalsCreateComponent>,
+  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<ListReviewsComponent>,
               private router: Router, private route: ActivatedRoute,
               private api: ApiService, private formBuilder: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(GoalsEditComponent, {
-      width: '40%',
+    const dialogRef = this.dialog.open(ListReviewsComponent, {
+      width: '80%',
+
     });
+
     dialogRef.afterClosed().subscribe(result => {
     });
   }
@@ -41,17 +46,17 @@ export class GoalsEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getGoal(this.data.id);
-    this.articleForm = this.formBuilder.group({
+    this.getReview(this.data.id);
+    this.reviewForm = this.formBuilder.group({
       'description': ['', Validators.required]
     });
   }
 
-  getGoal(id: any) {
-    this.api.getGoal(id).subscribe((data: any) => {
+  getReview(id: any) {
+    this.api.getReview(id).subscribe((data: any) => {
       this.id = data.id;
       this.oldDescription = data.description;
-      this.articleForm.setValue({
+      this.reviewForm.setValue({
         description: data.description,
       });
     });
@@ -59,8 +64,7 @@ export class GoalsEditComponent implements OnInit {
 
   onFormSubmit() {
     this.isLoadingResults = true;
-    this.data.description = this.enteredValue;
-    this.api.updateGoal(this.data.id, this.data)
+    this.api.updateReview(this.data.id, this.reviewForm.value)
       .subscribe((res: any) => {
           this.isLoadingResults = false;
         }, (err: any) => {
@@ -68,6 +72,15 @@ export class GoalsEditComponent implements OnInit {
           this.isLoadingResults = false;
         }
       );
-    this.dialogRef.close();
+      this.dialogRef.close();
+      this.reloadCurrentRoute();
   }
+
+  reloadCurrentRoute() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+
 }

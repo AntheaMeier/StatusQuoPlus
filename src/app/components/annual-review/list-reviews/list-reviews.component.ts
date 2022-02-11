@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Review } from '../../shared/review';
+import { Review } from '../../../models/review';
 import { ApiService } from 'src/app/services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginData } from '../../shared/loginData';
-import { AuthService } from '../../services/auth.service';
+import { LoginData } from '../../../models/loginData';
+import { AuthService } from '../../../services/auth.service';
 import { EditReviewComponent } from '../edit-review/edit-review.component';
 
 @Component({

@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ListReviewsComponent } from '../list-reviews/list-reviews.component';
-import {ApiService} from '../../services/api.service';
+import {ApiService} from '../../../services/api.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -21,9 +21,9 @@ export class DeleteDialogComponent implements OnInit {
     description: this.formBuilder.control('initial value', Validators.required)
   });
 
-  constructor(public dialog: MatDialog, 
+  constructor(public dialog: MatDialog,
               public dialogRef: MatDialogRef<ListReviewsComponent>,
-              private api: ApiService, 
+              private api: ApiService,
               private router: Router,
               private formBuilder: FormBuilder,
               @Inject(MAT_DIALOG_DATA) public data: any

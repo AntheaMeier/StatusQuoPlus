@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Goals } from '../shared/goals';
-import { LoginData, LoginPayload, LoginResponse } from '../shared/loginData';
-import { Tasks } from '../shared/tasks';
-import { Review } from '../shared/review';
+import { Goals } from '../models/goals';
+import { LoginData, LoginPayload, LoginResponse } from '../models/loginData';
+import { Tasks } from '../models/tasks';
+import { Review } from '../models/review';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

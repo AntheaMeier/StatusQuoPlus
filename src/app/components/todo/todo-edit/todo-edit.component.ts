@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {GoalsCreateComponent} from "../../goals/goals-create/goals-create.component";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ApiService} from "../../services/api.service";
+import {ApiService} from "../../../services/api.service";
 
 @Component({
   selector: 'app-todo-edit',

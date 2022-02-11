@@ -2,12 +2,12 @@ import { ChangeDetectorRef, Component, Output } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, of } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginData, Team } from '../shared/loginData';
-import { ApiService } from '../services/api.service';
-import { Tasks } from '../shared/tasks';
+import { LoginData, Team } from '../../models/loginData';
+import { ApiService } from '../../services/api.service';
+import { Tasks } from '../../models/tasks';
 
 @Component({
   selector: 'app-responsive-header',

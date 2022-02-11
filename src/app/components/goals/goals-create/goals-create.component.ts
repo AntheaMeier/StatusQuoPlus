@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ApiService } from '../../services/api.service';
-import { Goals } from '../../shared/goals';
+import { ApiService } from '../../../services/api.service';
+import { Goals } from '../../../models/goals';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -9,9 +9,9 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { DeleteConfirmationDialogComponent } from '../delete-confirmation-dialog/delete-confirmation-dialog';
-import { Tasks } from '../../shared/tasks';
-import { LoginData, Role } from '../../shared/loginData';
-import { AuthService } from '../../services/auth.service';
+import { Tasks } from '../../../models/tasks';
+import { LoginData, Role } from '../../../models/loginData';
+import { AuthService } from '../../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { GoalsEditComponent } from '../goals-edit/goals-edit.component';

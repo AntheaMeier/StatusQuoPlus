@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Tasks } from '../shared/tasks';
+import { Tasks } from '../../models/tasks';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -7,9 +7,9 @@ import {
 } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from '../services/api.service';
-import { LoginData } from '../shared/loginData';
-import { AuthService } from '../services/auth.service';
+import { ApiService } from '../../services/api.service';
+import { LoginData } from '../../models/loginData';
+import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DeleteTaskDialogComponent } from './delete-task-dialog/delete-task-dialog.component';
 import { TodoEditComponent } from './todo-edit/todo-edit.component';
