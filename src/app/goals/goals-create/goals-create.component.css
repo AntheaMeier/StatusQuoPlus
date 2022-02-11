@@ -6,8 +6,8 @@
 .bttn {
   margin-bottom: 0.5em;
   margin-left: 0.4em;
-  width:2.3em;
-  height: 2.3em;
+  width:2.2em;
+  height: 2.2em;
   cursor: pointer;
   background: transparent;
   border: 1px solid #0071B9;
@@ -31,7 +31,7 @@
 
 
 .bttn span {
-  color: gray;
+  color: #857971;
   font-size: 25px;
   font-weight: 100;
 
