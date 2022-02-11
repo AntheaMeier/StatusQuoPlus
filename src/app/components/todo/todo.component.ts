@@ -74,7 +74,7 @@ export class TodoComponent implements OnInit {
         this.isLoadingResults = false;
       }
     );
-    this.idloggedInUser = this.auth.getUserDetails().user_info._id;
+    this.idloggedInUser = this.auth.getUserDetails()._id;
     if (this.selectedRole != 'Vorgesetzte_r') {
       this.getTodoDetails(this.idloggedInUser);
     }
@@ -165,14 +165,12 @@ export class TodoComponent implements OnInit {
   dropInTodo(event: CdkDragDrop<any>) {
     if (this.selectedRole == 'Mitarbeiter_in') {
       if (event.previousContainer === event.container) {
-        console.log('bewegt');
         moveItemInArray(
           event.container.data,
           event.previousIndex,
           event.currentIndex
         );
       } else {
-        console.log('bewegt todo');
         transferArrayItem(
           event.previousContainer.data,
           event.container.data,
@@ -209,7 +207,6 @@ export class TodoComponent implements OnInit {
         );
       } else {
         this.changedOrder.emit(true);
-        console.log('bewegt doing');
         transferArrayItem(
           event.previousContainer.data,
           event.container.data,
@@ -245,7 +242,6 @@ export class TodoComponent implements OnInit {
         );
       } else {
         this.changedOrder.emit(true);
-        console.log('bewegt done');
         transferArrayItem(
           event.previousContainer.data,
           event.container.data,
@@ -265,11 +261,7 @@ export class TodoComponent implements OnInit {
       data: { _id: idDialog },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-      console.log('test');
-      console.log('dialog result' + result);
       if (result.event == 'Delete') {
-        console.log('yes selected');
         this.decision = 'yes';
         this.result.emit(this.decision);
       }

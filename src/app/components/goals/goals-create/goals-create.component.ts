@@ -147,7 +147,6 @@ export class GoalsCreateComponent implements OnInit {
     if (this.currentUrl == '/') {
       this.showGoals(this.idloggedInUser);
     } else {
-      console.log('22222');
       this.idMember = this.route.snapshot.paramMap.get('id');
 
       this.showGoals(this.idMember);
@@ -180,7 +179,6 @@ export class GoalsCreateComponent implements OnInit {
       const first = await this.getNumberAllTasksDone(res[i]._id);
       second = await this.getNumberAllTasks(res[i]._id);
 
-      console.log('index = ' + i + ' all :' + second + ', done: ' + first);
 
       this.progress = (first / second) * 100;
 
@@ -213,7 +211,6 @@ export class GoalsCreateComponent implements OnInit {
 
   drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
-      console.log('drop aufgerufen');
       moveItemInArray(
         event.container.data,
         event.previousIndex,

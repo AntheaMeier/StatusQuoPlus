@@ -12,7 +12,8 @@ export class RoleGuard implements CanActivate {
     console.log('AUTH GUARD: ', this.auth.getUserDetails());
     if (this.auth.getUserDetails().role == 'Vorgesetzte_r') {
       return true;
-    } else {
+    }
+    else {
       this.router.navigate(['/notfound']);
       return false;
     }
