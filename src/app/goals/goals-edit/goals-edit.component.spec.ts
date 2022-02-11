@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GoalsEditComponent } from './goals-edit.component';
-import {MatDialogModule} from "@angular/material/dialog";
+import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {MockModule} from "ng-mocks";
 
 describe('GoalsEditComponent', () => {
@@ -10,7 +10,7 @@ describe('GoalsEditComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ GoalsEditComponent ],
-      imports: [MockModule(MatDialogModule)]
+      imports: [MockModule(MatDialogModule), MockModule(MatDialogRef)]
     })
     .compileComponents();
   });

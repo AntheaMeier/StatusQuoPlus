@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {MatDialog} from "@angular/material/dialog";
 import { GoalsCreateComponent } from './goals-create.component';
+import {MockModule} from "ng-mocks";
+import {Router} from "@angular/router";
 
 describe('GoalsComponent', () => {
   let component: GoalsCreateComponent;
@@ -8,7 +10,9 @@ describe('GoalsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GoalsCreateComponent ]
+      declarations: [ GoalsCreateComponent ],
+      imports: [MockModule(MatDialog)]
+
     })
     .compileComponents();
   });

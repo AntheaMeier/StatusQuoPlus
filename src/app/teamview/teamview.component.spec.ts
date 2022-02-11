@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TeamviewComponent } from './teamview.component';
+import {MockModule} from "ng-mocks";
+import {MatDialogModule} from "@angular/material/dialog";
+import {Router} from "@angular/router";
 
 describe('TeamviewComponent', () => {
   let component: TeamviewComponent;
@@ -8,7 +11,9 @@ describe('TeamviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TeamviewComponent ]
+      declarations: [ TeamviewComponent ],
+      imports: [MockModule(Router)]
+
     })
     .compileComponents();
   });

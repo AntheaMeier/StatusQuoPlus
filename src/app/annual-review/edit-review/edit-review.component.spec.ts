@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EditReviewComponent } from './edit-review.component';
+import {MockModule} from "ng-mocks";
+import {MatDialogModule} from "@angular/material/dialog";
 
 describe('EditReviewComponent', () => {
   let component: EditReviewComponent;
@@ -8,7 +9,8 @@ describe('EditReviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditReviewComponent ]
+      declarations: [ EditReviewComponent ],
+      imports: [MockModule(MatDialogModule)]
     })
     .compileComponents();
   });

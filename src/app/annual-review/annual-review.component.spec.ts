@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AnnualReviewComponent } from './annual-review.component';
+import {MockModule} from "ng-mocks";
+import {HttpClient} from "@angular/common/http";
 
 describe('AnnualReviewComponent', () => {
   let component: AnnualReviewComponent;
@@ -8,7 +10,9 @@ describe('AnnualReviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AnnualReviewComponent ]
+      declarations: [ AnnualReviewComponent ],
+      imports: [MockModule(HttpClient)]
+
     })
     .compileComponents();
   });
