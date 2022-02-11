@@ -65,7 +65,8 @@
     [cdkDropListData]="tasksToDoing"
     class="example-list"
     (cdkDropListDropped)="dropInDoing($event)">
-    <mat-card class="main-card">DOING
+    <mat-card class="main-card">
+      <div class="span-title">DOING</div>
         <mat-card
           class="task-card"
           *ngFor="let task of tasksToDoing"
@@ -92,7 +93,8 @@
     [cdkDropListData]="tasksToDone"
     class="example-list"
     (cdkDropListDropped)="dropInDone($event)">
-    <mat-card class="main-card">DONE
+    <mat-card class="main-card">
+      <div class="span-title">DONE</div>
         <mat-card
           class="task-card"
           *ngFor="let task of tasksToDone"

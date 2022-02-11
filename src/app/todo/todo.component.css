@@ -38,6 +38,11 @@
 }
 
 
+.span-title{
+  margin-bottom: 1.0em;
+}
+
+
 
 
 
@@ -62,7 +67,7 @@
 .task-card {
   background-color: white;
   box-shadow: none;
-  margin-bottom: 2%;
+  margin-bottom: 1.0em;
   padding: 2%;
   color: #857971;
   word-wrap: break-word;
