@@ -57,7 +57,7 @@ export class ListReviewsComponent implements OnInit {
         this.isLoadingResults = false;
       }
     );
-    this.idloggedInUser = this.auth.getUserDetails().user_info._id;
+    this.idloggedInUser = this.auth.getUserDetails()._id;
     if (this.selectedRole != 'Vorgesetzte_r') {
       this.getReviewDetails(this.idloggedInUser);
     }

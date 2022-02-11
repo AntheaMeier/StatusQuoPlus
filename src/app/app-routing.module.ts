@@ -8,6 +8,7 @@ import {NotFoundComponent} from "./not-found/not-found.component";
 import {TeamviewComponent} from "./teamview/teamview.component";
 import {LoginComponent} from "./login/login.component";
 
+
 const routes: Routes = [
 
   {
@@ -24,6 +25,8 @@ const routes: Routes = [
     component: NotFoundComponent,
     canActivate: [AuthGuardService]
   },
+
+
 
   {
     path: 'teamview/:id',

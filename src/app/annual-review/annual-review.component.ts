@@ -45,6 +45,8 @@ export class AnnualReviewComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
     this.currentUrl = this.router.url;
 
     if (this.currentUrl != '/protokolle') {
@@ -61,7 +63,8 @@ export class AnnualReviewComponent implements OnInit {
         this.isLoadingResults = false;
       }
     );
-    this.idloggedInUser = this.auth.getUserDetails().user_info._id;
+
+    this.idloggedInUser = this.auth.getUserDetails()._id;
   }
   reloadCurrentRoute() {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

@@ -81,7 +81,7 @@ export function playerFactory() {
     NotFoundComponent,
     TeamviewComponent,
     EditReviewComponent,
-    TodoEditComponent,
+    TodoEditComponent
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),

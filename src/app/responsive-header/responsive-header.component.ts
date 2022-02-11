@@ -97,11 +97,12 @@ export class ResponsiveHeaderComponent {
         this.isLoadingResults = false;
       }
     );
-    this.firstNameloggedInUser = this.auth.getUserDetails().user_info.firstname;
-    this.lastNameloggedInUser = this.auth.getUserDetails().user_info.surname;
-    this.roleLoggedInUser = this.auth.getUserDetails().user_info.role;
-    this.idLoggedInUser = this.auth.getUserDetails().user_info._id;
-    this.roleLoggedInUser = this.auth.getUserDetails().user_info.role;
+
+    this.firstNameloggedInUser = this.auth.getUserDetails().firstname;
+    this.lastNameloggedInUser = this.auth.getUserDetails().surname;
+    this.roleLoggedInUser = this.auth.getUserDetails().role;
+    this.idLoggedInUser = this.auth.getUserDetails()._id;
+    this.roleLoggedInUser = this.auth.getUserDetails().role;
 
     this.api.getUser(this.idLoggedInUser).subscribe(
       (res: LoginData) => {

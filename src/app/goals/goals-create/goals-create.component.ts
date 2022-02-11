@@ -143,7 +143,7 @@ export class GoalsCreateComponent implements OnInit {
         this.isLoadingResults = false;
       }
     );
-    this.idloggedInUser = this.auth.getUserDetails().user_info._id;
+    this.idloggedInUser = this.auth.getUserDetails()._id;
     if (this.currentUrl == '/') {
       this.showGoals(this.idloggedInUser);
     } else {

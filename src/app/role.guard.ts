@@ -10,7 +10,7 @@ export class RoleGuard implements CanActivate {
 
   canActivate(): boolean {
     console.log('AUTH GUARD: ', this.auth.getUserDetails());
-    if (this.auth.getUserDetails().user_info.role == 'Vorgesetzte_r') {
+    if (this.auth.getUserDetails().role == 'Vorgesetzte_r') {
       return true;
     } else {
       this.router.navigate(['/notfound']);
