@@ -5,11 +5,7 @@
      (cdkDropListDropped)="drop($event)">
   <mat-card class="goalsCard">
     <p>ZIELE
-      <button *ngIf="selectedRole == 'Mitarbeiter_in'" (click)="addPostForm()" class="bttn icon-display">
-        <span>
-          <span class="icon-display">+</span>
-        </span>
-      </button>
+      <button *ngIf="selectedRole == 'Mitarbeiter_in'" class="bttn icon-display" style="font-size: 23px" (click)="addPostForm()">+</button>
     </p>
     <div *ngIf="goalsToOneUser.length == 0" class="description-styling">
       <p>Du hast noch keine Ziele</p>

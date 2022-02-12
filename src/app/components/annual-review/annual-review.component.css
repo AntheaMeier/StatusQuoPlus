@@ -49,3 +49,27 @@ input {
 ::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline-thick {
   color: #0071B9 !important;
 }
+
+.bttn {
+  transition: 1s ease-in-out;
+  outline: none;
+  border: 1px solid #0071B9;
+  margin: 1%;
+  padding: 7px 12px 9px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 12px;
+  background: transparent;
+  color: #857971;
+  font-weight: 100;
+  font-size: 23px;
+}
+
+.bttn:hover {
+  transition: 1s ease-in-out;
+  background: #0071B9;
+  opacity: 0.4;
+  color: white;
+}
