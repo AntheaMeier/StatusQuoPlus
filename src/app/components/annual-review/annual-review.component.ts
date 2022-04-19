@@ -32,8 +32,8 @@ export class AnnualReviewComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private dateAdapter: DateAdapter<Date>
-  ) {
+    private dateAdapter: DateAdapter<Date>)
+  {
     this.currentUrl = router.url;
     console.log(this.currentUrl);
     this.dateAdapter.setLocale('de');
