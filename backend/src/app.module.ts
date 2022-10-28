@@ -16,8 +16,8 @@ import { ReviewsModule } from './reviews/reviews.module';
     TasksModule,
     ReviewsModule,
     MongooseModule.forRoot(
-      'mongodb+srv://Adso2:hallo@cluster0.kuzro.mongodb.net/statusquo-db?retryWrites=true&w=majority',
-    ),
+      'mongodb+srv://ela:elaElaela@cluster0.brai3fu.mongodb.net/statusquoplus?retryWrites=true&w=majority',
+      ),
   ],
   controllers: [AppController],
   providers: [AppService],
