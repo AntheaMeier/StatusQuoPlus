@@ -60,6 +60,7 @@ import {EditReviewComponent} from './components/annual-review/edit-review/edit-r
 import {RouterModule} from "@angular/router";
 import {RoleGuard} from "./guards/role.guard";
 import { TodoEditComponent } from './components/todo/todo-edit/todo-edit.component';
+import {NgxTranslateModule} from "./translate/ngx-translate.module";
 
 export function playerFactory() {
   return import('lottie-web');
@@ -132,6 +133,7 @@ export function playerFactory() {
     PortalModule,
     MatTabsModule,
     CdkAccordionModule,
+    NgxTranslateModule,
   ],
   exports: [
     MatInputModule,

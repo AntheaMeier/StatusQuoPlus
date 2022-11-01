@@ -1,29 +1,29 @@
 <div class='row style' *ngIf='!this.isLogin'>
-  <h3 class="headline">LOGIN</h3>
+  <h3 class="headline">{{ 'Login.login' | translate }}</h3>
   <form class="style2 col-lg" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class='form-group'>
       <input (keypress)="removeErrorMessage()" (keydown.backspace)="removeErrorMessage()" class='form-control'
-             type="text" formControlName="username" name="username" placeholder="Username"
+             type="text" formControlName="username" name="username" placeholder="{{ 'Login.benutzername' | translate }}"
              [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
       <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-        <div *ngIf="f.username.errors">Username is required</div>
+        <div *ngIf="f.username.errors">{{ 'Login.benutzernamePflicht' | translate }}</div>
       </div>
     </div>
     <div class='form-group'>
       <input (keypress)="removeErrorMessage()" (keydown.backspace)="removeErrorMessage()" class='form-control'
-             type="password" formControlName="password" name="password" placeholder="Password"
+             type="password" formControlName="password" name="password" placeholder="{{ 'Login.passwort' | translate }}"
              [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
       <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-        <div *ngIf="f.password.errors">Password is required</div>
+        <div *ngIf="f.password.errors">{{ 'Login.passwortPflicht' | translate }}</div>
       </div>
     </div>
     <mat-error *ngIf="loginInvalid">
-      The username and password were not recognized
+      {{ 'Login.nichtGefunden' | translate }}
     </mat-error>
     <div align="center">
       <button class='buttonLogin btn btn-outline-secondary'
               mat-raised-button *ngIf=true matSuffix
-              type="submit">Login
+              type="submit">{{ 'Login.login' | translate }}
       </button>
     </div>
   </form>

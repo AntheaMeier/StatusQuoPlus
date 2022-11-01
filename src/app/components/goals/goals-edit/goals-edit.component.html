@@ -1,18 +1,25 @@
-<h1>Hier kannst du dein Ziel bearbeiten:</h1>
+<h1>{{ 'Ziele.bearbeiten' | translate }}</h1>
 <div mat-dialog-content>
   <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
     <mat-form-field appearance="outline">
-      <input [(ngModel)]="enteredValue" matInput placeholder="mein Ziel" formControlName="description"
+      <input [(ngModel)]="enteredValue" matInput placeholder="{{ 'Ziele.deinZiel' | translate }}" formControlName="description"
              value="">
       <mat-error>
-        <span>Bitte gib eine Beschreibung ein</span>
+        <span>{{ 'Ziele.eingabeBeschreibung' | translate }}</span>
       </mat-error>
     </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions>
   <form [formGroup]="articleForm">
-    <button mat-button (click)="onNoClick()">Abbrechen</button>
-    <button class="save-button" mat-button (keyup.enter)="onFormSubmit()" (click)="onFormSubmit()" type="submit" [disabled]="!articleForm.valid">Speichern</button>
+    <button mat-button (click)="onNoClick()">{{ 'Button.abbrechen' | translate }}</button>
+    <button class="save-button"
+            mat-button
+            (keyup.enter)="onFormSubmit()"
+            (click)="onFormSubmit()"
+            type="submit"
+            [disabled]="!articleForm.valid">
+      {{ 'Button.speichern' | translate }}
+    </button>
   </form>
 </div>

@@ -1,8 +1,8 @@
 <mat-tab-group>
-  <mat-tab label="PROTOKOLLE">
+  <mat-tab label="{{ 'Protokolle.protokolle' | translate }}">
     <app-annual-review [selectedRole]="selectedRole" [reviewsToOneUser]="reviewsToOneUser" [idTeamMember]="idMember"></app-annual-review>
   </mat-tab>
-  <mat-tab label="ZIELE">
+  <mat-tab label="{{ 'Ziele.ziele' | translate }}">
     <app-goals [selectedRole]="selectedRole" [idMember]="idMember" [goalsToOneUser]="goalsToOneUser"></app-goals>
   </mat-tab>
   <mat-tab class="name-styling" [disabled]="true" [label]="this.firstname + ' ' + this.surname"></mat-tab>

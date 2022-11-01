@@ -1,13 +1,17 @@
-<h1>Willst du dieses Protokoll wirklich Löschen?</h1>
+<h1>{{ 'Protokolle.loeschen' | translate}}</h1>
 <div mat-dialog-content>
   <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
   </form>
 </div>
 <div mat-dialog-actions>
   <form [formGroup]="articleForm" (keyup.enter)="onFormSubmit()">
-    <button mat-button (click)="onNoClick()">Abbrechen</button>
-    <button (click)="onFormSubmit()" type="submit" [disabled]="!articleForm.valid" mat-button class="delete-button">
-      Löschen
+    <button mat-button (click)="onNoClick()">{{ 'Button.abbrechen' | translate}}</button>
+    <button (click)="onFormSubmit()"
+            type="submit"
+            [disabled]="!articleForm.valid"
+            mat-button
+            class="delete-button">
+      {{ 'Button.loeschen' | translate}}
     </button>
   </form>
 </div>

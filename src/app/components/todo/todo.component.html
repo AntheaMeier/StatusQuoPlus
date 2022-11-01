@@ -6,7 +6,7 @@
     class="example-list"
     (cdkDropListDropped)="dropInTodo($event)">
     <mat-card class="main-card">
-      <p>TODO
+      <p>{{ 'Tasks.todo' | translate }}
         <button (click)="addPostForm()" *ngIf="selectedRole == 'Mitarbeiter_in'" class="bttn icon-display" style="font-size: 23px">+</button>
       </p>
       <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true" style="background-color: white; margin-bottom: 1.0em;">
@@ -17,15 +17,15 @@
             matInput rows="6"
             name="content"
             required
-            placeholder="Deine Task"
+            placeholder="{{ 'Tasks.deineTask' | translate }}"
             #content="ngModel">
           </textarea>
-          <mat-error *ngIf="content.invalid">Bitte gib eine Beschreibung ein</mat-error>
+          <mat-error *ngIf="content.invalid">{{ 'Tasks.eingabeBeschreibung' | translate }}</mat-error>
         </mat-form-field>
         <mat-action-row style="background-color: white">
           <button
             style="color: white; background-color: #0071B9" mat-raised-button *ngIf=true matSuffix
-            type="submit" (click)=addTask(goalid)>Speichern
+            type="submit" (click)=addTask(goalid)>{{ 'Button.speichern' | translate }}
           </button>
         </mat-action-row>
       </mat-expansion-panel>
@@ -51,7 +51,7 @@
     class="example-list"
     (cdkDropListDropped)="dropInDoing($event)">
     <mat-card class="main-card">
-      <div class="span-title">DOING</div>
+      <div class="span-title">{{ 'Tasks.doing' | translate }}</div>
       <mat-card
         class="task-card"
         *ngFor="let task of tasksToDoing"
@@ -74,7 +74,7 @@
     class="example-list"
     (cdkDropListDropped)="dropInDone($event)">
     <mat-card class="main-card">
-      <div class="span-title">DONE</div>
+      <div class="span-title">{{ 'Tasks.done' | translate }}</div>
       <mat-card
         class="task-card"
         *ngFor="let task of tasksToDone"
