@@ -1,4 +1,4 @@
-<mat-card class="reviewsCard">UNTERJAEHRIGER AUSTAUSCH
+<mat-card class="reviewsCard"> {{ 'Protokolle.unterjaehrigerAustausch' | translate }}
   <button *ngIf="selectedRole == 'Vorgesetzte_r'" class="bttn icon-display" (click)="addPostForm()">+</button>
   <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true">
     <mat-expansion-panel-header style="background-color: #E8E4E1">
@@ -14,7 +14,7 @@
           #date="ngModel">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="date.invalid">Bitte gib ein Datum ein</mat-error>
+        <mat-error *ngIf="date.invalid">{{ 'Warnung.datumEingeben' | translate }}</mat-error>
       </mat-form-field>
     </mat-expansion-panel-header>
     <mat-form-field appearance="outline" style="white-space: pre-wrap;">
@@ -24,10 +24,10 @@
           matInput rows="6"
           name="content"
           required
-          placeholder="Notizen zum unterjaehrigen Austausch"
+          placeholder="{{'Vorschau.notizEingeben' | translate}}"
           #content="ngModel">
         </textarea>
-      <mat-error *ngIf="content.invalid">Bitte gib Notizen ein</mat-error>
+      <mat-error *ngIf="content.invalid">{{'Warnung.notizEingeben' | translate}}</mat-error>
     </mat-form-field>
     <mat-action-row>
       <button mat-raised-button *ngIf=true matSuffix type="submit" (click)=onAddPost(idloggedInUser)>Speichern</button>

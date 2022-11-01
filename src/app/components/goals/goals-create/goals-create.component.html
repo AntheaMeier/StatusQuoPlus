@@ -4,11 +4,11 @@
      class="example-list"
      (cdkDropListDropped)="drop($event)">
   <mat-card class="goalsCard">
-    <p>ZIELE
+    <p>{{ 'Ziele.ziele' | translate }}
       <button *ngIf="selectedRole == 'Mitarbeiter_in'" class="bttn icon-display" style="font-size: 23px" (click)="addPostForm()">+</button>
     </p>
     <div *ngIf="goalsToOneUser.length == 0" class="description-styling">
-      <p>Du hast noch keine Ziele</p>
+      <p>{{ 'Ziele.nichtVorhanden' | translate}}</p>
     </div>
     <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true">
       <mat-form-field appearance="outline" style="white-space: pre-wrap;">
@@ -18,10 +18,10 @@
           matInput rows="6"
           name="content"
           required
-          placeholder="Dein Ziel"
+          placeholder="{{ 'Ziele.deinZiel' | translate}}"
           #content="ngModel">
         </textarea>
-        <mat-error *ngIf="content.invalid">Bitte gib eine Beschreibung ein</mat-error>
+        <mat-error *ngIf="content.invalid">{{ 'Ziele.eingabeBeschreibung' | translate}}</mat-error>
       </mat-form-field>
       <mat-action-row>
         <button

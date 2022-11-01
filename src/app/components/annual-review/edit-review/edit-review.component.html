@@ -1,4 +1,4 @@
-<h1>Hier kannst du dein Protokoll bearbeiten:</h1>
+<h1>{{ 'Protokolle.bearbeiten' | translate}}</h1>
 <div mat-dialog-content>
   <form [formGroup]="reviewForm" (ngSubmit)="onFormSubmit()">
     <mat-form-field appearance="outline" style="display: unset;">
@@ -12,15 +12,20 @@
           formControlName="description"
           ></textarea>
       <mat-error>
-        <span>Bitte gib eine Beschreibung ein</span>
+        <span>{{ 'Protokolle.eingabeBeschreibung' | translate}}</span>
       </mat-error>
     </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions>
   <form [formGroup]="reviewForm">
-    <button mat-button (click)="onNoClick()">Abbrechen</button>
-    <button mat-button class="save-button" (keyup.enter)="onFormSubmit()" (click)="onFormSubmit()" type="submit" [disabled]="!reviewForm.valid">Speichern
+    <button mat-button (click)="onNoClick()">{{ 'Button.abbrechen' | translate}}</button>
+    <button mat-button class="save-button"
+            (keyup.enter)="onFormSubmit()"
+            (click)="onFormSubmit()"
+            type="submit"
+            [disabled]="!reviewForm.valid">
+      {{ 'Button.speichern' | translate}}
     </button>
   </form>
 </div>
