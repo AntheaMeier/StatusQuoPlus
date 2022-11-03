@@ -7,7 +7,7 @@
     <mat-toolbar>Menü</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item *ngIf="(loginData$ | async)" (click)="goToGoals(idLoggedInUser, 'Mitarbeiter_in')">
-        <div class="sidenav-text" *ngIf="(loginData$ | async)">{{ 'Ziele.ziele' | translate }}</div>
+        <div class="sidenav-text" *ngIf="(loginData$ | async)">{{ 'Ziele.ziele' | translate }} / {{ 'Erfolge.erfolge' | translate }}</div>
       </a>
       <a mat-list-item *ngIf="(loginData$ | async)" (click)="deleteSelectedGoalFromLocalStorage()"
          [routerLink]="'/protokolle'">
@@ -50,7 +50,7 @@
       {{ 'Titel.titel' | translate }}
     </span>
     <div class="nav-element" (click)="changeRoleToMitarbeiter_in()">
-      <div class="element-text" *ngIf="(loginData$ | async)">{{ 'Ziele.ziele' | translate }}</div>
+      <div class="element-text" *ngIf="(loginData$ | async)">{{ 'Ziele.ziele' | translate }} / {{ 'Erfolge.erfolge' | translate }}</div>
     </div>
     <div class="nav-element " (click)="deleteSelectedGoalFromLocalStorage()" (click)="clickProtokoll()">
       <div class="element-text" routerLink="protokolle" *ngIf="(loginData$ | async)">{{ 'Protokolle.protokolle' | translate }}</div>

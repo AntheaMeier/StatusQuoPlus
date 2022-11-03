@@ -61,6 +61,8 @@ import {RouterModule} from "@angular/router";
 import {RoleGuard} from "./guards/role.guard";
 import { TodoEditComponent } from './components/todo/todo-edit/todo-edit.component';
 import {NgxTranslateModule} from "./translate/ngx-translate.module";
+import { OverviewComponent } from './components/overview/overview.component';
+import { SuccessesComponent } from './components/successes/successes.component';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -82,7 +84,9 @@ export function playerFactory() {
     NotFoundComponent,
     TeamviewComponent,
     EditReviewComponent,
-    TodoEditComponent
+    TodoEditComponent,
+    OverviewComponent,
+    SuccessesComponent
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),

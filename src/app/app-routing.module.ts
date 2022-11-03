@@ -7,11 +7,12 @@ import {RoleGuard} from "./guards/role.guard";
 import {NotFoundComponent} from "./components/not-found/not-found.component";
 import {TeamviewComponent} from "./components/teamview/teamview.component";
 import {LoginComponent} from "./components/login/login.component";
+import { OverviewComponent } from './components/overview/overview.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: GoalsCreateComponent,
+    component: OverviewComponent,
     canActivate: [AuthGuardService]
   },
   {
