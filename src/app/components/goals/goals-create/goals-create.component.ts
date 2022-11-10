@@ -28,7 +28,7 @@ export class GoalsCreateComponent implements OnInit {
   addPost = false;
   enteredContent = '';
   lel: any = '';
-  goal: Goals = {_id: '', description: '', order: '', userid: ''};
+  goal: Goals = {_id: '', description: '', order: '', userid: '', completed: false};
 
   user: LoginData = {
     id: '',
@@ -46,7 +46,7 @@ export class GoalsCreateComponent implements OnInit {
   idDialog: any = '';
   tasksToOneGoal: Tasks[] = [];
   editableId: String = '';
-  selectedGoal: Goals = {_id: '', description: '', order: '', userid: ''};
+  selectedGoal: Goals = {_id: '', description: '', order: '', userid: '', completed: false};
   showTasksToOneGoal = false;
   newTask: Tasks = {goalid: '', _id: '', description: '', status: ''};
   deleteTodo: String = '';
@@ -169,7 +169,22 @@ export class GoalsCreateComponent implements OnInit {
       second = await this.getNumberAllTasks(res[i]._id);
       this.progress = (first / second) * 100;
       this.progressArray.push(this.progress);
+      if (second == first && second > 0) {
+        this.setGoalCompleted(res[i]);
+      }
     }
+  }
+
+  setGoalCompleted(goal: Goals) {
+    goal.completed = true;
+    this.api.updateGoal(goal._id, goal).subscribe(
+      (res) => {
+        console.log('goal completed');
+      },
+      (error) => {
+        console.log(error);
+      });
+
   }
 
   async getNumberAllTasks(goalid: String): Promise<number> {
@@ -242,6 +257,7 @@ export class GoalsCreateComponent implements OnInit {
     simpleObject.description = this.enteredContent;
     simpleObject.userid = id;
     simpleObject.order = '' + (this.goalsToOneUser.length + 1);
+    simpleObject.completed = false;
 
     this.api.addGoal(simpleObject).subscribe(
       (res: any) => {
