@@ -3,5 +3,5 @@ export interface Goals {
   description: string;
   order: string;
   userid: string;
-  date: string;
+  expiry_date: string;
 }
