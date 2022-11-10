@@ -10,6 +10,7 @@
     <div *ngIf="goalsToOneUser.length == 0" class="description-styling">
       <p>{{ 'Ziele.nichtVorhanden' | translate}}</p>
     </div>
+
     <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true">
       <mat-form-field appearance="outline" style="white-space: pre-wrap;">
         <textarea
@@ -23,6 +24,25 @@
         </textarea>
         <mat-error *ngIf="content.invalid">{{ 'Ziele.eingabeBeschreibung' | translate}}</mat-error>
       </mat-form-field>
+
+      <!-- Datumseingabe -->
+      <mat-form-field class="col-md-12">
+        <input
+          readonly='true'
+          matInput [matDatepicker]="picker"
+          [(ngModel)]="enteredDate"
+          id="dateEntry"
+          name="date"
+          required
+          placeholder="Fälligkeitsdatum festlegen"
+          #date="ngModel">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <!-- <mat-error *ngIf="date.invalid">{{ 'Warnung.datumEingeben' | translate }}</mat-error> -->
+      </mat-form-field>
+      <!-- Datumseingabe Ende -->
+
+
       <mat-action-row>
         <button
           style="color: white; background-color: #0071B9" mat-raised-button *ngIf=true matSuffix
@@ -30,6 +50,9 @@
         </button>
       </mat-action-row>
     </mat-expansion-panel>
+
+    
+
     <div
       class="example-accordion-item-header test"
       (click)="setTheSelectedGoal(goal)"

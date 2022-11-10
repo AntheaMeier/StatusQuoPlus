@@ -21,6 +21,7 @@ export class GoalsCreateComponent implements OnInit {
   editable = false;
   data: Goals[] = [];
   dataUser = {userid: '', selectedRole: ''};
+  enteredDate!: string;
   isLoadingResults = true;
   description = '';
   id = '';
@@ -28,7 +29,8 @@ export class GoalsCreateComponent implements OnInit {
   addPost = false;
   enteredContent = '';
   lel: any = '';
-  goal: Goals = {_id: '', description: '', order: '', userid: ''};
+  goal: Goals = {_id: '', description: '', order: '', userid: '', date: ''};
+  /* date hinzugefügt in Zeile drüber */
 
   user: LoginData = {
     id: '',
@@ -46,7 +48,7 @@ export class GoalsCreateComponent implements OnInit {
   idDialog: any = '';
   tasksToOneGoal: Tasks[] = [];
   editableId: String = '';
-  selectedGoal: Goals = {_id: '', description: '', order: '', userid: ''};
+  selectedGoal: Goals = {_id: '', description: '', order: '', userid: '', date: ''};
   showTasksToOneGoal = false;
   newTask: Tasks = {goalid: '', _id: '', description: '', status: ''};
   deleteTodo: String = '';
