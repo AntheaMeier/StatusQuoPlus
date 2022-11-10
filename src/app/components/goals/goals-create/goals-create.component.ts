@@ -11,6 +11,7 @@ import {AuthService} from '../../../services/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BehaviorSubject} from 'rxjs';
 import {GoalsEditComponent} from '../goals-edit/goals-edit.component';
+import { GoalCompletedDialogComponent } from '../goal-completed-dialog/goal-completed-dialog.component';
 
 @Component({
   selector: 'app-goals',
@@ -142,7 +143,7 @@ export class GoalsCreateComponent implements OnInit {
       this.showGoals(this.idMember);
     }
 
-    this.api.getGoalsToUser(this.idloggedInUser).subscribe(
+    this.api.getGoalsToUser(this.idloggedInUser, false).subscribe(
       (res: any) => {
         this.goalsToOneUser = res;
         this.isLoadingResults = false;
@@ -179,6 +180,7 @@ export class GoalsCreateComponent implements OnInit {
     goal.completed = true;
     this.api.updateGoal(goal._id, goal).subscribe(
       (res) => {
+        this.openGoalCompletedDialog(goal._id, goal.description);
         console.log('goal completed');
       },
       (error) => {
@@ -235,7 +237,7 @@ export class GoalsCreateComponent implements OnInit {
   }
 
   showGoals(id: any) {
-    this.api.getGoalsToUser(id).subscribe(
+    this.api.getGoalsToUser(id, false).subscribe(
       (res: any) => {
         this.goalsToOneUser = res;
         this.isLoadingResults = false;
@@ -371,6 +373,17 @@ export class GoalsCreateComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.ngOnInit();
+    });
+  }
+
+  openGoalCompletedDialog(id: any, desc: string): void {
+    this.idDialog = id;
+    const dialogRef = this.dialog.open(GoalCompletedDialogComponent, {
+      width: '50%',
+      data: {id: this.idDialog, description: desc},
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      window.location.reload();
     });
   }
 

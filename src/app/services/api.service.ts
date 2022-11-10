@@ -119,8 +119,8 @@ export class ApiService {
     );
   }
 
-  getGoalsToUser(id: any): Observable<Goals[]> {
-    return this.http.get<Goals[]>(`${apiUrlUsersForGoal}/${id}`).pipe(
+  getGoalsToUser(id: any, completed: boolean): Observable<Goals[]> {
+    return this.http.get<Goals[]>(`${apiUrlUsersForGoal}/${id}/${completed}`).pipe(
       tap((goal) => console.log('fetched goals for user')),
       catchError(this.handleError('getUsersForGoal', []))
     );

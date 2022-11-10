@@ -64,11 +64,11 @@ export class GoalsService {
     console.log(result);
   }
 
-  async getGoalsToUser (userid: string){
+  async getGoalsToUser (userid: string, completed: boolean){
     let goals;
 
     try{
-      goals = await this.goalModel.find( { userid: userid } )
+      goals = await this.goalModel.find( { userid: userid, completed: completed } )
     }
     catch(error){
       throw new NotFoundException('Could not find task')

@@ -66,12 +66,13 @@ export class GoalsController {
     return null;
   }
 
-  @Get('user/:userid')
+  @Get('user/:userid/:completed')
   async getAllGoalsToUser(
     @Param('userid') userid: string,
+    @Param('completed') completed: boolean,
 
   ){
-    const goals = await this.goalsService.getGoalsToUser(userid);
+    const goals = await this.goalsService.getGoalsToUser(userid, completed);
     return goals;
   }
 }
