@@ -50,7 +50,7 @@
       </mat-action-row>
     </mat-expansion-panel>
 
-    
+
 
     <div
       class="example-accordion-item-header test"
@@ -75,11 +75,9 @@
               <mat-icon class="button-styling" (click)="openDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">edit</mat-icon>
               <mat-icon class="button-styling" (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">delete_outline</mat-icon>
             </span>
-            <!-- Fälligkeitsdatums - Anzeige in der Übersicht US4.4 -->
-            <mat-expansion-panel-header style="color: #857971; background-color: #E8E4E1">
-              {{ enteredExpiryDate }}
-            </mat-expansion-panel-header>
-      <!-- Fälligkeitsdatums - Anzeige in der Übersicht US4.4 - Ende -->
+            </mat-card>
+          <mat-card *ngIf="goal.expiry_date != null">
+            {{ goal.expiry_date }}
           </mat-card>
         </mat-expansion-panel-header>
         <div class="test" *ngIf="goal._id == showGoalid">

@@ -244,6 +244,7 @@ export class GoalsCreateComponent implements OnInit {
     simpleObject.description = this.enteredContent;
     simpleObject.userid = id;
     simpleObject.order = '' + (this.goalsToOneUser.length + 1);
+    simpleObject.expiry_date = this.enteredExpiryDate;
 
     this.api.addGoal(simpleObject).subscribe(
       (res: any) => {
