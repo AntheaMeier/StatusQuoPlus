@@ -21,7 +21,7 @@ export class GoalsCreateComponent implements OnInit {
   editable = false;
   data: Goals[] = [];
   dataUser = {userid: '', selectedRole: ''};
-  enteredDate!: string;
+  enteredExpiryDate!: string;
   isLoadingResults = true;
   description = '';
   id = '';

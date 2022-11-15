@@ -25,12 +25,12 @@
         <mat-error *ngIf="content.invalid">{{ 'Ziele.eingabeBeschreibung' | translate}}</mat-error>
       </mat-form-field>
 
-      <!-- Datumseingabe -->
-      <mat-form-field appearance="fill"> <!-- war: <mat-form-field class="col-md-12"> -->
+      <!-- Fälligkeitsdatum US4.3 -->
+      <mat-form-field appearance="fill"> <!-- ist bei den annual reviews: <mat-form-field class="col-md-12"> -->
         <input
           readonly='true'
           matInput [matDatepicker]="picker"
-          [(ngModel)]="enteredDate"
+          [(ngModel)]="enteredExpiryDate"
           id="dateEntry"
           name="date"
           required='false'
@@ -38,9 +38,8 @@
           #date="ngModel">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-        <!-- <mat-error *ngIf="date.invalid">{{ 'Warnung.datumEingeben' | translate }}</mat-error> -->
       </mat-form-field>
-      <!-- Datumseingabe Ende -->
+      <!-- Fälligkeitsdatum US4.3 Ende -->
 
 
       <mat-action-row>
@@ -76,20 +75,11 @@
               <mat-icon class="button-styling" (click)="openDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">edit</mat-icon>
               <mat-icon class="button-styling" (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">delete_outline</mat-icon>
             </span>
-            <!-- Fälligkeitsdatums-Anzeige -->
-      <mat-form-field appearance="fill"> 
-        <input
-          readonly='true'
-          matInput [matDatepicker]="picker"
-          [(ngModel)]="enteredDate"
-          id="dateEntry"
-          name="date"
-          placeholder="Fälligkeitsdatum"
-          #date="ngModel">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <!-- Fälligkeitsdatums-Anzeige -->
+            <!-- Fälligkeitsdatums - Anzeige in der Übersicht US4.4 -->
+            <mat-expansion-panel-header style="color: #857971; background-color: #E8E4E1">
+              {{ enteredExpiryDate }}
+            </mat-expansion-panel-header>
+      <!-- Fälligkeitsdatums - Anzeige in der Übersicht US4.4 - Ende -->
           </mat-card>
         </mat-expansion-panel-header>
         <div class="test" *ngIf="goal._id == showGoalid">

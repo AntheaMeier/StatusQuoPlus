@@ -15,11 +15,13 @@ export class GoalsController {
 
   @Post()
   async addGoals(
+    @Body('expiry_date') goalExpiryDate: string,
     @Body('description') goalDesc: string,
     @Body('order') goalOrder: string,
     @Body('userid') goalUserid: string,
   ) {
     const generatedId = await this.goalsService.insertGoals(
+      goalExpiryDate,
       goalDesc,
       goalOrder,
       goalUserid,
@@ -41,10 +43,16 @@ export class GoalsController {
   @Patch(':id')
   async updateGoal(
     @Param('id') goalId: string,
+    @Body('expiry_date') goalExpiryDate: string,
     @Body('description') goalDesc: string,
     @Body('userid') goalUserid: string,
   ) {
-    await this.goalsService.updateGoal(goalId, goalDesc, goalUserid);
+    await this.goalsService.updateGoal(
+      goalId,
+      goalExpiryDate,
+      goalDesc,
+      goalUserid,
+    );
     return null;
   }
 
@@ -64,10 +72,7 @@ export class GoalsController {
   }
 
   @Get('user/:userid')
-  async getAllGoalsToUser(
-    @Param('userid') userid: string,
-
-  ){
+  async getAllGoalsToUser(@Param('userid') userid: string) {
     const goals = await this.goalsService.getGoalsToUser(userid);
     return goals;
   }
