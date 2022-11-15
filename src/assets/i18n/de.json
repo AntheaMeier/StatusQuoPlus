@@ -49,6 +49,8 @@
   "Button": {
     "abbrechen": "Abbrechen",
     "speichern": "Speichern",
-    "loeschen": "Löschen"
+    "loeschen": "Löschen",
+    "priorisieren": "Priorisieren",
+    "nichtPriorisieren": "Nicht Priorisieren"
   }
 }

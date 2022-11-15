@@ -30,15 +30,20 @@
         </button>
       </mat-action-row>
     </mat-expansion-panel>
+
     <div
       class="example-accordion-item-header test"
       (click)="setTheSelectedGoal(goal)"
       (click)="showTasks(goal._id)"
       (click)="setGoalsid(goal._id)"
       *ngFor="let goal of goalsToOneUser; let index = index">
-      <mat-expansion-panel cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" hideToggle class="panel-styling" [expanded]="showGoalid == goal._id">
+<!--      <mat-icon class="push-pin" *ngIf="goal.priority == true">push_pin</mat-icon>-->
+      <mat-expansion-panel #exppanel cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" hideToggle class="panel-styling" [expanded]="showGoalid == goal._id">
         <mat-expansion-panel-header class="panel-header-styling">
           <mat-card [ngStyle]="{'background-color':goal._id === showGoalid ? '#BFDCEE' : '#E8E4E1'}" class="goals-matcard">
+            <div *ngIf="goal.priority == true" class="star-container-styling">
+              <mat-icon class="star-styling" style="color: darkgoldenrod">star</mat-icon>
+            </div>
             <div class="description-styling">
               {{goal.description}}
             </div>
@@ -49,10 +54,29 @@
               mode="determinate"
               value="{{progressArray[index]}}">
             </mat-progress-bar>
-            <span class="span-styling">
-              <mat-icon class="button-styling" (click)="openDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">edit</mat-icon>
-              <mat-icon class="button-styling" (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">delete_outline</mat-icon>
-            </span>
+            <mat-panel-description>
+              <span class="span-styling">
+                <mat-icon class="button-styling" (click)="openDialog(goal._id); exppanel.toggle()"
+                          *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">edit</mat-icon>
+                <mat-icon [matMenuTriggerFor]="menu"
+                          (click)="exppanel.toggle()"
+                          class="button-styling"
+                          aria-label="Example icon-button with a menu"
+                          *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">more_vert</mat-icon>
+                <mat-menu #menu="matMenu">
+                  <button (click)="setPriorityTag(goal._id, goal)" mat-menu-item>
+                        <mat-icon
+                          [ngStyle]="{'color': goal.priority == true ? 'lightgray' : 'darkgoldenrod'}">star</mat-icon>
+                        <span *ngIf="!goal.priority">{{ 'Button.priorisieren' | translate }}</span>
+                        <span *ngIf="goal.priority">{{ 'Button.nichtPriorisieren' | translate }}</span>
+                      </button>
+                      <button (click)="deleteDialog(goal._id)" mat-menu-item>
+                        <mat-icon>delete_outline</mat-icon>
+                        <span style="color: red">{{ 'Button.loeschen' | translate }}</span>
+                      </button>
+                </mat-menu>
+              </span>
+            </mat-panel-description>
           </mat-card>
         </mat-expansion-panel-header>
         <div class="test" *ngIf="goal._id == showGoalid">

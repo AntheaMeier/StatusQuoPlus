@@ -28,7 +28,7 @@ export class GoalsCreateComponent implements OnInit {
   addPost = false;
   enteredContent = '';
   lel: any = '';
-  goal: Goals = {_id: '', description: '', order: '', userid: ''};
+  goal: Goals = {_id: '', description: '', order: '', userid: '',  priority: false};
 
   user: LoginData = {
     id: '',
@@ -46,7 +46,7 @@ export class GoalsCreateComponent implements OnInit {
   idDialog: any = '';
   tasksToOneGoal: Tasks[] = [];
   editableId: String = '';
-  selectedGoal: Goals = {_id: '', description: '', order: '', userid: ''};
+  selectedGoal: Goals = {_id: '', description: '', order: '', userid: '', priority: false};
   showTasksToOneGoal = false;
   newTask: Tasks = {goalid: '', _id: '', description: '', status: ''};
   deleteTodo: String = '';
@@ -67,7 +67,6 @@ export class GoalsCreateComponent implements OnInit {
   goalSelectedReload: any = '';
   tasksToTodo: Tasks[] = [];
   tasksToDoing: Tasks[] = [];
-  hehe: boolean = true;
   tasksToDone: Tasks[] = [];
   showGoalid = '';
   resid: String = '';
@@ -88,8 +87,7 @@ export class GoalsCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private auth: AuthService,
     private formBuilder: FormBuilder
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.currentUrl = this.router.url;
@@ -106,22 +104,14 @@ export class GoalsCreateComponent implements OnInit {
     }
 
     this.progressArray = [];
-    console.log('current url ' + this.currentUrl);
 
     if (this.currentUrl == '/') {
       this.selectedRole = 'Mitarbeiter_in';
     }
-    console.log('goals init');
     if (history.state.data != null) {
       this.dataUser = history.state.data;
       this.idMember = this.dataUser.userid;
       this.selectedRole = this.dataUser.selectedRole;
-      console.log(
-        'die aktuelle userid: ' +
-        this.idMember +
-        'und die Rolle: ' +
-        this.selectedRole
-      );
     }
 
     this.api.getUsers().subscribe(
@@ -161,12 +151,9 @@ export class GoalsCreateComponent implements OnInit {
   async fillProgressArray() {
     this.progressArray = [];
     let res = this.goalsToOneUser;
-    for (let i = 0; i < res.length; i++) {
-      this.getNumberAllTasks(res[i]._id);
-      this.getNumberAllTasksDone(res[i]._id);
-      let second = await this.getNumberAllTasks(res[i]._id);
-      const first = await this.getNumberAllTasksDone(res[i]._id);
-      second = await this.getNumberAllTasks(res[i]._id);
+    for (let item of res) {
+      let second = await this.getNumberAllTasks(item._id);
+      const first = await this.getNumberAllTasksDone(item._id);
       this.progress = (first / second) * 100;
       this.progressArray.push(this.progress);
     }
@@ -191,6 +178,7 @@ export class GoalsCreateComponent implements OnInit {
         (data: Goals) => {
         },
         (error) => {
+          console.log(error);
         }
       );
     });
@@ -242,6 +230,7 @@ export class GoalsCreateComponent implements OnInit {
     simpleObject.description = this.enteredContent;
     simpleObject.userid = id;
     simpleObject.order = '' + (this.goalsToOneUser.length + 1);
+    simpleObject.priority = false;
 
     this.api.addGoal(simpleObject).subscribe(
       (res: any) => {
@@ -265,7 +254,6 @@ export class GoalsCreateComponent implements OnInit {
     this.api.updateGoal(id, this.goalForm.value).subscribe(
       (res: any) => {
         const id = res._id;
-        console.log(id);
         this.isLoadingResults = false;
       },
       (err: any) => {
@@ -304,7 +292,6 @@ export class GoalsCreateComponent implements OnInit {
     //TODO
     this.api.getTasksToStatus(id, 'todo').subscribe(
       (res: any) => {
-        console.log(res);
         this.currentUrl = this.router.url;
         if (this.currentUrl != '/') {
           this.tasksToTodo = [];
@@ -405,5 +392,21 @@ export class GoalsCreateComponent implements OnInit {
       return true;
     }
     return this.selectedRole == 'Vorgesetzte_r';
+  }
+
+  setPriorityTag(_id: string, goal: Goals) {
+    if(!goal.priority) {
+      goal.priority = true;
+    } else {
+      goal.priority = false;
+    }
+    this.api.updateGoalPriority(_id, goal)
+      .subscribe((res: any) => {
+          this.isLoadingResults = false;
+        }, (err: any) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        }
+      );
   }
 }

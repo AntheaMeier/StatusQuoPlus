@@ -18,11 +18,13 @@ export class GoalsController {
     @Body('description') goalDesc: string,
     @Body('order') goalOrder: string,
     @Body('userid') goalUserid: string,
+    @Body('priority') goalPriority: boolean,
   ) {
     const generatedId = await this.goalsService.insertGoals(
       goalDesc,
       goalOrder,
       goalUserid,
+      goalPriority,
     );
     return { id: generatedId };
   }
@@ -43,8 +45,14 @@ export class GoalsController {
     @Param('id') goalId: string,
     @Body('description') goalDesc: string,
     @Body('userid') goalUserid: string,
+    @Body('priority') goalPriority: boolean,
   ) {
-    await this.goalsService.updateGoal(goalId, goalDesc, goalUserid);
+    await this.goalsService.updateGoal(
+      goalId,
+      goalDesc,
+      goalUserid,
+      goalPriority,
+    );
     return null;
   }
 

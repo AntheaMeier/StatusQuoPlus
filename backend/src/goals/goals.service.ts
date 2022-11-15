@@ -10,11 +10,12 @@ export class GoalsService {
   ) {
   }
 
-  async insertGoals(desc: string, order: string, userid:string) {
+  async insertGoals(desc: string, order: string, userid:string, priority: boolean) {
     const newGoal = new this.goalModel({
       description: desc,
       order: order,
-      userid
+      userid,
+      priority: priority,
     });
     const result = await newGoal.save();
     return result.id as string;
@@ -23,25 +24,29 @@ export class GoalsService {
   async getGoals() {
     const goals = await this.goalModel.find().exec();
     return goals.map((goal) => (
-      {id: goal.id, description: goal.description, order: goal.order, userid: goal.userid}));
+      {id: goal.id, description: goal.description, order: goal.order, userid: goal.userid, priority: goal.priority}));
   }
 
   async getSingleGoal(goalId: string) {
     const goal = await this.findGoal(goalId);
-    return {id: goal.id, description: goal.description, order: goal.order, userid: goal.userid};
+    return {id: goal.id, description: goal.description, order: goal.order, userid: goal.userid, priority: goal.priority};
   }
 
   async updateGoal(
     goalId: string,
     desc: string,
-    userid: string
+    userid: string,
+    priority: boolean
   ) {
     const updatedGoal = await this.findGoal(goalId);
     if (desc) {
       updatedGoal.description = desc;
     }
     if(userid){
-      updatedGoal.userid = userid
+      updatedGoal.userid = userid;
+    }
+    if (priority != undefined) {
+      updatedGoal.priority = priority;
     }
     await updatedGoal.save();
   }

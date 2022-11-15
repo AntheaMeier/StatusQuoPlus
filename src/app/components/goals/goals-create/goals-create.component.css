@@ -15,6 +15,16 @@
   font-size: 23px;
 }
 
+.star-styling {
+  font-size: 28px;
+  margin-right: 15px;
+}
+
+.star-container-styling {
+  margin-left: -10px;
+  margin-top: -5px!important;
+}
+
 .bttn:hover {
   transition: 1s ease-in-out;
   background: #0071B9;
@@ -45,12 +55,18 @@
 
 .span-styling {
   position: absolute;
-  bottom: 10px;
+  top: 15px;
   right: 5px;
 }
 
 .description-styling {
   width: 90%;
+  padding-right: 10px;
+}
+
+.push-pin {
+  color: gray;
+  margin-bottom: -20px;
 }
 
 @media screen and (max-width: 800px) {
@@ -91,6 +107,7 @@
   padding: 2%;
   box-shadow: none;
   word-wrap: break-word;
+  display: flex;
 }
 
 @media screen and (max-width: 844px) {
