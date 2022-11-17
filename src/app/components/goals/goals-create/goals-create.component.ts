@@ -435,4 +435,10 @@ export class GoalsCreateComponent implements OnInit {
     }
     return this.selectedRole == 'Vorgesetzte_r';
   }
+
+  // openTestDialog(desc: string): void {
+  //   const dialogRef = this.dialog.open(GoalCompletedDialogComponent, {
+  //     data: {description: desc},
+  //   });
+  // }
 }

@@ -1,8 +1,5 @@
-<div cdkDropList
-     #goalList="cdkDropList"
-     [cdkDropListData]="goalsToOneUser"
-     class="example-list"
-     (cdkDropListDropped)="drop($event)">
+<!-- <button (click)="openTestDialog('Angular lernen')">showDialog</button> -->
+<div>
   <mat-card class="goalsCard">
     <p>{{ 'Ziele.ziele' | translate }}
       <button *ngIf="selectedRole == 'Mitarbeiter_in'" class="bttn icon-display" style="font-size: 23px" (click)="addPostForm()">+</button>
@@ -36,7 +33,7 @@
       (click)="showTasks(goal._id)"
       (click)="setGoalsid(goal._id)"
       *ngFor="let goal of goalsToOneUser; let index = index">
-      <mat-expansion-panel cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" hideToggle class="panel-styling" [expanded]="showGoalid == goal._id">
+      <mat-expansion-panel hideToggle class="panel-styling" [expanded]="showGoalid == goal._id">
         <mat-expansion-panel-header class="panel-header-styling">
           <mat-card [ngStyle]="{'background-color':goal._id === showGoalid ? '#BFDCEE' : '#E8E4E1'}" class="goals-matcard">
             <div class="description-styling">

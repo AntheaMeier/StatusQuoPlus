@@ -1,0 +1,11 @@
+mat-icon {
+    margin-right: 10px;
+}
+
+.goal_icon {
+    color: green;
+}
+
+.success_icon {
+    color: darkgoldenrod;
+}
