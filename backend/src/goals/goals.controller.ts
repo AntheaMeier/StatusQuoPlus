@@ -1,13 +1,5 @@
-import { GoalsService } from './goals.service';
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-} from '@nestjs/common';
+import {GoalsService} from './goals.service';
+import {Body, Controller, Delete, Get, Param, Patch, Post,} from '@nestjs/common';
 
 @Controller('goals')
 export class GoalsController {
@@ -16,13 +8,11 @@ export class GoalsController {
   @Post()
   async addGoals(
     @Body('description') goalDesc: string,
-    @Body('order') goalOrder: string,
     @Body('userid') goalUserid: string,
     @Body('priority') goalPriority: boolean,
   ) {
     const generatedId = await this.goalsService.insertGoals(
       goalDesc,
-      goalOrder,
       goalUserid,
       goalPriority,
     );
@@ -31,8 +21,7 @@ export class GoalsController {
 
   @Get()
   async getAllGoals() {
-    const goals = await this.goalsService.getGoals();
-    return goals;
+    return await this.goalsService.getGoals();
   }
 
   @Get(':id')
@@ -56,15 +45,6 @@ export class GoalsController {
     return null;
   }
 
-  @Patch(':order/:id')
-  async updateGoalOrder(
-    @Param('id') goalId: string,
-    @Body('order') goalOrder: string,
-  ) {
-    await this.goalsService.updateGoalOrder(goalId, goalOrder);
-    return null;
-  }
-
   @Delete(':id')
   async removeGoal(@Param('id') goalId: string) {
     await this.goalsService.deleteGoal(goalId);
@@ -72,11 +52,7 @@ export class GoalsController {
   }
 
   @Get('user/:userid')
-  async getAllGoalsToUser(
-    @Param('userid') userid: string,
-
-  ){
-    const goals = await this.goalsService.getGoalsToUser(userid);
-    return goals;
+  async getAllGoalsToUser(@Param('userid') userid: string) {
+    return await this.goalsService.getGoalsToUser(userid);
   }
 }

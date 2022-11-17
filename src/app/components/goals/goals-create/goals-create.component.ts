@@ -3,13 +3,11 @@ import {ApiService} from '../../../services/api.service';
 import {Goals} from '../../../models/goals';
 import {MatDialog} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {DeleteConfirmationDialogComponent} from '../delete-confirmation-dialog/delete-confirmation-dialog';
 import {Tasks} from '../../../models/tasks';
 import {LoginData, Role} from '../../../models/loginData';
 import {AuthService} from '../../../services/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {BehaviorSubject} from 'rxjs';
 import {GoalsEditComponent} from '../goals-edit/goals-edit.component';
 
 @Component({
@@ -24,11 +22,8 @@ export class GoalsCreateComponent implements OnInit {
   isLoadingResults = true;
   description = '';
   id = '';
-  dataTasks: Tasks[] = [];
   addPost = false;
   enteredContent = '';
-  lel: any = '';
-  goal: Goals = {_id: '', description: '', order: '', userid: '',  priority: false};
 
   user: LoginData = {
     id: '',
@@ -42,18 +37,16 @@ export class GoalsCreateComponent implements OnInit {
   };
   dataUsers: LoginData[] = [];
   idloggedInUser: any = '';
-  userID = JSON.stringify(this.user.id);
   idDialog: any = '';
   tasksToOneGoal: Tasks[] = [];
   editableId: String = '';
-  selectedGoal: Goals = {_id: '', description: '', order: '', userid: '', priority: false};
+  selectedGoal: Goals = {_id: '', description: '', userid: '', priority: false};
   showTasksToOneGoal = false;
   newTask: Tasks = {goalid: '', _id: '', description: '', status: ''};
   deleteTodo: String = '';
   decision: String = 'yes';
 
   idls: any = '';
-  refreshGoals$ = new BehaviorSubject<boolean>(true);
 
   @Input() goalsToOneUser: Goals[] = [];
   @Input() idMember: any = '';
@@ -69,12 +62,7 @@ export class GoalsCreateComponent implements OnInit {
   tasksToDoing: Tasks[] = [];
   tasksToDone: Tasks[] = [];
   showGoalid = '';
-  resid: String = '';
-  reso: number = 0;
-  rest: number = 0;
   currentUrl = '';
-  allTasksLength: number = 99;
-  allTasksDoneLength: number = 99;
 
   goalForm: FormGroup = this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required),
@@ -92,7 +80,6 @@ export class GoalsCreateComponent implements OnInit {
   ngOnInit() {
     this.currentUrl = this.router.url;
     this.idls = localStorage.getItem('selectedGoal');
-    const element = document.getElementById('1');
     this.goalSelectedReload = localStorage.getItem('selectedGoal');
 
     if (this.goalSelectedReload) this.setGoalsid(this.goalSelectedReload);
@@ -132,79 +119,35 @@ export class GoalsCreateComponent implements OnInit {
       this.showGoals(this.idMember);
     }
 
-    this.api.getGoalsToUser(this.idloggedInUser).subscribe(
-      (res: any) => {
-        this.goalsToOneUser = res;
-        this.isLoadingResults = false;
-        this.goalsToOneUser.sort((goal1, goal2) => {
-          return Number(goal1.order) - Number(goal2.order);
-        });
-        this.fillProgressArray();
-      },
-      (err) => {
-        console.log(err);
-        this.isLoadingResults = false;
-      }
-    );
+    this.fillGoalsArray();
+    this.fillProgressArray();
   }
 
-  async fillProgressArray() {
+  fillProgressArray() {
     this.progressArray = [];
     let res = this.goalsToOneUser;
     for (let item of res) {
-      let second = await this.getNumberAllTasks(item._id);
-      const first = await this.getNumberAllTasksDone(item._id);
+      let second = this.getNumberAllTasks(item._id);
+      const first = this.getNumberAllTasksDone(item._id);
       this.progress = (first / second) * 100;
       this.progressArray.push(this.progress);
     }
   }
 
-  async getNumberAllTasks(goalid: String): Promise<number> {
-    const res = await this.api.getTasksToGoal(goalid).toPromise();
-    return res.length;
-  }
-
-  async getNumberAllTasksDone(goalid: String): Promise<number> {
-    const res = await this.api.getTasksToStatus(goalid, 'done').toPromise();
-    return res.length;
-  }
-
-  public position(): void {
-    let position = 0;
-    this.goalsToOneUser.forEach((goal: Goals) => {
-      position += 1;
-      goal.order = String(position);
-      this.api.updateGoalOrder(goal._id, goal).subscribe(
-        (data: Goals) => {
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+  getNumberAllTasks(goalid: String): number {
+    this.api.getTasksToGoal(goalid).subscribe(res => {
+      console.log(goalid + ' alle '+ res.length);
+      return res.length;
     });
+    return 0;
   }
 
-  drop(event: CdkDragDrop<any>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-      moveItemInArray(
-        this.progressArray,
-        event.previousIndex,
-        event.currentIndex
-      );
-      this.position();
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
+  getNumberAllTasksDone(goalid: String): number {
+    this.api.getTasksToStatus(goalid, 'done').subscribe(res => {
+      console.log(goalid + ' done '+ res.length);
+      return res.length;
+    });
+    return 0;
   }
 
   showGoals(id: any) {
@@ -229,7 +172,6 @@ export class GoalsCreateComponent implements OnInit {
     const simpleObject = {} as Goals;
     simpleObject.description = this.enteredContent;
     simpleObject.userid = id;
-    simpleObject.order = '' + (this.goalsToOneUser.length + 1);
     simpleObject.priority = false;
 
     this.api.addGoal(simpleObject).subscribe(
@@ -253,7 +195,6 @@ export class GoalsCreateComponent implements OnInit {
     this.isLoadingResults = true;
     this.api.updateGoal(id, this.goalForm.value).subscribe(
       (res: any) => {
-        const id = res._id;
         this.isLoadingResults = false;
       },
       (err: any) => {
@@ -345,12 +286,6 @@ export class GoalsCreateComponent implements OnInit {
     });
   }
 
-  setEditableToTrue() {
-    if (this.selectedRole == 'Mitarbeiter_in') {
-      this.editable = true;
-    }
-  }
-
   setTheSelectedGoal(goal: Goals) {
     if (this.currentUrl == '/') {
       localStorage.setItem('selectedGoal', goal._id);
@@ -403,10 +338,30 @@ export class GoalsCreateComponent implements OnInit {
     this.api.updateGoalPriority(_id, goal)
       .subscribe((res: any) => {
           this.isLoadingResults = false;
+          this.fillGoalsArray();
         }, (err: any) => {
           console.log(err);
           this.isLoadingResults = false;
         }
       );
+  }
+
+  fillGoalsArray(): void{
+    this.api.getGoalsToUser(this.idloggedInUser).subscribe(
+      (res: any) => {
+        this.goalsToOneUser = res;
+        this.isLoadingResults = false;
+        this.goalsToOneUser.sort(function(x, y) {
+          // true values first
+          return (x.priority === y.priority)? 0 : x.priority ? -1 : 1;
+          // false values first
+          // return (x === y)? 0 : x? 1 : -1;
+        });
+      },
+      (err) => {
+        console.log(err);
+        this.isLoadingResults = false;
+      }
+    );
   }
 }

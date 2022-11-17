@@ -7,7 +7,9 @@
     <mat-toolbar>Menü</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item *ngIf="(loginData$ | async)" (click)="goToGoals(idLoggedInUser, 'Mitarbeiter_in')">
-        <div class="sidenav-text" *ngIf="(loginData$ | async)">{{ 'Ziele.ziele' | translate }}</div>
+        <div class="sidenav-text" *ngIf="(loginData$ | async)">
+          {{ 'Ziele.ziele' | translate}}
+        </div>
       </a>
       <a mat-list-item *ngIf="(loginData$ | async)" (click)="deleteSelectedGoalFromLocalStorage()"
          [routerLink]="'/protokolle'">
