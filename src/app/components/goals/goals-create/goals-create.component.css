@@ -38,6 +38,22 @@
   margin-bottom: 1%;
 }
 
+.date_lable {
+  padding-bottom: 3%;
+  max-width: 25%;
+  border-radius: 10px 10px; 
+}
+
+
+.date_numbers {
+  font-size: 75%;
+  color: #070707;
+  padding-top: 5%;
+  border-radius: 10px;
+  text-align: center; 
+  
+}
+
 .button-styling {
   flex: 20%;
   color: #857971;

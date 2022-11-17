@@ -61,6 +61,21 @@
       <mat-expansion-panel cdkDrag [cdkDragDisabled]="isVorgesetzte_r()" hideToggle class="panel-styling" [expanded]="showGoalid == goal._id">
         <mat-expansion-panel-header class="panel-header-styling">
           <mat-card [ngStyle]="{'background-color':goal._id === showGoalid ? '#BFDCEE' : '#E8E4E1'}" class="goals-matcard">
+      <!-- Fälligkeitsdatumsanzeige in der Übersicht US4.4 -->
+     
+      <!-- gelb und rot
+      background-color: #f8e009;
+      background-color: #f35f3b;
+      -->
+      <!-- <div class="date_lable" style="background-color: #f35f3b;">
+      <div class="date_numbers"  *ngIf="goal.expiry_date != null"> -->
+  
+        <div *ngIf="goal.expiry_date != null">
+        {{ goal.expiry_date }}
+      </div>
+      
+      <!-- Fälligkeitsdatumsanzeige in der Übersicht US4.4 -->
+
             <div class="description-styling">
               {{goal.description}}
             </div>
@@ -76,9 +91,8 @@
               <mat-icon class="button-styling" (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">delete_outline</mat-icon>
             </span>
             </mat-card>
-          <mat-card *ngIf="goal.expiry_date != null">
-            {{ goal.expiry_date }}
-          </mat-card>
+            
+
         </mat-expansion-panel-header>
         <div class="test" *ngIf="goal._id == showGoalid">
           <app-todo [selectedRole]="selectedRole"
