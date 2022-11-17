@@ -11,6 +11,8 @@ import {AuthService} from '../../../services/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BehaviorSubject} from 'rxjs';
 import {GoalsEditComponent} from '../goals-edit/goals-edit.component';
+import { DateAdapter } from '@angular/material/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-goals',
@@ -89,8 +91,11 @@ export class GoalsCreateComponent implements OnInit {
     private api: ApiService,
     private route: ActivatedRoute,
     private auth: AuthService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private dateAdapter: DateAdapter<Date>
   ) {
+      this.dateAdapter.setLocale('de');
+    
   }
 
   ngOnInit() {
@@ -244,8 +249,9 @@ export class GoalsCreateComponent implements OnInit {
     simpleObject.description = this.enteredContent;
     simpleObject.userid = id;
     simpleObject.order = '' + (this.goalsToOneUser.length + 1);
-    simpleObject.expiry_date = this.enteredExpiryDate;
-
+    if(this.enteredExpiryDate){
+      simpleObject.expiry_date = moment(this.enteredExpiryDate).format('DD.MM.yyyy');
+    }
     this.api.addGoal(simpleObject).subscribe(
       (res: any) => {
         this.isLoadingResults = false;
@@ -354,7 +360,7 @@ export class GoalsCreateComponent implements OnInit {
     this.idDialog = id;
     const dialogRef = this.dialog.open(GoalsEditComponent, {
       width: '50%',
-      data: {id: this.idDialog, description: this.description},
+      data: {id: this.idDialog, description: this.description, expiry_date: this.enteredExpiryDate},
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.ngOnInit();
