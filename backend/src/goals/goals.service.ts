@@ -8,7 +8,7 @@ export class GoalsService {
   constructor(@InjectModel('Goal') private readonly goalModel: Model<Goal>) {}
 
   async insertGoals(
-    expiry_date: string,
+    expiry_date: Date,
     desc: string,
     order: string,
     userid: string,
@@ -47,13 +47,19 @@ export class GoalsService {
 
   async updateGoal(
     goalId: string,
-    expiry_date: string,
+    removeExpiryDate: boolean,
+    expiry_date: Date,
     desc: string,
     userid: string,
   ) {
     const updatedGoal = await this.findGoal(goalId);
-    if (expiry_date) {
+
+    if (expiry_date && !removeExpiryDate) {
       updatedGoal.expiry_date = expiry_date;
+    }
+    if (removeExpiryDate) {
+      console.log('!!!! removed expiry date');
+      updatedGoal.expiry_date = undefined;
     }
     if (desc) {
       updatedGoal.description = desc;

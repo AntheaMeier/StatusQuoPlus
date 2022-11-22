@@ -93,8 +93,8 @@ export class ApiService {
     );
   }
 
-  updateGoal(id: any, goal: Goals): Observable<any> {
-    const url = `${apiUrl}/${id}`;
+  updateGoal(id: any, goal: Goals, removeExpiryDate: boolean): Observable<any> {
+    const url = `${apiUrl}/${id}/${removeExpiryDate}`;
     return this.http.patch(url, goal, httpOptions).pipe(
       tap((_) => console.log(`updated goal id=${id}`)),
       catchError(this.handleError<any>('updateGoal'))

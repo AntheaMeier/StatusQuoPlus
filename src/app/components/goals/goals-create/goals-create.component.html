@@ -62,18 +62,19 @@
         <mat-expansion-panel-header class="panel-header-styling">
           <mat-card [ngStyle]="{'background-color':goal._id === showGoalid ? '#BFDCEE' : '#E8E4E1'}" class="goals-matcard">
       <!-- Fälligkeitsdatumsanzeige in der Übersicht US4.4 -->
-     
+
       <!-- gelb und rot
       background-color: #f8e009;
       background-color: #f35f3b;
       -->
-      <!-- <div class="date_lable" style="background-color: #f35f3b;">
-      <div class="date_numbers"  *ngIf="goal.expiry_date != null"> -->
-  
-        <div *ngIf="goal.expiry_date != null">
-        {{ goal.expiry_date }}
+      <div *ngIf="goal.expiry_date != null"
+           class="date-lable"
+           [ngStyle]="{'background-color': calculate(goal.expiry_date) == 'yellow' ? '#ffbb2f' : calculate(goal.expiry_date) == 'red' ? '#f35f3b' : '#a29892'}">
+        <div class="date-numbers">
+          {{ goal.expiry_date | date:'dd.MM.YYYY'}}
+        </div>
       </div>
-      
+
       <!-- Fälligkeitsdatumsanzeige in der Übersicht US4.4 -->
 
             <div class="description-styling">
@@ -91,7 +92,7 @@
               <mat-icon class="button-styling" (click)="deleteDialog(goal._id)" *ngIf="selectedRole == 'Mitarbeiter_in' || currentUrl == '/'">delete_outline</mat-icon>
             </span>
             </mat-card>
-            
+
 
         </mat-expansion-panel-header>
         <div class="test" *ngIf="goal._id == showGoalid">

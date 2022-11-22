@@ -12,7 +12,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BehaviorSubject} from 'rxjs';
 import {GoalsEditComponent} from '../goals-edit/goals-edit.component';
 import { DateAdapter } from '@angular/material/core';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-goals',
@@ -31,7 +30,7 @@ export class GoalsCreateComponent implements OnInit {
   addPost = false;
   enteredContent = '';
   lel: any = '';
-  goal: Goals = {_id: '', description: '', order: '', userid: '', expiry_date: ''};
+  goal: Goals = {_id: '', description: '', order: '', userid: '', expiry_date: new Date()};
   /* expiry_date hinzugefügt in Zeile drüber und in Zeile 51 */
 
   user: LoginData = {
@@ -50,7 +49,7 @@ export class GoalsCreateComponent implements OnInit {
   idDialog: any = '';
   tasksToOneGoal: Tasks[] = [];
   editableId: String = '';
-  selectedGoal: Goals = {_id: '', description: '', order: '', userid: '', expiry_date: ''};
+  selectedGoal: Goals = {_id: '', description: '', order: '', userid: '', expiry_date: new Date()};
   showTasksToOneGoal = false;
   newTask: Tasks = {goalid: '', _id: '', description: '', status: ''};
   deleteTodo: String = '';
@@ -85,6 +84,8 @@ export class GoalsCreateComponent implements OnInit {
     description: this.formBuilder.control('initial value', Validators.required),
   });
 
+  dates: String[] = [];
+
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -95,7 +96,6 @@ export class GoalsCreateComponent implements OnInit {
     private dateAdapter: DateAdapter<Date>
   ) {
       this.dateAdapter.setLocale('de');
-    
   }
 
   ngOnInit() {
@@ -151,6 +151,11 @@ export class GoalsCreateComponent implements OnInit {
 
     this.api.getGoalsToUser(this.idloggedInUser).subscribe(
       (res: any) => {
+        this.goalsToOneUser.forEach( goal => {
+          if(goal.expiry_date) {
+            this.calculate(goal.expiry_date);
+          }
+        });
         this.goalsToOneUser = res;
         this.isLoadingResults = false;
         this.goalsToOneUser.sort((goal1, goal2) => {
@@ -250,7 +255,7 @@ export class GoalsCreateComponent implements OnInit {
     simpleObject.userid = id;
     simpleObject.order = '' + (this.goalsToOneUser.length + 1);
     if(this.enteredExpiryDate){
-      simpleObject.expiry_date = moment(this.enteredExpiryDate).format('DD.MM.yyyy');
+      simpleObject.expiry_date = new Date(this.enteredExpiryDate);
     }
     this.api.addGoal(simpleObject).subscribe(
       (res: any) => {
@@ -271,7 +276,7 @@ export class GoalsCreateComponent implements OnInit {
 
   onFormSubmit(id: any) {
     this.isLoadingResults = true;
-    this.api.updateGoal(id, this.goalForm.value).subscribe(
+    this.api.updateGoal(id, this.goalForm.value, false).subscribe(
       (res: any) => {
         const id = res._id;
         console.log(id);
@@ -405,8 +410,7 @@ export class GoalsCreateComponent implements OnInit {
     }
   }
 
-  loadProgressNew($event: boolean) {
-  }
+  loadProgressNew($event: boolean) {}
 
   isVorgesetzte_r(): boolean {
     this.currentUrl = this.router.url;
@@ -414,5 +418,22 @@ export class GoalsCreateComponent implements OnInit {
       return true;
     }
     return this.selectedRole == 'Vorgesetzte_r';
+  }
+
+  calculate(expiryDate: Date): string {
+    if(expiryDate) {
+      let date2 = new Date(expiryDate);
+      let date1 = new Date();
+      let time = date2.getTime() - date1.getTime();
+      let days = (time / (1000 * 3600 * 24)) + 1 ; //Difference in Days*/
+      if(days <= 30 && days > 7){
+        return 'yellow';
+      } else if(days <= 7) {
+        return 'red';
+      }
+      return '';
+    } else {
+      return '';
+    }
   }
 }
