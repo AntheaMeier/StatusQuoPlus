@@ -158,8 +158,16 @@ export class GoalsCreateComponent implements OnInit {
         });
         this.goalsToOneUser = res;
         this.isLoadingResults = false;
-        this.goalsToOneUser.sort((goal1, goal2) => {
-          return Number(goal1.order) - Number(goal2.order);
+        this.goalsToOneUser.sort(function(a,b) {
+          if (!a.expiry_date) {
+            return 1;
+          }
+          if (!b.expiry_date) {
+            return -1;
+          }
+          let date1 = new Date(a.expiry_date);
+          let date2 = new Date(b.expiry_date);
+          return date1.getTime() - date2.getTime();
         });
         this.fillProgressArray();
       },
