@@ -69,7 +69,7 @@
       -->
       <div *ngIf="goal.expiry_date != null"
            class="date-lable"
-           [ngStyle]="{'background-color': calculate(goal.expiry_date) == 'yellow' ? '#ffbb2f' : calculate(goal.expiry_date) == 'red' ? '#f35f3b' : '#a29892'}">
+           [ngStyle]="{'background-color': calculate(goal.expiry_date) == 'yellow' ? '#ffbb2f' : calculate(goal.expiry_date) == 'red' ? '#f35f3b' : '#c5bfbc'}">
         <div class="date-numbers">
           {{ goal.expiry_date | date:'dd.MM.YYYY'}}
         </div>
