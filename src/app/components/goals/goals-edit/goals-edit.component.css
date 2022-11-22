@@ -24,3 +24,19 @@ mat-form-field {
     padding: 5px;
   }
 }
+
+.faelligkeitsdatum-div {
+  display: flex;
+}
+
+.faelligkeitsdatum-loeschen-button {
+  width: 50px;
+  height: 52px;
+  margin-left: 4px;
+  background-color: #F5F5F5;
+}
+
+.faelligkeitsdatum-loeschen-button:active {
+  background-color: #f35f3b;
+  color: #FFFFFF;
+}

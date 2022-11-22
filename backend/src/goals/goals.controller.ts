@@ -7,12 +7,16 @@ export class GoalsController {
 
   @Post()
   async addGoals(
+    @Body('expiry_date') goalExpiryDate: Date,
     @Body('description') goalDesc: string,
+    @Body('order') goalOrder: string,
     @Body('userid') goalUserid: string,
     @Body('priority') goalPriority: boolean,
   ) {
     const generatedId = await this.goalsService.insertGoals(
+      goalExpiryDate,
       goalDesc,
+      goalOrder,
       goalUserid,
       goalPriority,
     );
@@ -29,15 +33,18 @@ export class GoalsController {
     return this.goalsService.getSingleGoal(goalId);
   }
 
-  @Patch(':id')
+  @Patch(':id/:removeExpiryDate')
   async updateGoal(
     @Param('id') goalId: string,
+    @Param('removeExpiryDate') removeExpiryDate: string,
+    @Body('expiry_date') goalExpiryDate: Date,
     @Body('description') goalDesc: string,
     @Body('userid') goalUserid: string,
     @Body('priority') goalPriority: boolean,
   ) {
     await this.goalsService.updateGoal(
       goalId,
+      removeExpiryDate === 'true',
       goalDesc,
       goalUserid,
       goalPriority,

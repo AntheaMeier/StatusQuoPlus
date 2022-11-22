@@ -48,6 +48,23 @@
   margin-bottom: 1%;
 }
 
+.date-lable {
+  width: 80px;
+  padding-bottom: 3px;
+  border-radius: 10px 10px;
+  margin-bottom: 12px;
+}
+
+
+.date-numbers {
+  font-size: 75%;
+  color: black;
+  padding-top: 5%;
+  border-radius: 10px;
+  text-align: center;
+
+}
+
 .button-styling {
   flex: 20%;
   color: #857971;
@@ -62,6 +79,7 @@
 .description-styling {
   width: 90%;
   padding-right: 10px;
+  margin-bottom: 5px;
 }
 
 .push-pin {
@@ -104,16 +122,10 @@
   width: 100%;
   background-color: #E8E4E1;
   margin: 0 auto;
-  padding: 2%;
+  padding: 20px;
   box-shadow: none;
   word-wrap: break-word;
   display: flex;
-}
-
-@media screen and (max-width: 844px) {
-  .goals-matcard {
-    padding: 5%;
-  }
 }
 
 .progressbar-styling {

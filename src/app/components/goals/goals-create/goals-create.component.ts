@@ -9,6 +9,7 @@ import {LoginData, Role} from '../../../models/loginData';
 import {AuthService} from '../../../services/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GoalsEditComponent} from '../goals-edit/goals-edit.component';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-goals',
@@ -19,6 +20,7 @@ export class GoalsCreateComponent implements OnInit {
   editable = false;
   data: Goals[] = [];
   dataUser = {userid: '', selectedRole: ''};
+  enteredExpiryDate!: string;
   isLoadingResults = true;
   description = '';
   id = '';
@@ -37,10 +39,11 @@ export class GoalsCreateComponent implements OnInit {
   };
   dataUsers: LoginData[] = [];
   idloggedInUser: any = '';
+  userID = JSON.stringify(this.user.id);
   idDialog: any = '';
   tasksToOneGoal: Tasks[] = [];
   editableId: String = '';
-  selectedGoal: Goals = {_id: '', description: '', userid: '', priority: false};
+  selectedGoal: Goals = {_id: '', description: '', userid: '', priority: false, expiry_date: new Date()};
   showTasksToOneGoal = false;
   newTask: Tasks = {goalid: '', _id: '', description: '', status: ''};
   deleteTodo: String = '';
@@ -68,14 +71,18 @@ export class GoalsCreateComponent implements OnInit {
     description: this.formBuilder.control('initial value', Validators.required),
   });
 
+  dates: String[] = [];
+
   constructor(
     public dialog: MatDialog,
     private router: Router,
     private api: ApiService,
     private route: ActivatedRoute,
     private auth: AuthService,
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,
+    private dateAdapter: DateAdapter<Date>) {
+      this.dateAdapter.setLocale('de');
+  }
 
   ngOnInit() {
     this.currentUrl = this.router.url;
@@ -146,7 +153,9 @@ export class GoalsCreateComponent implements OnInit {
     simpleObject.description = this.enteredContent;
     simpleObject.userid = id;
     simpleObject.priority = false;
-
+    if(this.enteredExpiryDate){
+      simpleObject.expiry_date = new Date(this.enteredExpiryDate);
+    }
     this.api.addGoal(simpleObject).subscribe(
       (res: any) => {
         this.isLoadingResults = false;
@@ -166,7 +175,7 @@ export class GoalsCreateComponent implements OnInit {
 
   onFormSubmit(id: any) {
     this.isLoadingResults = true;
-    this.api.updateGoal(id, this.goalForm.value).subscribe(
+    this.api.updateGoal(id, this.goalForm.value, false).subscribe(
       (res: any) => {
         this.isLoadingResults = false;
       },
@@ -206,6 +215,7 @@ export class GoalsCreateComponent implements OnInit {
     //TODO
     this.api.getTasksToStatus(id, 'todo').subscribe(
       (res: any) => {
+        console.log(res);
         this.currentUrl = this.router.url;
         if (this.currentUrl != '/') {
           this.tasksToTodo = [];
@@ -252,7 +262,7 @@ export class GoalsCreateComponent implements OnInit {
     this.idDialog = id;
     const dialogRef = this.dialog.open(GoalsEditComponent, {
       width: '50%',
-      data: {id: this.idDialog, description: this.description},
+      data: {id: this.idDialog, description: this.description, expiry_date: this.enteredExpiryDate},
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.ngOnInit();
@@ -291,8 +301,7 @@ export class GoalsCreateComponent implements OnInit {
     }
   }
 
-  loadProgressNew($event: boolean) {
-  }
+  loadProgressNew($event: boolean) {}
 
   isVorgesetzte_r(): boolean {
     this.currentUrl = this.router.url;
@@ -300,6 +309,23 @@ export class GoalsCreateComponent implements OnInit {
       return true;
     }
     return this.selectedRole == 'Vorgesetzte_r';
+  }
+
+  calculate(expiryDate: Date): string {
+    if(expiryDate) {
+      let date2 = new Date(expiryDate);
+      let date1 = new Date();
+      let time = date2.getTime() - date1.getTime();
+      let days = (time / (1000 * 3600 * 24)) + 1 ; //Difference in Days*/
+      if(days <= 30 && days > 7){
+        return 'yellow';
+      } else if(days <= 7) {
+        return 'red';
+      }
+      return '';
+    } else {
+      return '';
+    }
   }
 
   setPriorityTag(_id: string, goal: Goals) {
@@ -324,6 +350,23 @@ export class GoalsCreateComponent implements OnInit {
       (res: any) => {
         this.goalsToOneUser = res;
         this.isLoadingResults = false;
+
+        if(goal.expiry_date) {
+          this.calculate(goal.expiry_date);
+        }
+      });
+        this.goalsToOneUser.sort(function(a,b) {
+          if (!a.expiry_date) {
+            return 1;
+          }
+          if (!b.expiry_date) {
+            return -1;
+          }
+          let date1 = new Date(a.expiry_date);
+          let date2 = new Date(b.expiry_date);
+          return date1.getTime() - date2.getTime();
+        });
+
         this.goalsToOneUser.sort(function(x, y) {
           // true values first
           return (x.priority === y.priority)? 0 : x.priority ? -1 : 1;
@@ -335,7 +378,6 @@ export class GoalsCreateComponent implements OnInit {
       (err) => {
         console.log(err);
         this.isLoadingResults = false;
-      }
-    );
+      });
   }
 }

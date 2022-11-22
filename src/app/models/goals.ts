@@ -3,4 +3,5 @@ export interface Goals {
   description: string;
   userid: string;
   priority: boolean;
+  expiry_date: Date;
 }

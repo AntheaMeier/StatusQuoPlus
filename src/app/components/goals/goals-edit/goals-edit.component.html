@@ -9,6 +9,28 @@
       </mat-error>
     </mat-form-field>
   </form>
+</div>
+ <!-- Fälligkeitsdatum Bearbeiten US4.5 -->
+<div class="faelligkeitsdatum-div">
+   <mat-form-field appearance="fill"> <!-- ist bei den annual reviews: <mat-form-field class="col-md-12"> -->
+    <input
+      readonly='true'
+      matInput [matDatepicker]="picker"
+      [(ngModel)]="enteredExpiryDate"
+      id="dateEntry"
+      name="date"
+      required
+      placeholder="{{placeholderExpiryDate}}"
+      #date="ngModel">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <button class="faelligkeitsdatum-loeschen-button" mat-button (click)="faelligkeitsdatumLoeschen()">
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>
+<!-- Fälligkeitsdatum Bearbeiten US4.5  Ende -->
+
 <div mat-dialog-actions>
   <form [formGroup]="articleForm">
     <button mat-button (click)="onNoClick()">{{ 'Button.abbrechen' | translate }}</button>
