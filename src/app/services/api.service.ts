@@ -96,13 +96,6 @@ export class ApiService {
     );
   }
 
-  updateGoalOrder(id: any, goal: Goals): Observable<any> {
-    const url = `${apiUrlOrder}/${id}`;
-    return this.http.patch(url, goal, httpOptions).pipe(
-      catchError(this.handleError<any>('updateGoal'))
-    );
-  }
-
   updateGoalPriority(id: any, goal: Goals): Observable<any> {
     const url = `${apiUrl}/${id}`;
     return this.http.patch(url, goal, httpOptions).pipe(

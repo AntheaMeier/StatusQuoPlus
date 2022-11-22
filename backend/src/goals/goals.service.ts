@@ -10,12 +10,9 @@ export class GoalsService {
   async insertGoals(
     expiry_date: Date,
     desc: string,
-    order: string,
     userid: string,
+    priority: boolean,
   ) {
-  }
-
-  async insertGoals(desc: string, userid: string, priority: boolean) {
     const newGoal = new this.goalModel({
       expiry_date,
       description: desc,
@@ -23,7 +20,7 @@ export class GoalsService {
       priority: priority,
     });
     const result = await newGoal.save();
-    return result.id as string;
+    return result.id;
   }
 
   async getGoals() {
@@ -33,7 +30,7 @@ export class GoalsService {
       expiry_date: goal.expiry_date,
       description: goal.description,
       userid: goal.userid,
-      priority: goal.priority
+      priority: goal.priority,
     }));
   }
 
@@ -44,7 +41,7 @@ export class GoalsService {
       expiry_date: goal.expiry_date,
       description: goal.description,
       userid: goal.userid,
-      priority: goal.priority
+      priority: goal.priority,
     };
   }
 
@@ -54,7 +51,7 @@ export class GoalsService {
     expiry_date: Date,
     desc: string,
     userid: string,
-    priority: boolean
+    priority: boolean,
   ) {
     const updatedGoal = await this.findGoal(goalId);
 

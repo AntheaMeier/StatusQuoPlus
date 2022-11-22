@@ -1,5 +1,13 @@
-import {GoalsService} from './goals.service';
-import {Body, Controller, Delete, Get, Param, Patch, Post,} from '@nestjs/common';
+import { GoalsService } from './goals.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 
 @Controller('goals')
 export class GoalsController {
@@ -9,14 +17,12 @@ export class GoalsController {
   async addGoals(
     @Body('expiry_date') goalExpiryDate: Date,
     @Body('description') goalDesc: string,
-    @Body('order') goalOrder: string,
     @Body('userid') goalUserid: string,
     @Body('priority') goalPriority: boolean,
   ) {
     const generatedId = await this.goalsService.insertGoals(
       goalExpiryDate,
       goalDesc,
-      goalOrder,
       goalUserid,
       goalPriority,
     );
@@ -45,6 +51,7 @@ export class GoalsController {
     await this.goalsService.updateGoal(
       goalId,
       removeExpiryDate === 'true',
+      goalExpiryDate,
       goalDesc,
       goalUserid,
       goalPriority,

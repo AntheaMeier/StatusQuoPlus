@@ -15,16 +15,6 @@
   font-size: 23px;
 }
 
-.star-styling {
-  font-size: 28px;
-  margin-right: 15px;
-}
-
-.star-container-styling {
-  margin-left: -10px;
-  margin-top: -5px!important;
-}
-
 .bttn:hover {
   transition: 1s ease-in-out;
   background: #0071B9;
@@ -82,11 +72,6 @@
   margin-bottom: 5px;
 }
 
-.push-pin {
-  color: gray;
-  margin-bottom: -20px;
-}
-
 @media screen and (max-width: 800px) {
   .description-styling {
     width: 85%;
@@ -95,22 +80,6 @@
 
 ::ng-deep .mat-focused .mat-form-field-label {
   color: #0071B9 !important;
-}
-
-.cdk-drag-preview {
-  box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-  0 8px 10px 1px rgba(0, 0, 0, 0.14),
-  0 3px 14px 2px rgba(0, 0, 0, 0.12);
-}
-
-.cdk-drag-placeholder {
-  opacity: 70;
-}
-
-.cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 .test {
@@ -125,7 +94,6 @@
   padding: 20px;
   box-shadow: none;
   word-wrap: break-word;
-  display: flex;
 }
 
 .progressbar-styling {
@@ -161,6 +129,7 @@
 
 .panel-header-styling:hover {
   background-color: transparent !important;
+  z-index: 9999;
 }
 
 .mat-input-element {
@@ -174,5 +143,15 @@
 mat-form-field {
   width: 100%;
   margin-top: 2%;
+}
+
+.push-pin {
+  z-index: 999999;
+  position: absolute;
+  font-size: 28px;
+  top: 0px;
+  color: firebrick;
+  margin-bottom: -60px;
+  transform: rotate(340deg)
 }
 

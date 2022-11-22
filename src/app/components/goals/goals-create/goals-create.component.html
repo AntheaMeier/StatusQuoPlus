@@ -47,12 +47,13 @@
     </mat-expansion-panel>
 
     <div
-      class="example-accordion-item-header test"
+      class="accordion-item-header"
       (click)="setGoalsid(goal._id); showTasks(goal._id); setTheSelectedGoal(goal)"
       *ngFor="let goal of goalsToOneUser; let index = index">
-<!--      <mat-icon class="push-pin" *ngIf="goal.priority == true">push_pin</mat-icon>-->
+
       <mat-expansion-panel #exppanel hideToggle class="panel-styling" [expanded]="showGoalid == goal._id">
         <mat-expansion-panel-header class="panel-header-styling">
+          <mat-icon class="push-pin" *ngIf="goal.priority == true">push_pin</mat-icon>
           <mat-card [ngStyle]="{'background-color':goal._id === showGoalid ? '#BFDCEE' : '#E8E4E1'}" class="goals-matcard">
       <!-- Fälligkeitsdatumsanzeige in der Übersicht US4.4 -->
 
@@ -70,9 +71,6 @@
 
       <!-- Fälligkeitsdatumsanzeige in der Übersicht US4.4 -->
 
-            <div *ngIf="goal.priority == true" class="star-container-styling">
-              <mat-icon class="star-styling" style="color: darkgoldenrod">star</mat-icon>
-            </div>
             <div class="description-styling">
               {{goal.description}}
             </div>
@@ -82,9 +80,8 @@
               class="progressbar-styling"
               mode="determinate"
               value="{{progressArray[index]}}"
-              [ngModel]="progressArray[index]"
-              (change)="fillProgressArray(goalsToOneUser)"
-              (ngModelChange)="fillProgressArray(goalsToOneUser)">
+              ngModel="progressArray[index]"
+              (ngModelChange)="fillProgressArray()">
             </mat-progress-bar>
             <mat-panel-description>
               <span class="span-styling">
@@ -98,9 +95,9 @@
                 <mat-menu #menu="matMenu">
                   <button (click)="setPriorityTag(goal._id, goal)" mat-menu-item>
                         <mat-icon
-                          [ngStyle]="{'color': goal.priority == true ? 'lightgray' : 'darkgoldenrod'}">star</mat-icon>
-                        <span *ngIf="!goal.priority">{{ 'Button.priorisieren' | translate }}</span>
-                        <span *ngIf="goal.priority">{{ 'Button.nichtPriorisieren' | translate }}</span>
+                          [ngStyle]="{'color': goal.priority == true ? 'lightgray' : 'firebrick'}">push_pin</mat-icon>
+                        <span *ngIf="!goal.priority">{{ 'Button.anpinnen' | translate }}</span>
+                        <span *ngIf="goal.priority">{{ 'Button.nichtAnpinnen' | translate }}</span>
                       </button>
                       <button (click)="deleteDialog(goal._id)" mat-menu-item>
                         <mat-icon>delete_outline</mat-icon>

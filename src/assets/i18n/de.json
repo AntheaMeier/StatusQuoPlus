@@ -50,7 +50,7 @@
     "abbrechen": "Abbrechen",
     "speichern": "Speichern",
     "loeschen": "Löschen",
-    "priorisieren": "Priorisieren",
-    "nichtPriorisieren": "Nicht Priorisieren"
+    "anpinnen": "Anpinnen",
+    "nichtAnpinnen": "lösen"
   }
 }

@@ -107,12 +107,12 @@ export class GoalsCreateComponent implements OnInit {
       this.idMember = this.dataUser.userid;
       this.selectedRole = this.dataUser.selectedRole;
     }
-    this.fillGoalsArray();
+    this.fillGoalsArray(this.idloggedInUser);
   }
 
-  async fillProgressArray(res: Goals[]) {
+  async fillProgressArray() {
     this.progressArray = [];
-    for (let item of res) {
+    for (let item of this.goalsToOneUser) {
       let second = await this.getNumberAllTasks(item._id);
       const first = await this.getNumberAllTasksDone(item._id);
       this.progress = (first / second) * 100;
@@ -131,16 +131,7 @@ export class GoalsCreateComponent implements OnInit {
   }
 
   showGoals(id: any) {
-    this.api.getGoalsToUser(id).subscribe(
-      (res: any) => {
-        this.goalsToOneUser = res;
-        this.isLoadingResults = false;
-      },
-      (err) => {
-        console.log(err);
-        this.isLoadingResults = false;
-      }
-    );
+    this.fillGoalsArray(id);
     this.showGoalsToOneUser = true;
   }
 
@@ -334,10 +325,10 @@ export class GoalsCreateComponent implements OnInit {
     } else {
       goal.priority = false;
     }
-    this.api.updateGoalPriority(_id, goal)
+    this.api.updateGoal(_id, goal, false)
       .subscribe((res: any) => {
           this.isLoadingResults = false;
-          this.fillGoalsArray();
+          this.fillGoalsArray(this.idloggedInUser);
         }, (err: any) => {
           console.log(err);
           this.isLoadingResults = false;
@@ -345,16 +336,17 @@ export class GoalsCreateComponent implements OnInit {
       );
   }
 
-  fillGoalsArray(): void{
-    this.api.getGoalsToUser(this.idloggedInUser).subscribe(
+  fillGoalsArray(id: string): void{
+    this.api.getGoalsToUser(id).subscribe(
       (res: any) => {
         this.goalsToOneUser = res;
         this.isLoadingResults = false;
 
-        if(goal.expiry_date) {
-          this.calculate(goal.expiry_date);
-        }
-      });
+        this.goalsToOneUser.forEach( goal => {
+            if(goal.expiry_date) {
+              this.calculate(goal.expiry_date);
+            }
+          });
         this.goalsToOneUser.sort(function(a,b) {
           if (!a.expiry_date) {
             return 1;
@@ -373,7 +365,7 @@ export class GoalsCreateComponent implements OnInit {
           // false values first
           // return (x === y)? 0 : x? 1 : -1;
         });
-        this.fillProgressArray(this.goalsToOneUser);
+        this.fillProgressArray();
       },
       (err) => {
         console.log(err);
