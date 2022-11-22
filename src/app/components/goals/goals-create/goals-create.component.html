@@ -47,8 +47,9 @@
               class="progressbar-styling"
               mode="determinate"
               value="{{progressArray[index]}}"
-              ngModel="progressArray[index]"
-              (ngModelChange)="fillProgressArray()">
+              [ngModel]="progressArray[index]"
+              (change)="fillProgressArray(goalsToOneUser)"
+              (ngModelChange)="fillProgressArray(goalsToOneUser)">
             </mat-progress-bar>
             <mat-panel-description>
               <span class="span-styling">

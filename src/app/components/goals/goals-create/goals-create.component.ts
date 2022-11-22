@@ -83,71 +83,44 @@ export class GoalsCreateComponent implements OnInit {
     this.goalSelectedReload = localStorage.getItem('selectedGoal');
 
     if (this.goalSelectedReload) this.setGoalsid(this.goalSelectedReload);
+    this.idloggedInUser = this.auth.getUserDetails()._id;
 
     if (this.currentUrl == '/') {
       this.showTasks(this.goalSelectedReload);
+      this.selectedRole = 'Mitarbeiter_in';
+      this.showGoals(this.idloggedInUser);
     } else {
       this.showGoalid = '';
+      this.idMember = this.route.snapshot.paramMap.get('id');
+      this.showGoals(this.idMember);
     }
 
-    this.progressArray = [];
-
-    if (this.currentUrl == '/') {
-      this.selectedRole = 'Mitarbeiter_in';
-    }
     if (history.state.data != null) {
       this.dataUser = history.state.data;
       this.idMember = this.dataUser.userid;
       this.selectedRole = this.dataUser.selectedRole;
     }
-
-    this.api.getUsers().subscribe(
-      (res: any) => {
-        this.dataUsers = res;
-        this.isLoadingResults = false;
-      },
-      (err) => {
-        console.log(err);
-        this.isLoadingResults = false;
-      }
-    );
-    this.idloggedInUser = this.auth.getUserDetails()._id;
-    if (this.currentUrl == '/') {
-      this.showGoals(this.idloggedInUser);
-    } else {
-      this.idMember = this.route.snapshot.paramMap.get('id');
-      this.showGoals(this.idMember);
-    }
-
     this.fillGoalsArray();
-    this.fillProgressArray();
   }
 
-  fillProgressArray() {
+  async fillProgressArray(res: Goals[]) {
     this.progressArray = [];
-    let res = this.goalsToOneUser;
     for (let item of res) {
-      let second = this.getNumberAllTasks(item._id);
-      const first = this.getNumberAllTasksDone(item._id);
+      let second = await this.getNumberAllTasks(item._id);
+      const first = await this.getNumberAllTasksDone(item._id);
       this.progress = (first / second) * 100;
       this.progressArray.push(this.progress);
     }
   }
 
-  getNumberAllTasks(goalid: String): number {
-    this.api.getTasksToGoal(goalid).subscribe(res => {
-      console.log(goalid + ' alle '+ res.length);
-      return res.length;
-    });
-    return 0;
+  async getNumberAllTasks(goalid: String): Promise<number> {
+    const res = await this.api.getTasksToGoal(goalid).toPromise();
+    return res.length;
   }
 
-  getNumberAllTasksDone(goalid: String): number {
-    this.api.getTasksToStatus(goalid, 'done').subscribe(res => {
-      console.log(goalid + ' done '+ res.length);
-      return res.length;
-    });
-    return 0;
+  async getNumberAllTasksDone(goalid: String): Promise<number> {
+    const res = await this.api.getTasksToStatus(goalid, 'done').toPromise();
+    return res.length;
   }
 
   showGoals(id: any) {
@@ -357,6 +330,7 @@ export class GoalsCreateComponent implements OnInit {
           // false values first
           // return (x === y)? 0 : x? 1 : -1;
         });
+        this.fillProgressArray(this.goalsToOneUser);
       },
       (err) => {
         console.log(err);
