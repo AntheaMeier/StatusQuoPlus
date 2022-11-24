@@ -5,6 +5,7 @@ export const GoalSchema = new mongoose.Schema({
   description: { type: String, required: true },
   userid: { type: String, required: true },
   priority: { type: Boolean, required: false },
+  completed: { type: Boolean, required: false },
 });
 
 export interface Goal extends mongoose.Document {
@@ -13,4 +14,5 @@ export interface Goal extends mongoose.Document {
   description: string;
   userid: string;
   priority: boolean;
+  completed: boolean;
 }

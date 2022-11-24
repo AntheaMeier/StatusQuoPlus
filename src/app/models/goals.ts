@@ -4,4 +4,5 @@ export interface Goals {
   userid: string;
   priority: boolean;
   expiry_date: Date;
+  completed: boolean;
 }

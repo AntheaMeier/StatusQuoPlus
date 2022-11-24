@@ -13,11 +13,21 @@ export class GoalsService {
     userid: string,
     priority: boolean,
   ) {
+  }
+
+  async insertGoals(
+    desc: string,
+    expiry_date: Date,
+    userid: string,
+    priority: boolean,
+    completed: boolean
+  ) {
     const newGoal = new this.goalModel({
       expiry_date,
       description: desc,
       userid,
       priority: priority,
+      completed: completed,
     });
     const result = await newGoal.save();
     return result.id;
@@ -31,6 +41,7 @@ export class GoalsService {
       description: goal.description,
       userid: goal.userid,
       priority: goal.priority,
+      completed: goal.completed
     }));
   }
 
@@ -42,6 +53,7 @@ export class GoalsService {
       description: goal.description,
       userid: goal.userid,
       priority: goal.priority,
+      completed: goal.completed
     };
   }
 
@@ -52,6 +64,7 @@ export class GoalsService {
     desc: string,
     userid: string,
     priority: boolean,
+    completed: boolean,
   ) {
     const updatedGoal = await this.findGoal(goalId);
 
@@ -71,6 +84,9 @@ export class GoalsService {
     if (priority != undefined) {
       updatedGoal.priority = priority;
     }
+    if (completed != undefined) {
+      updatedGoal.completed = completed;
+    }
     await updatedGoal.save();
   }
 
@@ -79,13 +95,14 @@ export class GoalsService {
     console.log(result);
   }
 
-  async getGoalsToUser(userid: string) {
+  async getGoalsToUser (userid: string, completed: boolean){
     let goals;
 
-    try {
-      goals = await this.goalModel.find({ userid: userid });
-    } catch (error) {
-      throw new NotFoundException('Could not find task');
+    try{
+      goals = await this.goalModel.find( { userid: userid, completed: completed } )
+    }
+    catch(error){
+      throw new NotFoundException('Could not find task')
     }
     if (!goals) {
       throw new NotFoundException('Could not find task task');

@@ -59,6 +59,9 @@ import {CdkAccordionModule} from "@angular/cdk/accordion";
 import {EditReviewComponent} from './components/annual-review/edit-review/edit-review.component';
 import { TodoEditComponent } from './components/todo/todo-edit/todo-edit.component';
 import {NgxTranslateModule} from "./translate/ngx-translate.module";
+import { OverviewComponent } from './components/overview/overview.component';
+import { SuccessesComponent } from './components/goals/successes/successes.component';
+import { GoalCompletedDialogComponent } from './components/goals/goal-completed-dialog/goal-completed-dialog.component';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -80,7 +83,10 @@ export function playerFactory() {
     NotFoundComponent,
     TeamviewComponent,
     EditReviewComponent,
-    TodoEditComponent
+    TodoEditComponent,
+    OverviewComponent,
+    SuccessesComponent,
+    GoalCompletedDialogComponent
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),

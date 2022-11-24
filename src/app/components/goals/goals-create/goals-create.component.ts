@@ -10,6 +10,7 @@ import {AuthService} from '../../../services/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GoalsEditComponent} from '../goals-edit/goals-edit.component';
 import { DateAdapter } from '@angular/material/core';
+import { GoalCompletedDialogComponent } from '../goal-completed-dialog/goal-completed-dialog.component';
 
 @Component({
   selector: 'app-goals',
@@ -43,7 +44,7 @@ export class GoalsCreateComponent implements OnInit {
   idDialog: any = '';
   tasksToOneGoal: Tasks[] = [];
   editableId: String = '';
-  selectedGoal: Goals = {_id: '', description: '', userid: '', priority: false, expiry_date: new Date()};
+  selectedGoal: Goals = {_id: '', description: '', userid: '', priority: false, expiry_date: new Date(),  completed: false};
   showTasksToOneGoal = false;
   newTask: Tasks = {goalid: '', _id: '', description: '', status: ''};
   deleteTodo: String = '';
@@ -117,7 +118,23 @@ export class GoalsCreateComponent implements OnInit {
       const first = await this.getNumberAllTasksDone(item._id);
       this.progress = (first / second) * 100;
       this.progressArray.push(this.progress);
+      if (second == first && second > 0) {
+        this.setGoalCompleted(res[i]);
+      }
     }
+  }
+
+  setGoalCompleted(goal: Goals) {
+    goal.completed = true;
+    this.api.updateGoal(goal._id, goal).subscribe(
+      (res) => {
+        this.openGoalCompletedDialog(goal._id, goal.description);
+        console.log('goal completed');
+      },
+      (error) => {
+        console.log(error);
+      });
+
   }
 
   async getNumberAllTasks(goalid: String): Promise<number> {
@@ -147,6 +164,8 @@ export class GoalsCreateComponent implements OnInit {
     if(this.enteredExpiryDate){
       simpleObject.expiry_date = new Date(this.enteredExpiryDate);
     }
+    simpleObject.completed = false;
+
     this.api.addGoal(simpleObject).subscribe(
       (res: any) => {
         this.isLoadingResults = false;
@@ -258,6 +277,23 @@ export class GoalsCreateComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.ngOnInit();
     });
+  }
+
+  openGoalCompletedDialog(id: any, desc: string): void {
+    this.idDialog = id;
+    const dialogRef = this.dialog.open(GoalCompletedDialogComponent, {
+      width: '50%',
+      data: {id: this.idDialog, description: desc},
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      window.location.reload();
+    });
+  }
+
+  setEditableToTrue() {
+    if (this.selectedRole == 'Mitarbeiter_in') {
+      this.editable = true;
+    }
   }
 
   setTheSelectedGoal(goal: Goals) {

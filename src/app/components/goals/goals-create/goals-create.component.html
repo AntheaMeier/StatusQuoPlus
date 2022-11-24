@@ -1,7 +1,7 @@
 <div>
   <mat-card class="goalsCard">
-    <p>{{ 'Ziele.ziele' | translate }}
-      <button *ngIf="selectedRole == 'Mitarbeiter_in'" class="bttn icon-display" style="font-size: 23px" (click)="addPostForm()">+</button>
+    <p>
+      <button *ngIf="selectedRole == 'Mitarbeiter_in'" class="bttn icon-display" style="font-size: 23px" (click)="addPostForm()">Ziel hinzufügen</button>
     </p>
     <div *ngIf="goalsToOneUser.length == 0" class="description-styling">
       <p>{{ 'Ziele.nichtVorhanden' | translate}}</p>

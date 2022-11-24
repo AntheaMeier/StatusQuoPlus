@@ -1,0 +1,113 @@
+.trophy_icon {
+    color: darkgoldenrod;
+    margin-right: 10px;
+}
+  
+  .goalsCard {
+    margin: 1%;
+    font-size: 15px;
+    color: #0071B9 !important;
+    box-shadow: none;
+  }
+  
+  ::ng-deep.mat-expansion-panel {
+    background-color: #E8E4E1;
+    margin-bottom: 1%;
+  }
+  
+  .button-styling {
+    flex: 20%;
+    color: #857971;
+  }
+  
+  .span-styling {
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+  }
+  
+  .description-styling {
+    width: 90%;
+  }
+  
+  @media screen and (max-width: 800px) {
+    .description-styling {
+      width: 85%;
+    }
+  }
+  
+  ::ng-deep .mat-focused .mat-form-field-label {
+    color: #0071B9 !important;
+  }
+  
+  .test {
+    display: block;
+  }
+  
+  .goals-matcard {
+    color: #857971;
+    width: 100%;
+    background-color: #E8E4E1;
+    margin: 0 auto;
+    padding: 2%;
+    box-shadow: none;
+    word-wrap: break-word;
+    display: flex;
+    align-items: center;
+  }
+  
+  @media screen and (max-width: 844px) {
+    .goals-matcard {
+      padding: 5%;
+    }
+  }
+  
+  .progressbar-styling {
+    border-radius: 4px;
+    position: absolute;
+    bottom: 3px;
+    width: 99%;
+    left: 3px;
+    height: 8px;
+  }
+  
+  ::ng-deep .mat-progress-bar-fill::after {
+    background-color: #0071B9;
+  }
+  
+  ::ng-deep .green-progress .mat-progress-bar-fill::after {
+    background-color: green !important;
+  }
+  
+  ::ng-deep .mat-progress-bar-buffer {
+    background: white;
+  }
+  
+  .panel-styling {
+    box-shadow: none;
+    background-color: transparent;
+  }
+  
+  .panel-header-styling {
+    width: 100%;
+    display: inline !important;
+  }
+  
+  .panel-header-styling:hover {
+    background-color: transparent !important;
+  }
+  
+  .mat-input-element {
+    color: #857971;
+  }
+  
+  ::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+    color: #0071B9 !important;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    margin-top: 2%;
+  }
+  
+  

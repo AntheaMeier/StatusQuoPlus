@@ -11,6 +11,13 @@
     "deinZiel": "Dein Ziel",
     "eingabeBeschreibung": "Bitte gib eine Beschreibung ein"
   },
+  "Erfolge": {
+    "erfolge": "ERFOLGE",
+    "nichtVorhanden": "Du hast noch keine Erfolge.",
+    "dialogTitle": "Das Ziel wurde erfolgreich abgeschlossen!",
+    "dialogText": "Du hast das Ziel erfolgreich abgeschlossen und findest es jetzt unter dem Erfolge-Tab."
+  },
+
   "Protokolle": {
     "protokolle": "PROTOKOLLE",
     "unterjaehrigerAustausch": "UNTERJÄHRIGER AUSTAUSCH",

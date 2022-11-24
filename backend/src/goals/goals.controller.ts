@@ -19,12 +19,14 @@ export class GoalsController {
     @Body('description') goalDesc: string,
     @Body('userid') goalUserid: string,
     @Body('priority') goalPriority: boolean,
+    @Body('completed') goalCompleted: boolean,
   ) {
     const generatedId = await this.goalsService.insertGoals(
       goalExpiryDate,
       goalDesc,
       goalUserid,
       goalPriority,
+      goalCompleted
     );
     return { id: generatedId };
   }
@@ -46,6 +48,7 @@ export class GoalsController {
     @Body('expiry_date') goalExpiryDate: Date,
     @Body('description') goalDesc: string,
     @Body('userid') goalUserid: string,
+    @Body('completed') goalCompleted: boolean,
     @Body('priority') goalPriority: boolean,
   ) {
     await this.goalsService.updateGoal(
@@ -55,6 +58,7 @@ export class GoalsController {
       goalDesc,
       goalUserid,
       goalPriority,
+      goalCompleted
     );
     return null;
   }
@@ -65,8 +69,13 @@ export class GoalsController {
     return null;
   }
 
-  @Get('user/:userid')
-  async getAllGoalsToUser(@Param('userid') userid: string) {
-    return await this.goalsService.getGoalsToUser(userid);
+  @Get('user/:userid/:completed')
+  async getAllGoalsToUser(
+    @Param('userid') userid: string,
+    @Param('completed') completed: boolean,
+
+  ){
+    const goals = await this.goalsService.getGoalsToUser(userid, completed);
+    return goals;
   }
 }
