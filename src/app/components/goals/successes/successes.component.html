@@ -1,0 +1,24 @@
+<!-- <div *ngFor="let goal of successes">
+{{ goal.description }}
+</div> -->
+
+<mat-card class="goalsCard">
+    <div *ngIf="successes.length == 0" class="description-styling">
+        <p>{{ 'Erfolge.nichtVorhanden' | translate}}</p>
+    </div>
+    <div
+        *ngFor="let goal of successes">
+        <mat-expansion-panel hideToggle class="panel-styling" [disabled]="true">
+            <mat-expansion-panel-header class="panel-header-styling">
+                <mat-card class="goals-matcard">
+                    <span class="trophy_icon">
+                        <mat-icon>emoji_events</mat-icon>
+                    </span>
+                    <div class="description-styling">
+                        {{goal.description}}
+                    </div>
+                </mat-card>
+            </mat-expansion-panel-header>
+        </mat-expansion-panel>
+    </div>
+</mat-card>

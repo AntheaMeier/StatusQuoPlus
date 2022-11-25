@@ -11,6 +11,13 @@
     "deinZiel": "Dein Ziel",
     "eingabeBeschreibung": "Bitte gib eine Beschreibung ein"
   },
+  "Erfolge": {
+    "erfolge": "ERFOLGE",
+    "nichtVorhanden": "Du hast noch keine Erfolge.",
+    "dialogTitle": "Herzlichen Glückwunsch, du hast dein Ziel erreicht!",
+    "dialogText": "Du findest es ab jetzt unter dem Erfolge-Tab"
+  },
+
   "Protokolle": {
     "protokolle": "PROTOKOLLE",
     "unterjaehrigerAustausch": "UNTERJÄHRIGER AUSTAUSCH",
@@ -49,6 +56,9 @@
   "Button": {
     "abbrechen": "Abbrechen",
     "speichern": "Speichern",
-    "loeschen": "Löschen"
+    "loeschen": "Löschen",
+    "anpinnen": "Anpinnen",
+    "nichtAnpinnen": "lösen",
+    "allesKlar": "Alles klar!"
   }
 }

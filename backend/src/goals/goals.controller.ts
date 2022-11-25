@@ -15,22 +15,25 @@ export class GoalsController {
 
   @Post()
   async addGoals(
+    @Body('expiry_date') goalExpiryDate: Date,
     @Body('description') goalDesc: string,
-    @Body('order') goalOrder: string,
     @Body('userid') goalUserid: string,
+    @Body('priority') goalPriority: boolean,
+    @Body('completed') goalCompleted: boolean,
   ) {
     const generatedId = await this.goalsService.insertGoals(
+      goalExpiryDate,
       goalDesc,
-      goalOrder,
       goalUserid,
+      goalPriority,
+      goalCompleted,
     );
     return { id: generatedId };
   }
 
   @Get()
   async getAllGoals() {
-    const goals = await this.goalsService.getGoals();
-    return goals;
+    return await this.goalsService.getGoals();
   }
 
   @Get(':id')
@@ -38,22 +41,25 @@ export class GoalsController {
     return this.goalsService.getSingleGoal(goalId);
   }
 
-  @Patch(':id')
+  @Patch(':id/:removeExpiryDate')
   async updateGoal(
     @Param('id') goalId: string,
+    @Param('removeExpiryDate') removeExpiryDate: string,
+    @Body('expiry_date') goalExpiryDate: Date,
     @Body('description') goalDesc: string,
     @Body('userid') goalUserid: string,
+    @Body('completed') goalCompleted: boolean,
+    @Body('priority') goalPriority: boolean,
   ) {
-    await this.goalsService.updateGoal(goalId, goalDesc, goalUserid);
-    return null;
-  }
-
-  @Patch(':order/:id')
-  async updateGoalOrder(
-    @Param('id') goalId: string,
-    @Body('order') goalOrder: string,
-  ) {
-    await this.goalsService.updateGoalOrder(goalId, goalOrder);
+    await this.goalsService.updateGoal(
+      goalId,
+      removeExpiryDate === 'true',
+      goalExpiryDate,
+      goalDesc,
+      goalUserid,
+      goalPriority,
+      goalCompleted
+    );
     return null;
   }
 
@@ -63,12 +69,12 @@ export class GoalsController {
     return null;
   }
 
-  @Get('user/:userid')
+  @Get('user/:userid/:completed')
   async getAllGoalsToUser(
     @Param('userid') userid: string,
+    @Param('completed') completed: boolean,
 
   ){
-    const goals = await this.goalsService.getGoalsToUser(userid);
-    return goals;
+    return await this.goalsService.getGoalsToUser(userid, completed);
   }
 }

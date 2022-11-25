@@ -70,7 +70,7 @@ export class AnnualReviewComponent implements OnInit {
     this.currentUrl = this.router.url;
     this.isLoadingResults = true;
     const simpleObject = {} as Review;
-    var date = moment(this.enteredDate).format('DD.MM.yyyy');
+    let date = moment(this.enteredDate).format('DD.MM.yyyy');
     simpleObject.date = date;
     simpleObject.description = this.enteredContent;
     simpleObject.userid = id;
