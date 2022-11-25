@@ -93,6 +93,12 @@ export class GoalsCreateComponent implements OnInit {
     if (this.goalSelectedReload) this.setGoalsid(this.goalSelectedReload);
     this.idloggedInUser = this.auth.getUserDetails()._id;
 
+    if (history.state.data != null) {
+      this.dataUser = history.state.data;
+      this.idMember = this.dataUser.userid;
+      this.selectedRole = this.dataUser.selectedRole;
+    }
+
     if (this.currentUrl == '/') {
       this.showTasks(this.goalSelectedReload);
       this.selectedRole = 'Mitarbeiter_in';
@@ -102,13 +108,6 @@ export class GoalsCreateComponent implements OnInit {
       this.idMember = this.route.snapshot.paramMap.get('id');
       this.showGoals(this.idMember);
     }
-
-    if (history.state.data != null) {
-      this.dataUser = history.state.data;
-      this.idMember = this.dataUser.userid;
-      this.selectedRole = this.dataUser.selectedRole;
-    }
-    this.fillGoalsArray(this.idloggedInUser);
   }
 
   async fillProgressArray() {
@@ -116,20 +115,20 @@ export class GoalsCreateComponent implements OnInit {
     for (let item of this.goalsToOneUser) {
       let second = await this.getNumberAllTasks(item._id);
       const first = await this.getNumberAllTasksDone(item._id);
+      second = await this.getNumberAllTasks(item._id);
       this.progress = (first / second) * 100;
       this.progressArray.push(this.progress);
       if (second == first && second > 0) {
-        this.setGoalCompleted(res[i]);
+        this.setGoalCompleted(item);
       }
     }
   }
 
   setGoalCompleted(goal: Goals) {
     goal.completed = true;
-    this.api.updateGoal(goal._id, goal).subscribe(
+    this.api.updateGoal(goal._id, goal, false).subscribe(
       (res) => {
         this.openGoalCompletedDialog(goal._id, goal.description);
-        console.log('goal completed');
       },
       (error) => {
         console.log(error);
@@ -373,16 +372,11 @@ export class GoalsCreateComponent implements OnInit {
   }
 
   fillGoalsArray(id: string): void{
-    this.api.getGoalsToUser(id).subscribe(
+    this.api.getGoalsToUser(id, false).subscribe(
       (res: any) => {
+        this.goalsToOneUser = [];
         this.goalsToOneUser = res;
         this.isLoadingResults = false;
-
-        this.goalsToOneUser.forEach( goal => {
-            if(goal.expiry_date) {
-              this.calculate(goal.expiry_date);
-            }
-          });
         this.goalsToOneUser.sort(function(a,b) {
           if (!a.expiry_date) {
             return 1;

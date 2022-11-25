@@ -26,7 +26,7 @@ export class GoalsController {
       goalDesc,
       goalUserid,
       goalPriority,
-      goalCompleted
+      goalCompleted,
     );
     return { id: generatedId };
   }
@@ -75,7 +75,6 @@ export class GoalsController {
     @Param('completed') completed: boolean,
 
   ){
-    const goals = await this.goalsService.getGoalsToUser(userid, completed);
-    return goals;
+    return await this.goalsService.getGoalsToUser(userid, completed);
   }
 }

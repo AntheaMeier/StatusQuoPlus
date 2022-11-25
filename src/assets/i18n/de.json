@@ -14,8 +14,8 @@
   "Erfolge": {
     "erfolge": "ERFOLGE",
     "nichtVorhanden": "Du hast noch keine Erfolge.",
-    "dialogTitle": "Das Ziel wurde erfolgreich abgeschlossen!",
-    "dialogText": "Du hast das Ziel erfolgreich abgeschlossen und findest es jetzt unter dem Erfolge-Tab."
+    "dialogTitle": "Herzlichen Glückwunsch, du hast dein Ziel erreicht!",
+    "dialogText": "Du findest es ab jetzt unter dem Erfolge-Tab"
   },
 
   "Protokolle": {
@@ -58,6 +58,7 @@
     "speichern": "Speichern",
     "loeschen": "Löschen",
     "anpinnen": "Anpinnen",
-    "nichtAnpinnen": "lösen"
+    "nichtAnpinnen": "lösen",
+    "allesKlar": "Alles klar!"
   }
 }

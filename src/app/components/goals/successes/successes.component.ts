@@ -16,11 +16,7 @@ export class SuccessesComponent implements OnInit {
   idloggedInUser: string = '';
   idMember: any;
   successes: Goals[] = [];
-  selectedGoal: Goals = {_id: '', description: '', order: '', userid: '', completed: false};
-  showGoalid = '';
-  tasksToOneGoal: Tasks[] = [];
-
-
+  selectedGoal: Goals = {_id: '', description: '', userid: '', expiry_date: new Date(), priority: false, completed: false};
 
   constructor(
     private auth: AuthService,
@@ -37,9 +33,8 @@ export class SuccessesComponent implements OnInit {
       this.idMember = this.route.snapshot.paramMap.get('id');
       this.getSuccesses(this.idMember);
     }
-    console.log('ngoninit')
   }
-  
+
   getSuccesses(idloggedInUser: any) {
     this.api.getGoalsToUser(idloggedInUser, true).subscribe(
       (res) => {
@@ -49,27 +44,5 @@ export class SuccessesComponent implements OnInit {
         console.log(error);
       }
     );
-  }
-
-  setTheSelectedGoal(goal: Goals) {
-    if (this.currentUrl == '/') {
-      localStorage.setItem('selectedGoal', goal._id);
-    }
-    this.selectedGoal = goal;
-  }
-
-  showTasks(id: any) {
-    this.api.getTasksToGoal(id).subscribe(
-      (res: any) => {
-        this.tasksToOneGoal = res;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
-
-  setGoalsid(value: string) {
-    this.showGoalid = value;
   }
 }

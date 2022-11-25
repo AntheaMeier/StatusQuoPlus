@@ -9,3 +9,7 @@ mat-icon {
 .success_icon {
     color: darkgoldenrod;
 }
+
+::ng-deep .mat-ink-bar {
+  background-color: #0071B9 !important;
+}

@@ -79,9 +79,7 @@
               *ngIf="selectedRole == 'Mitarbeiter_in'"
               class="progressbar-styling"
               mode="determinate"
-              value="{{progressArray[index]}}"
-              ngModel="progressArray[index]"
-              (ngModelChange)="fillProgressArray()">
+              value="{{progressArray[index]}}">
             </mat-progress-bar>
             <mat-panel-description>
               <span class="span-styling">

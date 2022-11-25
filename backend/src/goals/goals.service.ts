@@ -12,20 +12,12 @@ export class GoalsService {
     desc: string,
     userid: string,
     priority: boolean,
-  ) {
-  }
-
-  async insertGoals(
-    desc: string,
-    expiry_date: Date,
-    userid: string,
-    priority: boolean,
     completed: boolean
   ) {
     const newGoal = new this.goalModel({
-      expiry_date,
+      expiry_date: expiry_date,
       description: desc,
-      userid,
+      userid: userid,
       priority: priority,
       completed: completed,
     });
@@ -95,7 +87,7 @@ export class GoalsService {
     console.log(result);
   }
 
-  async getGoalsToUser (userid: string, completed: boolean){
+  async getGoalsToUser(userid: string, completed: boolean){
     let goals;
 
     try{

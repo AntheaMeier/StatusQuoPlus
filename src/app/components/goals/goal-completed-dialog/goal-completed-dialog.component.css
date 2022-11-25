@@ -1,0 +1,14 @@
+.dialog {
+  text-align: center;
+}
+
+button {
+  background-color: green;
+  color: white;
+  margin: 20px auto auto auto;
+}
+
+mat-icon {
+  color: darkgoldenrod;
+  font-size: 50px !important;
+}
