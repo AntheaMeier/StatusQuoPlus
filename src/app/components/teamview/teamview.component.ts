@@ -64,7 +64,7 @@ export class TeamviewComponent implements OnInit {
   }
 
   loadGoals(userid: any) {
-    this.api.getGoalsToUser(userid)
+    this.api.getGoalsToUser(userid, false)
       .subscribe((res: any) => {
         this.goalsToOneUser = res;
         this.isLoadingResults = false;
