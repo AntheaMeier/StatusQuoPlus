@@ -50,6 +50,7 @@ export class TodoComponent implements OnInit {
   @Output() deleteTodo = new EventEmitter<String>();
   @Output() result = new EventEmitter<String>();
   @Output() changedOrder = new EventEmitter<boolean>();
+  @Output() refillProgressArray = new EventEmitter<string>();
 
   constructor(
     public dialog: MatDialog,
@@ -107,7 +108,6 @@ export class TodoComponent implements OnInit {
         }
       );
       this.addPost = false;
-      window.location.reload();
     }
   }
 
@@ -120,7 +120,6 @@ export class TodoComponent implements OnInit {
     this.api.updateTask(id, this.todoForm.value).subscribe(
       (res: any) => {
         const id = res._id;
-        console.log(id);
         this.isLoadingResults = false;
       },
       (err: any) => {
@@ -130,7 +129,7 @@ export class TodoComponent implements OnInit {
     );
   }
 
-  openDialog(id: any, description: any): void {
+  openDialog(id: any, description: any, status: string, goalId: string): void {
     this.descriptionDialog = description;
     this.idDialog = id;
     const dialogRef = this.dialog.open(TodoEditComponent, {
@@ -138,8 +137,28 @@ export class TodoComponent implements OnInit {
       data: { id: this.idDialog, description: this.descriptionDialog },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.ngOnInit();
+      //get updated task.description to display new task.description without window.location.reload()
+      this.refillTaskArrays(status, goalId);
     });
+  }
+
+  refillTaskArrays(status: string, goalId: string): void {
+    this.api.getTasksToStatus(goalId, status).subscribe(
+      (res: any) => {
+        if (status == 'todo') {
+          this.tasksToTodo = res;
+        } else if (status == 'doing') {
+          this.tasksToDoing = res;
+        } else if(status == 'done') {
+          this.tasksToDone = res;
+        }
+        this.isLoadingResults = false;
+      },
+      (err) => {
+        console.log(err);
+        this.isLoadingResults = false;
+      }
+    );
   }
 
   // TODO
@@ -153,7 +172,6 @@ export class TodoComponent implements OnInit {
       }
     });
     this.changedOrder.emit(true);
-    window.location.reload();
   }
 
   dropInTodo(event: CdkDragDrop<any>) {
@@ -173,6 +191,7 @@ export class TodoComponent implements OnInit {
         );
         this.changeStatusToTodo();
       }
+      this.refillProgressArray.emit('refill');
     }
   }
 
@@ -187,7 +206,6 @@ export class TodoComponent implements OnInit {
       }
     });
     this.changedOrder.emit();
-    window.location.reload();
   }
 
   dropInDoing(event: CdkDragDrop<any>) {
@@ -208,6 +226,7 @@ export class TodoComponent implements OnInit {
         );
         this.changeStatusToDoing();
       }
+      this.refillProgressArray.emit('refill');
     }
   }
 
@@ -222,7 +241,6 @@ export class TodoComponent implements OnInit {
       }
     });
     this.changedOrder.emit(true);
-    window.location.reload();
   }
 
   dropInDone(event: CdkDragDrop<any>) {
@@ -243,10 +261,11 @@ export class TodoComponent implements OnInit {
         );
         this.changeStatusToDone();
       }
+      this.refillProgressArray.emit('refill');
     }
   }
 
-  deleteDialog(id: any): void {
+  deleteDialog(id: any, status: string, goalId: string): void {
     this.deleteTodo.emit(id);
     let idDialog = id;
     const dialogRef = this.dialog.open(DeleteTaskDialogComponent, {
@@ -254,14 +273,11 @@ export class TodoComponent implements OnInit {
       data: { _id: idDialog },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result.event == 'Delete') {
+      if (result == 'Delete') {
         this.decision = 'yes';
         this.result.emit(this.decision);
       }
-      if (result.event != 'Close') {
-        this.decision = 'no';
-        this.result.emit(this.decision);
-      }
+      this.refillTaskArrays(status, goalId)
     });
   }
 
@@ -271,9 +287,5 @@ export class TodoComponent implements OnInit {
       return true;
     }
     return this.selectedRole == 'Vorgesetzte_r';
-  }
-
-  geklickt() {
-    console.log('geklickt');
   }
 }

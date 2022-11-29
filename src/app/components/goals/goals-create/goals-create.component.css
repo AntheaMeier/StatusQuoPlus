@@ -96,6 +96,10 @@
   word-wrap: break-word;
 }
 
+.goals-matcard:hover {
+  background-color: #BFDCEE !important;
+}
+
 .progressbar-styling {
   border-radius: 4px;
   position: absolute;

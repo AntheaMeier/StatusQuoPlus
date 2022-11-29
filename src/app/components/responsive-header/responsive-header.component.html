@@ -31,7 +31,7 @@
           </div>
         </mat-expansion-panel>
       </ng-container>
-      <a (click)='logout()' mat-list-item *ngIf="(loginData$ | async)">
+      <a (click)='logout()' mat-list-item *ngIf="loginData$ | async">
         <mat-icon>exit_to_app</mat-icon>
         <div class="sidenav-text">{{ 'Login.logout' | translate }}</div>
       </a>

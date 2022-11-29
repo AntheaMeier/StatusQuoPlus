@@ -117,7 +117,8 @@
                     (newTodo)="setNewtask($event)"
                     (deleteTodo)="deleteTask($event)"
                     (result)="setDecision($event)"
-                    (changedOrder)="loadProgressNew($event)">
+                    (changedOrder)="loadProgressNew($event)"
+                    (refillProgressArray)="fillProgressArray()">
           </app-todo>
         </div>
       </mat-expansion-panel>
