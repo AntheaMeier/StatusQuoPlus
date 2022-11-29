@@ -23,6 +23,7 @@
     "@angular/router": "~12.2.0",
     "@auth0/angular-jwt": "^5.0.2",
     "@lottiefiles/lottie-player": "^1.5.4",
+    "@nestjs/mapped-types": "*",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "@okta/okta-auth-js": "4.8.0",

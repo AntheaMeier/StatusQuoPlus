@@ -20,6 +20,8 @@ const apiUrlUsersForGoal = 'http://localhost:3000/goals/user';
 const apiUrlReviews = 'http://localhost:3000/reviews';
 const apiUrlTasksForStatus = 'http://localhost:3000/tasks/goal';
 const apiUrlUsersForReview = 'http://localhost:3000/reviews/user';
+const apiUrlFeedback = 'http://localhost:3000/feedback';
+
 
 @Injectable({
   providedIn: 'root',
