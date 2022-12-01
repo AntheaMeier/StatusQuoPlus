@@ -1,46 +1,48 @@
-<h1>{{ 'Ziele.bearbeiten' | translate }}</h1>
-<div mat-dialog-content>
-  <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
-    <mat-form-field appearance="outline">
-      <input [(ngModel)]="enteredValue" matInput placeholder="{{ 'Ziele.deinZiel' | translate }}" formControlName="description"
-             value="">
-      <mat-error>
-        <span>{{ 'Ziele.eingabeBeschreibung' | translate }}</span>
-      </mat-error>
+<div class="dialog">
+  <h1>{{ 'Ziele.bearbeiten' | translate }}</h1>
+  <div mat-dialog-content>
+    <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
+      <mat-form-field appearance="outline">
+        <input [(ngModel)]="enteredValue" matInput placeholder="{{ 'Ziele.deinZiel' | translate }}" formControlName="description"
+               value="">
+        <mat-error>
+          <span>{{ 'Ziele.eingabeBeschreibung' | translate }}</span>
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </div>
+   <!-- Fälligkeitsdatum Bearbeiten US4.5 -->
+  <div class="faelligkeitsdatum-div">
+     <mat-form-field appearance="fill"> <!-- ist bei den annual reviews: <mat-form-field class="col-md-12"> -->
+      <input
+        readonly='true'
+        matInput [matDatepicker]="picker"
+        [(ngModel)]="enteredExpiryDate"
+        id="dateEntry"
+        name="date"
+        required
+        placeholder="{{placeholderExpiryDate}}"
+        #date="ngModel">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-  </form>
-</div>
- <!-- Fälligkeitsdatum Bearbeiten US4.5 -->
-<div class="faelligkeitsdatum-div">
-   <mat-form-field appearance="fill"> <!-- ist bei den annual reviews: <mat-form-field class="col-md-12"> -->
-    <input
-      readonly='true'
-      matInput [matDatepicker]="picker"
-      [(ngModel)]="enteredExpiryDate"
-      id="dateEntry"
-      name="date"
-      required
-      placeholder="{{placeholderExpiryDate}}"
-      #date="ngModel">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  <button class="faelligkeitsdatum-loeschen-button" mat-button (click)="faelligkeitsdatumLoeschen()">
-    <mat-icon>delete</mat-icon>
-  </button>
-</div>
-<!-- Fälligkeitsdatum Bearbeiten US4.5  Ende -->
-
-<div mat-dialog-actions>
-  <form [formGroup]="articleForm">
-    <button mat-button (click)="onNoClick()">{{ 'Button.abbrechen' | translate }}</button>
-    <button class="save-button"
-            mat-button
-            (keyup.enter)="onFormSubmit()"
-            (click)="onFormSubmit()"
-            type="submit"
-            [disabled]="!articleForm.valid">
-      {{ 'Button.speichern' | translate }}
+    <button class="faelligkeitsdatum-loeschen-button" mat-button (click)="faelligkeitsdatumLoeschen()">
+      <mat-icon>delete</mat-icon>
     </button>
-  </form>
+  </div>
+  <!-- Fälligkeitsdatum Bearbeiten US4.5  Ende -->
+
+  <div mat-dialog-actions>
+    <form [formGroup]="articleForm">
+      <button mat-button (click)="onNoClick()">{{ 'Button.abbrechen' | translate }}</button>
+      <button class="save-button"
+              mat-button
+              (keyup.enter)="onFormSubmit()"
+              (click)="onFormSubmit()"
+              type="submit"
+              [disabled]="!articleForm.valid">
+        {{ 'Button.speichern' | translate }}
+      </button>
+    </form>
+  </div>
 </div>

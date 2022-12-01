@@ -6,10 +6,11 @@
     "ziele": "ZIELE",
     "hinzufuegen": "hinzufügen",
     "loeschen": "Willst du dieses Ziel wirklich löschen?",
-    "bearbeiten": "Hier kannst du dein Ziel bearbeiten:",
+    "bearbeiten": "Hier kannst du dein Ziel bearbeiten",
     "nichtVorhanden": "Du hast noch keine Ziele.",
     "deinZiel": "Dein Ziel",
-    "eingabeBeschreibung": "Bitte gib eine Beschreibung ein"
+    "eingabeBeschreibung": "Bitte gib eine Beschreibung ein",
+    "zielHinzufuegen": "Ziel hinzufügen"
   },
   "Erfolge": {
     "erfolge": "ERFOLGE",

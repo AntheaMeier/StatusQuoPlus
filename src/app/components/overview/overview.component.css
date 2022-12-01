@@ -13,3 +13,7 @@ mat-icon {
 ::ng-deep .mat-ink-bar {
   background-color: #0071B9 !important;
 }
+
+.font {
+  font-size: 16px;
+}
