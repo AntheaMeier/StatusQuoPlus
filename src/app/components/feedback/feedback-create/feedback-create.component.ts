@@ -10,7 +10,7 @@ import { FeedbackDialogComponent } from '../feedback-dialog/feedback-dialog.comp
 export class FeedbackCreateComponent implements OnInit {
   constructor(public dialog: MatDialog) {}
  
- 
+
 
   ngOnInit(): void {
   }

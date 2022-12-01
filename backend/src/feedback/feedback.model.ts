@@ -1,9 +1,9 @@
 import * as mongoose from 'mongoose';
 
 export const FeedbackSchema = new mongoose.Schema({
-  provider_id: {type: String, required: true},
-  receiver_id: {type:String, required: true},
-  feedback_text:{type:String, required:true},
+  provider_id: {type: String},
+  receiver_id: {type:String},
+  feedback_text:{type:String},
 });
 
 export interface Feedback extends mongoose.Document {

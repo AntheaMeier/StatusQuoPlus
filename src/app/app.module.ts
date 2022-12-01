@@ -62,6 +62,9 @@ import {NgxTranslateModule} from "./translate/ngx-translate.module";
 import { OverviewComponent } from './components/overview/overview.component';
 import { SuccessesComponent } from './components/goals/successes/successes.component';
 import { GoalCompletedDialogComponent } from './components/goals/goal-completed-dialog/goal-completed-dialog.component';
+import { FeedbackComponent } from './components/feedback/feedback.component';
+import { FeedbackCreateComponent } from './components/feedback/feedback-create/feedback-create.component';
+import { FeedbackDialogComponent } from './components/feedback/feedback-dialog/feedback-dialog.component';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -86,7 +89,10 @@ export function playerFactory() {
     TodoEditComponent,
     OverviewComponent,
     SuccessesComponent,
-    GoalCompletedDialogComponent
+    GoalCompletedDialogComponent,
+    FeedbackComponent,
+    FeedbackCreateComponent,
+    FeedbackDialogComponent
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),

@@ -6,6 +6,8 @@ import { Goals } from '../models/goals';
 import { LoginData, LoginPayload, LoginResponse } from '../models/loginData';
 import { Tasks } from '../models/tasks';
 import { Review } from '../models/review';
+import { Feedback } from '../models/feedback';
+
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -205,6 +207,14 @@ export class ApiService {
     const url = `${apiUrlReviews}/${id}`;
     return this.http.get<Review>(url).pipe(
       catchError(this.handleError<Review>(`getReview id=${id}`))
+    );
+  }
+
+  // Feedbacks
+  addFeedback(feedback: Feedback): Observable<Feedback> {
+    console.log(feedback);
+    return this.http.post<Feedback>(apiUrlFeedback, feedback, httpOptions).pipe(
+      catchError(this.handleError<Feedback>('addFeedback'))
     );
   }
 }

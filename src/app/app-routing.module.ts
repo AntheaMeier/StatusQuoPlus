@@ -8,6 +8,8 @@ import {NotFoundComponent} from "./components/not-found/not-found.component";
 import {TeamviewComponent} from "./components/teamview/teamview.component";
 import {LoginComponent} from "./components/login/login.component";
 import { OverviewComponent } from './components/overview/overview.component';
+import { FeedbackComponent } from './components/feedback/feedback.component';
+import { FeedbackCreateComponent } from './components/feedback/feedback-create/feedback-create.component';
 
 const routes: Routes = [
   {
@@ -32,6 +34,11 @@ const routes: Routes = [
   {
     path: 'protokolle',
     component: AnnualReviewComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'feedback',
+    component: FeedbackComponent,
     canActivate: [AuthGuardService]
   },
   {

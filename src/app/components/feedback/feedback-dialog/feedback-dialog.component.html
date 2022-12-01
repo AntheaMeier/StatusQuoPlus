@@ -1,6 +1,16 @@
-<h1 mat-dialog-title>Dialog with elements</h1>
-<div mat-dialog-content>This dialog showcases the title, close, content and actions elements.</div>
-<div mat-dialog-actions>
+<mat-form-field appearance="outline" style="white-space: pre-wrap;">
+  <textarea
+    [(ngModel)]="enteredContent"
+    id="content"
+    matInput rows="6"
+    name="content"
+    required
+    placeholder="{{'Feedback.notizEingeben' | translate}}"
+    #content="ngModel">
+  </textarea>
+<mat-error *ngIf="content.invalid">{{'Warnung.notizEingeben' | translate}}</mat-error>
+</mat-form-field>
   <button mat-button mat-dialog-close>Close</button>
-</div>
+  <button mat-button (click)="addFeedback()">Add</button>
+
 
