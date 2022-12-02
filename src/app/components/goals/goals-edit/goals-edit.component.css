@@ -45,6 +45,8 @@ mat-form-field {
   text-align: center;
 }
 
-@media screen and (max-width: 700px) {
-
+@media screen and (max-width: 440px) {
+  .form-field-date {
+    width: 75%;
+  }
 }

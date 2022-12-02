@@ -270,7 +270,6 @@ export class GoalsCreateComponent implements OnInit {
   openDialog(id: any): void {
     this.idDialog = id;
     const dialogRef = this.dialog.open(GoalsEditComponent, {
-      width: '50%',
       data: {id: this.idDialog, description: this.description, expiry_date: this.enteredExpiryDate},
     });
     dialogRef.afterClosed().subscribe((result) => {
