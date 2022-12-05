@@ -1,6 +1,6 @@
 export interface Feedback {
   _id: string;
-  providerId: string;
-  receiverId: string;
-  feedbackText: string;
+  provider_id: string;
+  receiver_id: string;
+  feedback_text: string;
 }
