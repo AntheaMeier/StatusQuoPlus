@@ -10,7 +10,7 @@ import {Feedback} from '../../../models/feedback';
   styleUrls: ['./feedback-dialog.component.css']
 })
 export class FeedbackDialogComponent implements OnInit {
-  testfeedback: Feedback = {_id: "", providerId: "", receiverId: "", feedbackText: ""}
+  testfeedback: Feedback = {_id: "", provider_id: "", receiver_id: "", feedback_text: ""}
   idreceiver= "635bf1fe79ec9e6f7ab8b9ea";
   enteredContent = '';
   idloggedInUser: string = '';
@@ -25,10 +25,7 @@ export class FeedbackDialogComponent implements OnInit {
   }
 
   addFeedback(): void{
-    this.testfeedback._id= "";
-    this.testfeedback.providerId = this.idloggedInUser;
-    this.testfeedback.receiverId = this.idreceiver;
-    this.testfeedback.feedbackText = this.enteredContent;
+    this.testfeedback = {_id: "", provider_id: this.idloggedInUser, receiver_id: this.idreceiver, feedback_text: this.enteredContent};
     console.log(this.testfeedback);
     this.api.addFeedback(this.testfeedback).subscribe();
   }
