@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./feedback.component.css']
 })
 export class FeedbackComponent implements OnInit {
+  addPost: any;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+  addPostForm() {
+    this.addPost = !this.addPost;
   }
 
 }

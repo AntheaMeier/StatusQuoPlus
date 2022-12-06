@@ -65,6 +65,7 @@ import { GoalCompletedDialogComponent } from './components/goals/goal-completed-
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { FeedbackCreateComponent } from './components/feedback/feedback-create/feedback-create.component';
 import { FeedbackDialogComponent } from './components/feedback/feedback-dialog/feedback-dialog.component';
+import { SearchBarComponent } from './components/feedback/search-bar/search-bar.component';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -92,7 +93,8 @@ export function playerFactory() {
     GoalCompletedDialogComponent,
     FeedbackComponent,
     FeedbackCreateComponent,
-    FeedbackDialogComponent
+    FeedbackDialogComponent,
+    SearchBarComponent
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),
