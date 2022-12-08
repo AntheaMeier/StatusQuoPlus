@@ -11,6 +11,22 @@
 .example-input {
   width: 100%;
   padding: 8px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  border-radius: 4px;
+  border: 1px solid #857971;
+}
+
+.example-input:focus {
+  border: none;
+  outline: 2px solid #0071B9 !important;
+}
+
+.placeholder {
+  height: 20px;
+  background-color: transparent;
+}
+
+.mat-error {
+  height: 10px;
+  font-size: 12px;
+  margin-left: 10px;
 }

@@ -16,8 +16,7 @@
     "feedback": "FEEDBACK",
     "eingabeBeschreibung": "Bitte gebe eine Beschreibung ein",
     "notizEingeben": "Gebe hier dein Feedback ein",
-    "geben": "Gebe einer Person Feedback"
-    "notizEingeben": "Gebe hier dein Feedback ein",
+    "geben": "Gebe einer Person Feedback",
     "waehlePerson": "Empfänger deines Feedbacks",
     "errorWaehlePerson": "Du hast keine Person ausgewählt"
   },
@@ -59,7 +58,8 @@
   },
   "Warnung": {
     "datumEingeben": "Bitte gebe ein Datum ein",
-    "notizEingeben": "Bitte gebe Notizen ein"
+    "notizEingeben": "Bitte gebe Notizen ein",
+    "feedbackEingeben": "Bitte gebe Feedback ein"
   },
   "Vorschau": {
     "notizEingeben": "Notizen zum unterjaehrigen Austausch"

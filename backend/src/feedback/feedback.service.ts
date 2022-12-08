@@ -38,10 +38,10 @@ export class FeedbackService {
       feedbacks = await this.feedbackModel.find( { receiver_id: receiver_id } )
     }
     catch(error){
-      throw new NotFoundException('Could not find task')
+      throw new NotFoundException('Could not find feedback');
     }
     if (!feedbacks) {
-      throw new NotFoundException('Could not find task task');
+      throw new NotFoundException('Could not find feedback');
     }
     return feedbacks;
   }
@@ -64,9 +64,9 @@ export class FeedbackService {
       throw new NotFoundException('Could not find feedback.');
     }
     if (!feedback) {
-      throw new NotFoundException('Could not find feeback.');
+      throw new NotFoundException('Could not find feedback.');
     }
     return feedback;
   }
-  
+
 }

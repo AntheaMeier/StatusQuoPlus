@@ -1,3 +1,29 @@
 .fbinput {
-    width: 100%;
+  width: 100%;
+  margin-top: 15px;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  color: #0071B9 !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  background-color: #0071B9 !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  background-color: #0071B9 !important;
+}
+
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: #0071B9 !important;
+}
+
+mat-error {
+  font-size: 12px;
+}
+
+.button-div {
+  margin-top: 20px;
+  float: right;
 }
