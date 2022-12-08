@@ -15,8 +15,10 @@
   "Feedback": {
     "feedback": "FEEDBACK",
     "eingabeBeschreibung": "Bitte gebe eine Beschreibung ein",
-    "notizEingeben": "Gebe hier dein Feedback ein"
+    "notizEingeben": "Gebe hier dein Feedback ein",
+    "geben": "Gebe einer Person Feedback"
   },
+  
   "Erfolge": {
     "erfolge": "ERFOLGE",
     "nichtVorhanden": "Du hast noch keine Erfolge.",
@@ -66,6 +68,7 @@
     "loeschen": "Löschen",
     "anpinnen": "Anpinnen",
     "nichtAnpinnen": "lösen",
-    "allesKlar": "Alles klar!"
+    "allesKlar": "Alles klar!",
+    "senden": "Senden"
   }
 }

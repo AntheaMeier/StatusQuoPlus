@@ -9,6 +9,8 @@
 }
 
 .example-input {
-  max-width: 100%;
-  width: 300px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }

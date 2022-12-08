@@ -1,5 +1,5 @@
 <app-search-bar (receiverId)="setReceiverId($event)"></app-search-bar>
-<mat-form-field appearance="outline" style="white-space: pre-wrap;">
+<mat-form-field class="fbinput" appearance="outline" style="white-space: pre-wrap;">
   <textarea
     [(ngModel)]="enteredContent"
     id="content"
@@ -11,7 +11,9 @@
   </textarea>
 <mat-error *ngIf="content.invalid">{{'Warnung.notizEingeben' | translate}}</mat-error>
 </mat-form-field>
-  <button mat-button mat-dialog-close>Close</button>
-  <button mat-button (click)="addFeedback()">Add</button>
+<div>
+  <button mat-button mat-dialog-close>{{'Button.abbrechen' | translate}}</button>
+  <button style="background-color:#0071B9;color:#FFFFFF;" mat-button (click)="addFeedback()">{{'Button.senden' | translate}}</button>
+</div>
 
 
