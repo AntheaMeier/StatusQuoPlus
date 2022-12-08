@@ -15,7 +15,8 @@
   "Feedback": {
     "feedback": "FEEDBACK",
     "eingabeBeschreibung": "Bitte gebe eine Beschreibung ein",
-    "notizEingeben": "Gebe hier dein Feedback ein"
+    "notizEingeben": "Gebe hier dein Feedback ein",
+    "nichtVorhanden": "Du hast noch kein Feedback bekommen."
   },
   "Erfolge": {
     "erfolge": "ERFOLGE",

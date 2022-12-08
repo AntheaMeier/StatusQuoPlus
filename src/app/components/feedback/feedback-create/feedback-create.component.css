@@ -1,0 +1,37 @@
+.feedback-icon {
+    margin-right: 10px;
+}
+  
+.feedback-section {
+    margin: 40px;
+    color: #0071B9;
+}
+
+.feedback-provider {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.feedback-matcard {
+    color: #857971;
+    width: 100%;
+    background-color: #E8E4E1;
+    word-wrap: break-word;
+    margin-bottom: 20px;
+    box-shadow: none;
+    padding: 20px;
+}
+
+.feedback-text {
+    margin-top: 10px;
+    margin-left: 35px;
+}
+
+@media screen and (max-width: 800px) {
+    .description-styling {
+        width: 85%;
+    }
+}
+  
+  

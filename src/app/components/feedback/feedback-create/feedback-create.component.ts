@@ -5,6 +5,8 @@ import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from '../../../services/auth.service';
 import { FeedbackDialogComponent } from '../feedback-dialog/feedback-dialog.component';
 import { Feedback } from 'src/app/models/feedback';
+import { LoginData } from 'src/app/models/loginData';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-feedback-create',
@@ -13,7 +15,7 @@ import { Feedback } from 'src/app/models/feedback';
 })
 export class FeedbackCreateComponent implements OnInit {
   
-  idloggedInUser: string = '';
+  idloggedInUser: '' = '';
   idMember: any;
   feedbacks: Feedback[] = [];
   
@@ -45,7 +47,4 @@ export class FeedbackCreateComponent implements OnInit {
       }
     );
   }
-
-
-  
 }
