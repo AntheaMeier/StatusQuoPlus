@@ -15,7 +15,9 @@ export class SearchBarComponent {
   users: User[] = [];
   myControl = new FormControl('');
   filteredUsers?: Observable<User[]>;
+  showError: boolean = false;
   @Output() receiverId = new EventEmitter<string>();
+  @Output() userClicked = new EventEmitter<boolean>();
 
   constructor(private api: ApiService) {
     this.getAllUsers();
@@ -41,7 +43,16 @@ export class SearchBarComponent {
   }
 
   chooseUser(userId: string): void {
-    console.log('hey : ' + userId);
     this.receiverId.emit(userId);
+    this.setUserClicked(true);
+  }
+
+  setUserClicked(test: boolean): void {
+    if(!test) {
+      this.showError = true;
+    } else {
+      this.showError = false;
+    }
+    this.userClicked.emit(test);
   }
 }

@@ -1,10 +1,10 @@
 <form class="example-form">
   <input type="text"
-         placeholder="Suche nach Kollegen"
+         placeholder="{{ 'Feedback.waehlePerson' | translate }}"
          [formControl]="myControl"
          [matAutocomplete]="auto"
-         class="example-input">
-  <mat-icon>search</mat-icon>
+         class="example-input"
+         (keydown)="setUserClicked(false)">
   <mat-autocomplete #auto="matAutocomplete">
     <mat-option *ngFor="let user of filteredUsers | async" [value]="user.name">
       <div (click)="chooseUser(user._id)">
@@ -13,4 +13,5 @@
       </div>
     </mat-option>
   </mat-autocomplete>
+  <mat-error *ngIf="showError">{{ 'Feedback.errorWaehlePerson' | translate}}</mat-error>
 </form>
