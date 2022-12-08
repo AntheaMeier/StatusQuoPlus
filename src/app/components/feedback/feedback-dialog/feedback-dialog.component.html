@@ -1,4 +1,4 @@
-<app-search-bar (receiverId)="setReceiverId($event)"></app-search-bar>
+<app-search-bar (userClicked)="setUserClicked($event)" (receiverId)="setReceiverId($event)"></app-search-bar>
 <mat-form-field class="fbinput" appearance="outline" style="white-space: pre-wrap;">
   <textarea
     [(ngModel)]="enteredContent"
@@ -13,7 +13,7 @@
 </mat-form-field>
 <div>
   <button mat-button mat-dialog-close>{{'Button.abbrechen' | translate}}</button>
-  <button style="background-color:#0071B9;color:#FFFFFF;" mat-button (click)="addFeedback()">{{'Button.senden' | translate}}</button>
+  <button style="background-color:#0071B9;color:#FFFFFF;" mat-button (click)="addFeedback()" [disabled]="!userClicked || enteredContent == ''">{{'Button.senden' | translate}}</button>
 </div>
 
 

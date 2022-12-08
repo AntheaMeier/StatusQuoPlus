@@ -3,7 +3,6 @@ import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import {Feedback} from '../../../models/feedback';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {GoalsCreateComponent} from "../../goals/goals-create/goals-create.component";
 import {FeedbackCreateComponent} from "../feedback-create/feedback-create.component";
 
 
@@ -17,6 +16,7 @@ export class FeedbackDialogComponent implements OnInit {
   idreceiver= '';
   enteredContent = '';
   idloggedInUser: string = '';
+  userClicked: boolean = false;
 
   constructor(
     private api: ApiService,
@@ -45,6 +45,11 @@ export class FeedbackDialogComponent implements OnInit {
 
   setReceiverId(event: string) {
     console.log('Die Id in Feedback: ' + event);
+    this.userClicked = true;
     this.idreceiver = event;
+  }
+
+  setUserClicked($event: any) {
+    this.userClicked = $event;
   }
 }

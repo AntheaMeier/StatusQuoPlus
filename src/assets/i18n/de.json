@@ -17,8 +17,11 @@
     "eingabeBeschreibung": "Bitte gebe eine Beschreibung ein",
     "notizEingeben": "Gebe hier dein Feedback ein",
     "geben": "Gebe einer Person Feedback"
+    "notizEingeben": "Gebe hier dein Feedback ein",
+    "waehlePerson": "Empfänger deines Feedbacks",
+    "errorWaehlePerson": "Du hast keine Person ausgewählt"
   },
-  
+
   "Erfolge": {
     "erfolge": "ERFOLGE",
     "nichtVorhanden": "Du hast noch keine Erfolge.",
