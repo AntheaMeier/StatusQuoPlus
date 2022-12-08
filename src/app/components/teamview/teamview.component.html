@@ -1,9 +1,24 @@
 <mat-tab-group>
-  <mat-tab label="{{ 'Protokolle.protokolle' | translate }}">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="protocol_icon">description</mat-icon>
+      <span>{{ 'Protokolle.protokolle' | translate }}</span>
+    </ng-template>
     <app-annual-review [selectedRole]="selectedRole" [reviewsToOneUser]="reviewsToOneUser" [idTeamMember]="idMember"></app-annual-review>
   </mat-tab>
-  <mat-tab label="{{ 'Ziele.ziele' | translate }}">
-    <app-goals [selectedRole]="selectedRole" [idMember]="idMember" [goalsToOneUser]="goalsToOneUser"></app-goals>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="goal_icon">task_alt</mat-icon>
+      <span>{{ 'Ziele.ziele' | translate }}</span>
+  </ng-template>
+    <app-goals></app-goals>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="success_icon">emoji_events</mat-icon>
+      <span>{{ 'Erfolge.erfolge' | translate }}</span>
+  </ng-template>
+      <app-successes></app-successes>
   </mat-tab>
   <mat-tab class="name-styling" [disabled]="true" [label]="this.firstname + ' ' + this.surname"></mat-tab>
 </mat-tab-group>

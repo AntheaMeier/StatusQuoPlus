@@ -1,3 +1,19 @@
 ::ng-deep .mat-ink-bar {
   background-color: #0071B9 !important;
 }
+
+mat-icon {
+  margin-right: 10px;
+}
+
+.goal_icon {
+  color: green;
+}
+
+.success_icon {
+  color: darkgoldenrod;
+}
+
+.protocol_icon {
+  color: rgba(4, 112, 186, 1);
+}
