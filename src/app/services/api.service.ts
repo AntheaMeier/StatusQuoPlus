@@ -23,6 +23,7 @@ const apiUrlReviews = 'http://localhost:3000/reviews';
 const apiUrlTasksForStatus = 'http://localhost:3000/tasks/goal';
 const apiUrlUsersForReview = 'http://localhost:3000/reviews/user';
 const apiUrlFeedback = 'http://localhost:3000/feedback';
+const apiUrlFeedbackForUser = 'http://localhost:3000/feedback/receiver';
 
 
 @Injectable({
@@ -217,4 +218,16 @@ export class ApiService {
       catchError(this.handleError<Feedback>('addFeedback'))
     );
   }
+
+  getFeedbackForUser(id: string): Observable<Feedback[]> {
+    return this.http.get<Feedback[]>(`${apiUrlFeedbackForUser}/${id}`).pipe(
+      catchError(this.handleError<Feedback[]>('getFeedbackForUser', []))
+    );
+  }
+
+  getAllFeedback(): Observable<Feedback[]> {
+    return this.http.get<Feedback[]>(apiUrlFeedback).pipe(
+      catchError(this.handleError<Feedback[]>('getFeedback')) 
+    );
+  }  
 }

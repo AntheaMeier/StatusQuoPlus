@@ -1,7 +1,5 @@
 <button mat-button (click)="openDialog()">Feedback +</button>
                      
-<mat-card> 
-    <mat-card-title>
-        ela test
-    </mat-card-title>
-</mat-card>
+<div *ngFor="let feedback of feedbacks">
+{{ feedback.feedback_text }}
+</div>

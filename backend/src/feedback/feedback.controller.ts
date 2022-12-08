@@ -40,10 +40,7 @@ export class FeedbackController {
 
   @Get('receiver/:receiver_id')
   async getAllFeedbacksForReceiver(
-    @Param('receiver_id') receiver_id: string,
-    
-
-  ){
+    @Param('receiver_id') receiver_id: string) {
     return await this.feedbackService.getFeedbackForReceiver(receiver_id);
   }
  
