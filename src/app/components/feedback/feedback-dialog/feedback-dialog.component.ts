@@ -26,7 +26,6 @@ export class FeedbackDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.idloggedInUser = this.auth.getUserDetails()._id;
-    console.log(this.idloggedInUser);
   }
 
   addFeedback(): void{
@@ -34,7 +33,6 @@ export class FeedbackDialogComponent implements OnInit {
     this.testfeedback.provider_id = this.idloggedInUser;
     this.testfeedback.receiver_id = this.idreceiver;
     this.testfeedback.feedback_text = this.enteredContent;
-    console.log(this.testfeedback);
     this.api.addFeedback(this.testfeedback).subscribe( res => {
         this.dialogRef.close();
       },
@@ -44,7 +42,6 @@ export class FeedbackDialogComponent implements OnInit {
   }
 
   setReceiverId(event: string) {
-    console.log('Die Id in Feedback: ' + event);
     this.userClicked = true;
     this.idreceiver = event;
   }
