@@ -13,7 +13,7 @@
 </mat-form-field>
 <div class="button-div">
   <button mat-button mat-dialog-close>{{'Button.abbrechen' | translate}}</button>
-  <button class="button-send" mat-button (click)="addFeedback()" [disabled]="!userClicked || enteredContent == ''">{{'Button.senden' | translate}}</button>
+  <button class="button-send" mat-button (click)="addFeedback(); openSnackBar()" aria-label="Show an example snack-bar" [disabled]="!userClicked || enteredContent == ''">{{'Button.senden' | translate}}</button>
 </div>
 
 

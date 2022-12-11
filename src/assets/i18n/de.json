@@ -19,7 +19,8 @@
     "notizEingeben": "Gebe hier dein Feedback ein",
     "geben": "Gebe einer Person Feedback",
     "waehlePerson": "Empfänger deines Feedbacks",
-    "errorWaehlePerson": "Du hast keine Person ausgewählt"
+    "errorWaehlePerson": "Du hast keine Person ausgewählt",
+    "feedbackGesendet": "Feedback gesendet"
   },
 
   "Erfolge": {

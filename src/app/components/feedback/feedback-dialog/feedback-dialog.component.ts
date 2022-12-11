@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import {Feedback} from '../../../models/feedback';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FeedbackCreateComponent} from "../feedback-create/feedback-create.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 
 
 @Component({
   selector: 'app-feedback-dialog',
   templateUrl: './feedback-dialog.component.html',
-  styleUrls: ['./feedback-dialog.component.css']
+  styleUrls: ['./feedback-dialog.component.css'],
 })
 export class FeedbackDialogComponent implements OnInit {
   testfeedback: Feedback = {_id: '', provider_id: '', receiver_id: '', feedback_text: ''}
@@ -19,6 +21,7 @@ export class FeedbackDialogComponent implements OnInit {
   userClicked: boolean = false;
 
   constructor(
+    public snackBar: MatSnackBar,
     private api: ApiService,
     private auth: AuthService,
     public dialog: MatDialog,
@@ -48,5 +51,14 @@ export class FeedbackDialogComponent implements OnInit {
 
   setUserClicked($event: any) {
     this.userClicked = $event;
+  }
+
+  openSnackBar() {
+    this.snackBar.openFromComponent(SnackBarComponent, {
+      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
+      panelClass: ['success'],
+      duration: 2500,
+    });
   }
 }
