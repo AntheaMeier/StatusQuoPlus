@@ -37,8 +37,8 @@
           {{ task.description }}
         </div>
         <span class="span-styling">
-          <mat-icon class="button-styling" (click)="openDialog(task._id, task.description)" *ngIf="selectedRole == 'Mitarbeiter_in'">edit</mat-icon>
-          <mat-icon class="button-styling" (click)="deleteDialog(task._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">delete_outline</mat-icon>
+          <mat-icon class="button-styling" (click)="openDialog(task._id, task.description, task.status, task.goalid)" *ngIf="selectedRole == 'Mitarbeiter_in'">edit</mat-icon>
+          <mat-icon class="button-styling" (click)="deleteDialog(task._id, task.status, task.goalid)" *ngIf="selectedRole == 'Mitarbeiter_in'">delete_outline</mat-icon>
         </span>
       </mat-card>
     </mat-card>
@@ -60,8 +60,8 @@
           {{ task.description }}
         </div>
         <span class="span-styling">
-          <mat-icon class="button-styling" (click)="openDialog(task._id, task.description)" *ngIf="selectedRole == 'Mitarbeiter_in'">edit</mat-icon>
-          <mat-icon class="button-styling" (click)="deleteDialog(task._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">delete_outline</mat-icon>
+          <mat-icon class="button-styling" (click)="openDialog(task._id, task.description, task.status, task.goalid)" *ngIf="selectedRole == 'Mitarbeiter_in'">edit</mat-icon>
+          <mat-icon class="button-styling" (click)="deleteDialog(task._id, task.status, task.goalid)" *ngIf="selectedRole == 'Mitarbeiter_in'">delete_outline</mat-icon>
         </span>
       </mat-card>
     </mat-card>
@@ -83,8 +83,8 @@
           {{ task.description }}
         </div>
         <span class="span-styling">
-          <mat-icon class="button-styling" (click)="openDialog(task._id, task.description)" *ngIf="selectedRole == 'Mitarbeiter_in'">edit</mat-icon>
-          <mat-icon class="button-styling" (click)="deleteDialog(task._id)" *ngIf="selectedRole == 'Mitarbeiter_in'">delete_outline</mat-icon>
+          <mat-icon class="button-styling" (click)="openDialog(task._id, task.description, task.status, task.goalid)" *ngIf="selectedRole == 'Mitarbeiter_in'">edit</mat-icon>
+          <mat-icon class="button-styling" (click)="deleteDialog(task._id, task.status, task.goalid)" *ngIf="selectedRole == 'Mitarbeiter_in'">delete_outline</mat-icon>
         </span>
       </mat-card>
     </mat-card>

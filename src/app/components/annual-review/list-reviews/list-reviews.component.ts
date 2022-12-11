@@ -63,7 +63,6 @@ export class ListReviewsComponent implements OnInit {
 
     if (this.selectedRole == 'Vorgesetzte_r') {
       this.getReviewDetails(this.idTeamMember);
-      console.log('id member ' + this.idTeamMember);
     }
 
     if (

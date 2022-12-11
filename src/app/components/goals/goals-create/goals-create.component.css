@@ -1,29 +1,21 @@
 .bttn {
-  transition: 1s ease-in-out;
   outline: none;
-  border: 1px solid #0071B9;
-  margin: 1%;
-  padding: 7px 12px 9px;
+  padding: 12px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
   border-radius: 12px;
-  background: transparent;
-  color: #857971;
+  border: 1px solid #0071B9;
+  background-color: #FFFFFF;
+  color: #0071B9;
   font-weight: 100;
-  font-size: 23px;
+  font-size: 18px;
+  margin-bottom: 15px;
 }
 
 .bttn:hover {
-  transition: 1s ease-in-out;
-  background: #0071B9;
-  opacity: 0.4;
-  color: white;
-}
-
-.icon-display {
-  font-size: 15px;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .goalsCard {
@@ -70,6 +62,7 @@
   width: 90%;
   padding-right: 10px;
   margin-bottom: 5px;
+  font-size: 16px;
 }
 
 @media screen and (max-width: 800px) {
@@ -94,6 +87,10 @@
   padding: 20px;
   box-shadow: none;
   word-wrap: break-word;
+}
+
+.goals-matcard:hover {
+  background-color: #BFDCEE !important;
 }
 
 .progressbar-styling {

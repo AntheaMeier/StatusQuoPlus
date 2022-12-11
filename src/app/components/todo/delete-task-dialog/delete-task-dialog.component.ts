@@ -13,7 +13,7 @@ import {Tasks} from "../../../models/tasks";
 })
 export class DeleteTaskDialogComponent implements OnInit {
 
-  id :String =  '';
+  id: String =  '';
   task : Tasks = { _id: '', description: '', status: '', goalid: ''};
   isLoadingResults = false;
   articleForm: FormGroup =  this.formBuilder.group({
@@ -33,27 +33,9 @@ export class DeleteTaskDialogComponent implements OnInit {
     this.dialog.closeAll();
   }
 
-  ngOnInit() {
-    this.getTodo(this.data.id);
-  }
+  ngOnInit() {}
 
-  getTodo(id: any) {
-    this.api.getTodo(id).subscribe((data: any) => {
-      this.id = data.id;
-      this.articleForm.setValue({
-        description: data.description,
-      });
-    });
-  }
-
-  reloadCurrentRoute() {
-    let currentUrl = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate([currentUrl]);
-    });
-  }
-
-  deleteGoal(id: any) {
+  deleteTask(id: any) {
     this.dialogRef.close('Delete');
     this.isLoadingResults = true;
     this.api.deleteTask(id)
@@ -64,12 +46,11 @@ export class DeleteTaskDialogComponent implements OnInit {
           this.isLoadingResults = false;
         }
       );
-    window.location.reload();
   }
 
   onFormSubmit() {
     this.dialogRef.close('Delete');
-    this.deleteGoal(this.data._id);
+    this.deleteTask(this.data._id);
     this.dialog.closeAll();
   }
 }

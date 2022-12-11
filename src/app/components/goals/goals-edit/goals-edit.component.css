@@ -8,7 +8,7 @@ mat-form-field {
 }
 
 .mat-dialog-actions {
-  float: right;
+  float: right
 }
 
 .mat-input-element {
@@ -39,4 +39,14 @@ mat-form-field {
 .faelligkeitsdatum-loeschen-button:active {
   background-color: #f35f3b;
   color: #FFFFFF;
+}
+
+.dialog {
+  text-align: center;
+}
+
+@media screen and (max-width: 440px) {
+  .form-field-date {
+    width: 75%;
+  }
 }
