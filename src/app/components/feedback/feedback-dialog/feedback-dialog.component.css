@@ -27,3 +27,14 @@ mat-error {
   margin-top: 20px;
   float: right;
 }
+
+.button-send {
+  background-color:#0071B9;
+  color:#FFFFFF;
+  margin-left: 10px;
+}
+
+.button-send:disabled {
+  background-color: transparent;
+  color: #E8E4E1;
+}
