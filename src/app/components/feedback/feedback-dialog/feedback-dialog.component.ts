@@ -56,9 +56,8 @@ export class FeedbackDialogComponent implements OnInit {
   openSnackBar() {
     this.snackBar.openFromComponent(SnackBarComponent, {
       verticalPosition: 'bottom',
-      horizontalPosition: 'right',
       panelClass: ['success'],
-      duration: 2500,
+      duration: 2550,
     });
   }
 }

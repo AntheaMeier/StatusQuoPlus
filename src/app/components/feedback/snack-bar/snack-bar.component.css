@@ -4,6 +4,7 @@
   line-height: 18px !important;
   display: flex;
   align-items: center;
+  margin-left: 50px;
 }
 
 mat-icon {
