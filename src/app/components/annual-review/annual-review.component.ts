@@ -35,7 +35,6 @@ export class AnnualReviewComponent implements OnInit {
     private dateAdapter: DateAdapter<Date>)
   {
     this.currentUrl = router.url;
-    console.log(this.currentUrl);
     this.dateAdapter.setLocale('de');
   }
 

@@ -6,11 +6,23 @@
     "ziele": "ZIELE",
     "hinzufuegen": "hinzufügen",
     "loeschen": "Willst du dieses Ziel wirklich löschen?",
-    "bearbeiten": "Hier kannst du dein Ziel bearbeiten:",
+    "bearbeiten": "Hier kannst du dein Ziel bearbeiten",
     "nichtVorhanden": "Du hast noch keine Ziele.",
     "deinZiel": "Dein Ziel",
-    "eingabeBeschreibung": "Bitte gib eine Beschreibung ein"
+    "eingabeBeschreibung": "Bitte gib eine Beschreibung ein",
+    "zielHinzufuegen": "Ziel hinzufügen +"
   },
+
+  "Feedback": {
+    "feedback": "FEEDBACK",
+    "eingabeBeschreibung": "Bitte gebe eine Beschreibung ein",
+    "notizEingeben": "Gebe hier dein Feedback ein",
+    "geben": "Gebe einer Person Feedback",
+    "waehlePerson": "Empfänger deines Feedbacks",
+    "errorWaehlePerson": "Du hast keine Person ausgewählt",
+    "feedbackGesendet": "Feedback gesendet"
+  },
+
   "Erfolge": {
     "erfolge": "ERFOLGE",
     "nichtVorhanden": "Du hast noch keine Erfolge.",
@@ -22,7 +34,7 @@
     "protokolle": "PROTOKOLLE",
     "unterjaehrigerAustausch": "UNTERJÄHRIGER AUSTAUSCH",
     "bearbeiten": "Hier kannst du dein Protokoll bearbeiten:",
-    "eingabeBeschreibung": "Bitte gib eine Beschreibung ein",
+    "eingabeBeschreibung": "Bitte gebe eine Beschreibung ein",
     "loeschen": "Willst du dieses Protokoll wirklich löschen?"
   },
   "Team": {
@@ -33,7 +45,7 @@
     "doing": "DOING",
     "done": "DONE",
     "deineTask": "deine Task",
-    "eingabeBeschreibung": "Bitte gib eine Beschreibung ein",
+    "eingabeBeschreibung": "Bitte gebe eine Beschreibung ein",
     "bearbeiten": "Hier kannst du deine Task bearbeiten:",
     "loeschen": "Willst du diese Task wirklich löschen?"
   },
@@ -47,18 +59,21 @@
     "nichtGefunden": "Logindaten nicht gefunden"
   },
   "Warnung": {
-    "datumEingeben": "Bitte gib ein Datum ein",
-    "notizEingeben": "Bitte gib Notizen ein"
+    "datumEingeben": "Bitte gebe ein Datum ein",
+    "notizEingeben": "Bitte gebe Notizen ein",
+    "feedbackEingeben": "Bitte gebe Feedback ein"
   },
   "Vorschau": {
     "notizEingeben": "Notizen zum unterjaehrigen Austausch"
   },
+
   "Button": {
     "abbrechen": "Abbrechen",
     "speichern": "Speichern",
     "loeschen": "Löschen",
     "anpinnen": "Anpinnen",
     "nichtAnpinnen": "lösen",
-    "allesKlar": "Alles klar!"
+    "allesKlar": "Alles klar!",
+    "senden": "Senden"
   }
 }

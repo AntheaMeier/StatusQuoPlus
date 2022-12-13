@@ -45,7 +45,6 @@ export class TeamviewComponent implements OnInit {
   ngOnInit(): void {
     this.selectedRole = this.auth.getUserDetails().role;
     this.idMember = this.route.snapshot.paramMap.get('id') || '';
-    console.log('Die idMember mit route snapshot ' + this.idMember);
     this.api.getUser(this.idMember).subscribe((res: any) => {
       this.currentMember = res;
       this.surname = this.currentMember.surname;

@@ -1,0 +1,12 @@
+.snack-bar {
+  color: #FFFFFF !important;
+  font-size: 18px;
+  line-height: 18px !important;
+  display: flex;
+  align-items: center;
+  margin-left: 50px;
+}
+
+mat-icon {
+  margin-right: 10px;
+}

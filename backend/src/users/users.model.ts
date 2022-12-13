@@ -20,7 +20,7 @@ export const UsersSchema = new mongoose.Schema({
 });
 
 export interface Users extends mongoose.Document {
-  id: number;
+  id: string;
 
   username: string;
   password: string;

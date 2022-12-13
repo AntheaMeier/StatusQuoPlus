@@ -1,8 +1,6 @@
 <div>
   <mat-card class="goalsCard">
-    <p>
-      <button *ngIf="selectedRole == 'Mitarbeiter_in'" class="bttn icon-display" style="font-size: 23px" (click)="addPostForm()">Ziel hinzufügen</button>
-    </p>
+    <button *ngIf="selectedRole == 'Mitarbeiter_in'" class="bttn icon-display" (click)="addPostForm()">{{ 'Ziele.zielHinzufuegen' | translate }}</button>
     <div *ngIf="goalsToOneUser.length == 0" class="description-styling">
       <p>{{ 'Ziele.nichtVorhanden' | translate}}</p>
     </div>
@@ -117,7 +115,8 @@
                     (newTodo)="setNewtask($event)"
                     (deleteTodo)="deleteTask($event)"
                     (result)="setDecision($event)"
-                    (changedOrder)="loadProgressNew($event)">
+                    (changedOrder)="loadProgressNew($event)"
+                    (refillProgressArray)="fillProgressArray()">
           </app-todo>
         </div>
       </mat-expansion-panel>

@@ -13,6 +13,12 @@
          [routerLink]="'/protokolle'">
         <div class="sidenav-text" mat-button>{{ 'Protokolle.protokolle' | translate }}</div>
       </a>
+         <!--feedback Menu Item Sidebar--->
+      <a mat-list-item *ngIf="(loginData$ | async)"
+         [routerLink]="'/feedback'">
+        <div class="sidenav-text" mat-button>{{ 'Feedback.feedback' | translate }}</div>
+      </a>
+      <!--------------------------------->
       <ng-container *ngIf="loginData$ | async as loginData">
         <mat-expansion-panel class="expansion-panel-styling" *ngIf="loginData.role=='Vorgesetzte_r'"
                              (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -31,7 +37,7 @@
           </div>
         </mat-expansion-panel>
       </ng-container>
-      <a (click)='logout()' mat-list-item *ngIf="(loginData$ | async)">
+      <a (click)='logout()' mat-list-item *ngIf="loginData$ | async">
         <mat-icon>exit_to_app</mat-icon>
         <div class="sidenav-text">{{ 'Login.logout' | translate }}</div>
       </a>
@@ -55,6 +61,11 @@
     <div class="nav-element " (click)="deleteSelectedGoalFromLocalStorage()" (click)="clickProtokoll()">
       <div class="element-text" routerLink="protokolle" *ngIf="(loginData$ | async)">{{ 'Protokolle.protokolle' | translate }}</div>
     </div>
+    <!--feedback menü Item header--->
+    <div class="nav-element " (click)="deleteSelectedGoalFromLocalStorage()">
+      <div class="element-text" routerLink="feedback" *ngIf="(loginData$ | async)">{{ 'Feedback.feedback' | translate }}</div>
+    </div>
+    <!------------------------------>
     <ng-container *ngIf="loginData$ | async as loginData">
       <div class="nav-element" (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">
         <div class="element-text" [matMenuTriggerFor]="menu" *ngIf="loginData.role=='Vorgesetzte_r'">{{ 'Team.meinTeam' | translate }}

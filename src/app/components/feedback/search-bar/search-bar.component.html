@@ -1,0 +1,20 @@
+<h1>{{ 'Feedback.geben' | translate }}</h1>
+<form class="example-form">
+  <input  type="text"
+          placeholder="{{ 'Feedback.waehlePerson' | translate }}"
+          [formControl]="myControl"
+          [matAutocomplete]="auto"
+          class="example-input"
+          (keydown)="setUserClicked(false)">
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let user of filteredUsers | async" [value]="user.name">
+      <div (click)="chooseUser(user._id)">
+        <mat-icon>account_circle</mat-icon>
+        {{user.name}}
+      </div>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-error>
+    <p *ngIf="showError">{{ 'Feedback.errorWaehlePerson' | translate}}</p>
+  </mat-error>
+</form>
