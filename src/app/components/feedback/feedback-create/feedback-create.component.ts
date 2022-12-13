@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import  {MatDialog } from '@angular/material/dialog';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from '../../../services/auth.service';
 import { FeedbackDialogComponent } from '../feedback-dialog/feedback-dialog.component';
 import { Feedback } from 'src/app/models/feedback';
-import { LoginData } from 'src/app/models/loginData';
-import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-feedback-create',
@@ -15,15 +12,12 @@ import { User } from 'src/app/models/user';
 })
 export class FeedbackCreateComponent implements OnInit {
   
-  idloggedInUser: '' = '';
-  idMember: any;
+  idloggedInUser: string = '';
   feedbacks: Feedback[] = [];
-  
+
   constructor(
     public dialog: MatDialog,
     private auth: AuthService,
-    private router: Router,
-    private route: ActivatedRoute,
     private api: ApiService,
     ) {}
  
@@ -36,10 +30,11 @@ export class FeedbackCreateComponent implements OnInit {
     this.dialog.open(FeedbackDialogComponent);
   }
 
-  getFeedback(idloggedInUser: string) {
+  getFeedback(idloggedInUser: string): any {
     console.log(idloggedInUser);
-    this.api.getFeedbackForUser(idloggedInUser).subscribe(
+    this.api.getFeedbackWithName(idloggedInUser).subscribe(
       (res) => {
+        console.log(res);
         this.feedbacks = res;
       },
       (error) => {
@@ -47,4 +42,5 @@ export class FeedbackCreateComponent implements OnInit {
       }
     );
   }
+
 }

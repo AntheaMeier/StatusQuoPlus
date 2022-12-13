@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, forkJoin, from, Observable, of, zip } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, concatMap, map, mergeMap, tap, toArray } from 'rxjs/operators';
 import { Goals } from '../models/goals';
 import { LoginData, LoginPayload, LoginResponse } from '../models/loginData';
 import { Tasks } from '../models/tasks';
 import { Review } from '../models/review';
 import { Feedback } from '../models/feedback';
+import { User } from '../models/user';
 
 
 const httpOptions = {
@@ -78,6 +79,16 @@ export class ApiService {
     return this.http.get<LoginData>(url).pipe(
       catchError(this.handleError<LoginData>(`getUser id=${id}`))
     );
+  }
+
+  getUserName(id: string): Observable<any> {
+    const url = `${apiUrlLogin}/${id}`;
+    return this.http.get<LoginData>(url).pipe(
+      map( res => {
+            return res.firstname + ' ' + res.surname
+        }
+      )
+    )
   }
 
   // Goals
@@ -229,5 +240,19 @@ export class ApiService {
     return this.http.get<Feedback[]>(apiUrlFeedback).pipe(
       catchError(this.handleError<Feedback[]>('getFeedback')) 
     );
-  }  
+  }
+  
+  getFeedbackWithName(id: string): Observable<any> {
+    return this.getFeedbackForUser(id).pipe(
+      mergeMap(feedbacks => forkJoin(
+        feedbacks.map(f =>
+          this.getUserName(f.provider_id).pipe(
+            map(name => {
+              f.provider_name = name;
+              return f;
+            })
+          ))
+      ))
+    )
+  }
 }
