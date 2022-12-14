@@ -8,9 +8,28 @@
 }
 
 .feedback-provider {
-    display: flex;
-    align-items: center;
     font-weight: 500;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+.header {
+    display: flex;
+}
+
+.date-label {
+    width: 80px;
+    padding-bottom: 3px;
+    border-radius: 10px 10px;
+    margin-bottom: 12px;
+    background-color: rgb(197, 191, 188);
+}
+ 
+.date-numbers {
+    font-size: 75%;
+    color: black;
+    padding-top: 5%;
+    border-radius: 10px;
+    text-align: center;
 }
 
 .feedback-matcard {
@@ -25,7 +44,7 @@
 
 .feedback-text {
     margin-top: 10px;
-    margin-left: 35px;
+    margin-left: 5px;
 }
 
 @media screen and (max-width: 800px) {

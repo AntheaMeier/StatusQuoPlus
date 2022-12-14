@@ -4,4 +4,5 @@ export interface Feedback {
   provider_name?: any;
   receiver_id: string;
   feedback_text: string;
+  feedback_date?: Date;
 }

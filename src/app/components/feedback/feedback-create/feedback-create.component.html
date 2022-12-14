@@ -1,23 +1,22 @@
 <button mat-button (click)="openDialog()">Feedback +</button>
                      
-<!-- <div *ngFor="let feedback of feedbacks">
-{{ feedback.feedback_text }}
-</div> -->
 
 <div class="feedback-section">
     <h3>{{ 'Feedback.feedback' | translate }}</h3>
     <div *ngIf="feedbacks.length == 0" class="description-styling">
         <p>{{ 'Feedback.nichtVorhanden' | translate}}</p>
     </div>
-    <div *ngFor="let feedback of feedbacks">
+    <div *ngFor="let feedback of feedbacks.reverse()">
         <mat-card class="feedback-matcard">
-            <div class="feedback-provider">
-                <span class="material-symbols-outlined feedback-icon">
-                    <mat-icon>3p</mat-icon>
-                </span>
-                <span>
-                    {{ feedback.provider_name }}
-                </span>
+            <div class="header">
+                <div *ngIf="feedback.feedback_date" class="date-label">
+                    <div class="date-numbers">
+                        {{ feedback.feedback_date | date:'dd.MM.YYYY' }}
+                    </div>
+                </div>
+                <div class="feedback-provider">
+                    von {{ feedback.provider_name }}
+                </div>
             </div>
             <div class="feedback-text">
                 {{ feedback.feedback_text }}
@@ -25,3 +24,5 @@
         </mat-card>
     </div>
 </div>
+
+
