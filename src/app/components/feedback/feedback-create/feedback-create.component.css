@@ -1,7 +1,3 @@
-.feedback-icon {
-    margin-right: 10px;
-}
-  
 .feedback-section {
     margin: 40px;
     color: #0071B9;
@@ -9,8 +5,8 @@
 
 .feedback-provider {
     font-weight: 500;
-    margin-left: 15px;
     margin-top: 5px;
+    margin-left: 15px;
 }
 .header {
     display: flex;
@@ -43,8 +39,7 @@
 }
 
 .feedback-text {
-    margin-top: 10px;
-    margin-left: 5px;
+    margin-left: 15px;
 }
 
 @media screen and (max-width: 800px) {
