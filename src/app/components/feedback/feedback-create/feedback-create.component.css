@@ -8,6 +8,7 @@
     margin-top: 5px;
     margin-left: 15px;
 }
+
 .header {
     display: flex;
 }
@@ -19,7 +20,7 @@
     margin-bottom: 12px;
     background-color: rgb(197, 191, 188);
 }
- 
+
 .date-numbers {
     font-size: 75%;
     color: black;
@@ -38,14 +39,39 @@
     padding: 20px;
 }
 
-.feedback-text {
-    margin-left: 15px;
-}
-
 @media screen and (max-width: 800px) {
     .description-styling {
         width: 85%;
     }
 }
-  
-  
+
+.bttn {
+  transition: 1s ease-in-out;
+  outline: none;
+  border: 1px solid #0071B9;
+  padding: 7px 12px 9px;
+  margin-left: 10px;
+  margin-top: -5px;
+  margin-bottom: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 12px;
+  background: transparent;
+  color: #857971;
+  font-weight: 100;
+  font-size: 23px;
+  max-height: 40px;
+}
+
+.bttn:hover {
+  transition: 1s ease-in-out;
+  background: #0071B9;
+  opacity: 0.4;
+  color: white;
+}
+
+.icon-display {
+  font-size: 15px;
+}

@@ -13,10 +13,11 @@
   },
 
   "Feedback": {
-    "feedback": "FEEDBACK",
+    "feedback": "DEIN FEEDBACK",
     "eingabeBeschreibung": "Bitte gebe eine Beschreibung ein",
     "notizEingeben": "Gebe hier dein Feedback ein",
-    "nichtVorhanden": "Du hast noch kein Feedback bekommen."
+    "nichtVorhanden": "Du hast noch kein Feedback bekommen.",
+    "geben": "Feedback geben +"
   },
   "Erfolge": {
     "erfolge": "ERFOLGE",
