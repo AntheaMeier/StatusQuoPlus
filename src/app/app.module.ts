@@ -66,6 +66,7 @@ import { FeedbackComponent } from './components/feedback/feedback.component';
 import { FeedbackCreateComponent } from './components/feedback/feedback-create/feedback-create.component';
 import { FeedbackDialogComponent } from './components/feedback/feedback-dialog/feedback-dialog.component';
 import { SearchBarComponent } from './components/feedback/search-bar/search-bar.component';
+import { SendConfirmationDialogComponent } from './components/feedback/send-confirmation-dialog/send-confirmation-dialog/send-confirmation-dialog.component';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -94,7 +95,8 @@ export function playerFactory() {
     FeedbackComponent,
     FeedbackCreateComponent,
     FeedbackDialogComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    SendConfirmationDialogComponent
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),

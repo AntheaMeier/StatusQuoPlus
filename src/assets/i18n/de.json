@@ -17,7 +17,10 @@
     "eingabeBeschreibung": "Bitte gebe eine Beschreibung ein",
     "notizEingeben": "Gebe hier dein Feedback ein",
     "nichtVorhanden": "Du hast noch kein Feedback bekommen.",
-    "geben": "Feedback geben +"
+    "geben": "Feedback geben +",
+    "senden": "Feedback senden",
+    "sendenBestaetigen": "Wenn du fortfährst, wird das Feedback unwiderruflich an die gewählte Person gesendet.",
+    "sicher": "Bist du sicher?"
   },
   "Erfolge": {
     "erfolge": "ERFOLGE",
