@@ -6,6 +6,7 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FeedbackCreateComponent} from "../feedback-create/feedback-create.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SnackBarComponent} from "../snack-bar/snack-bar.component";
+import { FormBuilder, FormGroup } from '@angular/forms'; //character limitation
 
 
 @Component({
@@ -20,15 +21,32 @@ export class FeedbackDialogComponent implements OnInit {
   idloggedInUser: string = '';
   userClicked: boolean = false;
 
+  //character limitation
+  myForm!: FormGroup; 
+  maxChars = 200;
+  
   constructor(
     public snackBar: MatSnackBar,
     private api: ApiService,
     private auth: AuthService,
     public dialog: MatDialog,
-    public dialogRef: MatDialogRef<FeedbackCreateComponent>) {}
+    public dialogRef: MatDialogRef<FeedbackCreateComponent>,
+    
+    //character limitation
+    private fb: FormBuilder) {
+      //character limitation
+    this.buildForm();
+    }
 
   ngOnInit(): void {
-    this.idloggedInUser = this.auth.getUserDetails()._id;
+    this.idloggedInUser = this.auth.getUserDetails()._id;  
+  }
+  
+  //character limitation
+  buildForm() {
+    this.myForm = this.fb.group({
+      wordLimitation: [""]
+    });
   }
 
   addFeedback(): void{
