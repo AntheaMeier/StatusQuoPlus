@@ -9,7 +9,6 @@ export class RoleGuard implements CanActivate {
   constructor(public auth: AuthService, private router: Router) {}
 
   canActivate(): boolean {
-    console.log('AUTH GUARD: ', this.auth.getUserDetails());
     if (this.auth.getUserDetails().role == 'Vorgesetzte_r') {
       return true;
     }

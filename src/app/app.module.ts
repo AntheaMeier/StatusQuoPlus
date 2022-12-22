@@ -67,6 +67,8 @@ import { FeedbackCreateComponent } from './components/feedback/feedback-create/f
 import { FeedbackDialogComponent } from './components/feedback/feedback-dialog/feedback-dialog.component';
 import { SearchBarComponent } from './components/feedback/search-bar/search-bar.component';
 import { SendConfirmationDialogComponent } from './components/feedback/send-confirmation-dialog/send-confirmation-dialog/send-confirmation-dialog.component';
+import { SnackBarComponent } from './components/feedback/snack-bar/snack-bar.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 export function playerFactory() {
   return import('lottie-web');
@@ -96,7 +98,8 @@ export function playerFactory() {
     FeedbackCreateComponent,
     FeedbackDialogComponent,
     SearchBarComponent,
-    SendConfirmationDialogComponent
+    SendConfirmationDialogComponent,
+    SnackBarComponent
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),
@@ -148,12 +151,16 @@ export function playerFactory() {
     MatTabsModule,
     CdkAccordionModule,
     NgxTranslateModule,
+    MatSnackBarModule
   ],
   exports: [
     MatInputModule,
     MatFormFieldModule,
   ],
-  providers: [AuthGuardService],
+  providers: [
+    AuthGuardService,
+    MatSnackBarModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

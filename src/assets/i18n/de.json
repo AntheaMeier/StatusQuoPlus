@@ -6,10 +6,11 @@
     "ziele": "ZIELE",
     "hinzufuegen": "hinzufügen",
     "loeschen": "Willst du dieses Ziel wirklich löschen?",
-    "bearbeiten": "Hier kannst du dein Ziel bearbeiten:",
+    "bearbeiten": "Hier kannst du dein Ziel bearbeiten",
     "nichtVorhanden": "Du hast noch keine Ziele.",
     "deinZiel": "Dein Ziel",
-    "eingabeBeschreibung": "Bitte gebe eine Beschreibung ein"
+    "eingabeBeschreibung": "Bitte gib eine Beschreibung ein",
+    "zielHinzufuegen": "Ziel hinzufügen +"
   },
 
   "Feedback": {
@@ -21,7 +22,11 @@
     "senden": "Feedback senden",
     "sendenBestaetigen": "Wenn du fortfährst, wird das Feedback unwiderruflich an die gewählte Person gesendet.",
     "sicher": "Bist du sicher?"
+    "waehlePerson": "Empfänger deines Feedbacks",
+    "errorWaehlePerson": "Du hast keine Person ausgewählt",
+    "feedbackGesendet": "Feedback gesendet"
   },
+
   "Erfolge": {
     "erfolge": "ERFOLGE",
     "nichtVorhanden": "Du hast noch keine Erfolge.",
@@ -59,7 +64,8 @@
   },
   "Warnung": {
     "datumEingeben": "Bitte gebe ein Datum ein",
-    "notizEingeben": "Bitte gebe Notizen ein"
+    "notizEingeben": "Bitte gebe Notizen ein",
+    "feedbackEingeben": "Bitte gebe Feedback ein"
   },
   "Vorschau": {
     "notizEingeben": "Notizen zum unterjaehrigen Austausch"
@@ -71,6 +77,7 @@
     "loeschen": "Löschen",
     "anpinnen": "Anpinnen",
     "nichtAnpinnen": "lösen",
-    "allesKlar": "Alles klar!"
+    "allesKlar": "Alles klar!",
+    "senden": "Senden"
   }
 }

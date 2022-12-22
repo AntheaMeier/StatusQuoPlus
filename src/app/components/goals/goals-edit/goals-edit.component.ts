@@ -34,14 +34,6 @@ export class GoalsEditComponent implements OnInit {
                 this.dateAdapter.setLocale('de');
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(GoalsEditComponent, {
-      width: '40%',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
-
   onNoClick(): void {
     this.dialogRef.close();
   }

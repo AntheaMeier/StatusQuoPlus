@@ -1,5 +1,5 @@
-<app-search-bar (receiverId)="setReceiverId($event)"></app-search-bar>
-<mat-form-field appearance="outline" style="white-space: pre-wrap;">
+<app-search-bar (userClicked)="setUserClicked($event)" (receiverId)="setReceiverId($event)"></app-search-bar>
+<mat-form-field class="fbinput" appearance="outline" style="white-space: pre-wrap;">
   <textarea
     [(ngModel)]="enteredContent"
     id="content"
@@ -9,9 +9,11 @@
     placeholder="{{'Feedback.notizEingeben' | translate}}"
     #content="ngModel">
   </textarea>
-<mat-error *ngIf="content.invalid">{{'Warnung.notizEingeben' | translate}}</mat-error>
+  <mat-error *ngIf="content.invalid">{{'Warnung.feedbackEingeben' | translate}}</mat-error>
 </mat-form-field>
-  <button mat-button mat-dialog-close>Close</button>
-  <button mat-button (click)="openDialog()">Add</button>
+<div class="button-div">
+  <button mat-button mat-dialog-close>{{'Button.abbrechen' | translate}}</button>
+  <button class="button-send" mat-button (click)="addFeedback(); openSnackBar(); openDialog()" aria-label="Show an example snack-bar" [disabled]="!userClicked || enteredContent == ''">{{'Button.senden' | translate}}</button>
+</div>
 
 

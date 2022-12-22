@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import {Feedback} from '../../../models/feedback';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog"
 import {FeedbackCreateComponent} from "../feedback-create/feedback-create.component";
 import { SendConfirmationDialogComponent } from '../send-confirmation-dialog/send-confirmation-dialog/send-confirmation-dialog.component';
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 
 
 @Component({
   selector: 'app-feedback-dialog',
   templateUrl: './feedback-dialog.component.html',
-  styleUrls: ['./feedback-dialog.component.css']
+  styleUrls: ['./feedback-dialog.component.css'],
 })
 export class FeedbackDialogComponent implements OnInit {
 
@@ -18,8 +20,10 @@ export class FeedbackDialogComponent implements OnInit {
   idreceiver= '';
   enteredContent = '';
   idloggedInUser: string = '';
+  userClicked: boolean = false;
 
   constructor(
+    public snackBar: MatSnackBar,
     private api: ApiService,
     private auth: AuthService,
     public dialog: MatDialog,
@@ -27,7 +31,6 @@ export class FeedbackDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.idloggedInUser = this.auth.getUserDetails()._id;
-    console.log(this.idloggedInUser);
   }
 
   openDialog() {
@@ -43,7 +46,19 @@ export class FeedbackDialogComponent implements OnInit {
   }
 
   setReceiverId(event: string) {
-    console.log('Die Id in Feedback: ' + event);
+    this.userClicked = true;
     this.idreceiver = event;
+  }
+
+  setUserClicked($event: any) {
+    this.userClicked = $event;
+  }
+
+  openSnackBar() {
+    this.snackBar.openFromComponent(SnackBarComponent, {
+      verticalPosition: 'bottom',
+      panelClass: ['success'],
+      duration: 2550,
+    });
   }
 }

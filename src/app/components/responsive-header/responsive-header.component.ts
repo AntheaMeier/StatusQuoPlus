@@ -79,7 +79,6 @@ export class ResponsiveHeaderComponent {
   }
 
   ngOnInit(): void {
-    console.log('url ' + this.router.url);
     this.currentUrl = this.router.url;
 
     this.loginForm = this.formBuilder.group({
@@ -98,15 +97,16 @@ export class ResponsiveHeaderComponent {
       }
     );
 
-    this.firstNameloggedInUser = this.auth.getUserDetails().firstname;
-    this.lastNameloggedInUser = this.auth.getUserDetails().surname;
-    this.roleLoggedInUser = this.auth.getUserDetails().role;
-    this.idLoggedInUser = this.auth.getUserDetails()._id;
-    this.roleLoggedInUser = this.auth.getUserDetails().role;
+    if(this.isLogin) {
+      this.firstNameloggedInUser = this.auth.getUserDetails().firstname;
+      this.lastNameloggedInUser = this.auth.getUserDetails().surname;
+      this.roleLoggedInUser = this.auth.getUserDetails().role;
+      this.idLoggedInUser = this.auth.getUserDetails()._id;
+      this.roleLoggedInUser = this.auth.getUserDetails().role;
+    }
 
     this.api.getUser(this.idLoggedInUser).subscribe(
       (res: LoginData) => {
-        console.log('get user ' + res.firstname);
         this.teamVorgesetze = res.team;
         this.isLoadingResults = false;
       },
@@ -138,7 +138,6 @@ export class ResponsiveHeaderComponent {
   }
 
   changeRoleToMitarbeiter_in() {
-    console.log('geklickt');
     this.selectedRole = 'Mitarbeiter_in';
     this.currentUrl = '';
     this.router.navigate(['/']);
@@ -147,7 +146,6 @@ export class ResponsiveHeaderComponent {
   onClickVorgesetzter() {
     this.api.getUser(this.idLoggedInUser).subscribe(
       (res: LoginData) => {
-        console.log('get user ' + res.firstname);
         this.teamVorgesetze = res.team;
         this.isLoadingResults = false;
       },

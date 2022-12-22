@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ApiService} from '../../../services/api.service';
 import {Goals} from '../../../models/goals';
 import {MatDialog} from '@angular/material/dialog';
@@ -103,6 +103,7 @@ export class GoalsCreateComponent implements OnInit {
       this.showTasks(this.goalSelectedReload);
       this.selectedRole = 'Mitarbeiter_in';
       this.showGoals(this.idloggedInUser);
+      this.showGoalid = '';
     } else {
       this.showGoalid = '';
       this.idMember = this.route.snapshot.paramMap.get('id');
@@ -224,7 +225,6 @@ export class GoalsCreateComponent implements OnInit {
     //TODO
     this.api.getTasksToStatus(id, 'todo').subscribe(
       (res: any) => {
-        console.log(res);
         this.currentUrl = this.router.url;
         if (this.currentUrl != '/') {
           this.tasksToTodo = [];
@@ -270,7 +270,6 @@ export class GoalsCreateComponent implements OnInit {
   openDialog(id: any): void {
     this.idDialog = id;
     const dialogRef = this.dialog.open(GoalsEditComponent, {
-      width: '50%',
       data: {id: this.idDialog, description: this.description, expiry_date: this.enteredExpiryDate},
     });
     dialogRef.afterClosed().subscribe((result) => {

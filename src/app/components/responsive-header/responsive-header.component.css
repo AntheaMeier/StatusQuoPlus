@@ -145,3 +145,7 @@ a {
 .login {
   display: flex;
 }
+
+.selected-nav {
+  color: red !important;
+}
