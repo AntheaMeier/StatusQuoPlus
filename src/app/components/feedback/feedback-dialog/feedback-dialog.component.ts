@@ -7,6 +7,7 @@ import {FeedbackCreateComponent} from "../feedback-create/feedback-create.compon
 import { SendConfirmationDialogComponent } from '../send-confirmation-dialog/send-confirmation-dialog/send-confirmation-dialog.component';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SnackBarComponent} from "../snack-bar/snack-bar.component";
+import {DeleteConfirmationDialogComponent} from "../../goals/delete-confirmation-dialog/delete-confirmation-dialog";
 
 
 @Component({
@@ -40,8 +41,12 @@ export class FeedbackDialogComponent implements OnInit {
     this.testfeedback.feedback_text = this.enteredContent;
     this.testfeedback.feedback_date = new Date();
     console.log(this.testfeedback);
-    this.dialog.open(SendConfirmationDialogComponent, {
+
+    const dialogRef = this.dialog.open(SendConfirmationDialogComponent, {
       data: this.testfeedback
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.openSnackBar();
     });
   }
 

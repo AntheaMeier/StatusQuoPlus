@@ -8,7 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { TasksModule } from './tasks/tasks.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { FeedbackModule } from './feedback/feedback.module';
-
+import { MoodModule } from './mood/mood.module';
 
 @Module({
   imports: [
@@ -21,6 +21,7 @@ import { FeedbackModule } from './feedback/feedback.module';
       'mongodb+srv://ela:elaElaela@cluster0.brai3fu.mongodb.net/statusquoplus?retryWrites=true&w=majority',
     ),
     FeedbackModule,
+    MoodModule
   ],
   controllers: [AppController],
   providers: [AppService],
