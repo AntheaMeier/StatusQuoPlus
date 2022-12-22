@@ -14,10 +14,14 @@
   },
 
   "Feedback": {
-    "feedback": "FEEDBACK",
+    "feedback": "DEIN FEEDBACK",
     "eingabeBeschreibung": "Bitte gebe eine Beschreibung ein",
     "notizEingeben": "Gebe hier dein Feedback ein",
-    "geben": "Gebe einer Person Feedback",
+    "nichtVorhanden": "Du hast noch kein Feedback bekommen.",
+    "geben": "Feedback geben +",
+    "senden": "Feedback senden",
+    "sendenBestaetigen": "Wenn du fortfährst, wird das Feedback unwiderruflich an die gewählte Person gesendet.",
+    "sicher": "Bist du sicher?"
     "waehlePerson": "Empfänger deines Feedbacks",
     "errorWaehlePerson": "Du hast keine Person ausgewählt",
     "feedbackGesendet": "Feedback gesendet"

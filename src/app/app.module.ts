@@ -66,6 +66,7 @@ import { FeedbackComponent } from './components/feedback/feedback.component';
 import { FeedbackCreateComponent } from './components/feedback/feedback-create/feedback-create.component';
 import { FeedbackDialogComponent } from './components/feedback/feedback-dialog/feedback-dialog.component';
 import { SearchBarComponent } from './components/feedback/search-bar/search-bar.component';
+import { SendConfirmationDialogComponent } from './components/feedback/send-confirmation-dialog/send-confirmation-dialog/send-confirmation-dialog.component';
 import { SnackBarComponent } from './components/feedback/snack-bar/snack-bar.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 
@@ -97,6 +98,7 @@ export function playerFactory() {
     FeedbackCreateComponent,
     FeedbackDialogComponent,
     SearchBarComponent,
+    SendConfirmationDialogComponent,
     SnackBarComponent
   ],
   imports: [

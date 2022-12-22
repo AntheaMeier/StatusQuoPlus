@@ -18,12 +18,14 @@ export class FeedbackController {
     @Body('provider_id') feedbackProviderId: string,
     @Body('receiver_id') feedbackReceiverId: string,
     @Body('feedback_text') feedbackFeedbackText: string,
+    @Body('feedback_date') feedbackFeedbackDate: Date,
   ) {
-    console.log(feedbackProviderId + " " + feedbackFeedbackText);
+    console.log(feedbackProviderId + " " + feedbackFeedbackText + " " + feedbackFeedbackDate);
     const generatedId = await this.feedbackService.insertFeedback(
       feedbackProviderId,
       feedbackReceiverId,
-      feedbackFeedbackText
+      feedbackFeedbackText,
+      feedbackFeedbackDate,
     );
     return { id: generatedId };
   }
@@ -40,10 +42,7 @@ export class FeedbackController {
 
   @Get('receiver/:receiver_id')
   async getAllFeedbacksForReceiver(
-    @Param('receiver_id') receiver_id: string,
-    
-
-  ){
+    @Param('receiver_id') receiver_id: string) {
     return await this.feedbackService.getFeedbackForReceiver(receiver_id);
   }
  
