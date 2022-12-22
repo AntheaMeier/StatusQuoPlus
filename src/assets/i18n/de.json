@@ -27,6 +27,10 @@
     "feedbackGesendet": "Feedback gesendet"
   },
 
+  "Mood": {
+    "mood": "MOOD"
+  },
+
   "Erfolge": {
     "erfolge": "ERFOLGE",
     "nichtVorhanden": "Du hast noch keine Erfolge.",
