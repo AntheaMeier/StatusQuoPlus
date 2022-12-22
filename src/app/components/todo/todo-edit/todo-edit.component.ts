@@ -21,11 +21,19 @@ export class TodoEditComponent implements OnInit {
     description: this.formBuilder.control('initial value', Validators.required)
   });
 
+  //character limitation
+  myForm!: FormGroup; 
+  maxChars = 500;
+
   constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<GoalsCreateComponent>,
               private router: Router, private route: ActivatedRoute,
               private api: ApiService, private formBuilder: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) public data: any) {
-  }
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              //character limitation
+              private fb: FormBuilder) {
+              //character limitation
+              this.buildForm();
+      }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(TodoEditComponent, {
@@ -37,6 +45,13 @@ export class TodoEditComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  //character limitation
+  buildForm() {
+    this.myForm = this.fb.group({
+      wordLimitation: [""]
+    });
   }
 
   ngOnInit() {

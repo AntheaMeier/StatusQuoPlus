@@ -6,22 +6,26 @@
     matInput rows="6"
     name="content"
     required
-    placeholder="{{'Feedback.notizEingeben' | translate}}"
-    #content="ngModel"
     [maxlength]="maxChars"
     formControlName="wordLimitation"
+    placeholder="{{'Feedback.notizEingeben' | translate}}"
+    #content
+    ngModel="content"
+    
     
       >
   </textarea>
-  <mat-error *ngIf="content.invalid">{{'Warnung.feedbackEingeben' | translate}}</mat-error>
+  <!-- <mat-error *ngIf="content.invalid">{{'Warnung.feedbackEingeben' | translate}}</mat-error> -->
   
-  <!-- character limitation-->
-  <label>
-    Verbleibende Zeichenanzahl: {{content.value.length}} /{{maxChars}}
-  </label
-  >
+  
+  
 </mat-form-field>
+<!-- character limitation-->
+<label style="color: #a5a3a1ec; margin-left: 5px" >
+  {{content.value.length}}/{{maxChars}}
+</label>
 <div class="button-div">
+
   <button mat-button mat-dialog-close>{{'Button.abbrechen' | translate}}</button>
   <button class="button-send" mat-button (click)="addFeedback(); openSnackBar()" aria-label="Show an example snack-bar" [disabled]="!userClicked || enteredContent == ''">{{'Button.senden' | translate}}</button>
 </div>

@@ -10,18 +10,27 @@
         <button (click)="addPostForm()" *ngIf="selectedRole == 'Mitarbeiter_in'" class="bttn icon-display" style="font-size: 23px">+</button>
       </p>
       <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true" style="background-color: white; margin-bottom: 1.0em;">
-        <mat-form-field appearance="outline" style="white-space: pre-wrap;">
+        <mat-form-field appearance="outline" style="white-space: pre-wrap;" [formGroup]="myForm">
           <textarea
             [(ngModel)]="enteredContent"
             id="content"
             matInput rows="6"
             name="content"
             required
+            [maxlength]="maxChars"
+            formControlName="wordLimitation"
             placeholder="{{ 'Tasks.deineTask' | translate }}"
-            #content="ngModel">
+            #content
+            ngModel="content">
+
           </textarea>
-          <mat-error *ngIf="content.invalid">{{ 'Tasks.eingabeBeschreibung' | translate }}</mat-error>
+          <!-- <mat-error *ngIf="content.invalid">{{ 'Tasks.eingabeBeschreibung' | translate }}</mat-error> -->
         </mat-form-field>
+        <!-- character limitation-->
+        <label style="color: #a5a3a1ec; margin-left: 5px" >
+  {{content.value.length}}/{{maxChars}}
+        </label>
+
         <mat-action-row style="background-color: white">
           <button
             style="color: white; background-color: #0071B9" mat-raised-button *ngIf=true matSuffix

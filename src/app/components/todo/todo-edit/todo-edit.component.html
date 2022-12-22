@@ -1,13 +1,26 @@
 <h1>{{ 'Tasks.bearbeiten' | translate }}</h1>
 <div mat-dialog-content>
   <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
-    <mat-form-field appearance="outline">
-      <input [(ngModel)]="enteredValue" matInput placeholder="{{ 'Tasks.deineTask' | translate }}" formControlName="description"
-             value="">
+    <mat-form-field appearance="outline" name="myForm">
+      <input 
+      [(ngModel)]="enteredValue" 
+      matInput 
+      placeholder="{{ 'Tasks.deineTask' | translate }}" 
+      formControlName="description"
+      value=""
+      name="myInput" 
+      ng-model="myInput" 
+      ng-maxlength="maxChars"
+  
+      >
       <mat-error>
         <span>{{ 'Tasks.eingabeBeschreibung' | translate }}</span>
       </mat-error>
     </mat-form-field>
+    <!-- character limitation-->
+<label style="color: #a5a3a1ec; margin-left: 5px" >
+  {{myForm.value.length}}/{{maxChars}}
+</label>
   </form>
 </div>
 <div mat-dialog-actions>

@@ -23,7 +23,7 @@ export class FeedbackDialogComponent implements OnInit {
 
   //character limitation
   myForm!: FormGroup; 
-  maxChars = 200;
+  maxChars = 500;
   
   constructor(
     public snackBar: MatSnackBar,
@@ -34,7 +34,7 @@ export class FeedbackDialogComponent implements OnInit {
     
     //character limitation
     private fb: FormBuilder) {
-      //character limitation
+    //character limitation
     this.buildForm();
     }
 
