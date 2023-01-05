@@ -11,7 +11,7 @@ import { Feedback } from 'src/app/models/feedback';
   styleUrls: ['./feedback-create.component.css']
 })
 export class FeedbackCreateComponent implements OnInit {
-  
+
   idloggedInUser: string = '';
   feedbacks: Feedback[] = [];
 
@@ -20,7 +20,7 @@ export class FeedbackCreateComponent implements OnInit {
     private auth: AuthService,
     private api: ApiService,
     ) {}
- 
+
   ngOnInit(): void {
     this.idloggedInUser = this.auth.getUserDetails()._id;
     this.getFeedback(this.idloggedInUser);
@@ -31,10 +31,8 @@ export class FeedbackCreateComponent implements OnInit {
   }
 
   getFeedback(idloggedInUser: string): any {
-    console.log(idloggedInUser);
     this.api.getFeedbackWithName(idloggedInUser).subscribe(
       (res) => {
-        console.log(res);
         this.feedbacks = res;
       },
       (error) => {

@@ -106,14 +106,16 @@ export class ResponsiveHeaderComponent {
       this.roleLoggedInUser = this.auth.getUserDetails().role;
     }
 
-    this.api.getTeamToSupervisor(this.idLoggedInUser).subscribe(
-      (res: LoginData[]) => {
-        this.teamVorgesetze = res;
-        this.isLoadingResults = false;
-      }, (err) => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
+    if(this.idLoggedInUser) {
+      this.api.getTeamToSupervisor(this.idLoggedInUser).subscribe(
+        (res: LoginData[]) => {
+          this.teamVorgesetze = res;
+          this.isLoadingResults = false;
+        }, (err) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        });
+    }
   }
 
   get f(): any {
@@ -143,14 +145,16 @@ export class ResponsiveHeaderComponent {
   }
 
   onClickVorgesetzter() {
-    this.api.getTeamToSupervisor(this.idLoggedInUser).subscribe(
-      (res: LoginData[]) => {
-        this.teamVorgesetze = res;
-        this.isLoadingResults = false;
-      }, (err) => {
-        console.log(err);
-        this.isLoadingResults = false;
-      });
+    if(this.idLoggedInUser) {
+      this.api.getTeamToSupervisor(this.idLoggedInUser).subscribe(
+        (res: LoginData[]) => {
+          this.teamVorgesetze = res;
+          this.isLoadingResults = false;
+        }, (err) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        });
+    }
   }
 
   setGoalsid(id: string) {

@@ -7,7 +7,7 @@
     "hinzufuegen": "hinzufügen",
     "loeschen": "Willst du dieses Ziel wirklich löschen?",
     "bearbeiten": "Hier kannst du dein Ziel bearbeiten",
-    "nichtVorhanden": "Du hast noch keine Ziele.",
+    "nichtVorhanden": "Noch keine Ziele angelegt.",
     "deinZiel": "Dein Ziel",
     "eingabeBeschreibung": "Bitte gib eine Beschreibung ein",
     "zielHinzufuegen": "Ziel hinzufügen +"
@@ -39,7 +39,7 @@
 
   "Erfolge": {
     "erfolge": "ERFOLGE",
-    "nichtVorhanden": "Du hast noch keine Erfolge.",
+    "nichtVorhanden": "Noch keine Erfolge vorhanden.",
     "dialogTitle": "Herzlichen Glückwunsch, du hast dein Ziel erreicht!",
     "dialogText": "Du findest es ab jetzt unter dem Erfolge-Tab"
   },
@@ -49,7 +49,8 @@
     "unterjaehrigerAustausch": "UNTERJÄHRIGER AUSTAUSCH",
     "bearbeiten": "Hier kannst du dein Protokoll bearbeiten:",
     "eingabeBeschreibung": "Bitte gebe eine Beschreibung ein",
-    "loeschen": "Willst du dieses Protokoll wirklich löschen?"
+    "loeschen": "Willst du dieses Protokoll wirklich löschen?",
+    "nichtVorhanden": "Noch keine Protokolle angelegt."
   },
   "Team": {
     "meinTeam": "MEIN TEAM"
