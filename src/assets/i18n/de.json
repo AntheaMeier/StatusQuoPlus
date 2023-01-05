@@ -28,7 +28,12 @@
   },
 
   "Mood": {
-    "mood": "MOOD"
+    "mood": "MOOD",
+    "bearbeiten": "Hier kannst du deine Stimmung bearbeiten:",
+    "loeschen": "Willst du diese Stimmungseingabe wirklich löschen?",
+    "deineMood": "Deine Stimmung",
+    "eingabeBeschreibung": "Bitte füge einen Koomentar hinzu (optional)",
+    "stimmungBearbeiten": "Stimmung berabeiten +"
   },
 
   "Erfolge": {

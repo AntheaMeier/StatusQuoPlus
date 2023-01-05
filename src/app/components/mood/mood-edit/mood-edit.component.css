@@ -1,0 +1,52 @@
+.save-button {
+  background-color: #0071B9;
+  color: white;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.mat-dialog-actions {
+  float: right
+}
+
+.mat-input-element {
+  color: #857971;
+}
+
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: #0071B9 !important;
+}
+
+@media screen and (max-width: 844px) {
+  button {
+    padding: 5px;
+  }
+}
+
+.faelligkeitsdatum-div {
+  display: flex;
+}
+
+.faelligkeitsdatum-loeschen-button {
+  width: 50px;
+  height: 52px;
+  margin-left: 4px;
+  background-color: #F5F5F5;
+}
+
+.faelligkeitsdatum-loeschen-button:active {
+  background-color: #f35f3b;
+  color: #FFFFFF;
+}
+
+.dialog {
+  text-align: center;
+}
+
+@media screen and (max-width: 440px) {
+  .form-field-date {
+    width: 75%;
+  }
+}

@@ -69,8 +69,7 @@ import { SearchBarComponent } from './components/feedback/search-bar/search-bar.
 import { SendConfirmationDialogComponent } from './components/feedback/send-confirmation-dialog/send-confirmation-dialog/send-confirmation-dialog.component';
 import { SnackBarComponent } from './components/feedback/snack-bar/snack-bar.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import { MoodComponent } from './components/mood/mood.component';
-import { MoodTrackenComponent } from './components/mood/mood-tracken/mood-tracken.component';
+import { MoodEditComponent } from './components/mood/mood-edit/mood-edit.component';
 import { DisplayMoodComponent } from './components/mood/display-mood/display-mood.component';
 
 export function playerFactory() {
@@ -103,9 +102,8 @@ export function playerFactory() {
     SearchBarComponent,
     SendConfirmationDialogComponent,
     SnackBarComponent,
-    MoodComponent,
-    MoodTrackenComponent,
-    DisplayMoodComponent
+    DisplayMoodComponent,
+    MoodEditComponent
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),
