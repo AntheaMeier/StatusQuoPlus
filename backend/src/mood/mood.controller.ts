@@ -24,8 +24,8 @@ export class MoodController {
       const generatedId = await this.moodService.insertMood(
         creatorId,
         creatorname,
-        date,
         emotion,
+        date,
         text,
       );
       return { id: generatedId };

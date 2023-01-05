@@ -1,16 +1,39 @@
+
+
+
+<div class="selected-emotion">
+
+  <mat-icon for="sad2"[ngStyle]="{'color':'red'}">mood_bad</mat-icon>
+
+</div>
+
+
 <div class="emotion">
     <fieldset id="group">
-        <input type="radio" id="sad" value="sad" name="group">
-        <label for="sad">SAD</label>
-        <input type="radio" id="neutral" value="neutral" name="group">
-        <label for="neutral">NEUTRAL</label>
+        <input type="radio" id="sad" value="sad" name="group" >
+      <mat-icon class= "sad" for="sad"[ngStyle]="{'color':'red'}">mood_bad</mat-icon>
+      <input type="radio" id="neutral" value="neutral" name="group">
+      <mat-icon class= "neutral" for="neutral"[ngStyle]="{'color':'yellow'}">sentiment_neutral</mat-icon>
         <input type="radio" id="happy" value="happy" name="group">
-        <label for="happy">HAPPY</label>
+      <mat-icon class= "happy" for="happy"[ngStyle]="{'color':'green'}">mood</mat-icon>
     </fieldset>
 </div>
 
+
 <div class="textfield">
-    <input type="text">
+  <mat-form-field appearance="fill">
+    <mat-label>Kommentar</mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
 </div>
 
-<button type="submit">submit</button>
+
+  <div class="submit-button">
+
+  <button type="submit">submit</button>
+
+  </div>
+
+
+
+
