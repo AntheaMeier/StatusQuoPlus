@@ -20,15 +20,14 @@
             [maxlength]="maxChars"
             formControlName="wordLimitation"
             placeholder="{{ 'Tasks.deineTask' | translate }}"
-            #content
-            ngModel="content">
-
+            
+            >
           </textarea>
-          <!-- <mat-error *ngIf="content.invalid">{{ 'Tasks.eingabeBeschreibung' | translate }}</mat-error> -->
+          <mat-error *ngIf="enteredContent.length==0">{{ 'Tasks.eingabeBeschreibung' | translate }}</mat-error>
         </mat-form-field>
         <!-- character limitation-->
         <label style="color: #a5a3a1ec; margin-left: 5px" >
-  {{content.value.length}}/{{maxChars}}
+  {{enteredContent.length}}/{{maxChars}}
         </label>
 
         <mat-action-row style="background-color: white">

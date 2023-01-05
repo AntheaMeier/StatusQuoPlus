@@ -27,14 +27,14 @@
           [maxlength]="maxChars"
           formControlName="wordLimitation"
           placeholder="{{'Vorschau.notizEingeben' | translate}}"
-          #content
-          ngModel="content">
+
+                >
         </textarea>
-      <!-- <mat-error *ngIf="content.invalid">{{'Warnung.notizEingeben' | translate}}</mat-error> -->
+      <mat-error *ngIf="enteredContent.length==0">{{'Warnung.notizEingeben' | translate}}</mat-error> -->
     </mat-form-field>
     <!-- character limitation-->
     <label style="color: #a5a3a1ec; margin-left: 5px" >
-      {{content.value.length}}/{{maxChars}}
+      {{enteredContent.length}}/{{maxChars}}
     </label>
     <mat-action-row>
       <button mat-raised-button *ngIf=true matSuffix type="submit" (click)=onAddPost(idloggedInUser)>Speichern</button>

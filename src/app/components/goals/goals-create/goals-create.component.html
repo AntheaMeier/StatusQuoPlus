@@ -14,18 +14,16 @@
           name="content"
           required
           [maxlength]="maxChars"
-    formControlName="wordLimitation"
+          formControlName="wordLimitation"
           placeholder="{{ 'Ziele.deinZiel' | translate}}"
-          #content
-          ngModel="content"
+      
           >
         </textarea>
-        <!-- <mat-error *ngIf="content.invalid">{{ 'Ziele.eingabeBeschreibung' | translate}}</mat-error> -->
+      <mat-error *ngIf="enteredContent.length==0">{{ 'Ziele.eingabeBeschreibung' | translate}}</mat-error>
       </mat-form-field>
       <!-- character limitation-->
       <label style="color: #777675; margin-left: 5px;" >
-  {{content.value.length}}/{{maxChars}}
-     </label>
+  {{enteredContent.length}}/{{maxChars}}     </label>
 
       <!-- Fälligkeitsdatum US4.3 -->
       <div>
