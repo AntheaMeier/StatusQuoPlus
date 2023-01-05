@@ -1,1 +1,19 @@
-<p>mood-tracken works!</p>
+<app-search-bar (userClicked)="ngOnInit()" (receiverId)="ngOnInit()"></app-search-bar>
+<mat-form-field class="fbinput" appearance="outline" style="white-space: pre-wrap;">
+  <textarea
+    [(ngModel)]="ngOnInit"
+    id="content"
+    matInput rows="4"
+    name="content"
+    required
+    placeholder="{{'Feedback.notizEingeben' | translate}}"
+    #content="ngModel">
+  </textarea>
+  <mat-error *ngIf="content.invalid">{{'Warnung.feedbackEingeben' | translate}}</mat-error>
+</mat-form-field>
+<div class="button-div">
+  <button mat-button mat-dialog-close>{{'Button.abbrechen' | translate}}</button>
+</div>
+
+
+
