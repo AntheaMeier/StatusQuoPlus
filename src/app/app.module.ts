@@ -70,10 +70,10 @@ import { SendConfirmationDialogComponent } from './components/feedback/send-conf
 import { SnackBarComponent } from './components/feedback/snack-bar/snack-bar.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { MoodComponent } from './components/mood/mood.component';
-import { MoodTrackenComponent } from './components/mood/mood-tracken/mood-tracken.component';
 import { DisplayMoodComponent } from './components/mood/display-mood/display-mood.component';
 import { MoodSendConfirmationDialogComponent } from './components/mood/mood-send-confirmation-dialog/mood-send-confirmation-dialog.component';
 import { MoodSnackBarComponent } from './components/mood/mood-snack-bar/mood-snack-bar.component';
+import { MoodEditComponent } from './components/mood/mood-edit/mood-edit.component';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -106,10 +106,11 @@ export function playerFactory() {
     SendConfirmationDialogComponent,
     SnackBarComponent,
     MoodComponent,
-    MoodTrackenComponent,
     DisplayMoodComponent,
     MoodSendConfirmationDialogComponent,
-    MoodSnackBarComponent
+    MoodSnackBarComponent,
+    MoodEditComponent,
+  
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),

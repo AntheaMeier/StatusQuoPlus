@@ -13,9 +13,10 @@
           <div class="date-numbers">
             {{ feedback.feedback_date | date:'dd.MM.YYYY' }}
           </div>
+  
         </div>
         <div class="feedback-provider">
-          von {{ feedback.provider_name }}
+          {{ feedback.provider_name }}
         </div>
       </div>
       <div class="feedback-text">
@@ -24,3 +25,5 @@
     </mat-card>
   </div>
 </div>
+
+

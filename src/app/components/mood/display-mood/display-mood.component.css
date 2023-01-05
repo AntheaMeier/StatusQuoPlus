@@ -1,9 +1,10 @@
-.mood-section {
+.feedback-section {
     margin: 40px;
     color: #0071B9;
+   justify-content: end;
 }
 
-.mood-provider {
+.feedback-provider {
     font-weight: 500;
     margin-top: 5px;
     margin-left: 15px;
@@ -29,7 +30,7 @@
     text-align: center;
 }
 
-.mood-matcard {
+.feedback-matcard {
     color: #857971;
     width: 100%;
     background-color: #E8E4E1;
@@ -75,3 +76,29 @@
 .icon-display {
   font-size: 15px;
 }
+
+
+   
+
+
+   .mat-icon {
+     
+      background-color: #ddd;
+      
+
+  }
+  
+  .mood{
+    margin: auto;
+  
+  }
+  
+  
+  mat-form-field {
+    width: 60%;
+    margin-top: 5%;
+    margin-left:20%;
+    margin-right:20%;
+  
+  }
+  

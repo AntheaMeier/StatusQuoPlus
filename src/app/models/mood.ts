@@ -5,5 +5,6 @@ export interface Mood {
     receiver_id: string;
     mood_text: string;
     mood_date?: Date;
+    emotion: string;
   }
   
