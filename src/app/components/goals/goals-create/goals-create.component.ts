@@ -37,6 +37,7 @@ export class GoalsCreateComponent implements OnInit {
     email: '',
     role: Role.Employee,
     team: [],
+    supervisor_id: ''
   };
   dataUsers: LoginData[] = [];
   idloggedInUser: any = '';

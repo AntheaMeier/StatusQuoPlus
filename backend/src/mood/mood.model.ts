@@ -6,6 +6,7 @@ export const MoodSchema = new mongoose.Schema({
   creator_id: {type: String},
   text: {type: String},
   emotion: {type: String},
+  supervisor_id: { type: String },
 });
 
 export interface Mood extends mongoose.Document {
@@ -15,4 +16,5 @@ export interface Mood extends mongoose.Document {
   creator_id: string;
   text: string;
   emotion: string;
+  supervisor_id: string;
 }

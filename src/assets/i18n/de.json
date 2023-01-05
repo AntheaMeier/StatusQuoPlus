@@ -28,7 +28,13 @@
   },
 
   "Mood": {
-    "mood": "MOOD"
+    "mood": "MOOD",
+    "team": "Teamansicht Mood",
+    "eigene": "Eigene Mood",
+    "uebersicht": "Übersicht",
+    "diagram": "Statistik",
+    "panelTitel": "Stimmungslage/n getrackt",
+    "leer": "Hier gibt es noch keine Einträge"
   },
 
   "Erfolge": {

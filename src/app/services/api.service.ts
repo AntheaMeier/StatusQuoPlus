@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, from, Observable, of, zip } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, concatMap, map, mergeMap, tap, toArray } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { Goals } from '../models/goals';
-import { LoginData, LoginPayload, LoginResponse } from '../models/loginData';
+import {LoginData, LoginPayload, LoginResponse } from '../models/loginData';
 import { Tasks } from '../models/tasks';
 import { Review } from '../models/review';
 import { Feedback } from '../models/feedback';
-import { User } from '../models/user';
+import {Mood} from "../models/mood";
 
 
 const httpOptions = {
@@ -25,6 +25,7 @@ const apiUrlTasksForStatus = 'http://localhost:3000/tasks/goal';
 const apiUrlUsersForReview = 'http://localhost:3000/reviews/user';
 const apiUrlFeedback = 'http://localhost:3000/feedback';
 const apiUrlFeedbackForUser = 'http://localhost:3000/feedback/receiver';
+const apiUrlMood = 'http://localhost:3000/mood';
 
 
 @Injectable({
@@ -86,9 +87,14 @@ export class ApiService {
     return this.http.get<LoginData>(url).pipe(
       map( res => {
             return res.firstname + ' ' + res.surname
-        }
-      )
-    )
+        }));
+  }
+
+  getTeamToSupervisor(supervisor_id: any): Observable<LoginData[]> {
+    const url = `${apiUrlLogin}/${supervisor_id}/team`;
+    return this.http.get<LoginData[]>(url).pipe(
+      catchError(this.handleError<LoginData[]>(`getUser id=${supervisor_id}`))
+    );
   }
 
   // Goals
@@ -238,10 +244,10 @@ export class ApiService {
 
   getAllFeedback(): Observable<Feedback[]> {
     return this.http.get<Feedback[]>(apiUrlFeedback).pipe(
-      catchError(this.handleError<Feedback[]>('getFeedback')) 
+      catchError(this.handleError<Feedback[]>('getFeedback'))
     );
   }
-  
+
   getFeedbackWithName(id: string): Observable<any> {
     return this.getFeedbackForUser(id).pipe(
       mergeMap(feedbacks => forkJoin(
@@ -254,5 +260,12 @@ export class ApiService {
           ))
       ))
     )
+  }
+
+  //MOOD
+
+  getMoodsOfTeam(id: string): Observable<Mood[]> {
+    return this.http.get<Mood[]>(`${apiUrlMood}/team/${id}`).pipe(
+      catchError(this.handleError('getMoodsOfTeam', [])));
   }
 }
