@@ -28,7 +28,12 @@
   },
 
   "Mood": {
-    "mood": "MOOD"
+    "mood": "MOOD",
+    "textEingabe": "Gib ein Kommentar ein",
+    "sicher": "Bist du sicher?",
+    "senden": "Mood senden",
+    "sendenBestaetigen": "Wenn du fortfährst, wird deine Stimmung gesendet.",
+    "gespeichert": "Mood gespeichet"
   },
 
   "Erfolge": {

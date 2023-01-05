@@ -14,18 +14,18 @@ export class MoodController {
   constructor(private moodService: MoodService) {}
   @Post()
     async addMood(
+      @Body('creation_date') creationDate: Date,
       @Body('creator_id') creatorId: string,
-      @Body('creator_name') creatorname: string,
-      @Body('creation_date') date: Date,
+      @Body('creator_name') creatorName: string,
       @Body('emotion') emotion: string,
       @Body('text') text: string,
     ) {
-      console.log(creatorId + " " + creatorname + " " + date + " " + emotion + " " + text);
+      console.log(creatorId + " " + creatorName + " " + creationDate + " " + emotion + " " + text);
       const generatedId = await this.moodService.insertMood(
+        creationDate,
         creatorId,
-        creatorname,
+        creatorName,
         emotion,
-        date,
         text,
       );
       return { id: generatedId };

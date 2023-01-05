@@ -8,6 +8,7 @@ import { Tasks } from '../models/tasks';
 import { Review } from '../models/review';
 import { Feedback } from '../models/feedback';
 import { User } from '../models/user';
+import { Mood } from '../models/mood';
 
 
 const httpOptions = {
@@ -25,6 +26,7 @@ const apiUrlTasksForStatus = 'http://localhost:3000/tasks/goal';
 const apiUrlUsersForReview = 'http://localhost:3000/reviews/user';
 const apiUrlFeedback = 'http://localhost:3000/feedback';
 const apiUrlFeedbackForUser = 'http://localhost:3000/feedback/receiver';
+const apiUrlMoodTracker = 'http://localhost:3000/mood';
 
 
 @Injectable({
@@ -254,5 +256,12 @@ export class ApiService {
           ))
       ))
     )
+  }
+
+  // Mood Tracker
+  trackMood(mood: Mood): Observable<Mood> {
+    return this.http.post<Mood>(apiUrlMoodTracker, mood, httpOptions).pipe(
+      catchError(this.handleError<Mood>('trackMood'))
+    );
   }
 }

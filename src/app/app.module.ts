@@ -72,6 +72,9 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { MoodComponent } from './components/mood/mood.component';
 import { MoodTrackenComponent } from './components/mood/mood-tracken/mood-tracken.component';
 import { DisplayMoodComponent } from './components/mood/display-mood/display-mood.component';
+import {MatRadioModule} from '@angular/material/radio';
+import { MoodConfirmationDialogComponent } from './components/mood/mood-confirmation-dialog/mood-confirmation-dialog.component';
+import { MoodSnackbarComponent } from './components/mood/mood-snackbar/mood-snackbar.component';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -105,7 +108,9 @@ export function playerFactory() {
     SnackBarComponent,
     MoodComponent,
     MoodTrackenComponent,
-    DisplayMoodComponent
+    DisplayMoodComponent,
+    MoodConfirmationDialogComponent,
+    MoodSnackbarComponent,
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),
@@ -157,7 +162,8 @@ export function playerFactory() {
     MatTabsModule,
     CdkAccordionModule,
     NgxTranslateModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatRadioModule
   ],
   exports: [
     MatInputModule,
