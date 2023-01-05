@@ -60,6 +60,12 @@ export class MoodTrackenComponent implements OnInit {
     const dialogRef = this.dialog.open(MoodConfirmationDialogComponent, {
       data: this.moodTest
     });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.openSnackBar();
+      this.selectedEmotion = '';
+      this.enteredContent = '';
+    });
   }
 
   openSnackBar() {
@@ -76,7 +82,3 @@ export class MoodTrackenComponent implements OnInit {
   }
 
 }
-
-// dialogRef.afterClosed().subscribe((result) => {
-//   this.openSnackBar();
-// });

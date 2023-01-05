@@ -18,17 +18,17 @@
     <fieldset id="group">
       <!-- sad icon -->
       <label for="sad" class="emotion-btn">
-        <input type="radio" id="sad" value="sad" name="group" (change)="onSelect($event)">
+        <input type="radio" id="sad" value="sad" name="group" (change)="onSelect($event)" [checked]="selectedEmotion === 'sad'">
         <mat-icon class= "sad" for="sad"[ngStyle]="{'color':'red'}">mood_bad</mat-icon>
       </label>
       <!-- neutral icon -->
       <label for="neutral" class="emotion-btn">
-        <input type="radio" id="neutral" value="neutral" name="group" (change)="onSelect($event)">
+        <input type="radio" id="neutral" value="neutral" name="group" (change)="onSelect($event)" [checked]="selectedEmotion === 'neutral'">
         <mat-icon class= "neutral" for="neutral"[ngStyle]="{'color':'yellow'}">sentiment_neutral</mat-icon>
       </label>
       <!-- happy icon -->
       <label for="happy" class="emotion-btn">
-        <input type="radio" id="happy" value="happy" name="group" (change)="onSelect($event)"s>
+        <input type="radio" id="happy" value="happy" name="group" (change)="onSelect($event)" [checked]="selectedEmotion === 'happy'">
         <mat-icon class= "happy" for="happy"[ngStyle]="{'color':'green'}">mood</mat-icon>
       </label>
     </fieldset>
