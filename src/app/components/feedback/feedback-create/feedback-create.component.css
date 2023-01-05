@@ -1,14 +1,3 @@
-.feedback-section {
-    margin: 40px;
-    color: #0071B9;
-}
-
-.feedback-provider {
-    font-weight: 500;
-    margin-top: 5px;
-    margin-left: 15px;
-}
-
 .header {
     display: flex;
 }
