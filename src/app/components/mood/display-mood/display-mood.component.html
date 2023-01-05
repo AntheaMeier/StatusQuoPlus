@@ -1,1 +1,27 @@
-<p>display-mood works!</p>
+<div class="mood-section">
+    <div style="display: flex">
+      <h3>{{ 'Mood.mood' | translate }}</h3>
+      <button class="bttn" style="font-size: 23px" (click)="openDialog()">+</button>
+    </div>
+    <div *ngIf="moods.length == 0" class="description-styling">
+      <p>{{ 'Mood.nichtVorhanden' | translate}}</p>
+    </div>
+    <div *ngFor="let mood of moods.reverse()">
+      <mat-card class="mood-matcard">
+        <div class="header">
+          <div *ngIf="mood.mood_date" class="date-label">
+            <div class="date-numbers">
+              {{ mood.mood_date | date:'dd.MM.YYYY' }}
+            </div>
+          </div>
+          <div class="mood-provider">
+            von {{ mood.provider_name }}
+          </div>
+        </div>
+        <div class="feedback-text">
+          {{ mood.mood_text }}
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  
