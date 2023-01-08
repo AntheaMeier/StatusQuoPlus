@@ -12,19 +12,47 @@
 
   <div class="emotion">
     <fieldset id="group">         
-      <mat-icon class= "happy" for="happy"[ngStyle]="{'color':'green'}">mood</mat-icon>
-    </fieldset>
+      <mat-icon class= "sad" for="sad"[ngStyle]="{'color':'red'}">mood_bad</mat-icon>
+    </fieldset>        
     <mat-card class="feedback-matcard">   
       <div class="header">
-      </div>
+      </div>        
       <div class="feedback-text">
-        {{ feedback.feedback_text }}
+        {{ feedback.feedback_text }}  
+      </div>
+    </mat-card>
+  </div>
+  
+
+  <div class="emotion">
+    <fieldset id="group">         
+      <mat-icon class= "happy" for="happy"[ngStyle]="{'color':'green'}">mood</mat-icon>
+    </fieldset>        
+    <mat-card class="feedback-matcard">   
+      <div class="header">
+      </div>    
+      <div class="feedback-text">
+        {{ feedback.feedback_text }}        
+      </div>
+    </mat-card>
+  </div>
+  
+
+  <div class="emotion">
+    <fieldset id="group">         
+      <mat-icon class= "neutral" for="neutral"[ngStyle]="{'color':'yellow'}">sentiment_neutral</mat-icon>
+    </fieldset>        
+    <mat-card class="feedback-matcard">   
+      <div class="header">
+      </div>    
+      <div class="feedback-text">
+        {{ feedback.feedback_text }}        
       </div>
     </mat-card>
   </div>
 
-
-
+  
+  
   <!--
     <fieldset id="group">         
       <mat-icon class= "sad" for="sad"[ngStyle]="{'color':'red'}">mood_bad</mat-icon>
