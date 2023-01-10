@@ -17,7 +17,7 @@ export class DisplayMoodComponent implements OnInit {
   idloggedInUser: string = '';
   feedbacks: Feedback[] = [];
   moods: Mood [] = [];
- 
+  Mood = { mood_date: new Date()}
 
   constructor(
     public dialog: MatDialog,
@@ -33,6 +33,7 @@ export class DisplayMoodComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(MoodEditComponent);
+    this.Mood.mood_date = new Date();
   }
 
   getFeedback(idloggedInUser: string): any {
