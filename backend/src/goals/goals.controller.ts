@@ -58,7 +58,7 @@ export class GoalsController {
       goalDesc,
       goalUserid,
       goalPriority,
-      goalCompleted
+      goalCompleted,
     );
     return null;
   }
@@ -73,8 +73,7 @@ export class GoalsController {
   async getAllGoalsToUser(
     @Param('userid') userid: string,
     @Param('completed') completed: boolean,
-
-  ){
+  ) {
     return await this.goalsService.getGoalsToUser(userid, completed);
   }
 }

@@ -8,6 +8,7 @@ import { Tasks } from '../models/tasks';
 import { Review } from '../models/review';
 import { Feedback } from '../models/feedback';
 import { User } from '../models/user';
+import { Mood } from 'backend/src/mood/mood.model';
 
 
 const httpOptions = {
@@ -131,6 +132,43 @@ export class ApiService {
       catchError(this.handleError('getUsersForGoal', []))
     );
   }
+
+  //____________
+  // Mood
+  addMood(mood: Mood): Observable<Mood> {
+    return this.http.post<Mood>(apiUrl, mood, httpOptions).pipe(
+      catchError(this.handleError<Mood>('addMood'))
+    );
+  }
+
+  deleteMood(id: any): Observable<Goals> {
+    const url = `${apiUrl}/${id}`;
+    return this.http.delete<Goals>(url, httpOptions).pipe(
+      catchError(this.handleError<Goals>('deleteGoal'))
+    );
+  }
+
+  updateMood(id: any, goal: Goals, removeStoredDate: boolean): Observable<any> {
+    const url = `${apiUrl}/${id}/${removeStoredDate}`;
+    return this.http.patch(url, goal, httpOptions).pipe(
+      catchError(this.handleError<any>('updateMood'))
+    );
+    }
+   
+  getMood(id: string): Observable<Mood> {
+    const url = `${apiUrl}/${id}`;
+    return this.http.get<Mood>(url).pipe(
+      catchError(this.handleError<Mood>(`getArticle id=${id}`))
+    );
+  }
+
+  getMoodToUser(id: any, completed: boolean): Observable<Mood[]> {
+    return this.http.get<Mood[]>(`${apiUrlUsersForMood}/${id}/${completed}`).pipe(
+      catchError(this.handleError('getUsersForMood', []))
+    );
+  }
+  
+  //_____________
 
   // Tasks
   addTask(task: Tasks): Observable<Tasks> {

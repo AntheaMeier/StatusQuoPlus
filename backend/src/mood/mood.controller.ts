@@ -22,7 +22,7 @@ export class MoodController {
     @Body('creator_name') moodCreatorName: string,
     @Body('creator_id') moodCreatorId: string,
   ) {
-    const generatedId = await this.moodsService.insertMoods(
+    const generatedId = await this.moodService.insertMoods(
       moodStoredDate,
       moodText,
       moodEmotion,
@@ -39,7 +39,7 @@ export class MoodController {
 
   @Get(':id')
   getMood(@Param('id') moodId: string) {
-    return this.moodsService.getSingleMood(moodId);
+    return this.moodService.getSingleMood(moodId);
   }
 
   @Patch(':id/:removeStoredDate')
@@ -53,7 +53,7 @@ export class MoodController {
     @Body('creator_name') moodCreatorName: string,
     @Body('creator_id') moodCreatorId: string,
   ) {
-    await this.moodsService.updateMood(
+    await this.moodService.updateMood(
       moodId,
       removeStoredDate === 'true',
       moodStoredDate,
@@ -67,13 +67,18 @@ export class MoodController {
 
   @Delete(':id')
   async removeMood(@Param('id') moodId: string) {
-    await this.moodsService.deleteMood(moodId);
+    await this.moodService.deleteMood(moodId);
     return null;
   }
+
+
+/* function updateMood() {
+  throw new Error('Function not implemented.');
+} */
 
 /*   @Get('user/:userid/:completed')
   async getAllMoodsToUser(
     @Param('moodsId') moodsId: string,
   ){
-    return await this.moodsService.getMoodsToUser(userid, completed);
+    return await this.moodService.getMoodsToUser(userid, completed);
   }   }*/
