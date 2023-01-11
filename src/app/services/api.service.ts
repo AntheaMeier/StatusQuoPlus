@@ -281,19 +281,8 @@ export class ApiService {
     );
   }
   
-  getMoodWithName(id: string): Observable<any> {
-    return this.getMoodForUser(id).pipe(
-      mergeMap(moods => forkJoin(
-        moods.map(f =>
-          this.getUserName(f.provider_id).pipe(
-            map(name => {
-              f.provider_name = name;
-              return f;
-            })
-          ))
-      ))
-    )
-  }
+  
+  
 
 
 

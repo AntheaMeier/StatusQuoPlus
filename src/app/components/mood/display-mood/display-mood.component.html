@@ -1,13 +1,16 @@
 <div class="feedback-section">
+  
+
   <div style="display: flex">
-   
-   
+    <h3>{{ 'Mood.mood' | translate }}</h3>
+    <button class="bttn" style="font-size: 23px" (click)="openDialog()">+</button>
   </div>
 
-  <div *ngIf="feedbacks.length == 0" class="description-styling">
-    <p>{{ 'Feedback.nichtVorhanden' | translate}}</p>
+
+  <div *ngIf="moods.length == 0" class="description-styling">
+    <p>{{ 'Mood.nichtVorhanden' | translate}}</p>
   </div>
-  <div *ngFor="let feedback of feedbacks.reverse()">
+  <div *ngFor="let mood of moods.reverse()">
     
 
 
@@ -17,32 +20,39 @@
     </fieldset>        
     <mat-card class="feedback-matcard">   
       <div>
-        {{ Mood.mood_date| date:'dd.MM.YYYY' }}
+        {{ mood.mood_date| date:'dd.MM.YYYY' }}
       </div>
       <div class="header">
       </div>        
       <div class="feedback-text">
-        {{ feedback.feedback_text }}  
+        {{ mood.mood_text }}  
       </div>
     </mat-card>
   </div>
+ 
   
+ 
 
   <div class="emotion">
+
+     
     <fieldset id="group">         
       <mat-icon class= "happy" for="happy"[ngStyle]="{'color':'green'}">mood</mat-icon>
-    </fieldset>        
+    </fieldset>      
+     
     <mat-card class="feedback-matcard">  
       <div>
-        {{ Mood.mood_date| date:'dd.MM.YYYY' }}
+        {{ mood.mood_date| date:'dd.MM.YYYY' }}
       </div>
       <div class="header">
       </div>    
       <div class="feedback-text">
-        {{ feedback.feedback_text }}        
+        {{ mood.mood_text }}        
       </div>
     </mat-card>
   </div>
+
+
   
 
   <div class="emotion">
@@ -51,37 +61,20 @@
     </fieldset>      
     <mat-card class="feedback-matcard">  
       <div>
-        {{ Mood.mood_date| date:'dd.MM.YYYY' }}
+        {{ mood.mood_date| date:'dd.MM.YYYY' }}
       </div> 
       <div class="header">
       </div>    
       <div class="feedback-text">
-        {{ feedback.feedback_text }}        
+        {{ mood.mood_text }}        
       </div>
     </mat-card>
   </div>
 
-  
+
 
   
-  <!--
-    <fieldset id="group">         
-      <mat-icon class= "sad" for="sad"[ngStyle]="{'color':'red'}">mood_bad</mat-icon>
-      <mat-icon class= "neutral" for="neutral"[ngStyle]="{'color':'yellow'}">sentiment_neutral</mat-icon>
-      <mat-icon class= "happy" for="happy"[ngStyle]="{'color':'green'}">mood</mat-icon>
-    </fieldset>
-  -->
-
-<!--
-<div *ngIf="Mood.mood_date" class="date-label"></div>
-  <div class="date-numbers">
-    {{ Mood.mood_date| date:'dd.MM.YYYY' }}
-  </div>
-
--->
- 
-   
-    
+  
   
 
 </div>

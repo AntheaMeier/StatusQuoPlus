@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
-import {Feedback} from '../../../models/feedback';
+import {Mood} from '../../../models/mood';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog"
 import {DisplayMoodComponent} from "../display-mood/display-mood.component";
 import { MoodSendConfirmationDialogComponent } from '../mood-send-confirmation-dialog/mood-send-confirmation-dialog.component';
@@ -17,8 +17,8 @@ import {DeleteConfirmationDialogComponent} from "../../goals/delete-confirmation
 })
 export class MoodEditComponent implements OnInit {
 
-  testfeedback: Feedback = {_id: '', provider_id: '', receiver_id: '', feedback_text: '', feedback_date: new Date()}
-  idreceiver= '';
+  testmood: Mood = {_id: '', mood_text: '', emotion: '', mood_date: new Date()}
+ // idreceiver= '';
   enteredContent = '';
   idloggedInUser: string = '';
   userClicked: boolean = false;
@@ -35,15 +35,13 @@ export class MoodEditComponent implements OnInit {
   }
 
   openDialog() {
-    this.testfeedback._id= "";
-    this.testfeedback.provider_id = this.idloggedInUser;
-    this.testfeedback.receiver_id = this.idreceiver;
-    this.testfeedback.feedback_text = this.enteredContent;
-    this.testfeedback.feedback_date = new Date();
-    console.log(this.testfeedback);
+    this.testmood._id= "";
+   
+    this.testmood.mood_date = new Date();
+    console.log(this.testmood);
 
     const dialogRef = this.dialog.open(MoodSendConfirmationDialogComponent, {
-      data: this.testfeedback
+      data: this.testmood
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.openSnackBar();
@@ -52,7 +50,7 @@ export class MoodEditComponent implements OnInit {
 
   setReceiverId(event: string) {
     this.userClicked = true;
-    this.idreceiver = event;
+   
   }
 
   setUserClicked($event: any) {

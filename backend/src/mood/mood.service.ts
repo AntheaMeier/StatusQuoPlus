@@ -12,7 +12,7 @@ export class MoodService {
     creation_date: Date,
     creator_name: string,
     creator_id: string,
-    text: string,
+    mood_text: string,
     emotion: string,
   ) {
     const newMood = new this.moodModel({
@@ -20,7 +20,7 @@ export class MoodService {
       creation_date: creation_date,
       creator_name: creator_name,
       creator_id: creator_id,
-      text: text,
+      mood_text: mood_text,
       emotion: emotion,
       });
     const result = await newMood.save();
@@ -34,7 +34,7 @@ export class MoodService {
       creation_date: mood.creation_date,
       creator_name: mood.creator_name,
       creator_id: mood.creator_id,
-      text: mood.text,
+      mood_text: mood.mood_text,
       emotion: mood.emotion,
     }));
   }
@@ -61,7 +61,7 @@ export class MoodService {
       creation_date: mood.creation_date,
       creator_name: mood.creator_name,
       creator_id: mood.creator_id,
-      text: mood.text,
+      mood_text: mood.mood_text,
       emotion: mood.emotion,
     };
   }

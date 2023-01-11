@@ -1,18 +1,48 @@
 .feedback-section {
-    margin: 40px;
-    color: #0071B9;
-   justify-content: end;
+    margin: 100px;
 }
 
-.feedback-provider {
-    font-weight: 500;
-    margin-top: 5px;
-    margin-left: 15px;
+.emotion{
+  display: flex;
+    margin: 100px;    
 }
 
-.header {
-    display: flex;
+
+.mat-icon{
+  margin-right: 10px;
 }
+.bttn {
+  transition: 1s ease-in-out;
+  outline: none;
+  border: 1px solid #0071B9;
+  padding: 7px 12px 9px;
+  margin-left: 10px;
+  margin-top: -5px;
+  margin-bottom: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 12px;
+  background: transparent;
+  color: #857971;
+  font-weight: 100;
+  font-size: 23px;
+  max-height: 40px;
+}
+
+.bttn:hover {
+  transition: 1s ease-in-out;
+  background: #0071B9;
+  opacity: 0.4;
+  color: white;
+}
+
+.icon-display {
+  font-size: 15px;
+}
+
+
 
 .date-label {
     width: 80px;
@@ -38,13 +68,17 @@
     margin-bottom: 20px;
     box-shadow: none;
     padding: 20px;
+    
 }
 
+
+
 @media screen and (max-width: 800px) {
-    .description-styling {
-        width: 85%;
-    }
+  .feedback-section {
+    margin: 20px;
 }
+
+
 
 .bttn {
   transition: 1s ease-in-out;
@@ -78,27 +112,29 @@
 }
 
 
+.feedback-matcard {
+  color: #857971;
+  width: 260%;
+  background-color: #E8E4E1;
+  margin: 0 auto;
+  word-wrap: break-word;
+  box-shadow: none;
+  padding: 20px;
+}
+
+.mat-icon{
+  margin-right: 160px;
+  
+}
+
+}
+
+
+
+
+
+
+
+
+
    
-
-
-   .mat-icon {
-     
-      background-color: #ddd;
-      
-
-  }
-  
-  .mood{
-    margin: auto;
-  
-  }
-  
-  
-  mat-form-field {
-    width: 60%;
-    margin-top: 5%;
-    margin-left:20%;
-    margin-right:20%;
-  
-  }
-  

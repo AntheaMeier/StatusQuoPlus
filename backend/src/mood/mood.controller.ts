@@ -20,10 +20,10 @@ export class MoodController {
     @Body('creation_date') moodCreationDate: Date,
     @Body('creator_name') moodCreatorName: string,
     @Body('creator_id') moodCreatorId: string,
-    @Body('text') moodText: string,
+    @Body('mood_text') moodText: string,
     @Body('emotion') moodEmotion: string,
   ) {
-    console.log(moodId + " " + moodEmotion + " " + moodCreationDate);
+    console.log(moodId + " " + moodText + " " + moodCreationDate);
     const generatedId = await this.moodService.insertMood(
       moodId,
       moodCreationDate,

@@ -15,9 +15,8 @@ import { Feedback } from 'src/app/models/feedback';
 export class DisplayMoodComponent implements OnInit {
 
   idloggedInUser: string = '';
-  feedbacks: Feedback[] = [];
   moods: Mood [] = [];
-  Mood = { mood_date: new Date()}
+  
 
   constructor(
     public dialog: MatDialog,
@@ -27,21 +26,21 @@ export class DisplayMoodComponent implements OnInit {
  
   ngOnInit(): void {
     this.idloggedInUser = this.auth.getUserDetails()._id;
-    this.getFeedback(this.idloggedInUser);
+    this.getMood(this.idloggedInUser);
   }
   
 
   openDialog() {
     this.dialog.open(MoodEditComponent);
-    this.Mood.mood_date = new Date();
+   
   }
 
-  getFeedback(idloggedInUser: string): any {
+  getMood(idloggedInUser: string): any {
     console.log(idloggedInUser);
-    this.api.getFeedbackWithName(idloggedInUser).subscribe(
+    this.api.getAllMood().subscribe(
       (res) => {
         console.log(res);
-        this.feedbacks = res;
+        this.moods = res;
       },
       (error) => {
         console.log(error);
