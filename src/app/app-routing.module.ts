@@ -51,7 +51,7 @@ const routes: Routes = [
   {
     path: 'mood-team',
     component: MoodTrackerStatistikComponent,
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService, RoleGuard]
   },
   {
     path: '**',

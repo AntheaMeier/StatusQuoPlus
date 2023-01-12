@@ -1,0 +1,27 @@
+.chart-container {
+  position: relative;
+  height: 85%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+@media screen and (max-width: 830px) {
+  .chart-container {
+    height: 70%;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .chart-container {
+    height: 65%;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .chart-container {
+    height: 60%;
+  }
+}
