@@ -34,14 +34,7 @@
     </fieldset>
 </div>
 
-<div class="comment-locker">
-  <div *ngIf="!hideComment">
-    <mat-icon class= "not-hidden" [ngStyle]="{'color':'gray'}" (click)="changeState()">lock_open</mat-icon>
-  </div>
-  <div *ngIf="hideComment">
-    <mat-icon class= "hidden" [ngStyle]="{'color':'gray'}" (click)="changeState()">lock</mat-icon>
-  </div>
-</div>
+
 
 <div class="textfield">
   <mat-form-field appearance="fill">
@@ -55,8 +48,24 @@
       #content="ngModel"
     ></textarea>
   </mat-form-field>
+
+  <div class="submit-button">
+    <button type="submit" (click)="openDialog()">{{'Button.senden' | translate}}</button>
+  </div>
+
+  <div class="comment-locker">
+    <div *ngIf="!hideComment">
+      <mat-icon class= "not-hidden" [ngStyle]="{'color':'gray'}" (click)="changeState()">lock_open</mat-icon>
+    </div>
+    <div *ngIf="hideComment">
+
+      <mat-icon class= "hidden" [ngStyle]="{'color':'gray'}" (click)="changeState()">lock</mat-icon>
+
+    </div>
+  </div>
+  <mat-icon class= "help" [ngStyle]="{'color':'#A4A4A4'}">help_outline</mat-icon>
+
+
 </div>
 
-<div class="submit-button">
-  <button type="submit" (click)="openDialog()">{{'Button.senden' | translate}}</button>
-</div>
+
