@@ -26,13 +26,16 @@
 
 
 .emotion input:checked + mat-icon {
-    background-color:#bfb;
-    border-color: #4c4;
+    background-color:gray;
+    border-color: black;
 
 }
 
 .emotion .mat-icon:hover {
-  background-color: #dfd;
+  background-color: gray;
+  border-style: solid;
+      border-color: black;
+
 }
 
 
@@ -64,7 +67,6 @@
 
 mat-form-field {
   width: 60%;
-  margin-top: 5%;
   margin-left:20%;
   margin-right:20%;
 
@@ -73,16 +75,20 @@ mat-form-field {
     button
     {
     border-radius: 5px;
-    padding-left:20px;
-    padding-right:20px;
+    padding-left:2%;
+    padding-right:2%;
     padding-top:5px;
     padding-bottom:5px;
-      width: 13%;
-
+    width: 15%;
     margin-top: 1%;
     margin-left:20%;
     margin-right:20%;
-
-
     }
 
+.private .mat-icon{
+ font-size: 30px;
+     margin-left:70%;
+     padding-bottom: 0%;
+     margin-bottom: 0%;
+
+}

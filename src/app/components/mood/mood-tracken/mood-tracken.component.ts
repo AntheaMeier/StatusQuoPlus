@@ -15,12 +15,14 @@ import { MoodSnackbarComponent } from '../mood-snackbar/mood-snackbar.component'
 })
 export class MoodTrackenComponent implements OnInit {
 
-  moodTest: Mood = {id: '', creation_date: new Date(), creator_name: '', creator_id: '', text: '', emotion: ''};
+  moodTest: Mood = {id: '', creation_date: new Date(), creator_name: '', creator_id: '', text: '', emotion: '', hidden: false};
   enteredContent = '';
   selectedEmotion: string = '';
   emotions: string[] = ['sad', 'neutral', 'happy'];
   idloggedInUser: string = '';
   nameLoggedInUser: string = '';
+  hideKomment: boolean = false;
+
 
   constructor(
     public snackBar: MatSnackBar,
@@ -56,6 +58,7 @@ export class MoodTrackenComponent implements OnInit {
     this.moodTest.creator_id = this.idloggedInUser;
     this.moodTest.text = this.enteredContent;
     this.moodTest.emotion = this.selectedEmotion;
+    this.moodTest.hidden = this.hideKomment;
 
     const dialogRef = this.dialog.open(MoodConfirmationDialogComponent, {
       data: this.moodTest
@@ -82,3 +85,14 @@ export class MoodTrackenComponent implements OnInit {
   }
 
 }
+
+  changeState(){
+  if (this.hideKomment!){
+    this.hideKomment!=false;
+    }
+
+  else if(!this.hideKomment!){
+    this.hideKomment!=true;
+
+    }
+  }

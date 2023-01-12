@@ -1,3 +1,5 @@
+
+
 <div class="selected-emotion">
   <div *ngIf="selectedEmotion === ''">
     <mat-icon class= "sad" for="sad"[ngStyle]="{'color':'#ddd'}">mood_bad</mat-icon>
@@ -34,19 +36,49 @@
     </fieldset>
 </div>
 
+<div class="notHidden">
+  <div
+    *ngIf="!hideKomment">
+
+    <mat-icon class= "notHidden" for="notHidden"[ngStyle]="{'color':'gray'}" (click) =="changeState()" >lock_open</mat-icon>
+
+  </div>
+
+  <div
+    *ngIf="hideKomment">
+
+     <mat-icon class= "hidden" for="hidden"[ngStyle]="{'color':'gray'}" (click) =="changeState()" >lock</mat-icon>
+
+</div>
+
+
+</div>
+
 <div class="textfield">
+
   <mat-form-field appearance="fill">
-    <mat-label>Kommentar</mat-label>
-    <textarea 
+
+    <mat-label>Kommentar  </mat-label>
+
+
+
+    <textarea
       matInput
       [(ngModel)]="enteredContent"
       id="content"
       name="content"
       placeholder="{{'Mood.textEingabe' | translate}}"
       #content="ngModel"></textarea>
+
+
   </mat-form-field>
 </div>
 
 <div class="submit-button">
   <button type="submit" (click)="openDialog()">{{'Button.senden' | translate}}</button>
+
+
+
 </div>
+
+

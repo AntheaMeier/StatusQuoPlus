@@ -7,4 +7,5 @@ export interface Mood {
     creator_id: string;
     emotion: string;
     text?: string;
+    hidden: boolean;
 }

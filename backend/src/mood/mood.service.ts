@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class MoodService {
-  
+
   constructor(@InjectModel('Mood') private readonly moodModel: Model<Mood>) {}
 
   async insertMood(
@@ -14,6 +14,7 @@ export class MoodService {
     creator_name: string,
     emotion: string,
     text:string,
+    hidden:boolean,
   ) {
     const newMood = new this.moodModel({
       creation_date: creation_date,
@@ -21,6 +22,7 @@ export class MoodService {
       creator_Name: creator_name,
       emotion: emotion,
       text: text,
+      hidden: hidden,
     });
     const result = await newMood.save();
     return result.id;
