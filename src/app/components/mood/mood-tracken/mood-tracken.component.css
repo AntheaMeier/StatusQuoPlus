@@ -113,9 +113,9 @@ position: relative;
   width:28px;
   z-index: 999999;
   position: absolute;
-  font-size: 28px;
-  bottom: 17%;
-  right: 13%;
+  font-size: 25px;
+  bottom: 73%;
+  right: 12%;
 
 }
 
@@ -124,9 +124,9 @@ position: relative;
   width:10px;
   z-index: 999999;
   position: absolute;
-  font-size: 18px;
-  bottom: 25%;
-  right: 9%;
+  font-size: 16px;
+  bottom: 78%;
+  right: 8%;
 }
 
 
