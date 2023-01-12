@@ -1,8 +1,10 @@
 export interface Mood {
-    _id: string;
-
-    mood_text: string;
-    mood_date?: Date;
-    emotion: string;
-  }
+  id: string;
+  creation_date: Date;
+  creator_name: string;
+  creator_id: string;
+  emotion: string;
+  text?: string;
+  hidden: boolean;
+}
   

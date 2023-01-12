@@ -17,7 +17,7 @@ import {DeleteConfirmationDialogComponent} from "../../goals/delete-confirmation
 })
 export class MoodEditComponent implements OnInit {
 
-  testmood: Mood = {_id: '', mood_text: '', emotion: '', mood_date: new Date()}
+  mood: Mood = {id: '', creation_date: new Date(), creator_name: '', creator_id: '', emotion: '', text: '', hidden: false};
  // idreceiver= '';
   enteredContent = '';
   idloggedInUser: string = '';
@@ -35,13 +35,13 @@ export class MoodEditComponent implements OnInit {
   }
 
   openDialog() {
-    this.testmood._id= "";
+    this.mood.id= "";
    
-    this.testmood.mood_date = new Date();
-    console.log(this.testmood);
+    this.mood.creation_date = new Date();
+    console.log(this.mood);
 
     const dialogRef = this.dialog.open(MoodSendConfirmationDialogComponent, {
-      data: this.testmood
+      data: this.mood
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.openSnackBar();

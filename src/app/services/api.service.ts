@@ -27,7 +27,7 @@ const apiUrlUsersForReview = 'http://localhost:3000/reviews/user';
 const apiUrlFeedback = 'http://localhost:3000/feedback';
 const apiUrlMood = 'http://localhost:3000/mood';
 const apiUrlFeedbackForUser = 'http://localhost:3000/feedback/receiver';
-const apiUrlMoodForUser = 'http://localhost:3000/mood/receiver';
+const apiUrlMoodForUser = 'http://localhost:3000/mood/user';
 
 
 
@@ -275,11 +275,11 @@ export class ApiService {
     );
   }
 
-  getAllMood(): Observable<Mood[]> {
-    return this.http.get<Mood[]>(apiUrlMood).pipe(
-      catchError(this.handleError<Mood[]>('getMood')) 
-    );
-  }
+  // getAllMood(): Observable<Mood[]> {
+  //   return this.http.get<Mood[]>(apiUrlMood).pipe(
+  //     catchError(this.handleError<Mood[]>('getMood')) 
+  //   );
+  // }
   
   
   

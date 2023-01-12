@@ -4,8 +4,6 @@ import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from '../../../services/auth.service';
 import { MoodEditComponent } from '../mood-edit/mood-edit.component';
 import { Mood } from 'src/app/models/mood';
-import { Feedback } from 'src/app/models/feedback';
-
 
 @Component({
   selector: 'app-display-mood',
@@ -32,12 +30,11 @@ export class DisplayMoodComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(MoodEditComponent);
-   
   }
 
   getMood(idloggedInUser: string): any {
     console.log(idloggedInUser);
-    this.api.getAllMood().subscribe(
+    this.api.getMoodForUser(idloggedInUser).subscribe(
       (res) => {
         console.log(res);
         this.moods = res;
