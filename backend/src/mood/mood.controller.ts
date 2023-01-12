@@ -34,21 +34,9 @@ export class MoodController {
     return { id: generatedId };
   }
 
-  // @Get()
-  // async getAllMood() {
-  //   return await this.moodService.getMoods();
-  // }
-
-  // @Get(':id')
-  // getFeedback(@Param('id') moodId: string) {
-  //   return this.moodService.getSingleMood(moodId);
-  // }
-
   @Get('user/:creator_id')
   async getAllMoodsForReceiver(
     @Param('creator_id') creator_id: string) {
     return await this.moodService.getMoodForUser(creator_id);
   }
- 
-
 }

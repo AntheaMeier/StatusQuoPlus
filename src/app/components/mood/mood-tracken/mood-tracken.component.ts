@@ -23,9 +23,9 @@ export class MoodTrackenComponent implements OnInit {
 
 
   constructor(
-    public snackBar: MatSnackBar,
     public dialog: MatDialog,
     private auth: AuthService,
+    public snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -47,10 +47,12 @@ export class MoodTrackenComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.openSnackBar();
-      this.selectedEmotion = '';
-      this.enteredContent = '';
-      this.hideComment = false;
+      if (result === 'success') {
+        this.openSnackBar();
+        this.selectedEmotion = '';
+        this.enteredContent = '';
+        this.hideComment = false;
+      }
     });
   }
 

@@ -28,18 +28,6 @@ export class MoodService {
     return result.id;
   }
 
-  // async getMoods() {
-  //   const moods = await this.moodModel.find().exec();
-  //   return moods.map((mood) => ({
-  //     id: mood.id,
-  //     creation_date: mood.creation_date,
-  //     creator_name: mood.creator_name,
-  //     creator_id: mood.creator_id,
-  //     mood_text: mood.mood_text,
-  //     emotion: mood.emotion,
-  //   }));
-  // }
-
   async getMoodForUser(creator_id: string) {
     let moods;
 
@@ -54,31 +42,5 @@ export class MoodService {
     }
     return moods;
   }
-
-  // async getSingleMood(moodId: string) {
-  //   const mood = await this.findMood(moodId);
-  //   return {
-  //     id: mood.id,
-  //     creation_date: mood.creation_date,
-  //     creator_name: mood.creator_name,
-  //     creator_id: mood.creator_id,
-  //     mood_text: mood.mood_text,
-  //     emotion: mood.emotion,
-  //   };
-  // }
-
-  // private async findMood(id: string): Promise<Mood> {
-  //   let mood;
-  //   try {
-  //     mood = await this.moodModel.findById(id).exec();
-  //   } catch (error) {
-  //     throw new NotFoundException('Could not find mood.');
-  //   }
-  //   if (!mood) {
-  //     throw new NotFoundException('Could not find mood.');
-  //   }
-  //   return mood;
-  // }
-
 }
 

@@ -1,3 +1,10 @@
 .container {
-    display: flex;
+    display: grid;
+    grid-template-columns: [col1-start] 50% [col2-start] 50%;
 }
+
+@media screen and (max-width: 1080px) {
+    .container {
+        display: block;
+    }
+  }

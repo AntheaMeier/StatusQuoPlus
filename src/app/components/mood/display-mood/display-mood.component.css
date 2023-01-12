@@ -1,11 +1,16 @@
 .mood-section {
-  margin: 40px;
+  margin-top: 50px;
   color: #0071B9;
 }
 
 .mood-container {
   display: flex;
   justify-content: center;
+}
+
+.header {
+  display: flex;
+  gap: 10px;
 }
 
 .date-label {
@@ -42,6 +47,6 @@
 }
 
 .emotion-icon {
-  margin: 30px;
+  margin: 20px;
   font-size: 50px;
 }

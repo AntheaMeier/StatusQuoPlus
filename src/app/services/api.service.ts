@@ -268,30 +268,9 @@ export class ApiService {
     );
   }
 
-  // addMood(mood: Mood): Observable<Mood> {
-  //   console.log(mood);
-  //   return this.http.post<Mood>(apiUrlMood, mood, httpOptions).pipe(
-  //     catchError(this.handleError<Mood>('addMood'))
-  //   );
-  // }
-
   getMoodForUser(id: string): Observable<Mood[]> {
     return this.http.get<Mood[]>(`${apiUrlMoodForUser}/${id}`).pipe(
       catchError(this.handleError<Mood[]>('getMoodForUser', []))
     );
   }
-
-  // getAllMood(): Observable<Mood[]> {
-  //   return this.http.get<Mood[]>(apiUrlMood).pipe(
-  //     catchError(this.handleError<Mood[]>('getMood')) 
-  //   );
-  // }
-  
-  
-  
-
-
-
-
 }
-

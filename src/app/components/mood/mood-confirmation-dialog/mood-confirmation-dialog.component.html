@@ -1,10 +1,10 @@
 <div class="dialog">
     <h1 mat-dialog-title>{{ 'Mood.sicher' | translate }}</h1>
     <div mat-dialog-content>
-        {{ 'Mood.sendenBestaetigen' | translate }}
+        {{ 'Mood.speichernBestaetigen' | translate }}
     </div>
     <div mat-dialog-actions class="action-btn">
         <button mat-button mat-dialog-close>{{ 'Button.abbrechen' | translate }}</button>
-        <button mat-button (click)="trackMood()">{{ 'Mood.senden' | translate }}</button>
+        <button mat-button mat-dialog-close="success" (click)="trackMood()">{{ 'Mood.speichern' | translate }}</button>
     </div>
 </div>

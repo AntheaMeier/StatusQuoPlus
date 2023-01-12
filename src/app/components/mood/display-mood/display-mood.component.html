@@ -1,4 +1,5 @@
 <div class="mood-section">
+  <h3>DEINE MOODS</h3>
   <div *ngIf="moods.length == 0" class="description-styling">
     <p>{{ 'Mood.nichtVorhanden' | translate}}</p>
   </div>
@@ -22,12 +23,12 @@
             {{ mood.creation_date| date:'dd.MM.YYYY' }}
           </div>
         </div>
+        <div *ngIf="mood.hidden" class="lock-icon">
+          <mat-icon>lock</mat-icon>
+        </div>
       </div>
       <div class="mood-text">
         {{ mood.text }}
-      </div>
-      <div *ngIf="mood.hidden" class="lock-icon">
-        <mat-icon>lock</mat-icon>
       </div>
     </mat-card>
   </div>

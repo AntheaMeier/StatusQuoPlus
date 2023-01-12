@@ -1,3 +1,7 @@
+.container {
+  margin-top: 50px;
+}
+
 .mat-icon {
     font-size: 110px;
     height: 110px ;
@@ -21,94 +25,74 @@
     padding-top: 1px;
     border-radius: 100px;
     margin-right: 20px;
-
 }
-
 
 .emotion input:checked + mat-icon {
     background-color:#A9BCF5;
-
 }
 
 .emotion .mat-icon:hover {
   background-color: #A9BCF5;
-
-
-
-
 }
 
-
-.emotion{
+.emotion {
   text-align: center;
 }
 
-.selected-emotion{
+.selected-emotion {
   text-align: center;
   margin:30px;
 }
 
 .selected-emotion .mat-icon {
-    text-align: center;
-    background-color: rgb(221, 221, 221);
-       padding-left: 0px;
-       padding-right: 8px;
-       padding-bottom: 9px;
-       padding-top: 1px;
-       border-radius: 100px;
-       margin-right: 20px;
+  text-align: center;
+  background-color: rgb(221, 221, 221);
+  padding-left: 0px;
+  padding-right: 8px;
+  padding-bottom: 9px;
+  padding-top: 1px;
+  border-radius: 100px;
+  margin-right: 20px;
 }
 
-.mood{
+.mood {
   margin: auto;
-
 }
-
 
 mat-form-field {
   width: 80%;
   margin-left:10%;
   margin-right:10%;
-
 }
 
-    button
-    {
-    border-radius: 5px;
-    padding-left:50px;
-    padding-right:50px;
-    padding-top:5px;
-    padding-bottom:5px;
-    margin-top: 1%;
-    margin-left:10%;
-
-
-    }
-
-.private .mat-icon{
- font-size: 30px;
-     margin-left:70%;
-
-
+button {
+  border-radius: 5px;
+  padding-left:50px;
+  padding-right:50px;
+  padding-top:5px;
+  padding-bottom:5px;
+  margin-top: 1%;
+  margin-left:10%;
 }
 
-.textfield{
-background-color:#F2F2F2;
-padding-top: 2%;
-padding-bottom: 2%;
-margin-left: 10%;
-margin-right: 10%;
-margin-top: 3%;
-width:80%;
-
-border-radius : 20px;
-position: relative;
-
-
+.private .mat-icon {
+  font-size: 30px;
+  margin-left:70%;
 }
 
-.comment-locker .mat-icon{
+.textfield {
+  background-color:#F2F2F2;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 3%;
+  width:80%;
+  border-radius : 20px;
+  position: relative;
+}
 
+.comment-locker .mat-icon {
   height: 28px ;
   width:28px;
   z-index: 999999;
@@ -116,10 +100,9 @@ position: relative;
   font-size: 25px;
   bottom: 72%;
   right: 12%;
-
 }
 
-.help {
+.help-icon {
   height: 28px ;
   width:10px;
   z-index: 999999;
@@ -128,6 +111,3 @@ position: relative;
   bottom: 77%;
   right: 7%;
 }
-
-
-
