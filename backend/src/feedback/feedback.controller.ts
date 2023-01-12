@@ -19,13 +19,16 @@ export class FeedbackController {
     @Body('receiver_id') feedbackReceiverId: string,
     @Body('feedback_text') feedbackFeedbackText: string,
     @Body('feedback_date') feedbackFeedbackDate: Date,
+    
   ) {
-    console.log(feedbackProviderId + " " + feedbackFeedbackText + " " + feedbackFeedbackDate);
+    console.log(feedbackProviderId + " " + feedbackFeedbackText + " " + feedbackFeedbackDate );
     const generatedId = await this.feedbackService.insertFeedback(
       feedbackProviderId,
       feedbackReceiverId,
       feedbackFeedbackText,
       feedbackFeedbackDate,
+     
+      
     );
     return { id: generatedId };
   }

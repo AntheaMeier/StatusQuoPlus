@@ -1,0 +1,47 @@
+.mood-section {
+  margin: 40px;
+  color: #0071B9;
+}
+
+.mood-container {
+  display: flex;
+  justify-content: center;
+}
+
+.date-label {
+  width: 80px;
+  padding-bottom: 3px;
+  border-radius: 10px 10px;
+  margin-bottom: 12px;
+  background-color: rgb(197, 191, 188);
+}
+
+.date-numbers {
+  font-size: 75%;
+  color: black;
+  padding-top: 5%;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.mood-matcard {
+  color: #857971;
+  width: 100%;
+  background-color: #E8E4E1;
+  word-wrap: break-word;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  box-shadow: none;
+  padding: 20px;
+}
+
+@media screen and (max-width: 800px) {
+  .description-styling {
+      width: 85%;
+  }
+}
+
+.emotion-icon {
+  margin: 30px;
+  font-size: 50px;
+}

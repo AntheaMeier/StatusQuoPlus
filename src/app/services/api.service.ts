@@ -7,8 +7,8 @@ import { LoginData, LoginPayload, LoginResponse } from '../models/loginData';
 import { Tasks } from '../models/tasks';
 import { Review } from '../models/review';
 import { Feedback } from '../models/feedback';
-import { User } from '../models/user';
 import { Mood } from '../models/mood';
+import { User } from '../models/user';
 
 
 const httpOptions = {
@@ -25,8 +25,11 @@ const apiUrlReviews = 'http://localhost:3000/reviews';
 const apiUrlTasksForStatus = 'http://localhost:3000/tasks/goal';
 const apiUrlUsersForReview = 'http://localhost:3000/reviews/user';
 const apiUrlFeedback = 'http://localhost:3000/feedback';
+const apiUrlMood = 'http://localhost:3000/mood';
 const apiUrlFeedbackForUser = 'http://localhost:3000/feedback/receiver';
 const apiUrlMoodTracker = 'http://localhost:3000/mood';
+const apiUrlMoodForUser = 'http://localhost:3000/mood/user';
+
 
 
 @Injectable({
@@ -264,4 +267,31 @@ export class ApiService {
       catchError(this.handleError<Mood>('trackMood'))
     );
   }
+
+  // addMood(mood: Mood): Observable<Mood> {
+  //   console.log(mood);
+  //   return this.http.post<Mood>(apiUrlMood, mood, httpOptions).pipe(
+  //     catchError(this.handleError<Mood>('addMood'))
+  //   );
+  // }
+
+  getMoodForUser(id: string): Observable<Mood[]> {
+    return this.http.get<Mood[]>(`${apiUrlMoodForUser}/${id}`).pipe(
+      catchError(this.handleError<Mood[]>('getMoodForUser', []))
+    );
+  }
+
+  // getAllMood(): Observable<Mood[]> {
+  //   return this.http.get<Mood[]>(apiUrlMood).pipe(
+  //     catchError(this.handleError<Mood[]>('getMood')) 
+  //   );
+  // }
+  
+  
+  
+
+
+
+
 }
+

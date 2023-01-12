@@ -12,12 +12,14 @@ export class FeedbackService {
     receiver_id: string,
     feedback_text:string,
     feedback_date: Date,
+    
   ) {
     const newFeedback = new this.feedbackModel({
       provider_id: provider_id,
       receiver_id: receiver_id,
       feedback_text: feedback_text,
       feedback_date: feedback_date,
+    
       });
     const result = await newFeedback.save();
     return result.id;
@@ -31,6 +33,7 @@ export class FeedbackService {
       receiver_id: feedback.receiver_id,
       feedback_text: feedback.feedback_text,
       feedback_date: feedback.feedback_date,
+     
     }));
   }
 
@@ -57,6 +60,7 @@ export class FeedbackService {
       receiver_id: feedback.receiver_id,
       feedback_text: feedback.feedback_text,
       feedback_date: feedback.feedback_date,
+     
     };
   }
 

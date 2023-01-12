@@ -1,1 +1,34 @@
-<p>display-mood works!</p>
+<div class="mood-section">
+  <div *ngIf="moods.length == 0" class="description-styling">
+    <p>{{ 'Mood.nichtVorhanden' | translate}}</p>
+  </div>
+  
+  <div *ngFor="let mood of moods.reverse()" class="mood-container">
+    <div class="emotion">
+      <div *ngIf="mood.emotion === 'sad'">
+        <mat-icon class="emotion-icon" [ngStyle]="{'color':'red'}">mood_bad</mat-icon>
+      </div>
+      <div *ngIf="mood.emotion === 'neutral'">
+        <mat-icon class="emotion-icon" [ngStyle]="{'color':'yellow'}">sentiment_neutral</mat-icon>
+      </div>
+      <div *ngIf="mood.emotion === 'happy'">
+        <mat-icon class="emotion-icon" [ngStyle]="{'color':'green'}">mood</mat-icon>
+      </div>
+    </div>
+    <mat-card class="mood-matcard">
+      <div class="header">
+        <div *ngIf="mood.creation_date" class="date-label">
+          <div class="date-numbers">
+            {{ mood.creation_date| date:'dd.MM.YYYY' }}
+          </div>
+        </div>
+      </div>
+      <div class="mood-text">
+        {{ mood.text }}
+      </div>
+      <div *ngIf="mood.hidden" class="lock-icon">
+        <mat-icon>lock</mat-icon>
+      </div>
+    </mat-card>
+  </div>
+</div>
