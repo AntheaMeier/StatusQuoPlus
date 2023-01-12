@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Mood } from '../../../models/mood';
 import { AuthService } from 'src/app/services/auth.service';
-import { ApiService } from 'src/app/services/api.service';
-import { Emotion } from 'src/app/models/emotion';
 import { MatDialog } from '@angular/material/dialog';
 import { MoodConfirmationDialogComponent } from '../mood-confirmation-dialog/mood-confirmation-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -21,13 +19,12 @@ export class MoodTrackenComponent implements OnInit {
   emotions: string[] = ['sad', 'neutral', 'happy'];
   idloggedInUser: string = '';
   nameLoggedInUser: string = '';
-  hideKomment: boolean = false;
+  hideComment: boolean = false;
 
 
   constructor(
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private api: ApiService,
     private auth: AuthService,
   ) { }
 
@@ -36,21 +33,6 @@ export class MoodTrackenComponent implements OnInit {
     this.nameLoggedInUser = this.auth.getUserDetails().firstname + ' ' + this.auth.getUserDetails().surname;
   }
 
-  // trackMood(): void {
-  //   this.moodTest.id= "";
-  //   this.moodTest.creation_date = new Date();
-  //   this.moodTest.creator_name = this.nameLoggedInUser;
-  //   this.moodTest.creator_id = this.idloggedInUser;
-  //   this.moodTest.text = this.enteredContent;
-  //   this.moodTest.emotion = this.selectedEmotion;
-  //   this.api.trackMood(this.moodTest).subscribe( res => {
-  //     console.log(this.moodTest);
-  //   },
-  //   (error: any) => {
-  //     console.log(error);
-  // });
-  // }
-
   openDialog() {
     this.moodTest.id= "";
     this.moodTest.creation_date = new Date();
@@ -58,7 +40,7 @@ export class MoodTrackenComponent implements OnInit {
     this.moodTest.creator_id = this.idloggedInUser;
     this.moodTest.text = this.enteredContent;
     this.moodTest.emotion = this.selectedEmotion;
-    this.moodTest.hidden = this.hideKomment;
+    this.moodTest.hidden = this.hideComment;
 
     const dialogRef = this.dialog.open(MoodConfirmationDialogComponent, {
       data: this.moodTest
@@ -68,6 +50,7 @@ export class MoodTrackenComponent implements OnInit {
       this.openSnackBar();
       this.selectedEmotion = '';
       this.enteredContent = '';
+      this.hideComment = false;
     });
   }
 
@@ -84,15 +67,13 @@ export class MoodTrackenComponent implements OnInit {
     console.log(this.selectedEmotion);
   }
 
-}
-
-  changeState(){
-  if (this.hideKomment!){
-    this.hideKomment!=false;
+  changeState() {
+    if (this.hideComment) {
+      this.hideComment = false;
     }
-
-  else if(!this.hideKomment!){
-    this.hideKomment!=true;
-
+    else if (!this.hideComment) {
+      this.hideComment = true;
     }
   }
+
+}
