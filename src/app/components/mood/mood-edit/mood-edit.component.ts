@@ -19,7 +19,6 @@ export class MoodEditComponent implements OnInit {
   oldDescription: any;
   id = '';
   isLoadingResults = false;
-  storedDate?: Date;
   
   articleForm: FormGroup = this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required)
@@ -47,7 +46,6 @@ export class MoodEditComponent implements OnInit {
   getMood(id: any) {
     this.api.getGoal(id).subscribe((data: any) => {
       this.id = data.id;
-      this.storedDate = data.stored_date;
       this.oldDescription = data.description;
       this.articleForm.setValue({
         description: data.description,
@@ -56,16 +54,10 @@ export class MoodEditComponent implements OnInit {
   }
 
   onFormSubmit() {
-    let removeStoredDate = false;
     this.isLoadingResults = true;
     this.data.description = this.enteredValue;
-    if(this.storedDate) {
-      this.data.stored_date = this.storedDate;
-    } else {
-      this.data.stored_date = '';
-      removeStoredDate = true;
-    }
-    this.api.updateMood(this.data.id, this.data, removeStoredDate)
+    
+    this.api.updateMood(this.data.id, this.data)
       .subscribe((res: any) => {
           this.isLoadingResults = false;
         }, (err: any) => {

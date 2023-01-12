@@ -45,7 +45,7 @@ export class GoalsService {
       description: goal.description,
       userid: goal.userid,
       priority: goal.priority,
-      completed: goal.completed
+      completed: goal.completed,
     };
   }
 

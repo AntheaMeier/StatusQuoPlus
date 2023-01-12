@@ -72,6 +72,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { MoodEditComponent } from './components/mood/mood-edit/mood-edit.component';
 import { DisplayMoodComponent } from './components/mood/display-mood/display-mood.component';
 
+
 export function playerFactory() {
   return import('lottie-web');
 }

@@ -12,18 +12,17 @@ import {
 @Controller('mood')
 export class MoodController {
   constructor(private moodService: MoodService) {}
-}
 
-@Post()
+  @Post()
   async addMoods(
-    @Body('creation_date') moodStoredDate: Date,
+    @Body('creation_date') moodCreationDate: Date,
     @Body('text') moodText: string,
     @Body('emotion') moodEmotion: string,
     @Body('creator_name') moodCreatorName: string,
     @Body('creator_id') moodCreatorId: string,
   ) {
-    const generatedId = await this.moodService.insertMoods(
-      moodStoredDate,
+    const generatedId = await this.moodService.insertMood(
+      moodCreationDate,
       moodText,
       moodEmotion,
       moodCreatorName,
@@ -34,7 +33,7 @@ export class MoodController {
 
   @Get()
   async getAllMoods() {
-    return await this.goalsService.getGoals();
+    return await this.moodService.getMood();
   }
 
   @Get(':id')
@@ -42,12 +41,10 @@ export class MoodController {
     return this.moodService.getSingleMood(moodId);
   }
 
-  @Patch(':id/:removeStoredDate')
+  @Patch(':id')
   async updateMood(
     @Param('id') moodId: string,
-    @Param('removeStoredDate') removeStoredDate: string,
-    @Body('stored_date') moodStoredDate: Date,
-    @Body('creation_date') moodStoredDate: Date,
+    @Body('creation_date') moodCreationDate: Date,
     @Body('text') moodText: string,
     @Body('emotion') moodEmotion: string,
     @Body('creator_name') moodCreatorName: string,
@@ -55,12 +52,11 @@ export class MoodController {
   ) {
     await this.moodService.updateMood(
       moodId,
-      removeStoredDate === 'true',
-      moodStoredDate,
+      moodCreationDate,
       moodText,
       moodEmotion,
       moodCreatorName,
-      moodCreatorId
+      moodCreatorId,
     );
     return null;
   }
@@ -70,7 +66,7 @@ export class MoodController {
     await this.moodService.deleteMood(moodId);
     return null;
   }
-
+}
 
 /* function updateMood() {
   throw new Error('Function not implemented.');

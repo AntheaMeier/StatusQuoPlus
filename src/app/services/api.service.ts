@@ -15,6 +15,7 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
 };
 const apiUrl = 'http://localhost:3000/goals';
+const apiUrlUsersForMood = 'http://localhost:3000/mood';
 const apiUrlLogin = 'http://localhost:3000/users';
 const apiUrlOrder = 'http://localhost:3000/goals/order';
 const apiUrlTasks = 'http://localhost:3000/tasks';
@@ -136,27 +137,27 @@ export class ApiService {
   //____________
   // Mood
   addMood(mood: Mood): Observable<Mood> {
-    return this.http.post<Mood>(apiUrl, mood, httpOptions).pipe(
+    return this.http.post<Mood>(apiUrlUsersForMood, mood, httpOptions).pipe(
       catchError(this.handleError<Mood>('addMood'))
     );
   }
 
-  deleteMood(id: any): Observable<Goals> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.delete<Goals>(url, httpOptions).pipe(
-      catchError(this.handleError<Goals>('deleteGoal'))
+  deleteMood(id: any): Observable<Mood> {
+    const url = `${apiUrlUsersForMood}/${id}`;
+    return this.http.delete<Mood>(url, httpOptions).pipe(
+      catchError(this.handleError<Mood>('deleteMood'))
     );
   }
 
-  updateMood(id: any, goal: Goals, removeStoredDate: boolean): Observable<any> {
-    const url = `${apiUrl}/${id}/${removeStoredDate}`;
-    return this.http.patch(url, goal, httpOptions).pipe(
+  updateMood(id: any, mood: Mood): Observable<any> {
+    const url = `${apiUrlUsersForMood}/${id}`;
+    return this.http.patch(url, mood, httpOptions).pipe(
       catchError(this.handleError<any>('updateMood'))
     );
     }
    
   getMood(id: string): Observable<Mood> {
-    const url = `${apiUrl}/${id}`;
+    const url = `${apiUrlUsersForMood}/${id}`;
     return this.http.get<Mood>(url).pipe(
       catchError(this.handleError<Mood>(`getArticle id=${id}`))
     );
