@@ -1,4 +1,4 @@
-<mat-card style="width: 90%; margin: 20px 0 50px 5%">
+<mat-card class="container">
   <mat-card-title style="margin-left: 15px;">
     Filtere deine Mitarbeiter-Statistik
   </mat-card-title>
@@ -15,8 +15,8 @@
         <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
 
-        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Inkorrektes Start-Datum</mat-error>
+        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Inkorrektes End-Datum</mat-error>
       </mat-form-field>
     </div>
 
@@ -36,8 +36,8 @@
             </div>
           </mat-option>
         </mat-autocomplete>
-        <mat-error>
-          <p *ngIf="showError">{{ 'Feedback.errorWaehlePerson' | translate}}</p>
+        <mat-error style="color: #0071B9 !important;">
+          <p *ngIf="showError">! {{ 'Feedback.errorWaehlePerson' | translate}}</p>
         </mat-error>
       </form>
     </div>

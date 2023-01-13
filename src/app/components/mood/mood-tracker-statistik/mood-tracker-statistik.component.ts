@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../../services/auth.service";
 import {ApiService} from "../../../services/api.service";
 import {Mood} from "../../../models/mood";
@@ -43,11 +43,22 @@ export class MoodTrackerStatistikComponent implements OnInit{
 
   constructor(private auth: AuthService,
               private api: ApiService) {
-      this.getAllUsers();
-      this.filteredUsers = this.myControl.valueChanges.pipe(
-        startWith(''),
-        map(state => (state ? this.filterStates(state) : this.users.slice())),
-      );
+    this.getAllUsers();
+    this.filteredUsers = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(state => (state ? this.filterStates(state) : this.users.slice())),
+    );
+    this.range.valueChanges.subscribe(x => {
+      let startDate = new Date(x.start);
+      let endDate = new Date(x.end);
+
+      let time = endDate.getTime() - startDate.getTime();
+      let days = (time / (1000 * 3600 * 24)) + 1 ; //Difference in Days*/
+      if(days <= 2) {
+        console.log('hier')
+        this.errorMessage = 'Spanne zu klein'
+      }
+    })
   }
 
   ngOnInit(): void {
@@ -97,7 +108,7 @@ export class MoodTrackerStatistikComponent implements OnInit{
     return tempAll;
 
   }
-  private sortEmotions(allMoodsClassified: Mood[][]): Boolean {
+  private sortEmotions(allMoodsClassified: Mood[][]): boolean {
     this.happy =  allMoodsClassified[0].sort(function(a,b) {
       let date1 = new Date(a.creation_date);
       let date2 = new Date(b.creation_date);
@@ -195,11 +206,7 @@ export class MoodTrackerStatistikComponent implements OnInit{
   }
 
   setUserClicked(user: boolean): void {
-    if(!user) {
-      this.showError = true;
-    } else {
-      this.showError = false;
-    }
+    this.showError = !user;
     this.userClicked = user;
   }
 }
