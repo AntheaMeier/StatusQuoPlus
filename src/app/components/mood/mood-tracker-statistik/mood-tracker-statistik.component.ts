@@ -6,6 +6,8 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {User} from "../../../models/user";
 import {Observable} from "rxjs";
 import {map, startWith} from "rxjs/operators";
+import {HelpDialogComponent} from "../help-dialog/help-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 const THIRTY_SECONDS = 30000; // in ms
 const TWO_SECONDS = 800; // in ms
@@ -42,7 +44,8 @@ export class MoodTrackerStatistikComponent implements OnInit{
   providerId = '';
 
   constructor(private auth: AuthService,
-              private api: ApiService) {
+              private api: ApiService,
+              public dialog: MatDialog) {
     this.getAllUsers();
     this.filteredUsers = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -55,7 +58,6 @@ export class MoodTrackerStatistikComponent implements OnInit{
       let time = endDate.getTime() - startDate.getTime();
       let days = (time / (1000 * 3600 * 24)) + 1 ; //Difference in Days*/
       if(days <= 2) {
-        console.log('hier')
         this.errorMessage = 'Spanne zu klein'
       }
     })
@@ -178,6 +180,9 @@ export class MoodTrackerStatistikComponent implements OnInit{
     clearTimeout(this.timeoutIdTwo);
   }
 
+  openHelpDialog() {
+    this.dialog.open(HelpDialogComponent);
+  }
 
 
 

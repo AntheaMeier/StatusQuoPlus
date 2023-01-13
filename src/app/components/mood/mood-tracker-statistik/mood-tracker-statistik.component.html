@@ -1,6 +1,7 @@
 <mat-card class="container">
   <mat-card-title style="margin-left: 15px;">
     Filtere deine Mitarbeiter-Statistik
+    <mat-icon class="help-icon" (click)="openHelpDialog()">help</mat-icon>
   </mat-card-title>
   <mat-card-content class="filter-mat-card">
 
@@ -53,12 +54,12 @@
   <div>
     <mat-expansion-panel class="panel-styling">
       <mat-expansion-panel-header class="panel-header-styling">
-        <mat-panel-title>
-          <mat-icon style="color: green" aria-label="Example home icon">sentiment_very_satisfied</mat-icon>
+        <mat-panel-title class="panel-title-styling">
+          <mat-icon class="emotion-styling" style="color: green;" aria-label="Example home icon">sentiment_very_satisfied</mat-icon>
         </mat-panel-title>
         <mat-panel-description style="color: #857971">
           {{happyCount}} positive
-          {{ 'Mood.panelTitel' | translate }}
+          <div class="stimmungslagen-getrackt"> {{ 'Mood.panelTitel' | translate }}</div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p *ngIf="happy.length == 0" style="color: #857971">{{ 'Mood.leer' | translate}}</p>
@@ -85,11 +86,11 @@
     <mat-expansion-panel class="panel-styling">
       <mat-expansion-panel-header class="panel-header-styling">
         <mat-panel-title>
-          <mat-icon style="color: goldenrod" aria-label="Example home icon">sentiment_neutral</mat-icon>
+          <mat-icon class="emotion-styling" style="color: goldenrod;" aria-label="Example home icon">sentiment_neutral</mat-icon>
         </mat-panel-title>
         <mat-panel-description style="color: #857971">
           {{neutralCount}} neutrale
-          {{ 'Mood.panelTitel' | translate }}
+          <div class="stimmungslagen-getrackt"> {{ 'Mood.panelTitel' | translate }}</div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p *ngIf="neutral.length == 0" style="color: #857971">{{ 'Mood.leer' | translate}}</p>
@@ -116,11 +117,11 @@
     <mat-expansion-panel class="panel-styling">
       <mat-expansion-panel-header class="panel-header-styling">
         <mat-panel-title>
-          <mat-icon style="color: red" aria-label="Example home icon">sentiment_very_dissatisfied</mat-icon>
+          <mat-icon class="emotion-styling" style="color: red" aria-label="Example home icon">sentiment_very_dissatisfied</mat-icon>
         </mat-panel-title>
         <mat-panel-description style="color: #857971">
           {{sadCount}} negative
-          {{ 'Mood.panelTitel' | translate }}
+          <div class="stimmungslagen-getrackt"> {{ 'Mood.panelTitel' | translate }}</div>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p *ngIf="sad.length == 0" style="color: #857971">{{ 'Mood.leer' | translate}}</p>

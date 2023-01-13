@@ -1,9 +1,19 @@
 .container {
-  width: 90%;
-  margin: 20px 0 50px 5%;
+  width: 90% !important;
+  margin-top: 40px;
+  margin-bottom: 40px;
   box-shadow: 0 0 5px 0 #9b9b9b,
   0 0.5px 0.5px 0 #9b9b9b,
   0 0.5px 1.5px 0 #9b9b9b;
+}
+
+.help-icon {
+  position: absolute;
+  margin-left: 10px;
+  margin-top: -2px;
+  font-size: 22px;
+  color: #857971;
+  cursor: pointer;
 }
 
 .filter-mat-card {
@@ -64,6 +74,25 @@
 
 .panel-header-styling {
   font-size: 18px;
+}
+
+.emotion-styling {
+  font-size: 40px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+@media screen and (max-width: 700px) and (min-width: 600px){
+  .stimmungslagen-getrackt {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .stimmungslagen-getrackt {
+    display: none;
+  }
 }
 
 mat-card {
