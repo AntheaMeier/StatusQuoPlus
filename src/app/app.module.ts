@@ -75,6 +75,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { MoodConfirmationDialogComponent } from './components/mood/mood-confirmation-dialog/mood-confirmation-dialog.component';
 import { MoodSnackbarComponent } from './components/mood/mood-snackbar/mood-snackbar.component';
 import { MoodTrackenComponent } from './components/mood/mood-tracken/mood-tracken.component';
+import { MoodEditComponent } from './components/mood/mood-edit/mood-edit.component';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -111,6 +112,7 @@ export function playerFactory() {
     MoodConfirmationDialogComponent,
     DisplayMoodComponent,
     MoodSnackbarComponent,
+    MoodEditComponent,
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),

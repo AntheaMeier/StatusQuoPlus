@@ -1,0 +1,27 @@
+<div class="dialog">
+  <h1>{{ 'Mood.bearbeiten' | translate }}</h1>
+  {{data.mood.creation_date | date:'dd.MM.YYYY'}}
+  <div mat-dialog-content>
+    <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
+      <mat-form-field appearance="outline">
+        <textarea [(ngModel)]="enteredValue" matInput placeholder="{{ data.mood.text }}" formControlName="description"
+                  value=""></textarea>
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div class="actions" mat-dialog-actions>
+    <form [formGroup]="articleForm">
+      <button mat-button (click)="onNoClick()">{{ 'Button.abbrechen' | translate }}</button>
+      <button class="save-button"
+              mat-button
+              (keyup.enter)="onFormSubmit()"
+              (click)="onFormSubmit()"
+              type="submit"
+              [disabled]="!articleForm.valid">
+        {{ 'Button.speichern' | translate }}
+      </button>
+    </form>
+  </div>
+</div>
+

@@ -34,7 +34,12 @@
     "speichern": "Mood speichern",
     "speichernBestaetigen": "Wenn du fortfährst, wird deine Stimmung gespeichert. Danach hast du sieben Tage Zeit, um Änderungen vorzunehmen.",
     "gespeichert": "Mood gespeichert",
-    "tooltip": "Verberge deinen Kommentar vor deiner Führungskraft, indem du das Schloss schließt."
+    "tooltip": "Verberge deinen Kommentar vor deiner Führungskraft, indem du das Schloss schließt.",
+    "tracker": "MOOD TRACKER",
+    "einsehen": "DEINE MOOD",
+    "keinKommentar": "Kein Kommentar hinterlassen",
+    "bearbeiten": "Bearbeite deine Mood vom: ",
+    "deinKommentar": "Dein Kommentar"
   },
 
   "Erfolge": {

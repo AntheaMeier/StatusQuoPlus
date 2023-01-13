@@ -1,16 +1,16 @@
 <div class="mood-section">
-  <h3>DEINE MOODS</h3>
+  <h3>{{ 'Mood.einsehen' | translate }}</h3>
   <div *ngIf="moods.length == 0" class="description-styling">
     <p>{{ 'Mood.nichtVorhanden' | translate}}</p>
   </div>
-  
+
   <div *ngFor="let mood of moods.reverse()" class="mood-container">
     <div class="emotion">
       <div *ngIf="mood.emotion === 'sad'">
         <mat-icon class="emotion-icon" [ngStyle]="{'color':'red'}">mood_bad</mat-icon>
       </div>
       <div *ngIf="mood.emotion === 'neutral'">
-        <mat-icon class="emotion-icon" [ngStyle]="{'color':'yellow'}">sentiment_neutral</mat-icon>
+        <mat-icon class="emotion-icon" [ngStyle]="{'color':'goldenrod'}">sentiment_neutral</mat-icon>
       </div>
       <div *ngIf="mood.emotion === 'happy'">
         <mat-icon class="emotion-icon" [ngStyle]="{'color':'green'}">mood</mat-icon>
@@ -26,10 +26,14 @@
         <div *ngIf="mood.hidden" class="lock-icon">
           <mat-icon>lock</mat-icon>
         </div>
+        <div (click)="openMoodEditDialog(mood)" *ngIf="calculateIfEditable(mood.creation_date)" class="edit-icon">
+          <mat-icon>edit</mat-icon>
+        </div>
       </div>
       <div class="mood-text">
         {{ mood.text }}
       </div>
+      <div *ngIf="!mood.text" style="font-style: italic">{{ 'Mood.keinKommentar' | translate}}</div>
     </mat-card>
   </div>
 </div>

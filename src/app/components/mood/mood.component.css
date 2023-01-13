@@ -1,10 +1,23 @@
 .container {
-    display: grid;
-    grid-template-columns: [col1-start] 50% [col2-start] 50%;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 48% 48%;
+  grid-gap: 30px;
+  margin: auto;
+  padding: 10px;
+
+}
+
+.tabs {
+  display: none;
 }
 
 @media screen and (max-width: 1080px) {
     .container {
-        display: block;
+      display: none;
+    }
+
+    .tabs {
+      display: grid;
     }
   }

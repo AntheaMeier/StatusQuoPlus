@@ -2,3 +2,18 @@
     <app-mood-tracken></app-mood-tracken>
     <app-display-mood></app-display-mood>
 </div>
+
+<mat-tab-group class="tabs">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span class="font">{{ 'Mood.tracker' | translate }}</span>
+    </ng-template>
+    <app-mood-tracken></app-mood-tracken>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span class="font">{{ 'Mood.einsehen' | translate }}</span>
+    </ng-template>
+    <app-display-mood></app-display-mood>
+  </mat-tab>
+</mat-tab-group>

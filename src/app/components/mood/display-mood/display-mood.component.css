@@ -8,6 +8,11 @@
   justify-content: center;
 }
 
+@media screen and (max-width: 1080px) {
+  .mood-container {
+    margin-right: 20px;
+  }
+}
 .header {
   display: flex;
   gap: 10px;
@@ -49,4 +54,25 @@
 .emotion-icon {
   margin: 20px;
   font-size: 50px;
+}
+
+h3 {
+  color: #0071B9;
+}
+
+@media screen and (max-width: 1080px) {
+  h3 {
+    display: none;
+  }
+}
+
+.edit-icon {
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+  cursor: pointer;
+}
+
+.lock-icon {
+  color: #0071B9;
 }

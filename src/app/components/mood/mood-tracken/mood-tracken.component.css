@@ -2,6 +2,12 @@
   margin-top: 50px;
 }
 
+.wrapper {
+  border: 1px solid #E8E4E1;
+  border-radius: 8px;
+  padding: 15px;
+}
+
 .mat-icon {
     font-size: 110px;
     height: 110px ;
@@ -11,6 +17,10 @@
     margin-top: 1%;
 }
 
+mat-icon {
+  font-size: 180px;
+}
+
 .emotion input[type="radio"] {
   opacity: 0;
   position: fixed;
@@ -18,17 +28,17 @@
 }
 
 .emotion .mat-icon {
-    background-color: #ddd;
-    padding-left: 0px;
-    padding-right: 8px;
-    padding-bottom: 9px;
-    padding-top: 1px;
-    border-radius: 100px;
-    margin-right: 20px;
+  border: 1px solid #0071B9;
+  background-color: #FFFFFF;
+  padding-left: 0px;
+  padding-bottom: 9px;
+  padding-top: 0px;
+  border-radius: 100px;
+  margin-right: 20px;
 }
 
 .emotion input:checked + mat-icon {
-    background-color:#A9BCF5;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 
 .emotion .mat-icon:hover {
@@ -46,13 +56,14 @@
 
 .selected-emotion .mat-icon {
   text-align: center;
-  background-color: rgb(221, 221, 221);
+  border: 1px solid #0071B9;
+  background-color: #FFFFFF;
   padding-left: 0px;
-  padding-right: 8px;
   padding-bottom: 9px;
-  padding-top: 1px;
+  padding-top: 0px;
   border-radius: 100px;
   margin-right: 20px;
+  /*font-size: 180px;*/
 }
 
 .mood {
@@ -60,9 +71,12 @@
 }
 
 mat-form-field {
-  width: 80%;
-  margin-left:10%;
-  margin-right:10%;
+  width: 100%;
+  height: 135px;
+}
+
+textarea {
+  height: 135px;
 }
 
 button {
@@ -81,7 +95,6 @@ button {
 }
 
 .textfield {
-  background-color:#F2F2F2;
   padding-top: 2%;
   padding-bottom: 2%;
   margin-left: 10%;
@@ -92,22 +105,48 @@ button {
   position: relative;
 }
 
+.submit-button {
+  background-color: #0071B9;
+  color: #FFFFFF;
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+h3 {
+  color: #0071B9;
+}
+
+@media screen and (max-width: 1080px) {
+  h3 {
+    display: none;
+  }
+
+  .wrapper {
+    border: none;
+  }
+}
+
+.wrapper-actions {
+  display: flex;
+  position: relative;
+}
+
 .comment-locker .mat-icon {
-  height: 28px ;
-  width:28px;
-  z-index: 999999;
   position: absolute;
+  top: 15px;
+  left: 5px;
   font-size: 25px;
-  bottom: 72%;
-  right: 12%;
+  height: 25px;
+  width: 25px;
 }
 
 .help-icon {
-  height: 28px ;
-  width:10px;
-  z-index: 999999;
   position: absolute;
+  top: 10px;
+  left: 30px;
   font-size: 16px;
-  bottom: 77%;
-  right: 7%;
+  height: 16px;
+  width: 16px;
 }

@@ -243,10 +243,10 @@ export class ApiService {
 
   getAllFeedback(): Observable<Feedback[]> {
     return this.http.get<Feedback[]>(apiUrlFeedback).pipe(
-      catchError(this.handleError<Feedback[]>('getFeedback')) 
+      catchError(this.handleError<Feedback[]>('getFeedback'))
     );
   }
-  
+
   getFeedbackWithName(id: string): Observable<any> {
     return this.getFeedbackForUser(id).pipe(
       mergeMap(feedbacks => forkJoin(
@@ -271,6 +271,13 @@ export class ApiService {
   getMoodForUser(id: string): Observable<Mood[]> {
     return this.http.get<Mood[]>(`${apiUrlMoodForUser}/${id}`).pipe(
       catchError(this.handleError<Mood[]>('getMoodForUser', []))
+    );
+  }
+
+  getSingleMood(id: string): Observable<Mood> {
+    const url = `${apiUrlMood}/${id}`;
+    return this.http.get<Mood>(url).pipe(
+      catchError(this.handleError<Mood>(`getArticle id=${id}`))
     );
   }
 }

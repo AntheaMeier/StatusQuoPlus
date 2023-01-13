@@ -12,7 +12,7 @@ import {
 @Controller('mood')
 export class MoodController {
   constructor(private moodService: MoodService) {}
-  
+
   @Post()
   async addMood(
     @Body('creation_date') creationDate: Date,
@@ -38,5 +38,10 @@ export class MoodController {
   async getAllMoodsForReceiver(
     @Param('creator_id') creator_id: string) {
     return await this.moodService.getMoodForUser(creator_id);
+  }
+
+  @Get(':id')
+  getSingleMood(@Param('id') moodId: string) {
+    return this.moodService.getSingleMood(moodId);
   }
 }

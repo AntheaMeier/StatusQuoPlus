@@ -1,5 +1,5 @@
 export interface Mood {
-  id: string;
+  _id: string;
   creation_date: Date;
   creator_name: string;
   creator_id: string;
@@ -7,4 +7,4 @@ export interface Mood {
   text?: string;
   hidden: boolean;
 }
-  
+
