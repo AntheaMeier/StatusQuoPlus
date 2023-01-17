@@ -2,11 +2,11 @@ import * as mongoose from 'mongoose';
 
 export const MoodSchema = new mongoose.Schema({
   creation_date: { type: Date, default: Date.now() },
-  creator_name: {type: String},
-  creator_id: {type: String},
-  emotion: {type: String},
-  text: {type: String},
-  hidden: {type: Boolean},
+  creator_name: { type: String },
+  creator_id: { type: String },
+  emotion: { type: String },
+  text: { type: String },
+  hidden: { type: Boolean },
   supervisor_id: { type: String },
 });
 

@@ -63,7 +63,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p *ngIf="happy.length == 0" style="color: #857971">{{ 'Mood.leer' | translate}}</p>
-      <div *ngFor="let i of happy">
+      <div *ngFor="let i of happy.reverse()">
         <mat-card>
           <mat-card-header>
             <mat-card-title>{{i.creator_name}}</mat-card-title>
@@ -75,7 +75,11 @@
             </div>
           </mat-card-header>
           <mat-card-content>
-            {{ i.text }}
+            <p *ngIf="!i.hidden"> {{ i.text }}</p>
+            <div *ngIf="i.hidden" style="display: flex">
+              <mat-icon style="color: #0071B9;">lock</mat-icon>
+              <p style="font-style: italic; margin-left: 8px; line-height: 26px">{{ 'Mood.privat' | translate }}</p>
+            </div>
           </mat-card-content>
         </mat-card>
       </div>
@@ -94,7 +98,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p *ngIf="neutral.length == 0" style="color: #857971">{{ 'Mood.leer' | translate}}</p>
-      <div *ngFor="let i of neutral">
+      <div *ngFor="let i of neutral.reverse()">
         <mat-card>
           <mat-card-header>
             <mat-card-title>{{i.creator_name}}</mat-card-title>
@@ -106,7 +110,11 @@
             </div>
           </mat-card-header>
           <mat-card-content>
-            {{ i.text }}
+            <p *ngIf="!i.hidden"> {{ i.text }}</p>
+            <div *ngIf="i.hidden" style="display: flex">
+              <mat-icon style="color: #0071B9;">lock</mat-icon>
+              <p style="font-style: italic; margin-left: 8px; line-height: 26px">{{ 'Mood.privat' | translate }}</p>
+            </div>
           </mat-card-content>
         </mat-card>
       </div>
@@ -125,7 +133,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p *ngIf="sad.length == 0" style="color: #857971">{{ 'Mood.leer' | translate}}</p>
-      <div *ngFor="let i of sad">
+      <div *ngFor="let i of sad.reverse()">
         <mat-card>
           <mat-card-header>
             <mat-card-title>{{i.creator_name}}</mat-card-title>
@@ -137,7 +145,11 @@
             </div>
           </mat-card-header>
           <mat-card-content>
-            {{ i.text }}
+            <p *ngIf="!i.hidden"> {{ i.text }}</p>
+            <div *ngIf="i.hidden" style="display: flex">
+              <mat-icon style="color: #0071B9;">lock</mat-icon>
+              <p style="font-style: italic; margin-left: 8px; line-height: 26px">{{ 'Mood.privat' | translate }}</p>
+            </div>
           </mat-card-content>
         </mat-card>
       </div>

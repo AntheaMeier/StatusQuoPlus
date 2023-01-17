@@ -13,15 +13,18 @@ export class MoodService {
     creator_id: string,
     creator_name: string,
     emotion: string,
-    text:string,
-    hidden:boolean,
+    text: string,
+    supervisor_id: string,
+    hidden: boolean,
   ) {
+    console.log('Creatpr name:    ' + creator_name);
     const newMood = new this.moodModel({
       creation_date: creation_date,
       creator_id: creator_id,
-      creator_Name: creator_name,
+      creator_name: creator_name,
       emotion: emotion,
       text: text,
+      supervisor_id: supervisor_id,
       hidden: hidden,
     });
     const result = await newMood.save();

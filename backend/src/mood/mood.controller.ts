@@ -20,6 +20,7 @@ export class MoodController {
     @Body('creator_name') creatorName: string,
     @Body('emotion') emotion: string,
     @Body('text') text: string,
+    @Body('supervisor_id') supervisor_id: string,
     @Body('hidden') hidden: boolean,
   ) {
     const generatedId = await this.moodService.insertMood(
@@ -28,6 +29,7 @@ export class MoodController {
       creatorName,
       emotion,
       text,
+      supervisor_id,
       hidden,
     );
     return { id: generatedId };

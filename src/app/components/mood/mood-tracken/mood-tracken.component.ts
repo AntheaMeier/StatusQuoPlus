@@ -13,7 +13,7 @@ import { MoodSnackbarComponent } from '../mood-snackbar/mood-snackbar.component'
 })
 export class MoodTrackenComponent implements OnInit {
 
-  moodTest: Mood = {_id: '', creation_date: new Date(), creator_name: '', creator_id: '', text: '', emotion: '', hidden: false};
+  moodTest: Mood = {_id: '', creation_date: new Date(), creator_name: '', creator_id: '', text: '', emotion: '', hidden: false, supervisor_id: ''};
   enteredContent = '';
   selectedEmotion: string = '';
   emotions: string[] = ['sad', 'neutral', 'happy'];
@@ -39,6 +39,7 @@ export class MoodTrackenComponent implements OnInit {
     this.moodTest._id= "";
     this.moodTest.creation_date = new Date();
     this.moodTest.creator_name = this.nameLoggedInUser;
+    console.log(this.nameLoggedInUser);
     this.moodTest.creator_id = this.idloggedInUser;
     this.moodTest.text = this.enteredContent;
     this.moodTest.emotion = this.selectedEmotion;
