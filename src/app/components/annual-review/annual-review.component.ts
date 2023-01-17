@@ -6,6 +6,7 @@ import { LoginData } from '../../models/loginData';
 import { AuthService } from '../../services/auth.service';
 import * as moment from 'moment';
 import { DateAdapter } from '@angular/material/core';
+import { FormBuilder, FormGroup } from '@angular/forms'; //character limitation
 
 @Component({
   selector: 'app-annual-review',
@@ -27,15 +28,30 @@ export class AnnualReviewComponent implements OnInit {
   @Input() idTeamMember: any = '';
   @Input() selectedRole: String = '';
 
+  //character limitation
+  myForm!: FormGroup; 
+  maxChars = 500;
+
   constructor(
     private api: ApiService,
     private auth: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private dateAdapter: DateAdapter<Date>)
+    private dateAdapter: DateAdapter<Date>,
+    //character limitation
+    private fb: FormBuilder)
   {
     this.currentUrl = router.url;
     this.dateAdapter.setLocale('de');
+    //character limitation
+    this.buildForm();
+  }
+
+  //character limitation
+  buildForm() {
+    this.myForm = this.fb.group({
+      wordLimitation: [""]
+    });
   }
 
   ngOnInit() {

@@ -17,18 +17,25 @@
         <mat-error *ngIf="date.invalid">{{ 'Warnung.datumEingeben' | translate }}</mat-error>
       </mat-form-field>
     </mat-expansion-panel-header>
-    <mat-form-field appearance="outline" style="white-space: pre-wrap;">
+    <mat-form-field appearance="outline" style="white-space: pre-wrap;" [formGroup]="myForm">
         <textarea
           [(ngModel)]="enteredContent"
           id="content"
           matInput rows="6"
           name="content"
           required
+          [maxlength]="maxChars"
+          formControlName="wordLimitation"
           placeholder="{{'Vorschau.notizEingeben' | translate}}"
-          #content="ngModel">
+
+                >
         </textarea>
-      <mat-error *ngIf="content.invalid">{{'Warnung.notizEingeben' | translate}}</mat-error>
+      <mat-error *ngIf="enteredContent.length==0">{{'Warnung.notizEingeben' | translate}}</mat-error> 
     </mat-form-field>
+    <!-- character limitation-->
+    <label style="color: #a5a3a1ec; margin-left: 5px" >
+      {{enteredContent.length}}/{{maxChars}}
+    </label>
     <mat-action-row>
       <button mat-raised-button *ngIf=true matSuffix type="submit" (click)=onAddPost(idloggedInUser)>Speichern</button>
     </mat-action-row>

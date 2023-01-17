@@ -6,21 +6,28 @@
     </div>
 
     <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true">
-      <mat-form-field appearance="outline" style="white-space: pre-wrap;">
+      <mat-form-field appearance="outline" style="white-space: pre-wrap;" [formGroup]="myForm">
         <textarea
           [(ngModel)]="enteredContent"
           id="content"
           matInput rows="6"
           name="content"
           required
+          [maxlength]="maxChars"
+          formControlName="wordLimitation"
           placeholder="{{ 'Ziele.deinZiel' | translate}}"
-          #content="ngModel">
+      
+          >
         </textarea>
-        <mat-error *ngIf="content.invalid">{{ 'Ziele.eingabeBeschreibung' | translate}}</mat-error>
+      <mat-error *ngIf="enteredContent.length==0">{{ 'Ziele.eingabeBeschreibung' | translate}}</mat-error>
       </mat-form-field>
+      <!-- character limitation-->
+      <label style="color: #777675; margin-left: 5px;" >
+  {{enteredContent.length}}/{{maxChars}}     </label>
 
       <!-- Fälligkeitsdatum US4.3 -->
-      <mat-form-field appearance="fill"> <!-- ist bei den annual reviews: <mat-form-field class="col-md-12"> -->
+      <div>
+        <mat-form-field appearance="fill"> <!-- ist bei den annual reviews: <mat-form-field class="col-md-12"> -->
         <input
           readonly='true'
           matInput [matDatepicker]="picker"
@@ -33,6 +40,7 @@
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
+    </div>
       <!-- Fälligkeitsdatum US4.3 Ende -->
 
 

@@ -12,6 +12,7 @@ import {GoalsEditComponent} from '../goals-edit/goals-edit.component';
 import { DateAdapter } from '@angular/material/core';
 import { GoalCompletedDialogComponent } from '../goal-completed-dialog/goal-completed-dialog.component';
 
+
 @Component({
   selector: 'app-goals',
   templateUrl: './goals-create.component.html',
@@ -75,6 +76,10 @@ export class GoalsCreateComponent implements OnInit {
 
   dates: String[] = [];
 
+  //character limitation
+  myForm!: FormGroup; 
+  maxChars = 100;
+
   constructor(
     public dialog: MatDialog,
     private router: Router,
@@ -82,11 +87,23 @@ export class GoalsCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private auth: AuthService,
     private formBuilder: FormBuilder,
-    private dateAdapter: DateAdapter<Date>) {
+    private dateAdapter: DateAdapter<Date>,
+    //character limitation
+    private fb: FormBuilder) {
       this.dateAdapter.setLocale('de');
+      //character limitation
+    this.buildForm();
+  }
+
+  //character limitation
+  buildForm() {
+    this.myForm = this.fb.group({
+      wordLimitation: [""]
+    });
   }
 
   ngOnInit() {
+    
     this.currentUrl = this.router.url;
     this.idls = localStorage.getItem('selectedGoal');
     this.goalSelectedReload = localStorage.getItem('selectedGoal');

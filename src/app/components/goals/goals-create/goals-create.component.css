@@ -30,6 +30,9 @@
   margin-bottom: 1%;
 }
 
+::ng-deep.mat-form-field-wrapper {
+  padding-bottom: 10px!important;
+}
 .date-lable {
   width: 80px;
   padding-bottom: 3px;

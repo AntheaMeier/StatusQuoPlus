@@ -7,6 +7,7 @@ import {FeedbackCreateComponent} from "../feedback-create/feedback-create.compon
 import { SendConfirmationDialogComponent } from '../send-confirmation-dialog/send-confirmation-dialog/send-confirmation-dialog.component';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SnackBarComponent} from "../snack-bar/snack-bar.component";
+import { FormBuilder, FormGroup } from '@angular/forms'; //character limitation
 import {DeleteConfirmationDialogComponent} from "../../goals/delete-confirmation-dialog/delete-confirmation-dialog";
 
 
@@ -23,15 +24,32 @@ export class FeedbackDialogComponent implements OnInit {
   idloggedInUser: string = '';
   userClicked: boolean = false;
 
+  //character limitation
+  myForm!: FormGroup;
+  maxChars = 500;
+
   constructor(
     public snackBar: MatSnackBar,
     private api: ApiService,
     private auth: AuthService,
     public dialog: MatDialog,
-    public dialogRef: MatDialogRef<FeedbackCreateComponent>) {}
+    public dialogRef: MatDialogRef<FeedbackCreateComponent>,
+
+    //character limitation
+    private fb: FormBuilder) {
+    //character limitation
+    this.buildForm();
+    }
 
   ngOnInit(): void {
     this.idloggedInUser = this.auth.getUserDetails()._id;
+  }
+
+  //character limitation
+  buildForm() {
+    this.myForm = this.fb.group({
+      wordLimitation: [""]
+    });
   }
 
   openDialog() {
