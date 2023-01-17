@@ -59,4 +59,26 @@ export class MoodService {
     }
     return mood;
   }
+
+  async updateMood(
+    moodId: string,
+    creation_date: Date,
+    creator_id: string,
+    emotion: string,
+    text: string,
+    hidden: boolean,
+  ) {
+    const updatedMood = await this.findMood(moodId);
+    if (text) {
+      updatedMood.text = text;
+    }
+    if (emotion) {
+      updatedMood.emotion = emotion;
+    }
+    await updatedMood.save();
+  }
+
+  async deleteMood(moodId: string) {
+    const result = await this.moodModel.deleteOne({ _id: moodId }).exec();
+  }
 }

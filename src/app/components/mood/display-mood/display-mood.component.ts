@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
 import  {MatDialog } from '@angular/material/dialog';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from '../../../services/auth.service';
@@ -14,7 +14,7 @@ export class DisplayMoodComponent implements OnInit {
 
   idloggedInUser: string = '';
   moods: Mood [] = [];
-
+  @Input() loadNewMood?: boolean;
 
   constructor(
     public dialog: MatDialog,
@@ -27,11 +27,13 @@ export class DisplayMoodComponent implements OnInit {
     this.getMood(this.idloggedInUser);
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    this.ngOnInit();
+  }
+
   getMood(idloggedInUser: string): any {
-    console.log(idloggedInUser);
     this.api.getMoodForUser(idloggedInUser).subscribe(
       (res) => {
-        console.log(res);
         this.moods = res;
       },
       (error) => {

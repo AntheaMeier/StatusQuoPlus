@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { ApiService } from 'src/app/services/api.service';
 import { Mood } from 'src/app/models/mood';
+import {GoalsCreateComponent} from "../../goals/goals-create/goals-create.component";
 
 @Component({
   selector: 'app-mood-confirmation-dialog',
@@ -14,14 +15,14 @@ export class MoodConfirmationDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public mood: Mood,
     private api: ApiService,
     public dialog: MatDialog,
+    public dialogRef: MatDialogRef<MoodConfirmationDialogComponent>,
   ) { }
 
   ngOnInit(): void {}
 
   trackMood(): void {
-    console.log(this.mood);
     this.api.trackMood(this.mood).subscribe(res => {
-      this.dialog.closeAll();
+      this.dialogRef.close(1);
     },
     (error: any) => {
       console.log(error);

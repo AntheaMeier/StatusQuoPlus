@@ -7,13 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MoodComponent implements OnInit {
   addPost: any;
+  loadNewMood: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
+
   addPostForm() {
     this.addPost = !this.addPost;
   }
 
+  load($event: boolean) {
+    if($event) {
+      this.loadNewMood = $event;
+    }
+  }
 }

@@ -1,6 +1,6 @@
 <div class="container">
-    <app-mood-tracken></app-mood-tracken>
-    <app-display-mood></app-display-mood>
+    <app-mood-tracken (loadNewMood)="load($event)"></app-mood-tracken>
+    <app-display-mood [loadNewMood]="loadNewMood"></app-display-mood>
 </div>
 
 <mat-tab-group class="tabs">

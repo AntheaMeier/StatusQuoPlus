@@ -280,4 +280,18 @@ export class ApiService {
       catchError(this.handleError<Mood>(`getArticle id=${id}`))
     );
   }
+
+  updateMood(mood: Mood): Observable<any> {
+    const url = `${apiUrlMood}/${mood._id}`;
+    return this.http.patch(url, mood, httpOptions).pipe(
+      catchError(this.handleError<any>('updateMood'))
+    );
+  }
+
+  deleteMood(id: string): Observable<any> {
+    const url = `${apiUrlMood}/${id}`;
+    return this.http.delete<any>(url, httpOptions).pipe(
+      catchError(this.handleError<Goals>('deleteGoal'))
+    );
+  }
 }

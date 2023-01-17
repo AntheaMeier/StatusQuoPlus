@@ -44,4 +44,30 @@ export class MoodController {
   getSingleMood(@Param('id') moodId: string) {
     return this.moodService.getSingleMood(moodId);
   }
+
+  @Patch(':id')
+  async updateMood(
+    @Param('id') moodId: string,
+    @Body('text') text: string,
+    @Body('creation_date') creation_date: Date,
+    @Body('creator_id') creator_id: string,
+    @Body('emotion') emotion: string,
+    @Body('hidden') hidden: boolean,
+  ) {
+    await this.moodService.updateMood(
+      moodId,
+      creation_date,
+      creator_id,
+      emotion,
+      text,
+      hidden,
+    );
+    return null;
+  }
+
+  @Delete(':id')
+  async deleteMood(@Param('id') moodId: string) {
+    await this.moodService.deleteMood(moodId);
+    return null;
+  }
 }

@@ -15,15 +15,10 @@ import {Mood} from "../../../models/mood";
 })
 export class MoodEditComponent {
 
-  mood?: Mood;
-
+  mood: Mood = this.data.mood;
+  emotionTemp: string = this.data.mood.emotion;
   @Input() idDialog: any;
   enteredValue = "";
-  oldDescription: any;
-  id = '';
-  isLoadingResults = false;
-  enteredExpiryDate?: Date;
-  placeholderExpiryDate = 'Fälligkeitsdatum festlegen';
 
   articleForm: FormGroup = this.formBuilder.group({
     description: this.formBuilder.control('initial value')
@@ -42,26 +37,29 @@ export class MoodEditComponent {
   }
 
   ngOnInit() {
+    this.enteredValue = this.data.mood.text;
   }
 
   onFormSubmit() {
-    let removeExpiryDate = false;
-    this.isLoadingResults = true;
-    this.data.description = this.enteredValue;
-    if(this.enteredExpiryDate) {
-      this.data.expiry_date = this.enteredExpiryDate;
-    } else {
-      this.data.expiry_date = '';
-      removeExpiryDate = true;
-    }
-    this.api.updateGoal(this.data.id, this.data, removeExpiryDate)
-      .subscribe((res: any) => {
-          this.isLoadingResults = false;
-        }, (err: any) => {
-          console.log(err);
-          this.isLoadingResults = false;
-        }
-      );
-    this.dialogRef.close();
+    this.mood.text = this.enteredValue.toString();
+    console.log('mood.text : ' + this.mood.text);
+    this.mood.emotion = this.emotionTemp;
+    this.api.updateMood(this.mood).subscribe( res => {
+      this.dialogRef.close();
+    }, (err: any) => {
+        console.log(err);
+    });
+  }
+
+  chooseSentiment(sentiment: string) {
+    this.emotionTemp = sentiment;
+  }
+
+  deleteMood() {
+    this.api.deleteMood(this.mood._id).subscribe( res => {
+      this.dialogRef.close();
+    }, (err: any) => {
+      console.log(err);
+    });
   }
 }

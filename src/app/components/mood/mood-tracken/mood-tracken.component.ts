@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { Mood } from '../../../models/mood';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,6 +20,7 @@ export class MoodTrackenComponent implements OnInit {
   idloggedInUser: string = '';
   nameLoggedInUser: string = '';
   hideComment: boolean = false;
+  @Output() loadNewMood = new EventEmitter<boolean>();
 
 
   constructor(
@@ -31,6 +32,7 @@ export class MoodTrackenComponent implements OnInit {
   ngOnInit(): void {
     this.idloggedInUser = this.auth.getUserDetails()._id;
     this.nameLoggedInUser = this.auth.getUserDetails().firstname + ' ' + this.auth.getUserDetails().surname;
+    this.loadNewMood.emit(false);
   }
 
   openDialog() {
@@ -47,7 +49,8 @@ export class MoodTrackenComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'success') {
+      if(result == 1) {
+        this.loadNewMood.emit(true);
         this.openSnackBar();
         this.selectedEmotion = '';
         this.enteredContent = '';
@@ -66,7 +69,6 @@ export class MoodTrackenComponent implements OnInit {
 
   onSelect(e: any) {
     this.selectedEmotion = e.target.value;
-    console.log(this.selectedEmotion);
   }
 
   changeState() {
