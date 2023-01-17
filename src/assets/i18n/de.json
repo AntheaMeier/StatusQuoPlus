@@ -7,7 +7,7 @@
     "hinzufuegen": "hinzufügen",
     "loeschen": "Willst du dieses Ziel wirklich löschen?",
     "bearbeiten": "Hier kannst du dein Ziel bearbeiten",
-    "nichtVorhanden": "Du hast noch keine Ziele.",
+    "nichtVorhanden": "Noch keine Ziele angelegt.",
     "deinZiel": "Dein Ziel",
     "eingabeBeschreibung": "Bitte gib eine Beschreibung ein",
     "zielHinzufuegen": "Ziel hinzufügen +"
@@ -39,12 +39,21 @@
     "einsehen": "DEINE MOOD",
     "keinKommentar": "Kein Kommentar hinterlassen",
     "bearbeiten": "Bearbeite deine Mood vom: ",
-    "deinKommentar": "Dein Kommentar"
+    "deinKommentar": "Dein Kommentar",
+    "team": "Teamansicht Mood",
+    "eigene": "Eigene Mood",
+    "uebersicht": "Übersicht",
+    "diagram": "Statistik",
+    "panelTitel": "Stimmungslage/n getrackt",
+    "leer": "Hier gibt es noch keine Einträge",
+    "waehleMitarbeiter": "Filtere nach Mitarbeiter",
+    "erklaert": "Erklärt: Filtere deine Mitarbeiter-Statistik",
+    "hilfe": "Hier kannst du die Stimmungslagen deiner Mitarbeiter*innen, welche im Laufe deiner Führungskrafttätigkeit getrackt wurden, einsehen und filtern. Filtere entweder nach Datum, nach Mitarbeiter*in oder beides gleichzeitig. Die Filterung hilft dir, um dir beispielsweise im oder vor dem Jahresgespräch, alle benötigten Informationen eines/einer einzelnen Mitarbeiter*in anzeigen zu lassen.",
   },
 
   "Erfolge": {
     "erfolge": "ERFOLGE",
-    "nichtVorhanden": "Du hast noch keine Erfolge.",
+    "nichtVorhanden": "Noch keine Erfolge vorhanden.",
     "dialogTitle": "Herzlichen Glückwunsch, du hast dein Ziel erreicht!",
     "dialogText": "Du findest es ab jetzt unter dem Erfolge-Tab"
   },
@@ -54,7 +63,8 @@
     "unterjaehrigerAustausch": "UNTERJÄHRIGER AUSTAUSCH",
     "bearbeiten": "Hier kannst du dein Protokoll bearbeiten:",
     "eingabeBeschreibung": "Bitte gebe eine Beschreibung ein",
-    "loeschen": "Willst du dieses Protokoll wirklich löschen?"
+    "loeschen": "Willst du dieses Protokoll wirklich löschen?",
+    "nichtVorhanden": "Noch keine Protokolle angelegt."
   },
   "Team": {
     "meinTeam": "MEIN TEAM"

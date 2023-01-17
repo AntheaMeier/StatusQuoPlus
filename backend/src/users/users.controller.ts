@@ -1,11 +1,18 @@
-import {UsersService} from "./users.service";
-import {Body, Controller, Delete, Get, Param, Patch, Post,} from "@nestjs/common";
-import {Team} from "./users.model";
+import { UsersService } from './users.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
+import { Team } from './users.model';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {
-  }
+  constructor(private readonly usersService: UsersService) {}
 
   @Post()
   async addUsers(
@@ -24,9 +31,9 @@ export class UsersController {
       usersSurname,
       usersEmail,
       usersRole,
-      usersTeam
+      usersTeam,
     );
-    return {id: generatedId};
+    return { id: generatedId };
   }
 
   @Get()
@@ -35,8 +42,13 @@ export class UsersController {
   }
 
   @Get(':id')
-  getUsers(@Param('id') usersId: string,) {
+  getUsers(@Param('id') usersId: string) {
     return this.usersService.getSingleUser(usersId);
+  }
+
+  @Get(':id/team')
+  getTeamToSupervisor(@Param('id') supervisor_id: string) {
+    return this.usersService.getTeamToSupervisor(supervisor_id);
   }
 
   @Patch(':id')
@@ -48,9 +60,18 @@ export class UsersController {
     @Body('surname') usersSurname: string,
     @Body('email') usersEmail: string,
     @Body('role') usersRole: string,
-    @Body('team') usersTeam: Team
-) {
-    await this.usersService.updateUsers(usersId, usersUsername, usersPassword, usersFirstname, usersSurname, usersEmail, usersRole, usersTeam);
+    @Body('team') usersTeam: Team,
+  ) {
+    await this.usersService.updateUsers(
+      usersId,
+      usersUsername,
+      usersPassword,
+      usersFirstname,
+      usersSurname,
+      usersEmail,
+      usersRole,
+      usersTeam,
+    );
     return null;
   }
 

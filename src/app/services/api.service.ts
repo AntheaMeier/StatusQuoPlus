@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, from, Observable, of, zip } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, concatMap, map, mergeMap, tap, toArray } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { Goals } from '../models/goals';
-import { LoginData, LoginPayload, LoginResponse } from '../models/loginData';
+import {LoginData, LoginPayload, LoginResponse } from '../models/loginData';
 import { Tasks } from '../models/tasks';
 import { Review } from '../models/review';
 import { Feedback } from '../models/feedback';
@@ -91,9 +91,14 @@ export class ApiService {
     return this.http.get<LoginData>(url).pipe(
       map( res => {
             return res.firstname + ' ' + res.surname
-        }
-      )
-    )
+        }));
+  }
+
+  getTeamToSupervisor(supervisor_id: any): Observable<LoginData[]> {
+    const url = `${apiUrlLogin}/${supervisor_id}/team`;
+    return this.http.get<LoginData[]>(url).pipe(
+      catchError(this.handleError<LoginData[]>(`getUser id=${supervisor_id}`))
+    );
   }
 
   // Goals
@@ -293,5 +298,15 @@ export class ApiService {
     return this.http.delete<any>(url, httpOptions).pipe(
       catchError(this.handleError<Goals>('deleteGoal'))
     );
+  }
+
+  getMoodsOfTeam(id: string): Observable<Mood[]> {
+    return this.http.get<Mood[]>(`${apiUrlMood}/team/${id}`).pipe(
+      catchError(this.handleError('getMoodsOfTeam', [])));
+  }
+
+  getMoodsOfTeamMember(supervisor_id: string | undefined, memberId: string | undefined, startDate: Date, endDate: Date): Observable<Mood[]> {
+    return this.http.get<Mood[]>(`${apiUrlMood}/team/${supervisor_id}/team-member/${memberId}/${startDate}/${endDate}`).pipe(
+      catchError(this.handleError('getMoodsOfTeam', [])));
   }
 }

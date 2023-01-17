@@ -6,5 +6,6 @@ export interface Mood {
   emotion: string;
   text?: string;
   hidden: boolean;
+  supervisor_id: string;
 }
 

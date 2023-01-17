@@ -17,6 +17,7 @@ export const UsersSchema = new mongoose.Schema({
   email: {type: String, required: true},
   role: {type: String, required: true},
   team: {type: [TeamSchema]},
+  supervisor_id: {type: String}
 });
 
 export interface Users extends mongoose.Document {
@@ -31,6 +32,7 @@ export interface Users extends mongoose.Document {
   email: string;
   role: string;
   team: Team;
+  supervisor_id: string;
 }
 
 export interface Team extends mongoose.Document {

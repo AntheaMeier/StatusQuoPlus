@@ -12,6 +12,7 @@ export interface LoginData {
   email: string;
   role: Role;
   team: Team[];
+  supervisor_id: string;
 }
 
 export interface Team {

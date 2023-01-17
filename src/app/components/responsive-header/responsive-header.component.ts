@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginData, Team } from '../../models/loginData';
 import { ApiService } from '../../services/api.service';
 import { Tasks } from '../../models/tasks';
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-responsive-header',
@@ -27,7 +28,7 @@ export class ResponsiveHeaderComponent {
   roleLoggedInUser: String = '';
   selectedRole: String = 'Mitarbeiter_in';
   idLoggedInUser: String = '';
-  teamVorgesetze: Team[] = [];
+  teamVorgesetze: LoginData[] = [];
   goalid: string = '';
   @Output() idTeamMember = '';
   tasksToOneGoal: Tasks[] = [];
@@ -105,16 +106,16 @@ export class ResponsiveHeaderComponent {
       this.roleLoggedInUser = this.auth.getUserDetails().role;
     }
 
-    this.api.getUser(this.idLoggedInUser).subscribe(
-      (res: LoginData) => {
-        this.teamVorgesetze = res.team;
-        this.isLoadingResults = false;
-      },
-      (err) => {
-        console.log(err);
-        this.isLoadingResults = false;
-      }
-    );
+    if(this.idLoggedInUser) {
+      this.api.getTeamToSupervisor(this.idLoggedInUser).subscribe(
+        (res: LoginData[]) => {
+          this.teamVorgesetze = res;
+          this.isLoadingResults = false;
+        }, (err) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        });
+    }
   }
 
   get f(): any {
@@ -144,16 +145,16 @@ export class ResponsiveHeaderComponent {
   }
 
   onClickVorgesetzter() {
-    this.api.getUser(this.idLoggedInUser).subscribe(
-      (res: LoginData) => {
-        this.teamVorgesetze = res.team;
-        this.isLoadingResults = false;
-      },
-      (err) => {
-        console.log(err);
-        this.isLoadingResults = false;
-      }
-    );
+    if(this.idLoggedInUser) {
+      this.api.getTeamToSupervisor(this.idLoggedInUser).subscribe(
+        (res: LoginData[]) => {
+          this.teamVorgesetze = res;
+          this.isLoadingResults = false;
+        }, (err) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        });
+    }
   }
 
   setGoalsid(id: string) {

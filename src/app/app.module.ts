@@ -76,6 +76,10 @@ import { MoodConfirmationDialogComponent } from './components/mood/mood-confirma
 import { MoodSnackbarComponent } from './components/mood/mood-snackbar/mood-snackbar.component';
 import { MoodTrackenComponent } from './components/mood/mood-tracken/mood-tracken.component';
 import { MoodEditComponent } from './components/mood/mood-edit/mood-edit.component';
+import { MoodTrackerStatistikComponent } from './components/mood/mood-tracker-statistik/mood-tracker-statistik.component';
+import { ChartComponent } from './components/mood/chart/chart.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { HelpDialogComponent } from './components/mood/help-dialog/help-dialog.component';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -113,6 +117,9 @@ export function playerFactory() {
     DisplayMoodComponent,
     MoodSnackbarComponent,
     MoodEditComponent,
+    MoodTrackerStatistikComponent,
+    ChartComponent,
+    HelpDialogComponent,
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),
@@ -165,7 +172,8 @@ export function playerFactory() {
     CdkAccordionModule,
     NgxTranslateModule,
     MatSnackBarModule,
-    MatRadioModule
+    MatRadioModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     MatInputModule,
