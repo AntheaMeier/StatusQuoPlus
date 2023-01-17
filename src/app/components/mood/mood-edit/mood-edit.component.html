@@ -26,11 +26,17 @@
   <div mat-dialog-content>
     <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
       <mat-form-field appearance="outline">
-        <textarea [(ngModel)]="enteredValue" matInput placeholder="{{ 'Mood.deinKommentar' | translate }}" formControlName="description"
-                  value=""></textarea>
+        <textarea [(ngModel)]="enteredValue"
+                  matInput
+                  placeholder="{{ 'Mood.deinKommentar' | translate }}"
+                  formControlName="description"
+                  value=""
+                  [maxlength]="maxChars"></textarea>
       </mat-form-field>
     </form>
   </div>
+  <label style="color: #777675; margin-left: 5px;" >
+    {{enteredValue.length}}/{{maxChars}}</label>
 
   <div class="actions" mat-dialog-actions>
     <form [formGroup]="articleForm">

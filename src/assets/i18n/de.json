@@ -49,7 +49,8 @@
     "waehleMitarbeiter": "Filtere nach Mitarbeiter",
     "erklaert": "Erklärt: Filtere deine Mitarbeiter-Statistik",
     "hilfe": "Hier kannst du die Stimmungslagen deiner Mitarbeiter*innen, welche im Laufe deiner Führungskrafttätigkeit getrackt wurden, einsehen und filtern. Filtere entweder nach Datum, nach Mitarbeiter*in oder beides gleichzeitig. Die Filterung hilft dir, um dir beispielsweise im oder vor dem Jahresgespräch, alle benötigten Informationen eines/einer einzelnen Mitarbeiter*in anzeigen zu lassen.",
-    "privat": "Dieser Kommentar ist privat."
+    "privat": "Dieser Kommentar ist privat.",
+    "filtereNachDatum": "Filtere nach Datum"
   },
 
   "Erfolge": {
@@ -104,6 +105,7 @@
     "anpinnen": "Anpinnen",
     "nichtAnpinnen": "lösen",
     "allesKlar": "Alles klar!",
-    "senden": "Senden"
+    "senden": "Senden",
+    "los": "LOS"
   }
 }

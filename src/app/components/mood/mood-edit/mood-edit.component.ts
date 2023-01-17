@@ -19,7 +19,7 @@ export class MoodEditComponent {
   emotionTemp: string = this.data.mood.emotion;
   @Input() idDialog: any;
   enteredValue = "";
-
+  maxChars = 400;
   articleForm: FormGroup = this.formBuilder.group({
     description: this.formBuilder.control('initial value')
   });

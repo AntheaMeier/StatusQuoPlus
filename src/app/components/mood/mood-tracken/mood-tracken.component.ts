@@ -13,6 +13,7 @@ import { MoodSnackbarComponent } from '../mood-snackbar/mood-snackbar.component'
 })
 export class MoodTrackenComponent implements OnInit {
 
+  maxChars = 300;
   moodTest: Mood = {_id: '', creation_date: new Date(), creator_name: '', creator_id: '', text: '', emotion: '', hidden: false, supervisor_id: ''};
   enteredContent = '';
   selectedEmotion: string = '';

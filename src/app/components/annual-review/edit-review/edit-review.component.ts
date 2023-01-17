@@ -13,6 +13,7 @@ import { Review } from 'src/app/models/review';
 })
 export class EditReviewComponent implements OnInit {
 
+  maxChars = 500;
   @Input() idDialog: any;
   enteredValue = "";
   oldDescription: any;

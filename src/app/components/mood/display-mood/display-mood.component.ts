@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from '../../../services/auth.service';
 import { Mood } from 'src/app/models/mood';
 import {MoodEditComponent} from "../mood-edit/mood-edit.component";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-display-mood',
@@ -11,6 +12,11 @@ import {MoodEditComponent} from "../mood-edit/mood-edit.component";
   styleUrls: ['./display-mood.component.css']
 })
 export class DisplayMoodComponent implements OnInit {
+
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl(),
+  });
 
   idloggedInUser: string = '';
   moods: Mood [] = [];

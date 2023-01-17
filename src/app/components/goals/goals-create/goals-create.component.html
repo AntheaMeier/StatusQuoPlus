@@ -16,8 +16,7 @@
           [maxlength]="maxChars"
           formControlName="wordLimitation"
           placeholder="{{ 'Ziele.deinZiel' | translate}}"
-      
-          >
+        >
         </textarea>
       <mat-error *ngIf="enteredContent.length==0">{{ 'Ziele.eingabeBeschreibung' | translate}}</mat-error>
       </mat-form-field>

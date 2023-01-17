@@ -47,9 +47,11 @@
           name="content"
           placeholder="{{'Mood.textEingabe' | translate}}"
           #content="ngModel"
+          [maxlength]="maxChars"
         ></textarea>
       </mat-form-field>
-
+      <label style="color: #777675; margin-left: 5px; margin-top: 15px;" >
+        {{enteredContent.length}}/{{maxChars}}</label>
       <div class="wrapper-actions">
       <div class="wrapper-locker">
         <div class="comment-locker">
