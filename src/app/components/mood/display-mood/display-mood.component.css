@@ -87,3 +87,12 @@ h3 {
 .los-button {
   margin-top: 15px;
 }
+
+mat-expansion-panel {
+  width: 95%;
+  margin: auto;
+}
+
+.panel-title-styling {
+  font-weight: bold;
+}
