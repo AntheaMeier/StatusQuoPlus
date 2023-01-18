@@ -62,7 +62,7 @@
             <mat-icon class= "hidden" [ngStyle]="{'color':'gray'}" (click)="changeState()">lock</mat-icon>
           </div>
         </div>
-        <mat-icon matTooltip="{{ 'Mood.tooltip' | translate }}" class= "help-icon" [ngStyle]="{'color':'#A4A4A4'}">help_outline</mat-icon>
+        <mat-icon (click)="openHelpDialog()" class= "help-icon" [ngStyle]="{'color':'#A4A4A4'}">help</mat-icon>
       </div>
 
       <button class="submit-button" mat-button type="submit" (click)="openDialog()" [disabled]="selectedEmotion === ''">{{ 'Button.speichern' | translate }}</button>

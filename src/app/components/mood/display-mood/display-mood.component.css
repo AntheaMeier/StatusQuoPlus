@@ -8,6 +8,13 @@
   justify-content: center;
 }
 
+@media screen and (min-width: 1081px) {
+  .wrapper-moods {
+    overflow-y: scroll;
+    height:500px;
+  }
+}
+
 @media screen and (max-width: 1080px) {
   .mood-container {
     margin-right: 20px;

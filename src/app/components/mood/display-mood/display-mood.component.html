@@ -38,6 +38,7 @@
     <p>{{ 'Mood.nichtVorhanden' | translate}}</p>
   </div>
 
+  <div class="wrapper-moods">
   <div *ngFor="let mood of moods.reverse()" class="mood-container">
     <div class="emotion">
       <div *ngIf="mood.emotion === 'sad'">
@@ -71,5 +72,6 @@
       </div>
       <div *ngIf="!mood.text" style="font-style: italic">{{ 'Mood.keinKommentar' | translate}}</div>
     </mat-card>
+  </div>
   </div>
 </div>

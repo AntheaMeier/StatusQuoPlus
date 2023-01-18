@@ -47,12 +47,14 @@
     "panelTitel": "Stimmungslage/n getrackt",
     "leer": "Hier gibt es noch keine Einträge",
     "waehleMitarbeiter": "Filtere nach Mitarbeiter",
-    "erklaert": "Erklärt: Filtere deine Mitarbeiter-Statistik",
+    "erklaert": "Filtere deine Mitarbeiter-Statistik",
     "hilfe": "Hier kannst du die Stimmungslagen deiner Mitarbeiter*innen, welche im Laufe deiner Führungskrafttätigkeit getrackt wurden, einsehen und filtern. Filtere entweder nach Datum, nach Mitarbeiter*in oder beides gleichzeitig. Die Filterung hilft dir, um dir beispielsweise im oder vor dem Jahresgespräch, alle benötigten Informationen eines/einer einzelnen Mitarbeiter*in anzeigen zu lassen.",
     "privat": "Dieser Kommentar ist privat.",
     "filtereNachDatum": "Filtere nach Datum",
     "nichtVorhanden": "Noch keine Mood getrackt",
-    "siebenTage": "Nur 7 Tage editierbar"
+    "siebenTage": "Nur 7 Tage editierbar",
+    "erklaertLock": "Verschlüssele deinen Kommentar",
+    "hilfeLock": "Du kannst deinen Kommentar vor deiner Führungskraft verbergen. So bleiben private Dinge privat. Du kannst diese Einstellung 7 Tage nach dem Erstellen bearbeiten."
   },
 
   "Erfolge": {

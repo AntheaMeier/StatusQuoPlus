@@ -80,6 +80,7 @@ import { MoodTrackerStatistikComponent } from './components/mood/mood-tracker-st
 import { ChartComponent } from './components/mood/chart/chart.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { HelpDialogComponent } from './components/mood/help-dialog/help-dialog.component';
+import { HelpLockDialogComponent } from './components/mood/help-lock-dialog/help-lock-dialog.component';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -120,6 +121,7 @@ export function playerFactory() {
     MoodTrackerStatistikComponent,
     ChartComponent,
     HelpDialogComponent,
+    HelpLockDialogComponent,
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),

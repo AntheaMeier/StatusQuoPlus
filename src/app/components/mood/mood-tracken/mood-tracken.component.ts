@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MoodConfirmationDialogComponent } from '../mood-confirmation-dialog/mood-confirmation-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MoodSnackbarComponent } from '../mood-snackbar/mood-snackbar.component';
+import {HelpDialogComponent} from "../help-dialog/help-dialog.component";
+import {HelpLockDialogComponent} from "../help-lock-dialog/help-lock-dialog.component";
 
 @Component({
   selector: 'app-mood-tracken',
@@ -82,4 +84,7 @@ export class MoodTrackenComponent implements OnInit {
     }
   }
 
+  openHelpDialog() {
+    this.dialog.open(HelpLockDialogComponent);
+  }
 }
