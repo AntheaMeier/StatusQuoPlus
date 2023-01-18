@@ -99,7 +99,11 @@ export class DisplayMoodComponent implements OnInit {
       data: {mood: mood},
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.ngOnInit();
+      if(this.range.value.start != null && this.range.value.start != null) {
+        this.filterMood();
+      } else {
+        this.ngOnInit();
+      }
     });
   }
 
