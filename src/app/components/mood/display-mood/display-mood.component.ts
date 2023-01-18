@@ -5,11 +5,37 @@ import { AuthService } from '../../../services/auth.service';
 import { Mood } from 'src/app/models/mood';
 import {MoodEditComponent} from "../mood-edit/mood-edit.component";
 import {FormControl, FormGroup} from "@angular/forms";
+import {DateAdapter, MAT_DATE_FORMATS, NativeDateAdapter} from "@angular/material/core";
+import {formatDate} from "@angular/common";
+
+export const PICK_FORMATS = {
+  parse: {dateInput: {month: 'short', year: 'numeric', day: 'numeric'}},
+  display: {
+    dateInput: 'input',
+    monthYearLabel: {year: 'numeric', month: 'short'},
+    dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
+    monthYearA11yLabel: {year: 'numeric', month: 'long'}
+  }
+};
+
+class PickDateAdapter extends NativeDateAdapter {
+  format(date: Date, displayFormat: Object): string {
+    if (displayFormat === 'input') {
+      return formatDate(date,'dd.MM.yyyy',this.locale);;
+    } else {
+      return date.toDateString();
+    }
+  }
+}
 
 @Component({
   selector: 'app-display-mood',
   templateUrl: './display-mood.component.html',
-  styleUrls: ['./display-mood.component.css']
+  styleUrls: ['./display-mood.component.css'],
+  providers: [
+    {provide: DateAdapter, useClass: PickDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS}
+  ]
 })
 export class DisplayMoodComponent implements OnInit {
 
@@ -18,6 +44,7 @@ export class DisplayMoodComponent implements OnInit {
     end: new FormControl(),
   });
 
+  disable: boolean = true;
   idloggedInUser: string = '';
   moods: Mood [] = [];
   @Input() loadNewMood?: boolean;
@@ -26,7 +53,13 @@ export class DisplayMoodComponent implements OnInit {
     public dialog: MatDialog,
     private auth: AuthService,
     private api: ApiService,
-    ) {}
+    ) {
+    this.range.valueChanges.subscribe( res => {
+      if(res.start != null && res.end != null) {
+        this.disable = false;
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.idloggedInUser = this.auth.getUserDetails()._id;
@@ -67,6 +100,16 @@ export class DisplayMoodComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.ngOnInit();
+    });
+  }
+
+  filterMood() {
+    this.api.getMoodsToDateRange(this.idloggedInUser, this.range.value.start, this.range.value.end)
+      .subscribe( res => {
+      console.log('HIIIER::::: ' + res);
+      this.moods = res;
+    }, (err) => {
+      console.log(err);
     });
   }
 }

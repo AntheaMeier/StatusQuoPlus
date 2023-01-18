@@ -309,4 +309,9 @@ export class ApiService {
     return this.http.get<Mood[]>(`${apiUrlMood}/team/${supervisor_id}/team-member/${memberId}/${startDate}/${endDate}`).pipe(
       catchError(this.handleError('getMoodsOfTeam', [])));
   }
+
+  getMoodsToDateRange(userId: string, startDate: Date, endDate: Date): Observable<Mood[]> {
+    return this.http.get<Mood[]>(`${apiUrlMood}/${userId}/${startDate}/${endDate}`).pipe(
+      catchError(this.handleError('getMoodsOfTeam', [])));
+  }
 }

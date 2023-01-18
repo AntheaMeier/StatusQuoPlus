@@ -150,3 +150,7 @@ h3 {
   height: 16px;
   width: 16px;
 }
+
+::ng-deep .success {
+  background-color: forestgreen;
+}

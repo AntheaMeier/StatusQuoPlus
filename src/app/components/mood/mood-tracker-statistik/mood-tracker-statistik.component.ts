@@ -8,15 +8,42 @@ import {Observable} from "rxjs";
 import {map, startWith} from "rxjs/operators";
 import {HelpDialogComponent} from "../help-dialog/help-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {formatDate} from "@angular/common";
+import {DateAdapter, MAT_DATE_FORMATS, NativeDateAdapter} from "@angular/material/core";
 
 const THIRTY_SECONDS = 30000; // in ms
 const TWO_SECONDS = 800; // in ms
 
+export const PICK_FORMATS = {
+  parse: {dateInput: {month: 'short', year: 'numeric', day: 'numeric'}},
+  display: {
+    dateInput: 'input',
+    monthYearLabel: {year: 'numeric', month: 'short'},
+    dateA11yLabel: {year: 'numeric', month: 'long', day: 'numeric'},
+    monthYearA11yLabel: {year: 'numeric', month: 'long'}
+  }
+};
+
+class PickDateAdapter extends NativeDateAdapter {
+  format(date: Date, displayFormat: Object): string {
+    if (displayFormat === 'input') {
+      return formatDate(date,'dd.MM.yyyy',this.locale);;
+    } else {
+      return date.toDateString();
+    }
+  }
+}
+
 @Component({
   selector: 'app-mood-tracker-statistik',
   templateUrl: './mood-tracker-statistik.component.html',
-  styleUrls: ['./mood-tracker-statistik.component.css']
+  styleUrls: ['./mood-tracker-statistik.component.css'],
+  providers: [
+    {provide: DateAdapter, useClass: PickDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: PICK_FORMATS}
+  ]
 })
+
 export class MoodTrackerStatistikComponent implements OnInit{
   idLoggedInUser?: string;
   happy: Mood[] = [];

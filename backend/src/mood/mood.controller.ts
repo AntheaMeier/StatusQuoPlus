@@ -91,4 +91,17 @@ export class MoodController {
       endDate,
     );
   }
+
+  @Get('/:userId/:startDate/:endDate')
+  async getMoodsToDateRange(
+    @Param('userId') userId: string,
+    @Param('startDate') startDate: Date,
+    @Param('endDate') endDate: Date,
+  ) {
+    return await this.moodService.getMoodsToDateRange(
+      userId,
+      startDate,
+      endDate,
+    );
+  }
 }

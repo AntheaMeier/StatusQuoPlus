@@ -145,4 +145,22 @@ export class MoodService {
     });
     return filteredMoods;
   }
+
+  async getMoodsToDateRange(userId: string, startDate: Date, endDate: Date) {
+    let moods;
+    const startDateTemp = new Date(startDate);
+    const endDateTemp = new Date(endDate);
+
+    try {
+      moods = await this.moodModel.find({ creator_id: userId });
+      moods = this.filterMoodsToDateRange(moods, startDate, endDate);
+    } catch (error) {
+      throw new NotFoundException('Could not find mood');
+    }
+
+    if (!moods) {
+      throw new NotFoundException('Could not find mood');
+    }
+    return moods;
+  }
 }
