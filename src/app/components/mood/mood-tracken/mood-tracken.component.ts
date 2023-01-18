@@ -36,6 +36,8 @@ export class MoodTrackenComponent implements OnInit {
     this.idloggedInUser = this.auth.getUserDetails()._id;
     this.nameLoggedInUser = this.auth.getUserDetails().firstname + ' ' + this.auth.getUserDetails().surname;
     this.loadNewMood.emit(false);
+    console.log('EMOTION:::::  in oninit ' + this.selectedEmotion);
+
   }
 
   openDialog() {
@@ -72,7 +74,9 @@ export class MoodTrackenComponent implements OnInit {
   }
 
   onSelect(e: any) {
-    this.selectedEmotion = e.target.value;
+    this.selectedEmotion = e;
+    console.log('EMOTION::::: in onseleect   ' + this.selectedEmotion);
+
   }
 
   changeState() {
