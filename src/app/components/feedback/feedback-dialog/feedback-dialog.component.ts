@@ -8,7 +8,6 @@ import { SendConfirmationDialogComponent } from '../send-confirmation-dialog/sen
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 import { FormBuilder, FormGroup } from '@angular/forms'; //character limitation
-import {DeleteConfirmationDialogComponent} from "../../goals/delete-confirmation-dialog/delete-confirmation-dialog";
 
 
 @Component({
@@ -64,7 +63,10 @@ export class FeedbackDialogComponent implements OnInit {
       data: this.testfeedback
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.openSnackBar();
+      if(result == 1) {
+        this.dialogRef.close();
+        this.openSnackBar();
+      }
     });
   }
 
