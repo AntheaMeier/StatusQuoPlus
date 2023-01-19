@@ -110,7 +110,6 @@ export class DisplayMoodComponent implements OnInit {
   filterMood() {
     this.api.getMoodsToDateRange(this.idloggedInUser, this.range.value.start, this.range.value.end)
       .subscribe( res => {
-      console.log('HIIIER::::: ' + res);
       this.moods = res;
     }, (err) => {
       console.log(err);

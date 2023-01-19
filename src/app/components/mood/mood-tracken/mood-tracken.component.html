@@ -50,8 +50,8 @@
           [maxlength]="maxChars"
         ></textarea>
       </mat-form-field>
-      <label style="color: #777675; margin-left: 5px; margin-top: 15px;" >
-        {{enteredContent.length}}/{{maxChars}}</label>
+      <label style="margin-left: 5px; margin-top: 15px; display: flex; color: #777675">
+        <p [ngStyle]="{'color' : enteredContent.length == maxChars ? 'red' : '#777675'}">{{enteredContent.length}}</p>/{{maxChars}}</label>
       <div class="wrapper-actions">
       <div class="wrapper-locker">
         <div class="comment-locker">

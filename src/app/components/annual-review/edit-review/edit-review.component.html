@@ -18,8 +18,8 @@
     </mat-form-field>
   </form>
 </div>
-<label style="color: #777675; margin-left: 5px; margin-bottom: 15px;" >
-  {{enteredValue.length}}/{{maxChars}}</label>
+<label style="margin-left: 5px; margin-top: 15px; display: flex; color: #777675">
+  <p [ngStyle]="{'color' : enteredValue.length == maxChars ? 'red' : '#777675'}">{{enteredValue.length}}</p>/{{maxChars}}</label>
 <div mat-dialog-actions>
   <form [formGroup]="reviewForm">
     <button mat-button (click)="onNoClick()">{{ 'Button.abbrechen' | translate}}</button>

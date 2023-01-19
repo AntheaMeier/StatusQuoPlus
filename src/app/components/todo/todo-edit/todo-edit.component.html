@@ -2,22 +2,22 @@
 <div mat-dialog-content>
   <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
     <mat-form-field appearance="outline">
-      <input 
-      [(ngModel)]="enteredValue" 
-      matInput 
-      placeholder="{{ 'Tasks.deineTask' | translate }}" 
+      <textarea
+      [(ngModel)]="enteredValue"
+      matInput
+      placeholder="{{ 'Tasks.deineTask' | translate }}"
       formControlName="description"
       value=""
-      name="myInput" 
-      ng-model="myInput" 
-     
-  
-      >
+      name="myInput"
+      ng-model="myInput"
+      [maxLength]="maxChars"
+      ></textarea>
       <mat-error>
         <span>{{ 'Tasks.eingabeBeschreibung' | translate }}</span>
       </mat-error>
     </mat-form-field>
-
+    <label style="margin-left: 5px; display: flex; color: #777675">
+      <p [ngStyle]="{'color' : enteredValue.length == maxChars ? 'red' : '#777675'}">{{enteredValue.length}}</p>/{{maxChars}}</label>
   </form>
 </div>
 <div mat-dialog-actions>

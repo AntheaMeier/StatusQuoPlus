@@ -35,8 +35,8 @@
       </mat-form-field>
     </form>
   </div>
-  <label style="color: #777675; margin-left: 5px;" >
-    {{enteredValue.length}}/{{maxChars}}</label>
+  <label style="margin-left: 5px; margin-top: 15px; display: flex; color: #777675">
+    <p [ngStyle]="{'color' : enteredValue.length == maxChars ? 'red' : '#777675'}">{{enteredValue.length}}</p>/{{maxChars}}</label>
 
   <div class="actions" mat-dialog-actions>
     <form [formGroup]="articleForm">
