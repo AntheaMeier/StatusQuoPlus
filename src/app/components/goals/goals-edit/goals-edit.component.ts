@@ -21,6 +21,7 @@ export class GoalsEditComponent implements OnInit {
   isLoadingResults = false;
   enteredExpiryDate?: Date;
   placeholderExpiryDate = 'Fälligkeitsdatum festlegen';
+  maxChars = 100;
 
   articleForm: FormGroup = this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required)

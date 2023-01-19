@@ -7,29 +7,59 @@
     "hinzufuegen": "hinzufügen",
     "loeschen": "Willst du dieses Ziel wirklich löschen?",
     "bearbeiten": "Hier kannst du dein Ziel bearbeiten",
-    "nichtVorhanden": "Du hast noch keine Ziele.",
+    "nichtVorhanden": "Noch keine Ziele angelegt.",
     "deinZiel": "Dein Ziel",
     "eingabeBeschreibung": "Bitte gib eine Beschreibung ein",
     "zielHinzufuegen": "Ziel hinzufügen +"
   },
 
   "Feedback": {
-    "feedback": "DEIN FEEDBACK",
+    "feedback": "FEEDBACK",
     "eingabeBeschreibung": "Bitte gebe eine Beschreibung ein",
     "notizEingeben": "Gebe hier dein Feedback ein",
     "nichtVorhanden": "Du hast noch kein Feedback bekommen.",
     "geben": "Feedback geben +",
     "senden": "Feedback senden",
     "sendenBestaetigen": "Wenn du fortfährst, wird das Feedback unwiderruflich an die gewählte Person gesendet.",
-    "sicher": "Bist du sicher?"
+    "sicher": "Bist du sicher?",
     "waehlePerson": "Empfänger deines Feedbacks",
     "errorWaehlePerson": "Du hast keine Person ausgewählt",
     "feedbackGesendet": "Feedback gesendet"
   },
 
+  "Mood": {
+    "mood": "MOOD",
+    "textEingabe": "Gib ein Kommentar ein",
+    "sicher": "Bist du sicher?",
+    "speichern": "Mood speichern",
+    "speichernBestaetigen": "Wenn du fortfährst, wird deine Stimmung gespeichert. Danach hast du sieben Tage Zeit, um Änderungen vorzunehmen.",
+    "gespeichert": "Mood gespeichert",
+    "tooltip": "Verberge deinen Kommentar vor deiner Führungskraft, indem du das Schloss schließt.",
+    "tracker": "MOOD TRACKER",
+    "einsehen": "DEINE MOOD",
+    "keinKommentar": "Kein Kommentar hinterlassen",
+    "bearbeiten": "Bearbeite deine Mood vom: ",
+    "deinKommentar": "Dein Kommentar",
+    "team": "Teamansicht Mood",
+    "eigene": "Eigene Mood",
+    "uebersicht": "Übersicht",
+    "diagram": "Statistik",
+    "panelTitel": "Stimmungslage/n getrackt",
+    "leer": "Hier gibt es noch keine Einträge",
+    "waehleMitarbeiter": "Filtere nach Mitarbeiter",
+    "erklaert": "Filtere deine Mitarbeiter-Statistik",
+    "hilfe": "Hier kannst du die Stimmungslagen deiner Mitarbeiter*innen, welche im Laufe deiner Führungskrafttätigkeit getrackt wurden, einsehen und filtern. Filtere entweder nach Datum, nach Mitarbeiter*in oder beides gleichzeitig. Die Filterung hilft dir, um dir beispielsweise im oder vor dem Jahresgespräch, alle benötigten Informationen eines/einer einzelnen Mitarbeiter*in anzeigen zu lassen.",
+    "privat": "Dieser Kommentar ist privat.",
+    "filtereNachDatum": "Filtere nach Datum",
+    "nichtVorhanden": "Noch keine Mood getrackt",
+    "siebenTage": "Nur 7 Tage editierbar",
+    "erklaertLock": "Verschlüssele deinen Kommentar",
+    "hilfeLock": "Du kannst deinen Kommentar vor deiner Führungskraft verbergen. So bleiben private Dinge privat. Du kannst diese Einstellung 7 Tage nach dem Erstellen bearbeiten."
+  },
+
   "Erfolge": {
     "erfolge": "ERFOLGE",
-    "nichtVorhanden": "Du hast noch keine Erfolge.",
+    "nichtVorhanden": "Noch keine Erfolge vorhanden.",
     "dialogTitle": "Herzlichen Glückwunsch, du hast dein Ziel erreicht!",
     "dialogText": "Du findest es ab jetzt unter dem Erfolge-Tab"
   },
@@ -39,7 +69,8 @@
     "unterjaehrigerAustausch": "UNTERJÄHRIGER AUSTAUSCH",
     "bearbeiten": "Hier kannst du dein Protokoll bearbeiten:",
     "eingabeBeschreibung": "Bitte gebe eine Beschreibung ein",
-    "loeschen": "Willst du dieses Protokoll wirklich löschen?"
+    "loeschen": "Willst du dieses Protokoll wirklich löschen?",
+    "nichtVorhanden": "Noch keine Protokolle angelegt."
   },
   "Team": {
     "meinTeam": "MEIN TEAM"
@@ -78,6 +109,7 @@
     "anpinnen": "Anpinnen",
     "nichtAnpinnen": "lösen",
     "allesKlar": "Alles klar!",
-    "senden": "Senden"
+    "senden": "Senden",
+    "los": "LOS"
   }
 }

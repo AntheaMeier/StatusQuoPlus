@@ -1,0 +1,23 @@
+.container {
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 48% 48%;
+  grid-gap: 30px;
+  margin: auto;
+  padding: 10px;
+
+}
+
+.tabs {
+  display: none;
+}
+
+@media screen and (max-width: 1080px) {
+    .container {
+      display: none;
+    }
+
+    .tabs {
+      display: grid;
+    }
+  }

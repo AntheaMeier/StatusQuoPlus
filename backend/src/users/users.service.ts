@@ -97,7 +97,21 @@ export class UsersService {
   }
 
   async deleteUsers(usersId: string) {
-    const result = await this.usersModel.deleteOne({_id: usersId}).exec();
+    const result = await this.usersModel.deleteOne({ _id: usersId }).exec();
     console.log(result);
+  }
+
+  async getTeamToSupervisor(supervisor_id: string) {
+    let team;
+
+    try {
+      team = await this.usersModel.find({ supervisor_id: supervisor_id });
+    } catch (error) {
+      throw new NotFoundException('Could not find team');
+    }
+    if (!team) {
+      throw new NotFoundException('Could not find team');
+    }
+    return team;
   }
 }

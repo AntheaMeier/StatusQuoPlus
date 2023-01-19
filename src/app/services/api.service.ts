@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, from, Observable, of, zip } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, concatMap, map, mergeMap, tap, toArray } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { Goals } from '../models/goals';
-import { LoginData, LoginPayload, LoginResponse } from '../models/loginData';
+import {LoginData, LoginPayload, LoginResponse } from '../models/loginData';
 import { Tasks } from '../models/tasks';
 import { Review } from '../models/review';
 import { Feedback } from '../models/feedback';
+import { Mood } from '../models/mood';
 import { User } from '../models/user';
 
 
@@ -24,7 +25,11 @@ const apiUrlReviews = 'http://localhost:3000/reviews';
 const apiUrlTasksForStatus = 'http://localhost:3000/tasks/goal';
 const apiUrlUsersForReview = 'http://localhost:3000/reviews/user';
 const apiUrlFeedback = 'http://localhost:3000/feedback';
+const apiUrlMood = 'http://localhost:3000/mood';
 const apiUrlFeedbackForUser = 'http://localhost:3000/feedback/receiver';
+const apiUrlMoodTracker = 'http://localhost:3000/mood';
+const apiUrlMoodForUser = 'http://localhost:3000/mood/user';
+
 
 
 @Injectable({
@@ -86,9 +91,14 @@ export class ApiService {
     return this.http.get<LoginData>(url).pipe(
       map( res => {
             return res.firstname + ' ' + res.surname
-        }
-      )
-    )
+        }));
+  }
+
+  getTeamToSupervisor(supervisor_id: any): Observable<LoginData[]> {
+    const url = `${apiUrlLogin}/${supervisor_id}/team`;
+    return this.http.get<LoginData[]>(url).pipe(
+      catchError(this.handleError<LoginData[]>(`getUser id=${supervisor_id}`))
+    );
   }
 
   // Goals
@@ -238,10 +248,10 @@ export class ApiService {
 
   getAllFeedback(): Observable<Feedback[]> {
     return this.http.get<Feedback[]>(apiUrlFeedback).pipe(
-      catchError(this.handleError<Feedback[]>('getFeedback')) 
+      catchError(this.handleError<Feedback[]>('getFeedback'))
     );
   }
-  
+
   getFeedbackWithName(id: string): Observable<any> {
     return this.getFeedbackForUser(id).pipe(
       mergeMap(feedbacks => forkJoin(
@@ -254,5 +264,54 @@ export class ApiService {
           ))
       ))
     )
+  }
+
+  // Mood Tracker
+  trackMood(mood: Mood): Observable<Mood> {
+    return this.http.post<Mood>(apiUrlMoodTracker, mood, httpOptions).pipe(
+      catchError(this.handleError<Mood>('trackMood'))
+    );
+  }
+
+  getMoodForUser(id: string): Observable<Mood[]> {
+    return this.http.get<Mood[]>(`${apiUrlMoodForUser}/${id}`).pipe(
+      catchError(this.handleError<Mood[]>('getMoodForUser', []))
+    );
+  }
+
+  getSingleMood(id: string): Observable<Mood> {
+    const url = `${apiUrlMood}/${id}`;
+    return this.http.get<Mood>(url).pipe(
+      catchError(this.handleError<Mood>(`getArticle id=${id}`))
+    );
+  }
+
+  updateMood(mood: Mood): Observable<any> {
+    const url = `${apiUrlMood}/${mood._id}`;
+    return this.http.patch(url, mood, httpOptions).pipe(
+      catchError(this.handleError<any>('updateMood'))
+    );
+  }
+
+  deleteMood(id: string): Observable<any> {
+    const url = `${apiUrlMood}/${id}`;
+    return this.http.delete<any>(url, httpOptions).pipe(
+      catchError(this.handleError<Goals>('deleteGoal'))
+    );
+  }
+
+  getMoodsOfTeam(id: string): Observable<Mood[]> {
+    return this.http.get<Mood[]>(`${apiUrlMood}/team/${id}`).pipe(
+      catchError(this.handleError('getMoodsOfTeam', [])));
+  }
+
+  getMoodsOfTeamMember(supervisor_id: string | undefined, memberId: string | undefined, startDate: Date, endDate: Date): Observable<Mood[]> {
+    return this.http.get<Mood[]>(`${apiUrlMood}/team/${supervisor_id}/team-member/${memberId}/${startDate}/${endDate}`).pipe(
+      catchError(this.handleError('getMoodsOfTeam', [])));
+  }
+
+  getMoodsToDateRange(userId: string, startDate: Date, endDate: Date): Observable<Mood[]> {
+    return this.http.get<Mood[]>(`${apiUrlMood}/${userId}/${startDate}/${endDate}`).pipe(
+      catchError(this.handleError('getMoodsOfTeam', [])));
   }
 }

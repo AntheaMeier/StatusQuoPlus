@@ -41,10 +41,6 @@ mat-form-field {
   color: #FFFFFF;
 }
 
-.dialog {
-  text-align: center;
-}
-
 @media screen and (max-width: 440px) {
   .form-field-date {
     width: 75%;

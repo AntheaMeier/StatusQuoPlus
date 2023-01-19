@@ -1,0 +1,59 @@
+<div class="dialog">
+  <h1>{{ 'Mood.bearbeiten' | translate }}</h1>
+  <p class="date-styling">{{data.mood.creation_date | date:'dd.MM.YYYY'}}</p>
+
+  <div class="button-wrapper">
+    <button [ngStyle]="{'box-shadow': emotionTemp === 'happy' ? 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px' : 'none'}"
+            mat-button
+            class="sentiment-button"
+            (click)="chooseSentiment('happy')">
+      <mat-icon class="sentiment-icon happy">mood</mat-icon>
+    </button>
+    <button [ngStyle]="{'box-shadow': emotionTemp === 'neutral' ? 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px' : 'none'}"
+            mat-button
+            class="sentiment-button"
+            (click)="chooseSentiment('neutral')">
+      <mat-icon class="sentiment-icon neutral">sentiment_neutral</mat-icon>
+    </button>
+    <button [ngStyle]="{'box-shadow': emotionTemp === 'sad' ? 'rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px' : 'none'}"
+            mat-button
+            class="sentiment-button"
+            (click)="chooseSentiment('sad')">
+      <mat-icon class="sentiment-icon sad">mood_bad</mat-icon>
+    </button>
+  </div>
+
+  <div mat-dialog-content>
+    <form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
+      <mat-form-field appearance="outline">
+        <textarea [(ngModel)]="enteredValue"
+                  matInput
+                  placeholder="{{ 'Mood.deinKommentar' | translate }}"
+                  formControlName="description"
+                  value=""
+                  [maxlength]="maxChars"></textarea>
+      </mat-form-field>
+    </form>
+  </div>
+  <label style="margin-left: 5px; margin-top: 15px; display: flex; color: #777675">
+    <p [ngStyle]="{'color' : enteredValue.length == maxChars ? 'red' : '#777675'}">{{enteredValue.length}}</p>/{{maxChars}}</label>
+
+  <div class="actions" mat-dialog-actions>
+    <form [formGroup]="articleForm">
+      <button mat-button (click)="onNoClick()">{{ 'Button.abbrechen' | translate }}</button>
+      <button mat-button class="delete-button" (click)="deleteMood()">
+        {{ 'Button.loeschen' | translate}}
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button class="save-button"
+              mat-button
+              (keyup.enter)="onFormSubmit()"
+              (click)="onFormSubmit()"
+              type="submit"
+              [disabled]="!articleForm.valid">
+        {{ 'Button.speichern' | translate }}
+      </button>
+    </form>
+  </div>
+</div>
+

@@ -30,6 +30,9 @@
   margin-bottom: 1%;
 }
 
+::ng-deep.mat-form-field-wrapper {
+  padding-bottom: 10px!important;
+}
 .date-lable {
   width: 80px;
   padding-bottom: 3px;
@@ -37,14 +40,12 @@
   margin-bottom: 12px;
 }
 
-
 .date-numbers {
   font-size: 75%;
   color: black;
   padding-top: 5%;
   border-radius: 10px;
   text-align: center;
-
 }
 
 .button-styling {
@@ -151,4 +152,7 @@ mat-form-field {
   margin-bottom: -60px;
   transform: rotate(340deg)
 }
+
+
+
 

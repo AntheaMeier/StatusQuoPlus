@@ -1,0 +1,77 @@
+<div class="mood-section">
+  <h3>{{ 'Mood.einsehen' | translate }}</h3>
+
+  <mat-expansion-panel style="margin-bottom: 25px;" #panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title class="panel-title-styling">
+        {{ 'Mood.filtereNachDatum' | translate }}
+      </mat-panel-title>
+      <mat-panel-description style="color: #857971">
+        <div *ngIf="range" class="stimmungslagen-getrackt"> {{range.value.start | date:'dd.MM.YYYY'}} - {{range.value.end | date:'dd.MM.YYYY'}}</div>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+      <div class="form-field-div">
+        <mat-form-field appearance="fill">
+          <mat-label>Gib einen Zeitraum an</mat-label>
+          <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+            <input matStartDate formControlName="start" placeholder="Start-Datum">
+            <input matEndDate formControlName="end" placeholder="End-Datum">
+          </mat-date-range-input>
+          <mat-hint>DD.MM.YYYY – DD.MM.YYYY</mat-hint>
+          <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+
+          <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Inkorrektes Start-Datum</mat-error>
+          <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Inkorrektes End-Datum</mat-error>
+        </mat-form-field>
+      </div>
+      <button class="los-button"
+              [ngStyle]="{'background-color': disable ? '#E8E4E1' : '#0071B9', 'color': disable ? '#857971' : '#FFFFFF'}"
+              [disabled]="disable"
+              (click)="filterMood()"
+              (click)="panel.toggle()"
+              mat-button>{{ 'Button.los' | translate }}</button>
+  </mat-expansion-panel>
+
+
+  <div *ngIf="moods.length == 0" class="description-styling">
+    <p>{{ 'Mood.nichtVorhanden' | translate}}</p>
+  </div>
+
+  <div class="wrapper-moods">
+  <div *ngFor="let mood of moods.reverse()" class="mood-container">
+    <div class="emotion">
+      <div *ngIf="mood.emotion === 'sad'">
+        <mat-icon class="emotion-icon" [ngStyle]="{'color':'red'}">mood_bad</mat-icon>
+      </div>
+      <div *ngIf="mood.emotion === 'neutral'">
+        <mat-icon class="emotion-icon" [ngStyle]="{'color':'goldenrod'}">sentiment_neutral</mat-icon>
+      </div>
+      <div *ngIf="mood.emotion === 'happy'">
+        <mat-icon class="emotion-icon" [ngStyle]="{'color':'green'}">mood</mat-icon>
+      </div>
+    </div>
+    <mat-card class="mood-matcard">
+      <div class="header">
+        <div *ngIf="mood.creation_date" class="date-label">
+          <div class="date-numbers">
+            {{ mood.creation_date| date:'dd.MM.YYYY' }}
+          </div>
+        </div>
+        <div *ngIf="mood.hidden" class="lock-icon">
+          <mat-icon>lock</mat-icon>
+        </div>
+        <div (click)="openMoodEditDialog(mood)" *ngIf="calculateIfEditable(mood.creation_date)" class="edit-icon">
+          <mat-icon matTooltip="{{ 'Mood.siebenTage' | translate }}"
+                    [matTooltipShowDelay]="1800"
+          >edit</mat-icon>
+        </div>
+      </div>
+      <div class="mood-text">
+        {{ mood.text }}
+      </div>
+      <div *ngIf="!mood.text" style="font-style: italic">{{ 'Mood.keinKommentar' | translate}}</div>
+    </mat-card>
+  </div>
+  </div>
+</div>

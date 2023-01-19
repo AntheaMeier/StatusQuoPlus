@@ -19,6 +19,37 @@
         <div class="sidenav-text" mat-button>{{ 'Feedback.feedback' | translate }}</div>
       </a>
       <!--------------------------------->
+      <!--mood Menu Item Sidebar MITARBEITER_IN--->
+      <ng-container *ngIf="loginData$ | async as loginData">
+      <a mat-list-item *ngIf="loginData.role=='Mitarbeiter_in'" [routerLink]="'/mood'">
+      <div class="sidenav-text" mat-button>{{ 'Mood.mood' | translate }}</div>
+      </a>
+      </ng-container>
+      <!--------------------------------->
+
+      <!--mood Menu Item Sidebar VORGESETZE_R--->
+      <ng-container *ngIf="loginData$ | async as loginData">
+        <mat-expansion-panel class="expansion-panel-styling" *ngIf="loginData.role=='Vorgesetzte_r'"
+                             (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <a mat-list-item *ngIf="loginData.role=='Vorgesetzte_r'">
+                <div class="sidenav-text">{{ 'Mood.mood' | translate }}</div>
+              </a>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <a class="expansion-panel-member-styling" [routerLink]="'/mood-team'">
+              {{ 'Mood.team' | translate }}
+            </a>
+            <a class="expansion-panel-member-styling" [routerLink]="'/mood'">
+              {{ 'Mood.eigene' | translate }}
+            </a>
+          </div>
+        </mat-expansion-panel>
+      </ng-container>
+      <!--------------------------------->
+
       <ng-container *ngIf="loginData$ | async as loginData">
         <mat-expansion-panel class="expansion-panel-styling" *ngIf="loginData.role=='Vorgesetzte_r'"
                              (opened)="panelOpenState = true" (closed)="panelOpenState = false">
@@ -66,6 +97,34 @@
       <div class="element-text" routerLink="feedback" *ngIf="(loginData$ | async)">{{ 'Feedback.feedback' | translate }}</div>
     </div>
     <!------------------------------>
+
+    <!--mood menü Item header MITARBEITER_IN--->
+    <ng-container *ngIf="loginData$ | async as loginData">
+      <div *ngIf="loginData.role=='Mitarbeiter_in'" class="nav-element " (click)="deleteSelectedGoalFromLocalStorage()">
+        <div class="element-text" routerLink="mood" *ngIf="(loginData$ | async)">{{ 'Mood.mood' | translate }}</div>
+      </div>
+    </ng-container>
+    <!------------------------------>
+
+    <!--mood menü Item header VORGESETZTE_R--->
+    <ng-container *ngIf="loginData$ | async as loginData">
+      <div class="nav-element" (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">
+        <div class="element-text" [matMenuTriggerFor]="menu" *ngIf="loginData.role=='Vorgesetzte_r'">{{ 'Mood.mood' | translate }}
+          <mat-menu #menu="matMenu">
+            <div>
+              <a class="dropdown-member-styling" [routerLink]="'/mood-team'">
+                {{ 'Mood.team' | translate}}
+              </a>
+              <a class="dropdown-member-styling" [routerLink]="'/mood'">
+                {{ 'Mood.eigene' | translate}}
+              </a>
+            </div>
+          </mat-menu>
+        </div>
+      </div>
+    </ng-container>
+    <!------------------------------>
+
     <ng-container *ngIf="loginData$ | async as loginData">
       <div class="nav-element" (click)="onClickVorgesetzter()" (click)="onSelectVorgesetzte_r()">
         <div class="element-text" [matMenuTriggerFor]="menu" *ngIf="loginData.role=='Vorgesetzte_r'">{{ 'Team.meinTeam' | translate }}
@@ -83,7 +142,7 @@
     <span class="example-spacer"></span>
     <ng-container *ngIf="loginData$ | async as loginData">
       <div class="title">
-        <div class="element-text">
+        <div class="element-text" style="color: #0071B9; cursor: default">
           {{loginData.firstname + ' ' + loginData.surname}}
         </div>
       </div>

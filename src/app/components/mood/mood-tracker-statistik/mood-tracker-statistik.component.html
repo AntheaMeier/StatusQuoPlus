@@ -1,0 +1,161 @@
+<mat-card class="container">
+  <mat-card-title style="margin-left: 15px;">
+    Filtere deine Mitarbeiter-Statistik
+    <mat-icon class="help-icon" (click)="openHelpDialog()">help</mat-icon>
+  </mat-card-title>
+  <mat-card-content class="filter-mat-card">
+
+    <div class="form-field-div">
+      <mat-form-field style="margin-top: 20px;" appearance="fill">
+        <mat-label>Gib einen Zeitraum an</mat-label>
+        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+          <input matStartDate formControlName="start" placeholder="Start-Datum">
+          <input matEndDate formControlName="end" placeholder="End-Datum">
+        </mat-date-range-input>
+        <mat-hint>DD.MM.YYYY – DD.MM.YYYY</mat-hint>
+        <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+
+        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Inkorrektes Start-Datum</mat-error>
+        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Inkorrektes End-Datum</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="search-bar-styling-responsive">
+      <form class="example-form">
+        <input  type="text"
+                placeholder="{{ 'Mood.waehleMitarbeiter' | translate }}"
+                [formControl]="myControl"
+                [matAutocomplete]="auto"
+                class="example-input"
+                (keydown)="setUserClicked(false)">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let user of filteredUsers | async" [value]="user.name">
+            <div (click)="chooseUser(user._id)">
+              <mat-icon>account_circle</mat-icon>
+              {{user.name}}
+            </div>
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error style="color: #0071B9 !important;">
+          <p *ngIf="showError">! {{ 'Feedback.errorWaehlePerson' | translate}}</p>
+        </mat-error>
+      </form>
+    </div>
+
+  </mat-card-content>
+  <mat-action-list>
+    <button (click)="filterMood()" mat-button style="background-color: #0071B9; color: #FFFFFF; margin-left: 15px;">{{ 'Button.los' | translate}}</button>
+  </mat-action-list>
+</mat-card>
+
+
+<div *ngIf="!isLoading">
+  <div>
+    <mat-expansion-panel class="panel-styling">
+      <mat-expansion-panel-header class="panel-header-styling">
+        <mat-panel-title class="panel-title-styling">
+          <mat-icon class="emotion-styling" style="color: green;" aria-label="Example home icon">sentiment_very_satisfied</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description style="color: #857971">
+          {{happyCount}} positive
+          <div class="stimmungslagen-getrackt"> {{ 'Mood.panelTitel' | translate }}</div>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p *ngIf="happy.length == 0" style="color: #857971">{{ 'Mood.leer' | translate}}</p>
+      <div *ngFor="let i of happy.reverse()">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{i.creator_name}}</mat-card-title>
+            <div class="date-lable"
+                 style="background-color: #c5bfbc">
+              <div class="date-numbers">
+                {{ i.creation_date | date:'dd.MM.YYYY'}}
+              </div>
+            </div>
+          </mat-card-header>
+          <mat-card-content>
+            <p *ngIf="!i.hidden"> {{ i.text }}</p>
+            <div *ngIf="i.hidden" style="display: flex">
+              <mat-icon style="color: #0071B9;">lock</mat-icon>
+              <p style="font-style: italic; margin-left: 8px; line-height: 26px">{{ 'Mood.privat' | translate }}</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-expansion-panel>
+  </div>
+
+  <div>
+    <mat-expansion-panel class="panel-styling">
+      <mat-expansion-panel-header class="panel-header-styling">
+        <mat-panel-title>
+          <mat-icon class="emotion-styling" style="color: goldenrod;" aria-label="Example home icon">sentiment_neutral</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description style="color: #857971">
+          {{neutralCount}} neutrale
+          <div class="stimmungslagen-getrackt"> {{ 'Mood.panelTitel' | translate }}</div>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p *ngIf="neutral.length == 0" style="color: #857971">{{ 'Mood.leer' | translate}}</p>
+      <div *ngFor="let i of neutral.reverse()">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{i.creator_name}}</mat-card-title>
+            <div class="date-lable"
+                 style="background-color: #c5bfbc">
+              <div class="date-numbers">
+                {{ i.creation_date | date:'dd.MM.YYYY'}}
+              </div>
+            </div>
+          </mat-card-header>
+          <mat-card-content>
+            <p *ngIf="!i.hidden"> {{ i.text }}</p>
+            <div *ngIf="i.hidden" style="display: flex">
+              <mat-icon style="color: #0071B9;">lock</mat-icon>
+              <p style="font-style: italic; margin-left: 8px; line-height: 26px">{{ 'Mood.privat' | translate }}</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-expansion-panel>
+  </div>
+
+  <div>
+    <mat-expansion-panel class="panel-styling">
+      <mat-expansion-panel-header class="panel-header-styling">
+        <mat-panel-title>
+          <mat-icon class="emotion-styling" style="color: red" aria-label="Example home icon">sentiment_very_dissatisfied</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description style="color: #857971">
+          {{sadCount}} negative
+          <div class="stimmungslagen-getrackt"> {{ 'Mood.panelTitel' | translate }}</div>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p *ngIf="sad.length == 0" style="color: #857971">{{ 'Mood.leer' | translate}}</p>
+      <div *ngFor="let i of sad.reverse()">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{i.creator_name}}</mat-card-title>
+            <div class="date-lable"
+                 style="background-color: #c5bfbc">
+              <div class="date-numbers">
+                {{ i.creation_date | date:'dd.MM.YYYY'}}
+              </div>
+            </div>
+          </mat-card-header>
+          <mat-card-content>
+            <p *ngIf="!i.hidden"> {{ i.text }}</p>
+            <div *ngIf="i.hidden" style="display: flex">
+              <mat-icon style="color: #0071B9;">lock</mat-icon>
+              <p style="font-style: italic; margin-left: 8px; line-height: 26px">{{ 'Mood.privat' | translate }}</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-expansion-panel>
+  </div>
+</div>
+<div class="center">
+<div *ngIf="isLoading" class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+</div>

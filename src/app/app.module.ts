@@ -69,6 +69,18 @@ import { SearchBarComponent } from './components/feedback/search-bar/search-bar.
 import { SendConfirmationDialogComponent } from './components/feedback/send-confirmation-dialog/send-confirmation-dialog/send-confirmation-dialog.component';
 import { SnackBarComponent } from './components/feedback/snack-bar/snack-bar.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { MoodComponent } from './components/mood/mood.component';
+import { DisplayMoodComponent } from './components/mood/display-mood/display-mood.component';
+import {MatRadioModule} from '@angular/material/radio';
+import { MoodConfirmationDialogComponent } from './components/mood/mood-confirmation-dialog/mood-confirmation-dialog.component';
+import { MoodSnackbarComponent } from './components/mood/mood-snackbar/mood-snackbar.component';
+import { MoodTrackenComponent } from './components/mood/mood-tracken/mood-tracken.component';
+import { MoodEditComponent } from './components/mood/mood-edit/mood-edit.component';
+import { MoodTrackerStatistikComponent } from './components/mood/mood-tracker-statistik/mood-tracker-statistik.component';
+import { ChartComponent } from './components/mood/chart/chart.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { HelpDialogComponent } from './components/mood/help-dialog/help-dialog.component';
+import { HelpLockDialogComponent } from './components/mood/help-lock-dialog/help-lock-dialog.component';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -99,7 +111,17 @@ export function playerFactory() {
     FeedbackDialogComponent,
     SearchBarComponent,
     SendConfirmationDialogComponent,
-    SnackBarComponent
+    SnackBarComponent,
+    MoodComponent,
+    MoodTrackenComponent,
+    MoodConfirmationDialogComponent,
+    DisplayMoodComponent,
+    MoodSnackbarComponent,
+    MoodEditComponent,
+    MoodTrackerStatistikComponent,
+    ChartComponent,
+    HelpDialogComponent,
+    HelpLockDialogComponent,
   ],
   imports: [
     LottieModule.forRoot({player: playerFactory}),
@@ -151,7 +173,9 @@ export function playerFactory() {
     MatTabsModule,
     CdkAccordionModule,
     NgxTranslateModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatRadioModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     MatInputModule,

@@ -1,0 +1,70 @@
+.date-styling {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.button-wrapper {
+  display: flex;
+  margin: auto;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.sentiment-button {
+  height: 60px !important;
+  width: 60px !important;
+  border-radius: 30px;
+  padding: 0;
+  min-width: unset!important;
+  display: flex;
+}
+
+::ng-deep .mat-button-focus-overlay {
+  display: none;
+}
+
+.sad {
+  color: red;
+}
+
+.happy {
+  color: green;
+}
+
+.neutral {
+  color: goldenrod;
+}
+
+.sentiment-icon {
+  font-size: 55px;
+  height: 60px;
+  width: 60px;
+  margin-top: 2.5px;
+}
+
+mat-form-field {
+  width: 100% !important;
+  max-height: 250px;
+}
+
+textarea {
+  max-height: 150px;
+}
+
+.save-button {
+  color: #FFFFFF;
+  background-color: #0071B9;
+}
+
+.delete-button {
+  color: #FFFFFF;
+  background-color: crimson;
+}
+
+::ng-deep.mat-form-field-wrapper {
+  padding-bottom: 0!important;
+}
+

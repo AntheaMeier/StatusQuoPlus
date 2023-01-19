@@ -52,13 +52,28 @@ export class TodoComponent implements OnInit {
   @Output() changedOrder = new EventEmitter<boolean>();
   @Output() refillProgressArray = new EventEmitter<string>();
 
+  //character limitation
+  myForm!: FormGroup; 
+  maxChars = 500;
+
+
   constructor(
     public dialog: MatDialog,
     private router: Router,
     private api: ApiService,
     private auth: AuthService,
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,
+    //character limitation
+    private fb: FormBuilder) {
+      //character limitation
+      this.buildForm();
+    }
+  //character limitation
+  buildForm() {
+    this.myForm = this.fb.group({
+      wordLimitation: [""]
+    });
+  }
 
   ngOnInit(): void {
     this.api.getUsers().subscribe(

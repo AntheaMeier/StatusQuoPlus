@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
     this.api.getUsers().subscribe(
       (res: any) => {
         this.data = res;
-        console.log('Hieeer: ' + res[1]._id);
         this.isLoadingResults = false;
       },
       (err) => {

@@ -10,6 +10,8 @@ import {LoginComponent} from "./components/login/login.component";
 import { OverviewComponent } from './components/overview/overview.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { FeedbackCreateComponent } from './components/feedback/feedback-create/feedback-create.component';
+import { MoodComponent } from './components/mood/mood.component';
+import {MoodTrackerStatistikComponent} from "./components/mood/mood-tracker-statistik/mood-tracker-statistik.component";
 
 const routes: Routes = [
   {
@@ -40,6 +42,16 @@ const routes: Routes = [
     path: 'feedback',
     component: FeedbackComponent,
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'mood',
+    component: MoodComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'mood-team',
+    component: MoodTrackerStatistikComponent,
+    canActivate: [AuthGuardService, RoleGuard]
   },
   {
     path: '**',
