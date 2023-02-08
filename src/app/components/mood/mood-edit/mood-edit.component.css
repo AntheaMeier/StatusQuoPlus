@@ -64,7 +64,3 @@ textarea {
   background-color: crimson;
 }
 
-::ng-deep.mat-form-field-wrapper {
-  padding-bottom: 0!important;
-}
-
