@@ -73,7 +73,7 @@ export class DisplayMoodComponent implements OnInit {
   getMood(idloggedInUser: string): any {
     this.api.getMoodForUser(idloggedInUser).subscribe(
       (res) => {
-        this.moods = res;
+        this.sortMoods(res);
       },
       (error) => {
         console.log(error);
@@ -110,9 +110,17 @@ export class DisplayMoodComponent implements OnInit {
   filterMood() {
     this.api.getMoodsToDateRange(this.idloggedInUser, this.range.value.start, this.range.value.end)
       .subscribe( res => {
-      this.moods = res;
+        this.sortMoods(res);
     }, (err) => {
       console.log(err);
+    });
+  }
+
+  private sortMoods(res: Mood[]) {
+    this.moods = res.sort(function(a,b) {
+      let date1 = new Date(a.creation_date);
+      let date2 = new Date(b.creation_date);
+      return date1.getTime() - date2.getTime();
     });
   }
 }

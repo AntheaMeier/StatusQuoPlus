@@ -2,6 +2,11 @@
     width: 400px;
 }
 
+@media screen and (max-width: 500px){
+  .dialog {
+    width: 250px;
+  }
+}
 .action-btn {
     display: flex;
     justify-content: end;
