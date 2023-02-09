@@ -25,7 +25,7 @@
   box-shadow: none;
 }
 
-::ng-deep.mat-expansion-panel {
+.mat-expansion-panel {
   background-color: #E8E4E1;
   margin-bottom: 1%;
 }
