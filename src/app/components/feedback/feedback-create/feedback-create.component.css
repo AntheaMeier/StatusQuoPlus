@@ -14,6 +14,7 @@
 }
 
 .date-label {
+  font-size: 15px;
   width: 80px;
   padding-bottom: 3px;
   border-radius: 10px 10px;
@@ -74,4 +75,8 @@ color: white;
 
 .icon-display {
 font-size: 15px;
+}
+
+.feedback-text {
+  font-size: 16px;
 }

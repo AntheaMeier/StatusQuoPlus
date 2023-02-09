@@ -26,6 +26,7 @@
 }
 
 .date-label {
+  font-size: 15px;
   width: 80px;
   padding-bottom: 3px;
   border-radius: 10px 10px;
@@ -95,4 +96,8 @@ mat-expansion-panel {
 
 .panel-title-styling {
   font-weight: bold;
+}
+
+.mood-text {
+  font-size: 16px;
 }

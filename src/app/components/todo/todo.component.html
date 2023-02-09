@@ -24,7 +24,7 @@
           <mat-error *ngIf="enteredContent.length==0">{{ 'Tasks.eingabeBeschreibung' | translate }}</mat-error>
         </mat-form-field>
         <!-- character limitation-->
-        <label style="margin-left: 5px; margin-top: -15px; display: flex; color: #777675">
+        <label style="margin-left: 5px; margin-top: -5px; display: flex; color: #777675">
           <p [ngStyle]="{'color' : enteredContent.length == maxChars ? 'red' : '#777675'}">{{enteredContent.length}}</p>/{{maxChars}}</label>
 
         <mat-action-row style="background-color: white">

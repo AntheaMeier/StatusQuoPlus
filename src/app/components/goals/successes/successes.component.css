@@ -28,6 +28,7 @@
 
   .description-styling {
     width: 90%;
+    font-size: 18px;
   }
 
   @media screen and (max-width: 800px) {
