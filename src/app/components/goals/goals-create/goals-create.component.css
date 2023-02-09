@@ -26,7 +26,7 @@
 }
 
 .mat-expansion-panel {
-  background-color: #E8E4E1;
+  background-color: #F2F2F2;
   margin-bottom: 1%;
 }
 
@@ -80,7 +80,7 @@
 .goals-matcard {
   color: #857971;
   width: 100%;
-  background-color: #E8E4E1;
+  background-color: #F2F2F2;
   margin: 0 auto;
   padding: 20px;
   box-shadow: none;
