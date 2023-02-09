@@ -30,7 +30,7 @@ export class AnnualReviewComponent implements OnInit {
 
   //character limitation
   myForm!: FormGroup;
-  maxChars = 500;
+  maxChars = 2000;
 
   constructor(
     private api: ApiService,
