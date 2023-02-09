@@ -198,6 +198,10 @@ export class GoalsCreateComponent implements OnInit {
     window.location.reload();
   }
 
+  onBack() {
+    this.addPost = false;
+  }
+
   addPostForm() {
     this.addPost = !this.addPost;
   }

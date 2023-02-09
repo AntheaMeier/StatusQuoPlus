@@ -53,7 +53,7 @@ export class TodoComponent implements OnInit {
   @Output() refillProgressArray = new EventEmitter<string>();
 
   //character limitation
-  myForm!: FormGroup; 
+  myForm!: FormGroup;
   maxChars = 500;
 
 
@@ -116,10 +116,12 @@ export class TodoComponent implements OnInit {
       this.api.addTask(simpleObject).subscribe(
         (res: any) => {
           this.isLoadingResults = false;
+          this.enteredContent = '';
         },
         (err: any) => {
           console.log(err);
           this.isLoadingResults = false;
+          this.enteredContent = '';
         }
       );
       this.addPost = false;

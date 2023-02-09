@@ -44,12 +44,20 @@
 
 
       <mat-action-row>
+        <button style="color: #0071B9; background-color: #FFFFFF"
+                mat-raised-button
+                (click)="onBack()">
+          {{ 'Button.abbrechen' | translate }}
+        </button>
         <button
           style="color: white; background-color: #0071B9" mat-raised-button *ngIf=true matSuffix
           type="submit" (click)=onAddPost(idloggedInUser)>{{ 'Button.speichern' | translate }}
         </button>
       </mat-action-row>
     </mat-expansion-panel>
+
+
+
 
     <div
       class="accordion-item-header"

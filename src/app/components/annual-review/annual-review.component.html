@@ -1,7 +1,7 @@
 <mat-card class="reviewsCard"> {{ 'Protokolle.unterjaehrigerAustausch' | translate }}
   <button *ngIf="selectedRole == 'Vorgesetzte_r'" class="bttn icon-display" (click)="addPostForm()">+</button>
   <mat-expansion-panel hideToggle *ngIf="addPost" [expanded]="true">
-    <mat-expansion-panel-header style="background-color: #E8E4E1">
+    <mat-expansion-panel-header style="background-color: #F2F2F2">
       <mat-form-field class="col-md-12">
         <input
           readonly='true'
@@ -34,7 +34,8 @@
     <label style="margin-left: 5px; margin-top: -15px; display: flex; color: #777675">
       <p [ngStyle]="{'color' : enteredContent.length == maxChars ? 'red' : '#777675'}">{{enteredContent.length}}</p>/{{maxChars}}</label>
     <mat-action-row>
-      <button mat-raised-button *ngIf=true matSuffix type="submit" (click)=onAddPost(idloggedInUser)>Speichern</button>
+      <button style="color: #0071B9; background-color: #FFFFFF" mat-raised-button (click)=onBack()>{{ 'Button.abbrechen' | translate }}</button>
+      <button mat-raised-button *ngIf=true matSuffix type="submit" (click)=onAddPost(idloggedInUser)>{{ 'Button.speichern' | translate }}</button>
     </mat-action-row>
   </mat-expansion-panel>
   <app-list-reviews [selectedRole]="selectedRole" [reviewsToOneUser]="reviewsToOneUser" [idTeamMember]="idTeamMember"

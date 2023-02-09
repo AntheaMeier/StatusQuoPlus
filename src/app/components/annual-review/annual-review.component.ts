@@ -29,7 +29,7 @@ export class AnnualReviewComponent implements OnInit {
   @Input() selectedRole: String = '';
 
   //character limitation
-  myForm!: FormGroup; 
+  myForm!: FormGroup;
   maxChars = 500;
 
   constructor(
@@ -103,6 +103,10 @@ export class AnnualReviewComponent implements OnInit {
   }
 
   addPostForm() {
+    this.addPost = !this.addPost;
+  }
+
+  onBack() {
     this.addPost = !this.addPost;
   }
 }
