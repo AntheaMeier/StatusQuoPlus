@@ -27,7 +27,9 @@ export class FeedbackCreateComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(FeedbackDialogComponent);
+    this.dialog.open(FeedbackDialogComponent, {
+      width: '60%'
+    });
   }
 
   getFeedback(idloggedInUser: string): any {

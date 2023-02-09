@@ -34,7 +34,8 @@
           name="date"
           required='false'
           placeholder="Fälligkeitsdatum festlegen"
-          #date="ngModel">
+          #date="ngModel"
+          [min]="minDate">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>

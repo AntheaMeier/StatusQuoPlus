@@ -69,6 +69,7 @@ export class GoalsCreateComponent implements OnInit {
   tasksToDone: Tasks[] = [];
   showGoalid = '';
   currentUrl = '';
+  minDate= new Date();
 
   goalForm: FormGroup = this.formBuilder.group({
     description: this.formBuilder.control('initial value', Validators.required),
@@ -77,7 +78,7 @@ export class GoalsCreateComponent implements OnInit {
   dates: String[] = [];
 
   //character limitation
-  myForm!: FormGroup; 
+  myForm!: FormGroup;
   maxChars = 100;
 
   constructor(
@@ -103,7 +104,7 @@ export class GoalsCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
     this.currentUrl = this.router.url;
     this.idls = localStorage.getItem('selectedGoal');
     this.goalSelectedReload = localStorage.getItem('selectedGoal');
