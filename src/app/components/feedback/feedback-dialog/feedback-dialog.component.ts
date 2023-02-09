@@ -78,7 +78,7 @@ export class FeedbackDialogComponent implements OnInit {
   setUserClicked($event: any) {
     this.userClicked = $event;
   }
-
+  
   openSnackBar() {
     this.snackBar.openFromComponent(SnackBarComponent, {
       verticalPosition: 'bottom',

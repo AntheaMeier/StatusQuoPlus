@@ -25,14 +25,11 @@
   box-shadow: none;
 }
 
-::ng-deep.mat-expansion-panel {
-  background-color: #E8E4E1;
+.mat-expansion-panel {
+  background-color: #F2F2F2;
   margin-bottom: 1%;
 }
 
-::ng-deep.mat-form-field-wrapper {
-  padding-bottom: 10px!important;
-}
 .date-lable {
   width: 80px;
   padding-bottom: 3px;
@@ -83,7 +80,7 @@
 .goals-matcard {
   color: #857971;
   width: 100%;
-  background-color: #E8E4E1;
+  background-color: #F2F2F2;
   margin: 0 auto;
   padding: 20px;
   box-shadow: none;

@@ -7,7 +7,7 @@
 }
 
 .mat-expansion-panel {
-  background-color: #E8E4E1;
+  background-color: #F2F2F2;
   box-shadow: none;
   padding: 4px;
 }
@@ -29,7 +29,7 @@ input {
 }
 
 ::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
-  background-color: #E8E4E1 !important;
+  background-color: #F2F2F2 !important;
   height: 10% !important;
 }
 

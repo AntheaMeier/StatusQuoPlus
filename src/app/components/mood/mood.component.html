@@ -8,12 +8,12 @@
     <ng-template mat-tab-label>
       <span class="font">{{ 'Mood.tracker' | translate }}</span>
     </ng-template>
-    <app-mood-tracken></app-mood-tracken>
+    <app-mood-tracken (loadNewMood)="load($event)"></app-mood-tracken>
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>
       <span class="font">{{ 'Mood.einsehen' | translate }}</span>
     </ng-template>
-    <app-display-mood></app-display-mood>
+    <app-display-mood [loadNewMood]="loadNewMood"></app-display-mood>
   </mat-tab>
 </mat-tab-group>

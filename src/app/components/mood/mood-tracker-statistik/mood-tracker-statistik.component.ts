@@ -173,9 +173,11 @@ export class MoodTrackerStatistikComponent implements OnInit{
       if (res.length != 0) {
         if (this.sortEmotions(this.fillArrays(res))) {
           this.stopTimer();
+          this.clearRange();
         }
       } else {
         this.stopTimer();
+        this.clearRange();
         this.happy = [];
         this.sad = [];
         this.neutral = [];
@@ -183,8 +185,16 @@ export class MoodTrackerStatistikComponent implements OnInit{
       this.employeeId = undefined;
     }, (err: any) => {
       this.stopTimer();
+      this.clearRange();
       console.log(err);
       this.employeeId = undefined;
+    });
+  }
+
+  clearRange() {
+    this.range = new FormGroup({
+      start: new FormControl(),
+      end: new FormControl(),
     });
   }
 

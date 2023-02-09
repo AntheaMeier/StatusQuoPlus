@@ -1,6 +1,6 @@
 <mat-card class="container">
   <mat-card-title style="margin-left: 15px;">
-    Filtere deine Mitarbeiter-Statistik
+    {{ 'Mood.erklaert' | translate }}
     <mat-icon class="help-icon" (click)="openHelpDialog()">help</mat-icon>
   </mat-card-title>
   <mat-card-content class="filter-mat-card">
@@ -9,8 +9,8 @@
       <mat-form-field style="margin-top: 20px;" appearance="fill">
         <mat-label>Gib einen Zeitraum an</mat-label>
         <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-          <input matStartDate formControlName="start" placeholder="Start-Datum">
-          <input matEndDate formControlName="end" placeholder="End-Datum">
+          <input readonly matStartDate formControlName="start" placeholder="Start-Datum">
+          <input readonly matEndDate formControlName="end" placeholder="End-Datum">
         </mat-date-range-input>
         <mat-hint>DD.MM.YYYY – DD.MM.YYYY</mat-hint>
         <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
@@ -58,7 +58,7 @@
           <mat-icon class="emotion-styling" style="color: green;" aria-label="Example home icon">sentiment_very_satisfied</mat-icon>
         </mat-panel-title>
         <mat-panel-description style="color: #857971">
-          {{happyCount}} positive
+          {{happyCount}} positive&nbsp;
           <div class="stimmungslagen-getrackt"> {{ 'Mood.panelTitel' | translate }}</div>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -93,7 +93,7 @@
           <mat-icon class="emotion-styling" style="color: goldenrod;" aria-label="Example home icon">sentiment_neutral</mat-icon>
         </mat-panel-title>
         <mat-panel-description style="color: #857971">
-          {{neutralCount}} neutrale
+          {{neutralCount}} neutrale&nbsp;
           <div class="stimmungslagen-getrackt"> {{ 'Mood.panelTitel' | translate }}</div>
         </mat-panel-description>
       </mat-expansion-panel-header>
@@ -128,7 +128,7 @@
           <mat-icon class="emotion-styling" style="color: red" aria-label="Example home icon">sentiment_very_dissatisfied</mat-icon>
         </mat-panel-title>
         <mat-panel-description style="color: #857971">
-          {{sadCount}} negative
+          {{sadCount}} negative&nbsp;
           <div class="stimmungslagen-getrackt"> {{ 'Mood.panelTitel' | translate }}</div>
         </mat-panel-description>
       </mat-expansion-panel-header>

@@ -4,7 +4,7 @@
 
 textarea {
   width: 100%;
-  background-color: #E8E4E1;
+  background-color: #F2F2F2;
 }
 
 .mat-expansion-panel {
@@ -20,7 +20,7 @@ textarea {
 
 .mat-expansion-panel {
   display: block;
-  background-color: #E8E4E1;
+  background-color: #F2F2F2;
   margin-bottom: 2%;
   border-radius: 4px;
   padding: 4px;

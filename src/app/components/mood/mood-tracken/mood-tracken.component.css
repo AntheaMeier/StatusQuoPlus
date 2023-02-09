@@ -8,7 +8,7 @@
   padding: 15px;
 }
 
-.mat-icon {
+mat-icon {
     font-size: 110px;
     height: 110px ;
     width: 110px;
@@ -17,17 +17,13 @@
     margin-top: 1%;
 }
 
-mat-icon {
-  font-size: 180px;
-}
-
-.emotion input[type="radio"] {
+.emotion-btn input[type="radio"] {
   opacity: 0;
   position: fixed;
   width: 0;
 }
 
-.emotion .mat-icon {
+.emotion mat-icon {
   border: 1px solid #0071B9;
   background-color: #FFFFFF;
   padding-left: 0px;
@@ -133,7 +129,7 @@ h3 {
   position: relative;
 }
 
-.comment-locker .mat-icon {
+.comment-locker mat-icon {
   position: absolute;
   top: 15px;
   left: 5px;

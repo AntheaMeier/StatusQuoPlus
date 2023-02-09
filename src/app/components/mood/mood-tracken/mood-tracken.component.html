@@ -5,37 +5,36 @@
       <div *ngIf="selectedEmotion === ''">
         <mat-icon [ngStyle]="{'color':'#ffffff'}"></mat-icon>
       </div>
-      <div *ngIf="selectedEmotion == 'sad'">
+      <div *ngIf="selectedEmotion === 'sad'">
         <mat-icon [ngStyle]="{'color':'red'}">mood_bad</mat-icon>
       </div>
-      <div *ngIf="selectedEmotion == 'neutral'">
+      <div *ngIf="selectedEmotion === 'neutral'">
         <mat-icon [ngStyle]="{'color':'goldenrod'}">sentiment_neutral</mat-icon>
       </div>
-      <div *ngIf="selectedEmotion == 'happy'">
+      <div *ngIf="selectedEmotion === 'happy'">
         <mat-icon [ngStyle]="{'color':'green'}">mood</mat-icon>
       </div>
     </div>
 
-
     <div class="emotion">
-        <fieldset id="group">
-          <!-- sad icon -->
-          <label for="sad" class="emotion-btn">
-            <input type="radio" id="sad" value="sad" name="group" (click)="onSelect('sad')" [checked]="selectedEmotion === 'sad'">
-            <mat-icon class= "sad" for="sad"[ngStyle]="{'color':'red'}">mood_bad</mat-icon>
-          </label>
-          <!-- neutral icon -->
-          <label for="neutral" class="emotion-btn">
-            <input type="radio" id="neutral" value="neutral" name="group" (click)="onSelect('neutral')" [checked]="selectedEmotion === 'neutral'">
-            <mat-icon class= "neutral" for="neutral"[ngStyle]="{'color':'goldenrod'}">sentiment_neutral</mat-icon>
-          </label>
-          <!-- happy icon -->
-          <label for="happy" class="emotion-btn">
-            <input type="radio" id="happy" value="happy" name="group" (click)="onSelect('happy')" [checked]="selectedEmotion === 'happy'">
-            <mat-icon class= "happy" for="happy"[ngStyle]="{'color':'green'}">mood</mat-icon>
-          </label>
-        </fieldset>
-    </div>
+      <fieldset id="group">
+        <!-- sad icon -->
+        <label class="emotion-btn">
+          <input type="radio" value="sad" name="group" (change)="onSelect('sad')" [checked]="selectedEmotion === 'sad'">
+          <mat-icon class= "sad" [ngStyle]="{'color':'red'}">mood_bad</mat-icon>
+        </label>
+        <!-- neutral icon -->
+        <label class="emotion-btn">
+          <input type="radio" value="neutral" name="group" (change)="onSelect('neutral')" [checked]="selectedEmotion === 'neutral'">
+          <mat-icon class= "neutral" [ngStyle]="{'color':'goldenrod'}">sentiment_neutral</mat-icon>
+        </label>
+        <!-- happy icon -->
+        <label class="emotion-btn">
+          <input type="radio" value="happy" name="group" (change)="onSelect('happy')" [checked]="selectedEmotion === 'happy'">
+          <mat-icon class= "happy" [ngStyle]="{'color':'green'}">mood</mat-icon>
+        </label>
+      </fieldset>
+  </div>
 
     <div class="textfield">
       <mat-form-field appearance="fill">
