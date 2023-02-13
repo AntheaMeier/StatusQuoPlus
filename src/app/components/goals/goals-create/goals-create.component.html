@@ -34,7 +34,8 @@
           name="date"
           required='false'
           placeholder="Fälligkeitsdatum festlegen"
-          #date="ngModel">
+          #date="ngModel"
+          [min]="minDate">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -58,7 +59,7 @@
       <mat-expansion-panel #exppanel hideToggle class="panel-styling" [expanded]="showGoalid == goal._id">
         <mat-expansion-panel-header class="panel-header-styling">
           <mat-icon class="push-pin" *ngIf="goal.priority == true">push_pin</mat-icon>
-          <mat-card [ngStyle]="{'background-color':goal._id === showGoalid ? '#BFDCEE' : '#E8E4E1'}" class="goals-matcard">
+          <mat-card [ngStyle]="{'background-color':goal._id === showGoalid ? '#BFDCEE' : '#F2F2F2'}" class="goals-matcard">
       <!-- Fälligkeitsdatumsanzeige in der Übersicht US4.4 -->
 
       <!-- gelb und rot

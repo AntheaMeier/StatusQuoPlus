@@ -1,6 +1,6 @@
 <mat-accordion multi="false" *ngIf="reviewsToOneUser.length > 0">
     <mat-expansion-panel *ngFor="let review of reviewsToOneUser.reverse()" hideToggle>
-      <mat-expansion-panel-header style="color: #857971; background-color: #E8E4E1">
+      <mat-expansion-panel-header style="color: #857971; background-color: #F2F2F2">
         {{ review.date }}
       </mat-expansion-panel-header>
       <p *ngIf="!edit" style="white-space: pre-wrap;">{{ review.description }}</p>

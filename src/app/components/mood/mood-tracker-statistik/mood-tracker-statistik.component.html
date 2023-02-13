@@ -9,8 +9,8 @@
       <mat-form-field style="margin-top: 20px;" appearance="fill">
         <mat-label>Gib einen Zeitraum an</mat-label>
         <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
-          <input matStartDate formControlName="start" placeholder="Start-Datum">
-          <input matEndDate formControlName="end" placeholder="End-Datum">
+          <input readonly matStartDate formControlName="start" placeholder="Start-Datum">
+          <input readonly matEndDate formControlName="end" placeholder="End-Datum">
         </mat-date-range-input>
         <mat-hint>DD.MM.YYYY – DD.MM.YYYY</mat-hint>
         <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>

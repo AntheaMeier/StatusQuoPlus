@@ -1,5 +1,6 @@
-<app-search-bar (userClicked)="setUserClicked($event)" (receiverId)="setReceiverId($event)"></app-search-bar>
-<mat-form-field class="fbinput" appearance="outline" style="white-space: pre-wrap;" [formGroup]="myForm" >
+<div>
+  <app-search-bar style="width: 100%" (userClicked)="setUserClicked($event)" (receiverId)="setReceiverId($event)"></app-search-bar>
+  <mat-form-field class="fbinput" appearance="outline" style="white-space: pre-wrap;" [formGroup]="myForm">
   <textarea
     [(ngModel)]="enteredContent"
     id="content"
@@ -9,16 +10,18 @@
     [maxlength]="maxChars"
     formControlName="wordLimitation"
     placeholder="{{'Feedback.notizEingeben' | translate}}"></textarea>
-  <mat-error *ngIf="enteredContent.length==0">{{'Warnung.feedbackEingeben' | translate}}</mat-error>
+    <mat-error *ngIf="enteredContent.length==0">{{'Warnung.feedbackEingeben' | translate}}</mat-error>
 
-</mat-form-field>
-<!-- character limitation-->
-<label style="margin-left: 5px; margin-top: -15px; display: flex; color: #777675">
-  <p [ngStyle]="{'color' : enteredContent.length == maxChars ? 'red' : '#777675'}">{{enteredContent.length}}</p>/{{maxChars}}</label>
-<div class="button-div">
-
-  <button mat-button mat-dialog-close>{{'Button.abbrechen' | translate}}</button>
-  <button class="button-send" mat-button (click)="openDialog()" aria-label="Show an example snack-bar" [disabled]="!userClicked || enteredContent == ''">{{'Button.senden' | translate}}</button>
+  </mat-form-field>
+  <!-- character limitation-->
+  <label style="margin-left: 5px; margin-top: -15px; display: flex; color: #777675">
+    <p [ngStyle]="{'color' : enteredContent.length == maxChars ? 'red' : '#777675'}">{{enteredContent.length}}</p>
+    /{{maxChars}}</label>
+  <div class="button-div">
+    <button mat-button mat-dialog-close>{{'Button.abbrechen' | translate}}</button>
+    <button class="button-send" mat-button (click)="openDialog()" aria-label="Show an example snack-bar"
+            [disabled]="!userClicked || enteredContent == ''">{{'Button.senden' | translate}}</button>
+  </div>
 </div>
 
 
